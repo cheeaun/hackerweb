@@ -8,9 +8,11 @@ Technical stuff
 
 This mobile web app primarily works on iOS 5 Mobile Safari. It uses these wonderful scripts:
 
-- [ScrollFix](https://github.com/joelambert/ScrollFix)
+- [OverflowScrollingFix](https://github.com/cubiq/OverflowScrollingFix)
 - [Amplify.Store](http://amplifyjs.com/api/store/)
 - Vanilla JavaScript
+
+Also uses the [unofficial Hacker News API](http://hndroidapi.appspot.com/) built by Gleb Popov.
 
 Contributing and Feedback
 --------

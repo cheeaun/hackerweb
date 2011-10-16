@@ -37,7 +37,7 @@
 	
 	var $viewSections = d.querySelectorAll('.view>section');
 	for (var i=0, l=$viewSections.length; i<l; i++){
-		new ScrollFix($viewSections[i]);
+		new OSFix($viewSections[i]);
 	}
 	
 	var news = amplify.store('news');
