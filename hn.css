@@ -1,0 +1,116 @@
+html{
+	height: 100%;
+}
+body{
+	font-family: helvetica, arial, sans-serif;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	height: 100%;
+	overflow: hidden;
+}
+.view{
+	width: 100%;
+	height: 100%;
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	-webkit-box-orient: vertical;
+	-moz-box-orient: vertical;
+	box-orient: vertical;
+}
+header{
+	color: #fff;
+	background-color: #b2bbca;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#b0bccd), color-stop(.5, #889bb3), color-stop(.51, #8195af), to(#6d84a2));
+	background-image: -webkit-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
+	background-image: -moz-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
+	background-image: -ms-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
+	background-image: -o-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
+	background-image: linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
+	line-height: 42px;
+	height: 42px;
+	border-top: 1px solid #cdd5df;
+	border-bottom: 1px solid #2d3642;
+	width: 100%;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+}
+header h1{
+	padding: 0;
+	text-align: center;
+	font-size: 20px;
+	text-shadow: 0 -1px rgba(0,0,0,.5);
+	margin: 0 80px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.view>section{
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	background-color: #e2e7ed;
+}
+.listview{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background-color: #fff;
+}
+.listview li{
+	display: block;
+	overflow: hidden;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 10px;
+}
+.listview-links li{
+	padding: 0;
+}
+.listview-links li>a{
+	color: #000;
+	display: block;
+	padding: 10px;
+	text-decoration: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.listview-links li>a *{
+	pointer-events: none;
+}
+.listview-links li>a b small{
+	font-size: 13px;
+	color: #666;
+	font-weight: normal;
+}
+.listview-links li>a .metadata{
+	display: block;
+	font-size: 13px;
+	color: #666;
+}
+.listview-links li>a:active,
+.listview-links li>a.selected{
+	color: #fff;
+	background-color: #4286f5;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#4286f5), to(#194fdb));
+	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
+	background-image: -moz-linear-gradient(top, #4286f5, #194fdb);
+	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
+	background-image: -o-linear-gradient(top, #4286f5, #194fdb);
+	background-image: linear-gradient(top, #4286f5, #194fdb);
+}
+.listview-links li>a:active *,
+.listview-links li>a.selected *{
+	color: #fff;
+}
+@media only screen and (max-height: 300px){
+	header{
+		line-height: 32px;
+		height: 32px;
+	}
+	header h1{
+		font-size: 16px;
+	}
+}
