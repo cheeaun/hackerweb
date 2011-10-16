@@ -53,6 +53,9 @@
 	d.addEventListener('touchend', function(e){
 		tappedEl.classList.remove('tapped');
 	}, false);
+	d.addEventListener('touchcancel', function(e){
+		tappedEl.classList.remove('tapped');
+	}, false);
 	
 	var news = amplify.store('news');
 	if (news){
