@@ -90,8 +90,7 @@ header h1{
 	font-size: 13px;
 	color: #666;
 }
-.listview-links li>a:active,
-.listview-links li>a.selected{
+.listview-links li>a.tapped{
 	color: #fff;
 	background-color: #4286f5;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#4286f5), to(#194fdb));
@@ -101,8 +100,7 @@ header h1{
 	background-image: -o-linear-gradient(top, #4286f5, #194fdb);
 	background-image: linear-gradient(top, #4286f5, #194fdb);
 }
-.listview-links li>a:active *,
-.listview-links li>a.selected *{
+.listview-links li>a.tapped *{
 	color: #fff;
 }
 @media only screen and (max-height: 300px){

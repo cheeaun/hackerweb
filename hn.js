@@ -40,6 +40,20 @@
 		new OSFix($viewSections[i]);
 	}
 	
+	var tappedEl;
+	d.addEventListener('touchstart', function(e){
+		var el = e.target;
+		if (!el) return;
+		el.classList.add('tapped');
+		tappedEl = el;
+	}, false);
+	d.addEventListener('touchmove', function(e){
+		tappedEl.classList.remove('tapped');
+	}, false);
+	d.addEventListener('touchend', function(e){
+		tappedEl.classList.remove('tapped');
+	}, false);
+	
 	var news = amplify.store('news');
 	if (news){
 		w.loadNews(news);
