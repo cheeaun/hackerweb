@@ -14,7 +14,7 @@
 			a.href = item.url;
 			var domain = a.hostname.match(/[^.]+\.[^.]+$/i)[0];
 			html += '<li>'
-					+ '<a href="' + item.url + '">'
+					+ '<a href="' + item.url + '" target="_blank">'
 						+ '<b>' + item.title + ' <small>(' + domain + ')</small></b>'
 						+ '<span class="metadata">' + item.score + ' by ' + item.user + ' ' + item.time + '</span>'
 					+ '</a>'
