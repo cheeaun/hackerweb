@@ -10,6 +10,7 @@
 		var html = '',
 			a = d.createElement('a');
 		data.query.results.items.forEach(function(item){
+			if (!item.item_id) return;
 			a.href = item.url;
 			var domain = a.hostname.match(/[^.]+\.[^.]+$/i)[0];
 			html += '<li>'
