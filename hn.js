@@ -15,8 +15,8 @@
 			var domain = a.hostname.replace('www.', '');
 			html += '<li>'
 					+ '<a href="' + item.url + '" target="_blank">'
-						+ '<b>' + item.title + ' <small>(' + domain + ')</small></b>'
-						+ '<span class="metadata">' + item.score + ' by ' + item.user + ' ' + item.time + '</span>'
+						+ '<b>' + item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2') + '</b>'
+						+ '<span class="metadata">' + domain + '<br>' + item.score + ' by ' + item.user + ' ' + item.time + '</span>'
 					+ '</a>'
 				+ '</li>';
 		});
@@ -43,6 +43,7 @@
 		var tappedEl;
 		tappable(view, {
 			onStart: function(e, target){
+				if (!target) return;
 				target.classList.add('tapped');
 				tappedEl = target;
 			},

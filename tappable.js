@@ -51,7 +51,7 @@ var tappable = function(el, opts){
 				clientY = changedTouches.clientY,
 				target = document.elementFromPoint(clientX, clientY);
 			if (!e.target) e.target = target;
-			if (target.nodeType == 3) target = target.parentNode;
+			if (target && target.nodeType == 3) target = target.parentNode;
 			
 			if (noScroll){
 				if (target != el){
@@ -78,7 +78,7 @@ var tappable = function(el, opts){
 			
 			var target = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
 			if (!e.target) e.target = target;
-			if (target.nodeType == 3) target = target.parentNode;
+			if (target && target.nodeType == 3) target = target.parentNode;
 			
 			options.onEnd.call(el, e, target);
 			
