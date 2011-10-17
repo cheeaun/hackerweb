@@ -12,7 +12,7 @@
 		data.query.results.items.forEach(function(item){
 			if (!item.item_id) return;
 			a.href = item.url;
-			var domain = a.hostname.match(/[^.]+\.[^.]+$/i)[0];
+			var domain = a.hostname.replace('www.', '');
 			html += '<li>'
 					+ '<a href="' + item.url + '" target="_blank">'
 						+ '<b>' + item.title + ' <small>(' + domain + ')</small></b>'
