@@ -47,6 +47,10 @@ header h1{
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+header h1 img{
+	vertical-align: -15%;
+	border: 1px solid #fff;
+}
 .view>section{
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
