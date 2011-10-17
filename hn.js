@@ -38,25 +38,25 @@
 	
 	var $viewSections = d.querySelectorAll('.view>section');
 	for (var i=0, l=$viewSections.length; i<l; i++){
-		new OSFix($viewSections[i]);
+		var view = $viewSections[i];
+		new OSFix(view);
+		var tappedEl;
+		tappable(view, {
+			onStart: function(e, target){
+				target.classList.add('tapped');
+				tappedEl = target;
+			},
+			onMove: function(){
+				if (tappedEl) tappedEl.classList.remove('tapped');
+			},
+			onEnd: function(){
+				if (tappedEl) tappedEl.classList.remove('tapped');
+			},
+			onCancel: function(){
+				if (tappedEl) tappedEl.classList.remove('tapped');
+			}
+		});
 	}
-	
-	var tappedEl;
-	d.addEventListener('touchstart', function(e){
-		var el = e.target;
-		if (!el) return;
-		el.classList.add('tapped');
-		tappedEl = el;
-	}, false);
-	d.addEventListener('touchmove', function(e){
-		tappedEl.classList.remove('tapped');
-	}, false);
-	d.addEventListener('touchend', function(e){
-		tappedEl.classList.remove('tapped');
-	}, false);
-	d.addEventListener('touchcancel', function(e){
-		tappedEl.classList.remove('tapped');
-	}, false);
 	
 	var news = amplify.store('news');
 	if (news){
