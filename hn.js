@@ -39,23 +39,46 @@
 	var $viewSections = d.querySelectorAll('.view>section');
 	for (var i=0, l=$viewSections.length; i<l; i++){
 		var view = $viewSections[i];
-		new OSFix(view);
-		var tappedEl;
+		new ScrollFix(view);
+		var tappedEl,
+			tappedTimeout,
+			moved = false;
+			clearTappedEl = function(){
+				if (!tappedEl) return;
+				clearTimeout(tappedTimeout);
+				tappedEl.classList.remove('tapped');
+				tappedEl = null;
+			};
+		view.onscroll = function(){
+			moved = false;
+		};
 		tappable(view, {
+			allowClick: true,
 			onStart: function(e, target){
 				if (!target) return;
-				target.classList.add('tapped');
+				if (target.tagName.toLowerCase() != 'a') return;
+				if (target.classList.contains('tapped')) return;
+				clearTappedEl();
 				tappedEl = target;
+				tappedTimeout = setTimeout(function(){
+					target.classList.add('tapped');
+				}, 100);
 			},
 			onMove: function(){
-				if (tappedEl) tappedEl.classList.remove('tapped');
+				moved = true;
+				clearTappedEl();
 			},
 			onEnd: function(){
-				if (tappedEl) tappedEl.classList.remove('tapped');
+				if (moved){
+					moved = false;
+					return;
+				}
+				if (!tappedEl) return;
+				clearTimeout(tappedTimeout);
+				tappedEl.classList.add('tapped');
+				setTimeout(clearTappedEl, 300);
 			},
-			onCancel: function(){
-				if (tappedEl) tappedEl.classList.remove('tapped');
-			}
+			onCancel: clearTappedEl
 		});
 	}
 	

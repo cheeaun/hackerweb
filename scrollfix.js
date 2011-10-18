@@ -11,14 +11,10 @@ var ScrollFix = function(elem) {
 	// Variables to track inputs
 	var startY = startTopScroll = deltaY = undefined,
 	
-	// Create a lock to prevent multiple interference per interaction
-	modifiedY = false,
+	elem = elem || elem.querySelector(elem);
 	
-	// Get the first child of the element and treat it as the content	
-	content = elem.querySelector('*');
-	
-	// If there is no content, then do nothing	
-	if(!content)
+	// If there is no element, then do nothing	
+	if(!elem)
 		return;
 
 	// Handle the start of interactions
@@ -26,39 +22,10 @@ var ScrollFix = function(elem) {
 		startY = event.touches[0].pageY;
 		startTopScroll = elem.scrollTop;
 		
-		// Reset the lock
-		modifiedY = false;
-		
-		//console.log('start (top):', startTopScroll);
-		//console.log('start (bottom):', startTopScroll + elem.offsetHeight, content.offsetHeight);
-		
 		if(startTopScroll <= 0)
 			elem.scrollTop = 1;
 
-		if(startTopScroll + elem.offsetHeight >= content.offsetHeight)
-			elem.scrollTop = content.offsetHeight - elem.offsetHeight - 1;
-	}, false);
-	
-	// Handle movements
-	elem.addEventListener('touchmove', function(event){
-		deltaY = event.touches[0].pageY - startY;
-		
-		// Is the content currently at the top?
-		if(startTopScroll == 0 && deltaY > 0 && !modifiedY) {
-			// Offset the scroll position to prevent Safari scrolling the whole page
-			elem.scrollTop = 1;
-			modifiedY = true;
-			event.stopPropagation();
-		}
-		
-		//console.log(startTopScroll, elem.offsetHeight, content.offsetHeight);
-		
-		// Is the content currently at the bottom?
-		if(startTopScroll + elem.offsetHeight == content.offsetHeight && !modifiedY) {
-			// Offset the scroll position to prevent Safari scrolling the whole page
-			elem.scrollTop = startTopScroll-1;
-			modifiedY = true;
-			event.stopPropagation();
-		}
+		if(startTopScroll + elem.offsetHeight >= elem.scrollHeight)
+			elem.scrollTop = elem.scrollHeight - elem.offsetHeight - 1;
 	}, false);
 };
