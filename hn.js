@@ -32,14 +32,15 @@
 		});
 	};
 	
-	var scrollTop = function(){
-		body.style.height = screen.height + 'px';
-		setTimeout(function(){
-			w.scrollTo(0, 0);
-			body.style.height = w.innerHeight + 'px';
-		}, 1);
-	};
-	w[(typeof w.orientation != 'undefined') ? 'onorientationchange' : 'resize'] = scrollTop;
+	var supportOrientation = typeof w.orientation != 'undefined',
+		scrollTop = supportOrientation ? function(){
+				body.style.height = screen.height + 'px';
+				setTimeout(function(){
+					w.scrollTo(0, 0);
+					body.style.height = w.innerHeight + 'px';
+				}, 1);
+			} : function(){};
+	if (supportOrientation) w.onorientationchange = scrollTop;
 	scrollTop();
 	
 	var $viewSections = d.querySelectorAll('.view>section');
@@ -71,8 +72,10 @@
 				}, 100);
 			},
 			onMove: function(){
-				moved = true;
-				clearTappedEl();
+				if (!moved){
+					moved = true;
+					clearTappedEl();
+				}
 			},
 			onEnd: function(){
 				if (moved){
