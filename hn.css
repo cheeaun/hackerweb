@@ -64,11 +64,12 @@ header h1 img{
 	padding: 0;
 	list-style: none;
 	background-color: #fff;
+	border-bottom: 1px solid #e0e0e0;
 }
 .listview li{
 	display: block;
 	overflow: hidden;
-	border-bottom: 1px solid #e0e0e0;
+	border-top: 1px solid #e0e0e0;
 	padding: 10px;
 }
 .listview-links li{
@@ -80,6 +81,9 @@ header h1 img{
 	padding: 10px;
 	text-decoration: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
 }
 .listview-links li>a *{
 	pointer-events: none;
@@ -88,6 +92,18 @@ header h1 img{
 	font-size: 13px;
 	color: #666;
 	font-weight: normal;
+}
+.listview-links li>a .number{
+	font-size: 13px;
+	text-align: right;
+	width: 3ex;
+	padding-right: 10px;
+	color: #666;
+}
+.listview-links li>a .story{
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
 }
 .listview-links li>a .metadata{
 	display: block;

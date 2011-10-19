@@ -8,15 +8,21 @@
 			return;
 		}
 		var html = '',
+			i = 1,
 			a = d.createElement('a');
 		data.query.results.items.forEach(function(item){
-			if (!item.item_id) return;
-			a.href = item.url;
-			var domain = a.hostname.replace('www.', '');
+			var url = item.url;
+			if (/item\?/i.test(url)) url = 'http://news.ycombinator.com/' + url; // For 'ask'
+			a.href = url;
+			var domain = a.hostname.replace('www.', ''),
+				postedBy = item.postedBy;
 			html += '<li>'
-					+ '<a href="' + item.url + '" target="_blank">'
-						+ '<b>' + item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2') + '</b>'
-						+ '<span class="metadata">' + domain + '<br>' + item.score + ' by ' + item.user + ' ' + item.time + '</span>'
+					+ '<a href="' + url + '" target="_blank">'
+						+ '<div class="number">' + (i++) + '.</div>'
+						+ '<div class="story">'
+							+ '<b>' + item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2') + '</b>'
+							+ (postedBy != 'null' ? '<span class="metadata">' + domain + '<br>' + item.points + ' points by ' + item.postedBy + ' ' + item.postedAgo + '</span>' : '')
+						+ '</div>'
 					+ '</a>'
 				+ '</li>';
 		});
@@ -87,8 +93,8 @@
 		w.loadNews(news);
 	} else {
 		var script = d.createElement('script'),
-			q = 'select * from json where url="http://hndroidapi.appspot.com/news" and itemPath = "json.items"',
-			src = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(q) + '&format=json&callback=loadNews&_maxage=600';
+			q = 'select * from json where url="http://api.ihackernews.com/page" and itemPath = "json.items"',
+			src = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(q) + '&format=json&callback=loadNews&_maxage=600&_t=' + (+new Date());
 		script.src = src;
 		body.appendChild(script);
 	}
