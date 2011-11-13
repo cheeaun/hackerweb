@@ -63,16 +63,39 @@ body{
 	color: #fff;
 	text-shadow: 0 -1px rgba(0,0,0,.6);
 	font-weight: bold;
-	padding: 0 4px 0 2px;
+	padding: 0 4px;
 	text-decoration: none;
+	border-width: 2px 4px;
+	-webkit-border-image: url(button.png) 4 8 4 8;
+	-moz-border-image: url(button.png) 4 8 4 8;
+	-ms-border-image: url(button.png) 4 8 4 8;
+	-o-border-image: url(button.png) 4 8 4 8;
+/*	border-image: url(button.png) 4 8 4 8;*/
+	background: transparent url(button-active.png) no-repeat;
+	-webkit-background-size: 0 0;
+	-moz-background-size: 0 0;
+	-ms-background-size: 0 0;
+	-o-background-size: 0 0;
+	background-size: 0 0;
+}
+.header-button.tappable-active{
+	-webkit-border-image: url(button-active.png) 4 8 4 8;
+	-moz-border-image: url(button-active.png) 4 8 4 8;
+	-ms-border-image: url(button-active.png) 4 8 4 8;
+	-o-border-image: url(button-active.png) 4 8 4 8;
+/*	border-image: url(button-active.png) 4 8 4 8;*/
+}
+.header-back-button{
+	padding: 0 4px 0 2px;
 	border-width: 2px 4px 2px 13px;
 	-webkit-border-image: url(back-button.png) 4 8 4 26;
 	-moz-border-image: url(back-button.png) 4 8 4 26;
 	-ms-border-image: url(back-button.png) 4 8 4 26;
 	-o-border-image: url(back-button.png) 4 8 4 26;
 /*	border-image: url(back-button.png) 4 8 4 26;*/
+	background-image: url(back-button-active.png);
 }
-.header-button.tappable-active{
+.header-back-button.tappable-active{
 	-webkit-border-image: url(back-button-active.png) 4 8 4 26;
 	-moz-border-image: url(back-button-active.png) 4 8 4 26;
 	-ms-border-image: url(back-button-active.png) 4 8 4 26;
@@ -480,5 +503,8 @@ body{
 		height: 24px;
 		line-height: 20px;
 		border-width: 2px 4px 2px 10px;
+	}
+	.header-back-button{
+		border-width: 2px 4px;
 	}
 }
