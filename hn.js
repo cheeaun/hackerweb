@@ -1,36 +1,87 @@
 !function(w, d){
 	var body = d.body,
-		$hnlist = d.getElementById('hnlist');
+		$ = function(id){ return d.getElementById(id) },
+		$hnlist = $('hnlist'),
+		hideAllViews = function(){
+			var views = d.querySelectorAll('.view');
+			for (var i=0, l=views.length; i<l; i++){
+				views[i].classList.add('hidden');
+			}
+		},
+		slide = function(el, direction){
+			if (typeof el == 'string') el = $(el);
+			var inout = (direction.match(/^in|out/i) || ['in'])[0];
+			if (inout == 'in') el.classList.remove('hidden');
+			var className = 'slide-' + direction,
+				reset = function(){
+					el.removeEventListener('webkitAnimationEnd', reset, false);
+					if (inout == 'out') el.classList.add('hidden');
+					el.classList.remove(className);
+				};
+			el.addEventListener('webkitAnimationEnd', reset, false);
+			el.classList.add(className);
+		},
+		tmplCache = {},
+		tmpl = function(template, data){
+			var t = tmplCache[template];
+			if (!t){
+				t = $(template + '-tmpl').textContent;
+				tmplCache[template] = t;
+			}
+			if (!data) return t;
+			return Mustache.to_html(t, data);
+		};
 	
-	w.loadNews = function(data){
-		if (!data || !data.query || !data.query.results){
-			alert('Things borked, try reload plz?');
-			return;
+	var currentView = null;
+	var routes = {
+		'/': function(){
+			var view = $('view-home');
+			if (!currentView){
+				hideAllViews();
+				view.classList.remove('hidden');
+			} else {
+				slide('view-' + currentView, 'out-to-right');
+				slide(view, 'in-from-left');
+			}
+			currentView = 'home';
+		},
+		'/item/(\\d+)': function(id){
+			var view = $('view-comments'),
+				viewHeading = view.querySelector('header h1'),
+				viewSection = view.querySelector('section');
+			if (!currentView){
+				hideAllViews();
+				view.classList.remove('hidden');
+			} else if (currentView != 'comments') {
+				slide('view-' + currentView, 'out-to-left');
+				slide(view, 'in-from-right');
+			}
+			currentView = 'comments';
+			if (id){
+				var post = amplify.store.sessionStorage('hacker-post-' + id),
+					loadPost = function(data){
+						if (!data) return;
+						amplify.store.sessionStorage('hacker-post-' + id, data, {
+							expires: 1000*60*10 // 10 minutes
+						});
+						var tmpl1 = tmpl('post-comments'),
+							tmpl2 = tmpl('comments');
+						data.title = data.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
+						var html = Mustache.to_html(tmpl1, data, {comments_list: tmpl2});
+						viewHeading.innerHTML = data.title;
+						viewSection.innerHTML = html;
+					};
+				viewHeading.innerHTML = viewHeading.dataset.loadingText;
+				viewSection.innerHTML = '';
+				post ? loadPost(post) : hnapi.post(id, loadPost);
+			}
 		}
-		var html = '',
-			i = 1,
-			a = d.createElement('a');
-		data.query.results.items.forEach(function(item){
-			var url = item.url;
-			if (/item\?/i.test(url)) url = 'http://news.ycombinator.com/' + url; // For 'ask'
-			a.href = url;
-			var domain = a.hostname.replace('www.', ''),
-				postedBy = item.postedBy;
-			html += '<li>'
-					+ '<a href="' + url + '" target="_blank">'
-						+ '<div class="number">' + (i++) + '.</div>'
-						+ '<div class="story">'
-							+ '<b>' + item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2') + '</b>'
-							+ (postedBy != 'null' ? '<span class="metadata">' + domain + '<br>' + item.points + ' points by ' + item.postedBy + ' ' + item.postedAgo + '</span>' : '')
-						+ '</div>'
-					+ '</a>'
-				+ '</li>';
-		});
-		$hnlist.innerHTML = html;
-		amplify.store('news', data, {
-			expires: 1000*60*10 // 10 minutes
-		});
 	};
+	Router(routes).init();
+	
+	if (!location.hash){
+		location.hash = '/';
+	}
 	
 	var supportOrientation = typeof w.orientation != 'undefined',
 		scrollTop = supportOrientation ? function(){
@@ -43,62 +94,72 @@
 	if (supportOrientation) w.onorientationchange = scrollTop;
 	scrollTop();
 	
-	var $viewSections = d.querySelectorAll('.view>section');
+	var $viewSections = d.querySelectorAll('.view>section'),
+		scrollTops = {};
 	for (var i=0, l=$viewSections.length; i<l; i++){
 		var view = $viewSections[i];
 		new ScrollFix(view);
-		var tappedEl,
-			tappedTimeout,
-			moved = false;
-			clearTappedEl = function(){
-				if (!tappedEl) return;
-				clearTimeout(tappedTimeout);
-				tappedEl.classList.remove('tapped');
-				tappedEl = null;
-			};
-		view.onscroll = function(){
-			moved = false;
-		};
-		tappable(view, {
-			allowClick: true,
-			onStart: function(e, target){
-				if (!target) return;
-				if (target.tagName.toLowerCase() != 'a') return;
-				if (target.classList.contains('tapped')) return;
-				clearTappedEl();
-				tappedEl = target;
-				tappedTimeout = setTimeout(function(){
-					target.classList.add('tapped');
-				}, 100);
-			},
-			onMove: function(){
-				if (!moved){
-					moved = true;
-					clearTappedEl();
-				}
-			},
-			onEnd: function(){
-				if (moved){
-					moved = false;
-					return;
-				}
-				if (!tappedEl) return;
-				clearTimeout(tappedTimeout);
-				tappedEl.classList.add('tapped');
-				setTimeout(clearTappedEl, 300);
-			},
-			onCancel: clearTappedEl
-		});
+		view.addEventListener('touchstart', function(){
+			w.scrollTo(0, 0);
+		}, false)
 	}
 	
-	var news = amplify.store('news');
-	if (news){
-		w.loadNews(news);
-	} else {
-		var script = d.createElement('script'),
-			q = 'select * from json where url="http://api.ihackernews.com/page" and itemPath = "json.items"',
-			src = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(q) + '&format=json&callback=loadNews&_maxage=600&_t=' + (+new Date());
-		script.src = src;
-		body.appendChild(script);
-	}
+	tappable('.view header a.header-button', {
+		noScroll: true,
+		onTap: function(e, target){
+			location.hash = target.getAttribute('href');
+		}
+	});
+	tappable('.view header', {
+		onTap: function(e, target){
+			var section = target.nextElementSibling;
+			// Reset the overflow because the momentum ignores scrollTop setting
+			var originalOverflow = section.style.overflow;
+			section.style.overflow = 'hidden';
+			setTimeout(function(){
+				section.style.overflow = originalOverflow;
+				var anim = Viper({
+					object: section,
+					transition: Viper.Transitions.sine,
+					property: 'scrollTop',
+					to: 1,
+					fps: 60 // pushing the limit?
+				});
+				anim.start();
+				anim = null;
+			}, 300);
+		}
+	});
+	tappable('.view section ul li a:first-child', {
+		allowClick: true,
+		activeClassDelay: 100,
+		inactiveClassDelay: 500
+	});
+	tappable('.view section ul li a.detail-disclosure', {
+		noScroll: true,
+		noScrollDelay: 100,
+		onTap: function(e, target){
+			location.hash = target.getAttribute('href');
+		}
+	});
+	
+	var loadNews = function(data){
+		if (!data){
+			alert('Things borked, try reload plz?');
+			return;
+		}
+		amplify.store('hacker-news', data, {
+			expires: 1000*60*10 // 10 minutes
+		});
+		var html = '',
+			i = 1;
+		data.forEach(function(item){
+			item.title = item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
+			item.i = i++;
+			html += tmpl('post', item);
+		});
+		$hnlist.innerHTML = html;
+	};
+	var news = amplify.store('hacker-news');
+	news ? loadNews(news) : hnapi.news(loadNews);
 }(window, document);

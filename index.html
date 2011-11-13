@@ -3,7 +3,7 @@
 <title>Hacker News</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link rel="stylesheet" href="hn.css">
-<div class="view">
+<div class="view hidden" id="view-home">
 	<header>
 		<h1><img src="http://ycombinator.com/images/y18.gif" width="18" height="18" alt=""> Hacker News</h1>
 	</header>
@@ -12,7 +12,80 @@
 		</ul>
 	</section>
 </div>
+<div class="view hidden" id="view-comments">
+	<header>
+		<a href="#/" class="header-button">News</a>
+		<h1 data-loading-text="Loading&hellip;"></h1>
+	</header>
+	<section class="striped">
+	</section>
+</div>
+<script type="text/html" id="post-tmpl">
+	<li id="story-{{id}}" class="post-{{type}}">
+		<a href="{{url}}" target="_blank" class="pad-right">
+			<div class="number">{{i}}.</div>
+			<div class="story">
+				<b>{{title}}</b>
+				{{#user}}
+					<span class="metadata">
+						{{#domain}}<span class="link-text">{{domain}}</span><br>{{/domain}}
+						<span class="inline-block">{{points}} points by {{user}}</span>
+						<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} comments{{/comments_count}}</span>
+					</span>
+				{{/user}}
+				{{^user}}
+					<span class="metadata">
+						<span class="inline-block">{{time_ago}}</span>
+					</span>
+				{{/user}}
+			</div>
+		</a>
+		<a href="#/item/{{id}}" class="detail-disclosure"><span></span></a>
+	</li>
+</script>
+<script type="text/html" id="post-comments-tmpl">
+	<article>
+		<div class="post-content">
+			<header>
+				<h1><a href="{{url}}" target="_blank">{{title}}</a></h1>
+				<p class="metadata">
+					{{#user}}
+						{{#domain}}<span class="link-text">{{domain}}</span><br>{{/domain}}
+						<span class="inline-block">{{points}} points by {{user}}</span>
+						<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} comments{{/comments_count}}</span>
+					{{/user}}
+					{{^user}}
+						<span class="inline-block">{{time_ago}}</span>
+					{{/user}}
+				</p>
+			</header>
+			{{#question}}
+				<section class="grouped-listview">{{{question}}}</section>
+			{{/question}}
+		</div>
+		<section class="comments">
+			<ul>
+				{{>comments_list}}
+			</ul>
+		</section>
+	</article>
+</script>
+<script type="text/html" id="comments-tmpl">
+	{{#comments}}
+		<li>
+			<p class="metadata"><b>{{user}}</b> <time>{{time_ago}}</time></p>
+			<p>{{{content}}}
+			<ul>
+				{{>comments_list}}
+			</ul>
+		</li>
+	{{/comments}}
+</script>
+<script src="SS.js"></script>
 <script src="amplify.store.js"></script>
+<script src="mustache.js"></script>
+<script src="viper.js"></script>
 <script src="tappable.js"></script>
 <script src="scrollfix.js"></script>
+<script src="hnapi.js"></script>
 <script src="hn.js"></script>
