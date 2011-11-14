@@ -22,7 +22,7 @@
 </div>
 <script type="text/html" id="post-tmpl">
 	<li id="story-{{id}}" class="post-{{type}}">
-		<a href="{{url}}" target="_blank" class="pad-right">
+		<a href="{{url}}" {{^local}}target="_blank" class="pad-right{{/local}}">
 			<div class="number">{{i}}.</div>
 			<div class="story">
 				<b>{{title}}</b>
@@ -40,7 +40,9 @@
 				{{/user}}
 			</div>
 		</a>
-		<a href="#/item/{{id}}" class="detail-disclosure"><span></span></a>
+		{{^local}}
+			<a href="#/item/{{id}}" class="detail-disclosure"><span></span></a>
+		{{/local}}
 	</li>
 </script>
 <script type="text/html" id="post-comments-tmpl">
@@ -64,9 +66,14 @@
 			{{/question}}
 		</div>
 		<section class="comments">
-			<ul>
-				{{>comments_list}}
-			</ul>
+			{{#comments_list}}
+				<ul>
+					{{>comments_list}}
+				</ul>
+			{{/comments_list}}
+			{{^comments_list}}
+				<p class="no-comments">No comments.</p>
+			{{/comments_list}}
 		</section>
 	</article>
 </script>

@@ -153,6 +153,10 @@
 			i = 1;
 		data.forEach(function(item){
 			item.title = item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
+			if (item.type != 'link' && /^item/i.test(item.url)){
+				item.local = true;
+				item.url = '#/item/' + item.id;
+			}
 			item.i = i++;
 			html += tmpl('post', item);
 		});

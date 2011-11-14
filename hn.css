@@ -366,6 +366,12 @@ body{
 	padding: 5px 0;
 	background-color: #eee;
 }
+.view article section.comments p.no-comments{
+	text-align: center;
+	color: #aaa;
+	font-weight: bold;
+	margin: 50px 0 250px;
+}
 .link-text{
 	color: #385487;
 	font-weight: bold;
