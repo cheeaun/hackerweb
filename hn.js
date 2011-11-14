@@ -154,10 +154,12 @@
 			i = 1;
 		data.forEach(function(item){
 			item.title = item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
-			if (item.type != 'link' && /^item/i.test(item.url)){
-				item.local = true;
+			if (/^item/i.test(item.url)){
 				item.url = '#/item/' + item.id;
+			} else {
+				item.external = true;
 			}
+			if (item.type == 'link') item.disclosure = true;
 			item.i = i++;
 			html += tmpl('post', item);
 		});
