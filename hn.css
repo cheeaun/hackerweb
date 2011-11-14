@@ -379,13 +379,15 @@ body{
 .inline-block{
 	display: inline-block;
 }
-.slide-in-from-right {
+.view{
 	-webkit-animation-timing-function: ease-in-out;
 	-webkit-animation-duration: 350ms;
 	-moz-animation-timing-function: ease-in-out;
 	-moz-animation-duration: 350ms;
 	animation-timing-function: ease-in-out;
 	animation-duration: 350ms;
+}
+.slide-in-from-right {
 	-webkit-transform: translateX(0);
 	-webkit-animation-name: slideinfromright;
 	-moz-transform: translateX(0);
@@ -395,12 +397,6 @@ body{
 }
 
 .slide-out-to-left {
-	-webkit-animation-timing-function: ease-in-out;
-	-webkit-animation-duration: 350ms;
-	-moz-animation-timing-function: ease-in-out;
-	-moz-animation-duration: 350ms;
-	animation-timing-function: ease-in-out;
-	animation-duration: 350ms;
 	-webkit-transform: translateX(-100%);
 	-webkit-animation-name: slideouttoleft;
 	-moz-transform: translateX(-100%);
@@ -410,12 +406,6 @@ body{
 }
 
 .slide-in-from-left {
-	-webkit-animation-timing-function: ease-in-out;
-	-webkit-animation-duration: 350ms;
-	-moz-animation-timing-function: ease-in-out;
-	-moz-animation-duration: 350ms;
-	animation-timing-function: ease-in-out;
-	animation-duration: 350ms;
 	-webkit-transform: translateX(0);
 	-webkit-animation-name: slideinfromleft;
 	-moz-transform: translateX(0);
@@ -425,12 +415,6 @@ body{
 }
 
 .slide-out-to-right {
-	-webkit-animation-timing-function: ease-in-out;
-	-webkit-animation-duration: 350ms;
-	-moz-animation-timing-function: ease-in-out;
-	-moz-animation-duration: 350ms;
-	animation-timing-function: ease-in-out;
-	animation-duration: 350ms;
 	-webkit-transform: translateX(100%);
 	-webkit-animation-name: slideouttoright;
 	-moz-transform: translateX(100%);
