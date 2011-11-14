@@ -66,14 +66,14 @@
 			{{/question}}
 		</div>
 		<section class="comments">
-			{{#comments_list}}
+			{{#has_comments}}
 				<ul>
 					{{>comments_list}}
 				</ul>
-			{{/comments_list}}
-			{{^comments_list}}
+			{{/has_comments}}
+			{{^has_comments}}
 				<p class="no-comments">No comments.</p>
-			{{/comments_list}}
+			{{/has_comments}}
 		</section>
 	</article>
 </script>

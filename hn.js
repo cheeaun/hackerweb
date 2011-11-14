@@ -67,6 +67,7 @@
 						var tmpl1 = tmpl('post-comments'),
 							tmpl2 = tmpl('comments');
 						data.title = data.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
+						data.has_comments = !!data.comments.length;
 						var html = Mustache.to_html(tmpl1, data, {comments_list: tmpl2});
 						viewHeading.innerHTML = data.title;
 						viewSection.innerHTML = html;
