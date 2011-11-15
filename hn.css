@@ -198,6 +198,9 @@ body{
 	-o-background-size: 1px 100%;
 	background-size: 1px 100%;
 }
+.listview-links li>a:visited{
+	color: #666;
+}
 .listview-links li>a *{
 	pointer-events: none;
 }
