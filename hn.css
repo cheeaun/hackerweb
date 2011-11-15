@@ -34,6 +34,12 @@ body{
 	background-image: -ms-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
 	background-image: -o-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
 	background-image: linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
+	background-repeat: repeat-x;
+	-webkit-background-size: 1px 100%;
+	-moz-background-size: 1px 100%;
+	-ms-background-size: 1px 100%;
+	-o-background-size: 1px 100%;
+	background-size: 1px 100%;
 	height: 44px;
 	border-top: 1px solid #cdd5df;
 	border-bottom: 1px solid #2d3642;
@@ -178,6 +184,19 @@ body{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#4286f5), to(#194fdb));
+	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
+	background-image: -moz-linear-gradient(top, #4286f5, #194fdb);
+	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
+	background-image: -o-linear-gradient(top, #4286f5, #194fdb);
+	background-image: linear-gradient(top, #4286f5, #194fdb);
+	background-position: -1px 0;
+	background-repeat: no-repeat;
+	-webkit-background-size: 1px 100%;
+	-moz-background-size: 1px 100%;
+	-ms-background-size: 1px 100%;
+	-o-background-size: 1px 100%;
+	background-size: 1px 100%;
 }
 .listview-links li>a *{
 	pointer-events: none;
@@ -205,12 +224,7 @@ body{
 .listview-links li>a.tappable-active{
 	color: #fff;
 	background-color: #4286f5;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#4286f5), to(#194fdb));
-	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -moz-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -o-linear-gradient(top, #4286f5, #194fdb);
-	background-image: linear-gradient(top, #4286f5, #194fdb);
+	background-repeat: repeat-x;
 }
 .listview-links li>a.tappable-active *{
 	color: #fff;
