@@ -71,6 +71,10 @@
 						var html = Mustache.to_html(tmpl1, data, {comments_list: tmpl2});
 						viewHeading.innerHTML = data.title;
 						viewSection.innerHTML = html;
+						var links = viewSection.querySelectorAll('a');
+						for (var i=0, l=links.length; i<l; i++){
+							links[i].target = '_blank';
+						}
 					};
 				viewHeading.innerHTML = viewHeading.dataset.loadingText;
 				viewSection.innerHTML = '';
