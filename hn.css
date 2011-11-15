@@ -44,7 +44,7 @@ body{
 	border-top: 1px solid #cdd5df;
 	border-bottom: 1px solid #2d3642;
 	width: 100%;
-	padding: 6px;
+	padding: 6px 5px;
 	-webkit-user-select: none;
 	-webkit-touch-callout: none;
 	-webkit-box-sizing: border-box;
@@ -64,8 +64,8 @@ body{
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	height: 30px;
-	line-height: 26px;
-	font-size: 12px;
+	line-height: 25px;
+	font-size: 13px;
 	color: #fff;
 	text-shadow: 0 -1px rgba(0,0,0,.6);
 	font-weight: bold;
@@ -92,7 +92,7 @@ body{
 /*	border-image: url(button-active.png) 4 8 4 8;*/
 }
 .header-back-button{
-	padding: 0 4px 0 2px;
+	padding: 0 4px 0 0;
 	border-width: 2px 4px 2px 13px;
 	-webkit-border-image: url(back-button.png) 4 8 4 26;
 	-moz-border-image: url(back-button.png) 4 8 4 26;
