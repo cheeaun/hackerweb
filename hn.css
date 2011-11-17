@@ -568,20 +568,24 @@ header.fake{
 }
 
 @media only screen and (max-height: 280px){
+	header.fake{
+		height: 32px;
+	}
 	.view>header{
 		height: 32px;
-		padding: 3px;
+		padding: 4px;
 	}
 	.view>header h1{
 		font-size: 16px;
-		line-height: 23px;
+		line-height: 26px;
 	}
 	.header-button{
+		padding: 0 4px 0 2px;
 		height: 24px;
-		line-height: 20px;
-		border-width: 2px 4px 2px 10px;
+		line-height: 18px;
+		border-width: 2px 4px;
 	}
 	.header-back-button{
-		border-width: 2px 4px;
+		border-width: 2px 4px 2px 10px;
 	}
 }
