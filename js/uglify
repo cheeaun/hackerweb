@@ -1,2 +1,0 @@
-#! /bin/bash
-cat *.js | uglifyjs -o ../hntools.js -nc -v
