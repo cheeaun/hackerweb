@@ -97,14 +97,12 @@
 	if (supportOrientation) w.onorientationchange = scrollTop;
 	scrollTop();
 	
-	var $viewSections = d.querySelectorAll('.view>section'),
-		scrollTops = {};
+	var $viewSections = d.querySelectorAll('.view>.scroll');
 	for (var i=0, l=$viewSections.length; i<l; i++){
 		var view = $viewSections[i];
-		new ScrollFix(view);
 		view.addEventListener('touchstart', function(){
 			w.scrollTo(0, 0);
-		}, false)
+		}, false);
 	}
 	
 	tappable('.view header a.header-button', {
@@ -115,7 +113,7 @@
 	});
 	tappable('.view header', {
 		onTap: function(e, target){
-			var section = target.nextElementSibling;
+			var section = target.nextElementSibling.firstElementChild;
 			// Reset the overflow because the momentum ignores scrollTop setting
 			var originalOverflow = section.style.overflow;
 			section.style.overflow = 'hidden';

@@ -8,18 +8,22 @@
 	<header>
 		<h1><img src="http://ycombinator.com/images/y18.gif" width="18" height="18" alt=""> Hacker News</h1>
 	</header>
-	<section>
-		<ul class="listview listview-links" id="hnlist">
-		</ul>
-	</section>
+	<div class="scroll">
+		<section>
+			<ul class="listview listview-links" id="hnlist">
+			</ul>
+		</section>
+	</div>
 </div>
 <div class="view hidden" id="view-comments">
 	<header>
 		<a href="#/news" class="header-button header-back-button">News</a>
 		<h1 data-loading-text="Loading&hellip;"></h1>
 	</header>
-	<section class="striped">
-	</section>
+	<div class="scroll striped">
+		<section>
+		</section>
+	</div>
 </div>
 <script type="text/html" id="post-tmpl">
 	<li id="story-{{id}}" class="post-{{type}}">

@@ -136,15 +136,22 @@ header.fake{
 	vertical-align: -15%;
 	border: 1px solid #fff;
 }
-.view>section{
+.view>.scroll{
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 	box-flex: 1;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	background-color: #e2e7ed;
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	-webkit-box-orient: vertical;
+	-moz-box-orient: vertical;
+	box-orient: vertical;
+	height: 100%;
 }
-.view>section.striped{
+.view>.scroll.striped{
 	background-color: #cbd2d8;
 	background-image: -webkit-gradient(linear, left top, right top, from(#c5ccd4), color-stop(0.714, #c5ccd4), color-stop(0.714, #cbd2d8), to(#cbd2d8)); 
 	background-image: -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
@@ -157,6 +164,13 @@ header.fake{
 	-ms-background-size: 7px 1px;
 	-o-background-size: 7px 1px;
 	background-size: 7px 1px;
+}
+.view>.scroll>section{
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 }
 .listview{
 	margin: 0;
