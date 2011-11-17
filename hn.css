@@ -82,12 +82,12 @@ header.fake{
 	padding: 0 4px;
 	text-decoration: none;
 	border-width: 2px 4px;
-	-webkit-border-image: url(button.png) 4 8 4 8;
-	-moz-border-image: url(button.png) 4 8 4 8;
-	-ms-border-image: url(button.png) 4 8 4 8;
-	-o-border-image: url(button.png) 4 8 4 8;
-/*	border-image: url(button.png) 4 8 4 8;*/
-	background: transparent url(button-active.png) no-repeat;
+	-webkit-border-image: url(images/button.png) 4 8 4 8;
+	-moz-border-image: url(images/button.png) 4 8 4 8;
+	-ms-border-image: url(images/button.png) 4 8 4 8;
+	-o-border-image: url(images/button.png) 4 8 4 8;
+/*	border-image: url(images/button.png) 4 8 4 8;*/
+	background: transparent url(images/button-active.png) no-repeat;
 	-webkit-background-size: 0 0;
 	-moz-background-size: 0 0;
 	-ms-background-size: 0 0;
@@ -95,28 +95,28 @@ header.fake{
 	background-size: 0 0;
 }
 .header-button.tappable-active{
-	-webkit-border-image: url(button-active.png) 4 8 4 8;
-	-moz-border-image: url(button-active.png) 4 8 4 8;
-	-ms-border-image: url(button-active.png) 4 8 4 8;
-	-o-border-image: url(button-active.png) 4 8 4 8;
-/*	border-image: url(button-active.png) 4 8 4 8;*/
+	-webkit-border-image: url(images/button-active.png) 4 8 4 8;
+	-moz-border-image: url(images/button-active.png) 4 8 4 8;
+	-ms-border-image: url(images/button-active.png) 4 8 4 8;
+	-o-border-image: url(images/button-active.png) 4 8 4 8;
+/*	border-image: url(images/button-active.png) 4 8 4 8;*/
 }
 .header-back-button{
 	padding: 0 4px 0 0;
 	border-width: 2px 4px 2px 13px;
-	-webkit-border-image: url(back-button.png) 4 8 4 26;
-	-moz-border-image: url(back-button.png) 4 8 4 26;
-	-ms-border-image: url(back-button.png) 4 8 4 26;
-	-o-border-image: url(back-button.png) 4 8 4 26;
-/*	border-image: url(back-button.png) 4 8 4 26;*/
-	background-image: url(back-button-active.png);
+	-webkit-border-image: url(images/back-button.png) 4 8 4 26;
+	-moz-border-image: url(images/back-button.png) 4 8 4 26;
+	-ms-border-image: url(images/back-button.png) 4 8 4 26;
+	-o-border-image: url(images/back-button.png) 4 8 4 26;
+/*	border-image: url(images/back-button.png) 4 8 4 26;*/
+	background-image: url(images/back-button-active.png);
 }
 .header-back-button.tappable-active{
-	-webkit-border-image: url(back-button-active.png) 4 8 4 26;
-	-moz-border-image: url(back-button-active.png) 4 8 4 26;
-	-ms-border-image: url(back-button-active.png) 4 8 4 26;
-	-o-border-image: url(back-button-active.png) 4 8 4 26;
-/*	border-image: url(back-button-active.png) 4 8 4 26;*/
+	-webkit-border-image: url(images/back-button-active.png) 4 8 4 26;
+	-moz-border-image: url(images/back-button-active.png) 4 8 4 26;
+	-ms-border-image: url(images/back-button-active.png) 4 8 4 26;
+	-o-border-image: url(images/back-button-active.png) 4 8 4 26;
+/*	border-image: url(images/back-button-active.png) 4 8 4 26;*/
 }
 .view>header h1{
 	padding: 0;
@@ -267,7 +267,7 @@ header.fake{
 	display: inline-block;
 	width: 29px;
 	height: 29px;
-	background: transparent url(detail-disclosure-button.png);
+	background: transparent url(images/detail-disclosure-button.png);
 	-webkit-background-size: auto 29px;
 	-moz-background-size: auto 29px;
 	-ms-background-size: auto 29px;
@@ -356,7 +356,7 @@ header.fake{
 .view article section.comments ul ul li{
 	padding: 0 0 0 15px;
 	border: 0;
-	background: transparent url(comment-arrow.png) no-repeat 0 4px;
+	background: transparent url(images/comment-arrow.png) no-repeat 0 4px;
 	-webkit-background-size: 10px 9px;
 	-moz-background-size: 10px 9px;
 	-ms-background-size: 10px 9px;
