@@ -39,7 +39,7 @@
 			if (!currentView){
 				hideAllViews();
 				view.classList.remove('hidden');
-			} else {
+			} else if (currentView != 'home'){
 				slide('view-' + currentView, 'out-to-right');
 				slide(view, 'in-from-left');
 			}
@@ -82,9 +82,11 @@
 			}
 		}
 	};
-	Router(routes).init();
-	
-	if (!location.hash) location.hash = '/news';
+	Router(routes).configure({
+		notfound: function(){
+			location.hash = '/news';
+		}
+	}).init('/news');
 	
 	var supportOrientation = typeof w.orientation != 'undefined',
 		scrollTop = supportOrientation ? function(){
