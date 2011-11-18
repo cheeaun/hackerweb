@@ -107,13 +107,13 @@
 		}, false);
 	}
 	
-	tappable('.view header a.header-button', {
+	tappable('.view>header a.header-button', {
 		noScroll: true,
 		onTap: function(e, target){
 			location.hash = target.getAttribute('href');
 		}
 	});
-	tappable('.view header', {
+	tappable('.view>header', {
 		onTap: function(e, target){
 			var section = target.nextElementSibling.firstElementChild;
 			// Reset the overflow because the momentum ignores scrollTop setting
