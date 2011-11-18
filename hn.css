@@ -54,7 +54,7 @@ header.fake{
 	color: #fff;
 	height: 44px;
 	width: 100%;
-	padding: 6px 5px;
+	padding: 7px 5px;
 	-webkit-user-select: none;
 	-webkit-touch-callout: none;
 	-webkit-box-sizing: border-box;
@@ -357,6 +357,9 @@ header.fake{
 	background-color: #fff;
 	font-size: 13px;
 	overflow: hidden;
+}
+.view article section.comments a{
+	word-wrap: break-word;
 }
 .view article section.comments ul{
 	margin: 0;
