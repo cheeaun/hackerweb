@@ -59,7 +59,9 @@
 			currentView = 'comments';
 			if (id){
 				var post = amplify.store.sessionStorage('hacker-post-' + id),
+					$commentsScroll = view.querySelector('.scroll'),
 					loadPost = function(data){
+						$commentsScroll.classList.remove('loading');
 						if (!data) return;
 						amplify.store.sessionStorage('hacker-post-' + id, data, {
 							expires: 1000*60*10 // 10 minutes
@@ -78,6 +80,7 @@
 					};
 				viewHeading.innerHTML = viewHeading.dataset.loadingText;
 				viewSection.innerHTML = '';
+				$commentsScroll.classList.add('loading');
 				post ? loadPost(post) : hnapi.post(id, loadPost);
 			}
 		}
@@ -146,29 +149,32 @@
 		}
 	});
 	
-	var loadNews = function(data){
-		if (!data){
-			alert('Things borked, try reload plz?');
-			return;
-		}
-		amplify.store('hacker-news', data, {
-			expires: 1000*60*10 // 10 minutes
-		});
-		var html = '',
-			i = 1;
-		data.forEach(function(item){
-			item.title = item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
-			if (/^item/i.test(item.url)){
-				item.url = '#/item/' + item.id;
-			} else {
-				item.external = true;
+	var $homeScroll = d.querySelector('#view-home .scroll'),
+		loadNews = function(data){
+			$homeScroll.classList.remove('loading');
+			if (!data){
+				alert('Things borked, try reload plz?');
+				return;
 			}
-			if (item.type == 'link') item.disclosure = true;
-			item.i = i++;
-			html += tmpl('post', item);
-		});
-		$hnlist.innerHTML = html;
-	};
+			amplify.store('hacker-news', data, {
+				expires: 1000*60*10 // 10 minutes
+			});
+			var html = '',
+				i = 1;
+			data.forEach(function(item){
+				item.title = item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
+				if (/^item/i.test(item.url)){
+					item.url = '#/item/' + item.id;
+				} else {
+					item.external = true;
+				}
+				if (item.type == 'link') item.disclosure = true;
+				item.i = i++;
+				html += tmpl('post', item);
+			});
+			$hnlist.innerHTML = html;
+		};
 	var news = amplify.store('hacker-news');
+	$homeScroll.classList.add('loading');
 	news ? loadNews(news) : hnapi.news(loadNews);
 }(window, document);

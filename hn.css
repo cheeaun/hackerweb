@@ -172,6 +172,74 @@ header.fake{
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 }
+.view>.scroll>.loader{
+	display: none;
+	pointer-events: none;
+	margin: 0 0 0 -50px;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	height: 20px;
+	line-height: 20px;
+	padding-left: 26px;
+	color: #666;
+	text-shadow: 0 1px #fff;
+	background: transparent url(images/activity-indicator.png) no-repeat;
+	-webkit-background-size: 20px auto;
+	-moz-background-size: 20px auto;
+	background-size: 20px auto;
+	-webkit-animation: loading-sprite 1s step-start infinite;
+	-moz-animation: loading-sprite 1s step-start infinite;
+	animation: loading-sprite 1s step-start infinite;
+}
+.view>.scroll.loading>.loader{
+	display: block;
+}
+@-webkit-keyframes loading-sprite {
+	0% { background-position: 0 0; }
+	8.33% { background-position: 0 -20px; }
+	16.67% { background-position: 0 -40px; }
+	25% { background-position: 0 -60px; }
+	33.33% { background-position: 0 -80px; }
+	41.67% { background-position: 0 -100px; }
+	50% { background-position: 0 -120px; }
+	58.33% { background-position: 0 -140px; }
+	66.67% { background-position: 0 -160px; }
+	75% { background-position: 0 -180px; }
+	83.33% { background-position: 0 -200px; }
+	91.67% { background-position: 0 -220px; }
+	100% { background-position: 0 0; }
+}
+@-moz-keyframes loading-sprite {
+	0% { background-position: 0 0; }
+	8.33% { background-position: 0 -20px; }
+	16.67% { background-position: 0 -40px; }
+	25% { background-position: 0 -60px; }
+	33.33% { background-position: 0 -80px; }
+	41.67% { background-position: 0 -100px; }
+	50% { background-position: 0 -120px; }
+	58.33% { background-position: 0 -140px; }
+	66.67% { background-position: 0 -160px; }
+	75% { background-position: 0 -180px; }
+	83.33% { background-position: 0 -200px; }
+	91.67% { background-position: 0 -220px; }
+	100% { background-position: 0 0; }
+}
+@keyframes loading-sprite {
+	0% { background-position: 0 0; }
+	8.33% { background-position: 0 -20px; }
+	16.67% { background-position: 0 -40px; }
+	25% { background-position: 0 -60px; }
+	33.33% { background-position: 0 -80px; }
+	41.67% { background-position: 0 -100px; }
+	50% { background-position: 0 -120px; }
+	58.33% { background-position: 0 -140px; }
+	66.67% { background-position: 0 -160px; }
+	75% { background-position: 0 -180px; }
+	83.33% { background-position: 0 -200px; }
+	91.67% { background-position: 0 -220px; }
+	100% { background-position: 0 0; }
+}
 .listview{
 	margin: 0;
 	padding: 0;
