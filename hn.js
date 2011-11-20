@@ -119,6 +119,7 @@
 	tappable('.view>header', {
 		onTap: function(e, target){
 			var section = target.nextElementSibling.firstElementChild;
+			if (section.scrollTop == 0) return;
 			// Reset the overflow because the momentum ignores scrollTop setting
 			var originalOverflow = section.style.overflow;
 			section.style.overflow = 'hidden';
@@ -128,7 +129,7 @@
 					object: section,
 					transition: Viper.Transitions.sine,
 					property: 'scrollTop',
-					to: 1,
+					to: 0,
 					fps: 60 // pushing the limit?
 				});
 				anim.start();
