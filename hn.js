@@ -34,7 +34,7 @@
 	
 	var currentView = null;
 	var routes = {
-		'/news': function(){
+		'/': function(){
 			var view = $('view-home');
 			if (!currentView){
 				hideAllViews();
@@ -87,9 +87,9 @@
 	};
 	Router(routes).configure({
 		notfound: function(){
-			location.hash = '/news';
+			location.hash = '/';
 		}
-	}).init('/news');
+	}).init('/');
 	
 	var supportOrientation = typeof w.orientation != 'undefined',
 		scrollTop = supportOrientation ? function(){
