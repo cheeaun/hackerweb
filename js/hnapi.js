@@ -27,7 +27,7 @@
 		},
 		
 		post: function(id, fn){
-			req(hnapi.url + 'post/' + id, fn);
+			req(hnapi.url + 'item/' + id, fn);
 		}
 		
 	};
