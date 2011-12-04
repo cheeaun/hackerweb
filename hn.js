@@ -8,7 +8,7 @@
 				views[i].classList.add('hidden');
 			}
 		},
-		slide = function(el, direction){
+		slide = function(el, direction, fn){
 			if (typeof el == 'string') el = $(el);
 			var inout = (direction.match(/^in|out/i) || ['in'])[0];
 			if (inout == 'in') el.classList.remove('hidden');
@@ -18,6 +18,7 @@
 					if (inout == 'out') el.classList.add('hidden');
 					el.classList.remove(className);
 					el.classList.remove('sliding');
+					if (fn) fn.apply();
 				};
 			el.addEventListener('webkitAnimationEnd', reset, false);
 			el.classList.add(className);
@@ -56,7 +57,9 @@
 				hideAllViews();
 				view.classList.remove('hidden');
 			} else if (currentView != 'about'){
-				slide(view, 'in-from-bottom');
+				slide(view, 'in-from-bottom', function(){
+					$('view-home').classList.add('hidden');
+				});
 			}
 			currentView = 'about';
 		},
@@ -131,9 +134,9 @@
 			location.hash = target.getAttribute('href');
 		}
 	});
-	tappable('.view>header', {
+	tappable('.view>header h1', {
 		onTap: function(e, target){
-			var section = target.nextElementSibling.firstElementChild;
+			var section = target.parentNode.nextElementSibling.firstElementChild;
 			if (section.scrollTop == 0) return;
 			// Reset the overflow because the momentum ignores scrollTop setting
 			var originalOverflow = section.style.overflow;

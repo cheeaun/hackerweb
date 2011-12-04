@@ -52,9 +52,9 @@ header.fake,
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	height: 44px;
+	line-height: 44px;
 	width: 100%;
 	color: #fff;
-	padding: 5px;
 	-webkit-user-select: none;
 	-webkit-touch-callout: none;
 }
@@ -63,14 +63,12 @@ header.fake,
 	border-top: 1px solid transparent;
 	border-bottom: 1px solid transparent;
 }
-.view>header *:not(a){
-	pointer-events: none;
-}
 .header-button{
 	position: absolute;
 	top: 0;
 	padding: 7px 5px;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	line-height: 1em;
 }
 .header-button button{
 	pointer-events: none;
@@ -80,7 +78,7 @@ header.fake,
 	min-width: 50px;
 	height: 30px;
 	line-height: 25px;
-	font-family: 'HelveticaNeue-Bold', 'Helvetica-Bold', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+	font-weight: bold;
 	font-size: 13px;
 	text-align: center;
 	color: #fff;
@@ -132,8 +130,6 @@ header.fake,
 	right: 0;
 }
 .view>header h1{
-	font-family: 'HelveticaNeue-Bold', 'Helvetica-Bold', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-	font-weight: normal;
 	padding: 0;
 	text-align: center;
 	font-size: 20px;
@@ -145,7 +141,6 @@ header.fake,
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 	box-flex: 1;
-	line-height: 31px;
 }
 .view>header h1 img{
 	vertical-align: -15%;
@@ -897,11 +892,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	}
 	.view>header{
 		height: 32px;
-		padding: 4px;
+		line-height: 32px;
 	}
 	.view>header h1{
 		font-size: 16px;
-		line-height: 23px;
 	}
 	.header-button{
 		padding: 4px;
