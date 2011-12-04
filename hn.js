@@ -17,9 +17,11 @@
 					el.removeEventListener('webkitAnimationEnd', reset, false);
 					if (inout == 'out') el.classList.add('hidden');
 					el.classList.remove(className);
+					el.classList.remove('sliding');
 				};
 			el.addEventListener('webkitAnimationEnd', reset, false);
 			el.classList.add(className);
+			el.classList.add('sliding');
 		},
 		tmplCache = {},
 		tmpl = function(template, data){
@@ -39,11 +41,24 @@
 			if (!currentView){
 				hideAllViews();
 				view.classList.remove('hidden');
+			} else if (currentView == 'about'){
+				slide('view-' + currentView, 'out-to-bottom');
+				view.classList.remove('hidden');
 			} else if (currentView != 'home'){
 				slide('view-' + currentView, 'out-to-right');
 				slide(view, 'in-from-left');
 			}
 			currentView = 'home';
+		},
+		'/about': function(){
+			var view = $('view-about');
+			if (!currentView){
+				hideAllViews();
+				view.classList.remove('hidden');
+			} else if (currentView != 'about'){
+				slide(view, 'in-from-bottom');
+			}
+			currentView = 'about';
 		},
 		'/item/(\\d+)': function(id){
 			var view = $('view-comments'),
@@ -81,7 +96,7 @@
 				viewHeading.innerHTML = viewHeading.dataset.loadingText;
 				viewSection.innerHTML = '';
 				$commentsScroll.classList.add('loading');
-				post ? loadPost(post) : hnapi.post(id, loadPost);
+				post ? loadPost(post) : hnapi.item(id, loadPost);
 			}
 		}
 	};
@@ -137,12 +152,12 @@
 			}, 300);
 		}
 	});
-	tappable('.view section ul li a:first-child', {
+	tappable('.tableview-links li>a:first-child, .grouped-tableview-links li>a:first-child', {
 		allowClick: true,
 		activeClassDelay: 100,
 		inactiveClassDelay: 500
 	});
-	tappable('.view section ul li a.detail-disclosure', {
+	tappable('.tableview-links li>a.detail-disclosure', {
 		noScroll: true,
 		noScrollDelay: 100,
 		onTap: function(e, target){
@@ -177,5 +192,7 @@
 		};
 	var news = amplify.store('hacker-news');
 	$homeScroll.classList.add('loading');
-	news ? loadNews(news) : hnapi.news(loadNews);
+	news ? loadNews(news) : setTimeout(function(){
+		hnapi.news(loadNews);
+	}, 1);
 }(window, document);
