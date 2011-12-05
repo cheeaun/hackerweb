@@ -156,9 +156,28 @@
 		}
 	});
 	tappable('.tableview-links li>a:first-child, .grouped-tableview-links li>a:first-child', {
-		allowClick: true,
 		activeClassDelay: 100,
-		inactiveClassDelay: 500
+		inactiveClassDelay: 500,
+		onTap: function(e, target){
+			if (target.classList.contains('more-link')){
+				var loadNews2 = function(data){
+					target.classList.remove('loading');
+					if (!data) return;
+					var targetParent = target.parentNode;
+					targetParent.parentNode.removeChild(targetParent);
+					amplify.store('hacker-news2', data, {
+						expires: 1000*60*5 // 5 minutes
+					});
+					var html = markupNews(data, 31);
+					$hnlist.insertAdjacentHTML('beforeend', html);
+				};
+				var news2 = amplify.store('hacker-news2');
+				target.classList.add('loading');
+				news2 ? loadNews2(news2) : hnapi.news2(loadNews2);
+			} else {
+				window.open(target.href);
+			}
+		}
 	});
 	tappable('.tableview-links li>a.detail-disclosure', {
 		noScroll: true,
@@ -169,17 +188,9 @@
 	});
 	
 	var $homeScroll = d.querySelector('#view-home .scroll'),
-		loadNews = function(data){
-			$homeScroll.classList.remove('loading');
-			if (!data){
-				alert('Things borked, try reload plz?');
-				return;
-			}
-			amplify.store('hacker-news', data, {
-				expires: 1000*60*10 // 10 minutes
-			});
-			var html = '',
-				i = 1;
+		markupNews = function(data, i){
+			var html = '';
+			if (!i) i = 1;
 			data.forEach(function(item){
 				item.title = item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
 				if (/^item/i.test(item.url)){
@@ -191,6 +202,19 @@
 				item.i = i++;
 				html += tmpl('post', item);
 			});
+			return html;
+		},
+		loadNews = function(data){
+			$homeScroll.classList.remove('loading');
+			if (!data){
+				alert('Things borked, try reload plz?');
+				return;
+			}
+			amplify.store('hacker-news', data, {
+				expires: 1000*60*10 // 10 minutes
+			});
+			var html = markupNews(data);
+			html += '<li><a href="#" class="more-link">More&hellip;<span class="loader"></span></a></li>';
 			$hnlist.innerHTML = html;
 		};
 	var news = amplify.store('hacker-news');

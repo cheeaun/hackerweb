@@ -338,6 +338,38 @@ header.fake,
 	color: #666d74;
 	line-height: 1.2em;
 }
+.tableview-links li>a.pad-right{
+	padding-right: 44px;
+}
+.tableview-links li>a.more-link{
+	-webkit-touch-callout: none;
+	line-height: 3em;
+	padding: 10px;
+	display: block;
+	color: #2960d9;
+	text-align: center;
+	font-weight: bold;
+	position: relative;
+}
+.tableview-links li>a.more-link.loading{
+	pointer-events: none;
+}
+.tableview-links li>a.more-link.loading .loader{
+	display: block;
+	position: absolute;
+	top: 50%;
+	right: 20px;
+	margin: -10px 0 0;
+	width: 20px;
+	height: 20px;
+	background: transparent url(images/activity-indicator.png) no-repeat;
+	-webkit-background-size: 20px auto;
+	-moz-background-size: 20px auto;
+	background-size: 20px auto;
+	-webkit-animation: loading-sprite 1s step-start infinite;
+	-moz-animation: loading-sprite 1s step-start infinite;
+	animation: loading-sprite 1s step-start infinite;
+}
 .tableview-links li>a.tappable-active{
 	color: #fff;
 	background-color: #4286f5;
@@ -345,9 +377,6 @@ header.fake,
 }
 .tableview-links li>a.tappable-active *{
 	color: #fff;
-}
-.tableview-links li>a.pad-right{
-	padding-right: 44px;
 }
 .tableview-links li>a.detail-disclosure{
 	-webkit-touch-callout: none;

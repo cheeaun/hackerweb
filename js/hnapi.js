@@ -26,6 +26,10 @@
 			req(hnapi.url + 'news' , fn);
 		},
 		
+		news2: function(fn){
+			req(hnapi.url + 'news2' , fn);
+		},
+		
 		item: function(id, fn){
 			req(hnapi.url + 'item/' + id, fn);
 		}
