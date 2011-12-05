@@ -128,12 +128,24 @@
 		}, false);
 	}
 	
-	tappable('.view>header a.header-button', {
+	tappable('.view>header a.header-button[href]', {
 		noScroll: true,
 		onTap: function(e, target){
 			location.hash = target.getAttribute('href');
 		}
 	});
+	tappable('#view-home-refresh', {
+		noScroll: true,
+		onTap: function(e){
+			$hnlist.innerHTML = '';
+			$homeScroll.classList.add('loading');
+			setTimeout(function(){
+				var news = amplify.store('hacker-news');
+				news ? loadNews(news) : hnapi.news(loadNews);
+			}, 500); // Cheat a little to make user think that it's doing something
+		}
+	});
+	
 	tappable('.view>header h1', {
 		onTap: function(e, target){
 			var section = target.parentNode.nextElementSibling.firstElementChild;
@@ -221,5 +233,5 @@
 	$homeScroll.classList.add('loading');
 	news ? loadNews(news) : setTimeout(function(){
 		hnapi.news(loadNews);
-	}, 1);
+	}, 100);
 }(window, document);

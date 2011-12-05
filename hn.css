@@ -99,6 +99,12 @@ header.fake,
 	-o-background-size: 0 0;
 	background-size: 0 0;
 }
+.header-button-icon button{
+	min-width: 0;
+}
+.header-button-icon button img{
+	vertical-align: text-bottom;
+}
 .header-button.tappable-active button{
 	-webkit-border-image: url(images/button-active.png) 4 8 4 8;
 	-moz-border-image: url(images/button-active.png) 4 8 4 8;
