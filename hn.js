@@ -221,7 +221,9 @@
 				};
 				var news2 = amplify.store('hacker-news2');
 				target.classList.add('loading');
-				news2 ? loadNews2(news2) : hnapi.news2(loadNews2);
+				news2 ? setTimeout(function(){
+					loadNews2(news2); // Cheat here too
+				}, 500) : hnapi.news2(loadNews2);
 			} else {
 				window.open(target.href);
 			}
