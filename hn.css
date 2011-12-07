@@ -355,9 +355,9 @@ header.fake,
 	color: #2960d9;
 	text-align: center;
 	font-weight: bold;
-	position: relative;
 }
 .tableview-links li>a.more-link.loading{
+	position: relative;
 	pointer-events: none;
 }
 .tableview-links li>a.more-link.loading .loader{
