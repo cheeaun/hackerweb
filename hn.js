@@ -8,19 +8,50 @@
 				views[i].classList.add('hidden');
 			}
 		},
+		flip = function(opts){
+			var inEl = opts.in,
+				outEl = opts.out,
+				direction = opts.direction,
+				fn = opts.fn,
+				flipWise = {
+					clockwise: ['flip-out-to-left', 'flip-in-from-left'],
+					anticlockwise: ['flip-out-to-right', 'flip-in-from-right']
+				},
+				wise = flipWise[direction],
+				reset = function(){
+					inEl.removeEventListener('webkitAnimationEnd', reset, false);
+					body.classList.remove('viewport-flip');
+					inEl.classList.remove('flip');
+					outEl.classList.remove('flip');
+					outEl.classList.remove(wise[0]);
+					inEl.classList.remove(wise[1]);
+					outEl.classList.add('hidden');
+					if (fn) fn.apply();
+				};
+			body.classList.add('viewport-flip');
+			inEl.classList.add('flip');
+			outEl.classList.add('flip');
+			inEl.classList.remove('hidden');
+			inEl.addEventListener('webkitAnimationEnd', reset, false);
+			outEl.classList.add(wise[0]);
+			inEl.classList.add(wise[1]);
+		},
 		slide = function(el, direction, fn){
 			if (typeof el == 'string') el = $(el);
 			var inout = (direction.match(/^in|out/i) || ['in'])[0];
 			if (inout == 'in') el.classList.remove('hidden');
-			var className = 'slide-' + direction,
+			var header = el.querySelector('header'),
+				className = 'slide-' + direction,
 				reset = function(){
 					el.removeEventListener('webkitAnimationEnd', reset, false);
+					header.classList.remove('transparent');
 					if (inout == 'out') el.classList.add('hidden');
 					el.classList.remove(className);
 					el.classList.remove('sliding');
 					if (fn) fn.apply();
 				};
 			el.addEventListener('webkitAnimationEnd', reset, false);
+			header.classList.add('transparent');
 			el.classList.add(className);
 			el.classList.add('sliding');
 		},
@@ -43,8 +74,11 @@
 				hideAllViews();
 				view.classList.remove('hidden');
 			} else if (currentView == 'about'){
-				slide('view-' + currentView, 'out-to-bottom');
-				view.classList.remove('hidden');
+				flip({
+					in: view,
+					out: $('view-' + currentView),
+					direction: 'anticlockwise'
+				});
 			} else if (currentView != 'home'){
 				slide('view-' + currentView, 'out-to-right');
 				slide(view, 'in-from-left');
@@ -57,8 +91,10 @@
 				hideAllViews();
 				view.classList.remove('hidden');
 			} else if (currentView != 'about'){
-				slide(view, 'in-from-bottom', function(){
-					$('view-home').classList.add('hidden');
+				flip({
+					in: view,
+					out: $('view-home'),
+					direction: 'clockwise'
 				});
 			}
 			currentView = 'about';

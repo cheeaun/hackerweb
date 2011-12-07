@@ -668,17 +668,17 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 /* For modern browsers */
 .cf:before,
 .cf:after {
-    content:"";
-    display:table;
+	content:"";
+	display:table;
 }
 
 .cf:after {
-    clear:both;
+	clear:both;
 }
 
 /* For IE 6/7 (trigger hasLayout) */
 .cf {
-    zoom:1;
+	zoom:1;
 }
 
 #y-touch-icon{
@@ -919,6 +919,58 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		-webkit-transform: translateX(-100%);
 		opacity: 0;
 	}
+}
+
+.viewport-flip {
+	-webkit-perspective: 1000;
+	background-color: #000;
+}
+.viewport-flip header.fake{
+	visibility: hidden;
+}
+
+.flip {
+	background-color: #fff;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-duration: .7s;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform:;
+	border: 1px solid #000;
+	margin: -1px;
+	pointer-events: none;
+}
+
+.flip-out-to-left {
+	-webkit-animation-name: flipouttoleft;
+}
+.flip-out-to-right {
+	-webkit-animation-name: flipouttoright;
+}
+.flip-in-from-left {
+	-webkit-animation-name: flipinfromleft;
+}
+.flip-in-from-right {
+	-webkit-animation-name: flipinfromright;
+}
+
+@-webkit-keyframes flipinfromright {
+	from { -webkit-transform: rotateY(-180deg) scale(.65); opacity: 0; }
+	to { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
+}
+
+@-webkit-keyframes flipinfromleft {
+	from { -webkit-transform: rotateY(180deg) scale(.65); opacity: 0; }
+	to { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
+}
+
+@-webkit-keyframes flipouttoleft {
+	from { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
+	to { -webkit-transform: rotateY(-180deg) scale(.65); opacity: 0; }
+}
+
+@-webkit-keyframes flipouttoright {
+	from { -webkit-transform: rotateY(0) scale(1); opacity: 1; }
+	to { -webkit-transform: rotateY(180deg) scale(.65); opacity: 0; }
 }
 
 @media only screen and (max-height: 280px){
