@@ -215,6 +215,9 @@ header.fake,
 	-moz-animation: loading-sprite 1s step-start infinite;
 	animation: loading-sprite 1s step-start infinite;
 }
+.view>.scroll.striped>.loader{
+	color: #2f343c;
+}
 .view>.scroll.loading{
 	position: relative;
 	background-color: transparent;
