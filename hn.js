@@ -204,6 +204,7 @@
 		}
 	});
 	tappable('.tableview-links li>a:first-child, .grouped-tableview-links li>a:first-child', {
+		allowClick: true,
 		activeClassDelay: 100,
 		inactiveClassDelay: 500,
 		onTap: function(e, target){
@@ -224,8 +225,6 @@
 				news2 ? setTimeout(function(){
 					loadNews2(news2); // Cheat here too
 				}, 500) : hnapi.news2(loadNews2);
-			} else {
-				window.open(target.href);
 			}
 		}
 	});
@@ -264,7 +263,7 @@
 				expires: 1000*60*10 // 10 minutes
 			});
 			var html = markupNews(data);
-			html += '<li><a href="#" class="more-link">More&hellip;<span class="loader"></span></a></li>';
+			html += '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>';
 			$hnlist.innerHTML = html;
 		};
 	var news = amplify.store('hacker-news');

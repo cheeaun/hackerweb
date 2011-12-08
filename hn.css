@@ -10,6 +10,7 @@ body{
 	background-color: #fff;
 	overflow: hidden;
 	position: relative;
+	word-wrap: break-word;
 }
 header.fake{
 	pointer-events: none;
@@ -41,13 +42,16 @@ header.fake,
 	background-image: -o-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
 	background-image: linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
 	background-repeat: repeat-x;
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding-box;
+	background-clip: padding-box;
 	-webkit-background-size: 1px 100%;
 	-moz-background-size: 1px 100%;
 	-ms-background-size: 1px 100%;
 	-o-background-size: 1px 100%;
 	background-size: 1px 100%;
 	border-top: 1px solid #cdd5df;
-	border-bottom: 1px solid #2d3642;
+	border-bottom: 1px solid #2e3744;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -602,9 +606,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-color: #fff;
 	font-size: 13px;
 	overflow: hidden;
-}
-.view article section.comments a{
-	word-wrap: break-word;
 }
 .view article section.comments ul{
 	margin: 0;
