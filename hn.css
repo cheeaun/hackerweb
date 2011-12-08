@@ -200,7 +200,7 @@ header.fake,
 	pointer-events: none;
 	margin: 0 0 0 -50px;
 	position: absolute;
-	top: 30%;
+	top: 45%;
 	left: 50%;
 	height: 20px;
 	line-height: 20px;
@@ -216,6 +216,7 @@ header.fake,
 	animation: loading-sprite 1s step-start infinite;
 }
 .view>.scroll.loading{
+	position: relative;
 	background-color: transparent;
 }
 .view>.scroll.loading>.loader{
