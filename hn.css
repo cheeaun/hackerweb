@@ -12,6 +12,9 @@ body{
 	position: relative;
 	word-wrap: break-word;
 }
+pre{
+	word-wrap: normal;
+}
 header.fake{
 	pointer-events: none;
 	position: absolute;
