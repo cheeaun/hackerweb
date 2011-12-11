@@ -690,7 +690,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 }
 
 #y-touch-icon{
-	background: transparent url(icons/y-touch-icon.png) no-repeat;
+	background: transparent url(icons/touch-icon.png) no-repeat;
 	background-size: 57px 57px;
 	width: 57px;
 	height: 57px;
