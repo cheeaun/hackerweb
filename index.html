@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html manifest="manifest.appcache">
+<head>
 <meta charset="utf-8">
 <title>Hacker News</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
@@ -9,6 +10,16 @@
 <link rel="stylesheet" href="hn.css">
 <link rel="shortcut icon" href="icons/favicon.png">
 <link rel="apple-touch-icon-precomposed" href="icons/touch-icon.png">
+<script>
+var _gaq = [['_setAccount', 'UA-23235796-3'], ['_trackPageview'], ['_trackPageLoadTime']];
+(function(d, t) {
+	var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    g.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	s.parentNode.insertBefore(g, s);
+}(document, 'script'));
+</script>
+</head>
+<body>
 <header class="fake"></header>
 <div class="view hidden" id="view-home">
 	<header>
@@ -125,4 +136,5 @@
 </script>
 <script src="scripts.js"></script>
 <script src="hn.js"></script>
+</body>
 </html>
