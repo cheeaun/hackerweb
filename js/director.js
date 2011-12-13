@@ -1,7 +1,7 @@
 
 //
-// Generated on Tue Nov 22 2011 18:22:41 GMT-0500 (EST) by Nodejitsu, Inc (Using Codesurgeon).
-// Version 1.0.2
+// Generated on Tue Dec 06 2011 04:47:21 GMT-0500 (EST) by Nodejitsu, Inc (Using Codesurgeon).
+// Version 1.0.7
 //
 
 (function (exports) {
@@ -120,7 +120,7 @@ var listener = {
 
   setHash: function (s) {
     // Mozilla always adds an entry to the history
-    if (mode === 'legacy') {
+    if (this.mode === 'legacy') {
       this.writeFrame(s);
     }
 
@@ -331,9 +331,9 @@ Router.prototype.configure = function(options) {
     this.notfound = options.notfound;
     this.resource = options.resource;
     this.every = {
-        after: options.after || [],
-        before: options.before || [],
-        on: options.on || []
+        after: options.after || null,
+        before: options.before || null,
+        on: options.on || null
     };
     return this;
 };
@@ -356,11 +356,11 @@ Router.prototype.on = Router.prototype.route = function(method, path, route) {
         method = "on";
     }
     if (path.source) {
-        path = path.source;
+        path = path.source.replace(/\\\//ig, "/");
     }
     if (Array.isArray(method)) {
         return method.forEach(function(m) {
-            self.on(m, path, route);
+            self.on(m.toLowerCase(), path, route);
         });
     }
     this.insert(method, this.scope.concat(path.split(new RegExp(this.delimiter))), route);
@@ -407,10 +407,9 @@ Router.prototype.invoke = function(fns, thisArg, callback) {
             if (typeof fn == "function") {
                 fn.apply(thisArg, fns.captures.concat(next));
             }
-            next();
         }, function() {
             if (callback) {
-                callback.apply(null, arguments);
+                callback.apply(thisArg, arguments);
             }
         });
     } else {
@@ -427,7 +426,7 @@ Router.prototype.invoke = function(fns, thisArg, callback) {
 };
 
 Router.prototype.traverse = function(method, path, routes, regexp) {
-    var fns = [], current, match, next, that;
+    var fns = [], current, exact, match, next, that;
     if (path === this.delimiter && routes[method]) {
         next = [ [ routes.before, routes[method] ].filter(Boolean) ];
         next.after = [ routes.after ].filter(Boolean);
@@ -436,12 +435,12 @@ Router.prototype.traverse = function(method, path, routes, regexp) {
         return next;
     }
     for (var r in routes) {
-        if (routes.hasOwnProperty(r) && !this._methods[r]) {
-            current = regexp + this.delimiter + r;
+        if (routes.hasOwnProperty(r) && (!this._methods[r] || this._methods[r] && typeof routes[r] === "object" && !Array.isArray(routes[r]))) {
+            current = exact = regexp + this.delimiter + r;
             if (!this.strict) {
-                current += "[" + this.delimiter + "]?";
+                exact += "[" + this.delimiter + "]?";
             }
-            match = path.match(new RegExp("^" + current));
+            match = path.match(new RegExp("^" + exact));
             if (!match) {
                 continue;
             }
@@ -450,6 +449,10 @@ Router.prototype.traverse = function(method, path, routes, regexp) {
                 next.after = [ routes[r].after ].filter(Boolean);
                 next.matched = true;
                 next.captures = match.slice(1);
+                if (this.recurse && routes === this.routes) {
+                    next.push([ routes["before"], routes["on"] ].filter(Boolean));
+                    next.after = next.after.concat([ routes["after"] ].filter(Boolean));
+                }
                 return next;
             }
             next = this.traverse(method, path, routes[r], current);
@@ -460,6 +463,10 @@ Router.prototype.traverse = function(method, path, routes, regexp) {
                 if (this.recurse) {
                     fns.push([ routes[r].before, routes[r].on ].filter(Boolean));
                     next.after = next.after.concat([ routes[r].after ].filter(Boolean));
+                    if (routes === this.routes) {
+                        fns.push([ routes["before"], routes["on"] ].filter(Boolean));
+                        next.after = next.after.concat([ routes["after"] ].filter(Boolean));
+                    }
                 }
                 fns.matched = true;
                 fns.captures = next.captures;
@@ -478,7 +485,7 @@ Router.prototype.insert = function(method, path, route, parent) {
     });
     parent = parent || this.routes;
     part = path.shift();
-    if (/\:|\*/.test(part)) {
+    if (/\:|\*/.test(part) && !/\\d|\\w/.test(part)) {
         part = regifyString(part, this.params);
     }
     if (path.length > 0) {
@@ -532,7 +539,8 @@ Router.prototype.extend = function(methods) {
         (function(method) {
             self._methods[method] = true;
             self[method] = function() {
-                self.on.apply(self, [ method ].concat(Array.prototype.slice.call(arguments)));
+                var extra = arguments.length === 1 ? [ method, "" ] : [ method ];
+                self.on.apply(self, extra.concat(Array.prototype.slice.call(arguments)));
             };
         })(methods[i]);
     }
