@@ -1,6 +1,7 @@
 !function(w, d){
 	var body = d.body,
 		$ = function(id){ return d.getElementById(id) },
+		isStandalone = 'standalone' in w.navigator && w.navigator.standalone,
 		$hnlist = $('hnlist'),
 		hideAllViews = function(){
 			var views = d.querySelectorAll('.view');
@@ -139,7 +140,15 @@
 			}
 		}
 	};
+
+	if (isStandalone){
+		var hash = amplify.store('hacker-hash');
+		if (hash) location.hash = hash;
+	}
 	Router(routes).configure({
+		on: function(){
+			if (isStandalone) amplify.store('hacker-hash', location.hash);
+		},
 		notfound: function(){
 			location.hash = '/';
 		}
