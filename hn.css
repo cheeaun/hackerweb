@@ -112,8 +112,7 @@ header.fake,
 .header-button-icon button img{
 	vertical-align: text-bottom;
 }
-.header-button.tappable-active button,
-.header-button:active button{
+.header-button.tappable-active button{
 	-webkit-border-image: url(images/button-active.png) 4 8 4 8;
 	-moz-border-image: url(images/button-active.png) 4 8 4 8;
 	-ms-border-image: url(images/button-active.png) 4 8 4 8;
@@ -130,8 +129,7 @@ header.fake,
 /*	border-image: url(images/back-button.png) 4 8 4 26;*/
 	background-image: url(images/back-button-active.png);
 }
-.header-back-button.tappable-active button,
-.header-back-button:active button{
+.header-back-button.tappable-active button{
 	-webkit-border-image: url(images/back-button-active.png) 4 8 4 26;
 	-moz-border-image: url(images/back-button-active.png) 4 8 4 26;
 	-ms-border-image: url(images/back-button-active.png) 4 8 4 26;
