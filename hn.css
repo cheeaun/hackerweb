@@ -1005,4 +1005,12 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	.header-back-button button{
 		border-width: 2px 4px 2px 10px;
 	}
+	.header-button-icon button{
+		line-height: 14px;
+	}
+	.header-button-icon button img{
+		width: auto;
+		height: 14px;
+		margin-bottom: 2px; /* temporary hack */
+	}
 }
