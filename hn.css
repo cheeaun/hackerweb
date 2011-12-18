@@ -37,27 +37,12 @@ header.fake{
 }
 header.fake,
 .view>header{
-	background-color: #b2bbca;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#b0bccd), color-stop(.5, #889bb3), color-stop(.51, #8195af), to(#6d84a2));
-	background-image: -webkit-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
-	background-image: -moz-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
-	background-image: -ms-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
-	background-image: -o-linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
-	background-image: linear-gradient(top, #b0bccd, #889bb3 50%, #8195af 51%, #6d84a2);
-	background-repeat: repeat-x;
-	-webkit-background-clip: padding-box;
-	-moz-background-clip: padding-box;
-	background-clip: padding-box;
-	-webkit-background-size: 1px 100%;
-	-moz-background-size: 1px 100%;
-	-ms-background-size: 1px 100%;
-	-o-background-size: 1px 100%;
-	background-size: 1px 100%;
-	border-top: 1px solid #cdd5df;
-	border-bottom: 1px solid #2e3744;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+	background: #b2bbca url(images/navbar-bg.png) repeat-x;
+	-webkit-background-size: 1px 44px;
+	-moz-background-size: 1px 44px;
+	-ms-background-size: 1px 44px;
+	-o-background-size: 1px 44px;
+	background-size: 1px 44px;
 	height: 44px;
 	line-height: 44px;
 	width: 100%;
@@ -67,8 +52,6 @@ header.fake,
 }
 .view>header.transparent{
 	background: transparent none;
-	border-top: 1px solid transparent;
-	border-bottom: 1px solid transparent;
 }
 .header-button{
 	position: absolute;
@@ -86,19 +69,19 @@ header.fake,
 	height: 30px;
 	line-height: 25px;
 	font-weight: bold;
-	font-size: 13px;
+	font-size: 12px;
 	text-align: center;
 	color: #fff;
-	text-shadow: 0 -1px rgba(0,0,0,.4);
-	padding: 0 5px;
+	text-shadow: 0 -1px rgba(0,0,0,.6);
+	padding: 0 4px;
 	margin: 0;
 	text-decoration: none;
-	border-width: 2px 4px;
-	-webkit-border-image: url(images/button.png) 4 8 4 8;
-	-moz-border-image: url(images/button.png) 4 8 4 8;
-	-ms-border-image: url(images/button.png) 4 8 4 8;
-	-o-border-image: url(images/button.png) 4 8 4 8;
-/*	border-image: url(images/button.png) 4 8 4 8;*/
+	border-width: 2px 5px;
+	-webkit-border-image: url(images/button.png) 4 10 4 10;
+	-moz-border-image: url(images/button.png) 4 10 4 10;
+	-ms-border-image: url(images/button.png) 4 10 4 10;
+	-o-border-image: url(images/button.png) 4 10 4 10;
+/*	border-image: url(images/button.png) 4 10 4 10;*/
 	background: transparent url(images/button-active.png) no-repeat;
 	-webkit-background-size: 0 0;
 	-moz-background-size: 0 0;
@@ -113,11 +96,11 @@ header.fake,
 	vertical-align: text-bottom;
 }
 .header-button.tappable-active button{
-	-webkit-border-image: url(images/button-active.png) 4 8 4 8;
-	-moz-border-image: url(images/button-active.png) 4 8 4 8;
-	-ms-border-image: url(images/button-active.png) 4 8 4 8;
-	-o-border-image: url(images/button-active.png) 4 8 4 8;
-/*	border-image: url(images/button-active.png) 4 8 4 8;*/
+	-webkit-border-image: url(images/button-active.png) 4 10 4 10;
+	-moz-border-image: url(images/button-active.png) 4 10 4 10;
+	-ms-border-image: url(images/button-active.png) 4 10 4 10;
+	-o-border-image: url(images/button-active.png) 4 10 4 10;
+/*	border-image: url(images/button-active.png) 4 10 4 10;*/
 }
 .header-back-button button{
 	padding: 0 4px 0 0;
@@ -417,13 +400,13 @@ header.fake,
 .tableview-links li>a.detail-disclosure span{
 	display: inline-block;
 	width: 29px;
-	height: 29px;
+	height: 31px;
 	background: transparent url(images/detail-disclosure-button.png);
-	-webkit-background-size: auto 29px;
-	-moz-background-size: auto 29px;
-	-ms-background-size: auto 29px;
-	-o-background-size: auto 29px;
-	background-size: auto 29px;
+	-webkit-background-size: 58px 31px;
+	-moz-background-size: 58px 31px;
+	-ms-background-size: 58px 31px;
+	-o-background-size: 58px 31px;
+	background-size: 58px 31px;
 }
 .tableview-links li>a.detail-disclosure.tappable-active span{
 	background-position: top right;
@@ -534,7 +517,7 @@ ol.grouped-tableview-links li>a.disclosure:after{
 	width: 8.5px;
 	height: 100%;
 	background: transparent url(images/disclosure-indicator.png) no-repeat left center;
-	background-size: 17px auto;
+	background-size: 20px auto;
 }
 ul.grouped-tableview-links li>a *,
 ol.grouped-tableview-links li>a *{
@@ -706,11 +689,11 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 .view>header h1,
 .view>header .header-button{
 	-webkit-animation-timing-function: ease-in-out;
-	-webkit-animation-duration: 333ms;
+	-webkit-animation-duration: 350ms;
 	-moz-animation-timing-function: ease-in-out;
-	-moz-animation-duration: 333ms;
+	-moz-animation-duration: 350ms;
 	animation-timing-function: ease-in-out;
-	animation-duration: 333ms;
+	animation-duration: 350ms;
 }
 
 .sliding{
