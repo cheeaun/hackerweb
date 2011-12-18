@@ -67,7 +67,12 @@
 			return Mustache.to_html(t, data);
 		};
 	
+	var $commentsScrollSection = d.querySelector('#view-comments .scroll section');
+	$commentsScrollSection.addEventListener('scroll', function(){
+		amplify.store('hacker-item-scrolltop', $commentsScrollSection.scrollTop);
+	}, false);
 	var currentView = null;
+	
 	var routes = {
 		'/': function(){
 			var view = $('view-home');
@@ -100,43 +105,54 @@
 			}
 			currentView = 'about';
 		},
-		'/item/(\\d+)': function(id){
-			var view = $('view-comments'),
-				viewHeading = view.querySelector('header h1'),
-				viewSection = view.querySelector('section');
-			if (!currentView){
-				hideAllViews();
-				view.classList.remove('hidden');
-			} else if (currentView != 'comments') {
-				slide('view-' + currentView, 'out-to-left');
-				slide(view, 'in-from-right');
-			}
-			currentView = 'comments';
-			if (id){
-				var post = amplify.store.sessionStorage('hacker-post-' + id),
-					$commentsScroll = view.querySelector('.scroll'),
-					loadPost = function(data){
-						$commentsScroll.classList.remove('loading');
-						if (!data) return;
-						amplify.store.sessionStorage('hacker-post-' + id, data, {
-							expires: 1000*60*10 // 10 minutes
-						});
-						var tmpl1 = tmpl('post-comments'),
-							tmpl2 = tmpl('comments');
-						data.title = data.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
-						data.has_comments = !!data.comments.length;
-						var html = Mustache.to_html(tmpl1, data, {comments_list: tmpl2});
-						viewHeading.innerHTML = data.title;
-						viewSection.innerHTML = html;
-						var links = viewSection.querySelectorAll('a');
-						for (var i=0, l=links.length; i<l; i++){
-							links[i].target = '_blank';
-						}
-					};
-				viewHeading.innerHTML = viewHeading.dataset.loadingText;
-				viewSection.innerHTML = '';
-				$commentsScroll.classList.add('loading');
-				post ? loadPost(post) : hnapi.item(id, loadPost);
+		'/item/(\\d+)': {
+			on: function(id){
+				var view = $('view-comments'),
+					viewHeading = view.querySelector('header h1'),
+					viewSection = view.querySelector('section');
+				if (!currentView){
+					hideAllViews();
+					view.classList.remove('hidden');
+				} else if (currentView != 'comments') {
+					slide('view-' + currentView, 'out-to-left');
+					slide(view, 'in-from-right');
+				}
+				currentView = 'comments';
+				if (id){
+					var post = amplify.store.sessionStorage('hacker-item-' + id),
+						$commentsScroll = view.querySelector('.scroll'),
+						loadPost = function(data){
+							$commentsScroll.classList.remove('loading');
+							if (!data) return;
+							amplify.store.sessionStorage('hacker-item-' + id, data, {
+								expires: 1000*60*10 // 10 minutes
+							});
+							var tmpl1 = tmpl('post-comments'),
+								tmpl2 = tmpl('comments');
+							data.title = data.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
+							data.has_comments = !!data.comments.length;
+							var html = Mustache.to_html(tmpl1, data, {comments_list: tmpl2});
+							viewHeading.innerHTML = data.title;
+							viewSection.innerHTML = html;
+							var links = viewSection.querySelectorAll('a');
+							for (var i=0, l=links.length; i<l; i++){
+								links[i].target = '_blank';
+							}
+						};
+					viewHeading.innerHTML = viewHeading.dataset.loadingText;
+					viewSection.innerHTML = '';
+					$commentsScroll.classList.add('loading');
+					if (post){
+						loadPost(post);
+						$commentsScrollSection.scrollTop = amplify.store('hacker-item-scrolltop');
+					} else {
+						hnapi.item(id, loadPost);
+						amplify.store('hacker-item-scrolltop', 0);
+					}
+				}
+			},
+			after: function(){
+				amplify.store('hacker-item-scrolltop', 0);
 			}
 		}
 	};
@@ -246,6 +262,7 @@
 	});
 	
 	var $homeScroll = d.querySelector('#view-home .scroll'),
+		$homeScrollSection = $homeScroll.querySelector('section'),
 		markupNews = function(data, i){
 			var html = '';
 			if (!i) i = 1;
@@ -275,9 +292,20 @@
 			html += '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>';
 			$hnlist.innerHTML = html;
 		};
+	
+	$homeScrollSection.addEventListener('scroll', function(){
+		amplify.store('hacker-news-scrolltop', $homeScrollSection.scrollTop);
+	}, false);
+	
 	var news = amplify.store('hacker-news');
-	$homeScroll.classList.add('loading');
-	news ? loadNews(news) : setTimeout(function(){
-		hnapi.news(loadNews);
-	}, 100);
+	if (news){
+		loadNews(news);
+		$homeScrollSection.scrollTop = amplify.store('hacker-news-scrolltop');
+	} else {
+		$homeScroll.classList.add('loading');
+		setTimeout(function(){
+			hnapi.news(loadNews);
+			amplify.store('hacker-news-scrolltop', 0);
+		}, 100);
+	}
 }(window, document);
