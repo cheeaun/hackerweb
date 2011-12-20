@@ -361,6 +361,7 @@ header.fake,
 	padding-right: 44px;
 }
 .tableview-links li>a.more-link{
+	cursor: pointer;
 	-webkit-touch-callout: none;
 	line-height: 3em;
 	padding: 10px;
