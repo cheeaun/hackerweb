@@ -13,23 +13,6 @@
 			return matches ? node : false;
 		};
 	
-	if (!w.Touch){
-		w.tappable = function(selector, opts){
-			if (!opts) return;
-			var onTap = (typeof opts == 'function') ? opts : opts.onTap,
-				el = opts.containerElement || d.body;
-			el.addEventListener('click', function(e){
-				var target = e.target;
-				if (target.nodeType == 3) target = el.parentNode;
-				target = closest(target, selector);
-				if (!target) return;
-				if (!opts.allowClick) e.preventDefault();
-				onTap.call(el, e, target);
-			}, false);
-		};
-		return;
-	}
-	
 	var abs = Math.abs,
 		noop = function(){},
 		defaults = {
@@ -47,6 +30,12 @@
 			noScrollDelay: 0,
 			activeClassDelay: 0,
 			inactiveClassDelay: 0
+		},
+		supportTouch = 'ontouchend' in document,
+		events = {
+			start: supportTouch ? 'touchstart' : 'mousedown',
+			move: supportTouch ? 'touchmove' : 'mousemove',
+			end: supportTouch ? 'touchend' : 'mouseup'
 		},
 		getTargetByCoords = function(x, y){
 			var el = d.elementFromPoint(x, y);
@@ -98,7 +87,7 @@
 			noScrollTimeout,
 			boundMargin = options.boundMargin;
 		
-		el.addEventListener('touchstart', function(e){
+		el.addEventListener(events.start, function(e){
 			var target = closest(getTarget(e), selector);
 			if (!target) return;
 			
@@ -127,7 +116,7 @@
 			options.onStart.call(el, e, target);
 		}, false);
 		
-		el.addEventListener('touchmove', function(e){
+		el.addEventListener(events.move, function(e){
 			if (!startTarget) return;
 			
 			if (noScroll){
@@ -136,10 +125,13 @@
 				clearTimeout(activeClassTimeout);
 			}
 			
-			var touch = e.changedTouches[0],
-				x = touch.clientX,
-				y = touch.clientY,
-				target = e.target || getTargetByCoords(x, y);
+			var target = e. target;
+			if (!target){
+				var touch = e.changedTouches[0],
+					x = touch.clientX,
+					y = touch.clientY;
+				target = getTargetByCoords(x, y);
+			}
 			
 			if (noScroll){
 				if (x>elBound.left-boundMargin && x<elBound.right+boundMargin && y>elBound.top-boundMargin && y<elBound.bottom+boundMargin){ // within element's boundary
@@ -160,7 +152,7 @@
 			options.onMove.call(el, e, target);
 		}, false);
 		
-		el.addEventListener('touchend', function(e){
+		el.addEventListener(events.end, function(e){
 			if (!startTarget) return;
 			
 			clearTimeout(activeClassTimeout);
