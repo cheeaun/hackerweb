@@ -168,7 +168,8 @@
 			
 			options.onEnd.call(el, e, startTarget);
 			
-			if (!cancel && !moveOut){
+			var rightClick = e.which == 3 || e.button == 2;
+			if (!cancel && !moveOut && !rightClick){
 				var target = startTarget;
 				setTimeout(function(){
 					options.onTap.call(el, e, target);
