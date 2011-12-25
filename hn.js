@@ -1,5 +1,6 @@
 !function(w, d){
 	var body = d.body,
+		location = w.location,
 		$ = function(id){ return d.getElementById(id) },
 		isStandalone = 'standalone' in w.navigator && w.navigator.standalone,
 		$hnlist = $('hnlist'),
@@ -192,7 +193,7 @@
 	tappable('.view>header a.header-button[href]', {
 		noScroll: true,
 		onTap: function(e, target){
-			location.hash = target.getAttribute('href');
+			location.hash = target.hash;
 		}
 	});
 	tappable('#view-home-refresh', {
@@ -231,7 +232,7 @@
 	tappable('.tableview-links li>a:first-child, .grouped-tableview-links li>a:first-child', {
 		allowClick: true,
 		activeClassDelay: 100,
-		inactiveClassDelay: 500,
+		inactiveClassDelay: 1000,
 		onTap: function(e, target){
 			if (target.classList.contains('more-link')){
 				var loadNews2 = function(data){
@@ -250,6 +251,8 @@
 				news2 ? setTimeout(function(){
 					loadNews2(news2); // Cheat here too
 				}, 500) : hnapi.news2(loadNews2);
+			} else if (/^#\//.test(target.getAttribute('href'))){ // "local" links
+				location.hash = target.hash;
 			}
 		}
 	});
@@ -257,7 +260,7 @@
 		noScroll: true,
 		noScrollDelay: 100,
 		onTap: function(e, target){
-			location.hash = target.getAttribute('href');
+			location.hash = target.hash;
 		}
 	});
 	
