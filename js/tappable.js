@@ -101,7 +101,7 @@
 			}
 			if (inactiveClassDelay) clearTimeout(inactiveClassTimeout);
 			
-			startTarget = target;
+			clickTarget = startTarget = target;
 			cancel = false;
 			moveOut = false;
 			elBound = noScroll ? target.getBoundingClientRect() : null;
@@ -176,7 +176,6 @@
 				}, 1);
 			}
 			
-			clickTarget = startTarget;
 			startTarget = null;
 		}, false);
 		
