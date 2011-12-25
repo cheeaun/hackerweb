@@ -1,6 +1,5 @@
 !function(w, d){
 	var body = d.body,
-		location = w.location,
 		$ = function(id){ return d.getElementById(id) },
 		isStandalone = 'standalone' in w.navigator && w.navigator.standalone,
 		$hnlist = $('hnlist'),

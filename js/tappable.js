@@ -73,7 +73,6 @@
 		
 		var el = options.containerElement || d.body,
 			startTarget,
-			clickTarget,
 			elBound,
 			cancel = false,
 			moveOut = false,
@@ -101,7 +100,7 @@
 			}
 			if (inactiveClassDelay) clearTimeout(inactiveClassTimeout);
 			
-			clickTarget = startTarget = target;
+			startTarget = target;
 			cancel = false;
 			moveOut = false;
 			elBound = noScroll ? target.getBoundingClientRect() : null;
@@ -187,9 +186,8 @@
 		}, false);
 		
 		if (!options.allowClick) el.addEventListener('click', function(e){
-			if (!clickTarget) return;
-			clickTarget = null;
-			e.preventDefault();
+			var target = closest(e.target, selector);
+			if (target) e.preventDefault();
 		}, false);
 	};
 	
