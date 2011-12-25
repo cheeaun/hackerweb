@@ -124,12 +124,14 @@
 				clearTimeout(activeClassTimeout);
 			}
 			
-			var target = e. target;
-			if (!target){
-				var touch = e.changedTouches[0],
-					x = touch.clientX,
-					y = touch.clientY;
-				target = getTargetByCoords(x, y);
+			var target = e.target,
+				x = e.clientX,
+				y = e.clientY;
+			if (!target || !x || !y){ // The event might have a target but no clientX/Y
+				var touch = e.changedTouches[0];
+				if (!x) x = touch.clientX;
+				if (!y) y = touch.clientY;
+				if (!target) target = getTargetByCoords(x, y);
 			}
 			
 			if (noScroll){
