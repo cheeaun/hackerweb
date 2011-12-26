@@ -230,7 +230,7 @@
 	});
 	tappable('.tableview-links li>a:first-child, .grouped-tableview-links li>a:first-child', {
 		allowClick: true,
-		activeClassDelay: 100,
+		activeClassDelay: 50,
 		inactiveClassDelay: 1000,
 		onTap: function(e, target){
 			if (target.classList.contains('more-link')){

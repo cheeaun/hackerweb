@@ -303,13 +303,13 @@ header.fake,
 	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
 	background-image: -o-linear-gradient(top, #4286f5, #194fdb);
 	background-image: linear-gradient(top, #4286f5, #194fdb);
-	background-position: -1px 0;
+	background-position: -10px 0;
 	background-repeat: no-repeat;
-	-webkit-background-size: 1px 100%;
-	-moz-background-size: 1px 100%;
-	-ms-background-size: 1px 100%;
-	-o-background-size: 1px 100%;
-	background-size: 1px 100%;
+	-webkit-background-size: 10px 100%;
+	-moz-background-size: 10px 100%;
+	-ms-background-size: 10px 100%;
+	-o-background-size: 10px 100%;
+	background-size: 10px 100%;
 }
 .tableview-links li>a:visited{
 	color: #666;
