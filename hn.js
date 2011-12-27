@@ -325,7 +325,7 @@
 				clearInterval(scrollCheck);
 				setTimeout(function(){
 					body.classList.add('show');
-				}, 1000);
+				}, 400);
 			}
 		}, 15);
 	}, false);
