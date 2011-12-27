@@ -170,17 +170,6 @@
 		}
 	}).init('/');
 	
-	var supportOrientation = typeof w.orientation != 'undefined',
-		scrollTop = supportOrientation ? function(){
-				body.style.height = screen.height + 'px';
-				setTimeout(function(){
-					w.scrollTo(0, 0);
-					body.style.height = w.innerHeight + 'px';
-				}, 1);
-			} : function(){};
-	if (supportOrientation) w.onorientationchange = scrollTop;
-	scrollTop();
-	
 	var $viewSections = d.querySelectorAll('.view>.scroll');
 	for (var i=0, l=$viewSections.length; i<l; i++){
 		var view = $viewSections[i];
@@ -310,4 +299,26 @@
 			amplify.store('hacker-news-scrolltop', 0);
 		}, 100);
 	}
+	
+	// Some useful tips from http://24ways.org/2011/raising-the-bar-on-mobile
+	var supportOrientation = typeof w.orientation != 'undefined',
+		getScrollTop = function(){
+			return w.pageYOffset || d.compatMode === 'CSS1Compat' && d.documentElement.scrollTop || body.scrollTop || 0;
+		},
+		scrollTop = function(){
+			if (!supportOrientation) return;
+			body.style.height = screen.height + 'px';
+			setTimeout(function(){
+				w.scrollTo(0, 1);
+				var top = getScrollTop();
+				w.scrollTo(0, top === 1 ? 0 : 1);
+				body.style.height = w.innerHeight + 'px';
+			}, 1);
+		};
+	scrollTop();
+	if (supportOrientation) w.onorientationchange = scrollTop;
+	
+	w.addEventListener('load', function(){
+		body.classList.add('show');
+	}, false);
 }(window, document);

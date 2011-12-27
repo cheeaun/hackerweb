@@ -2,6 +2,7 @@
 	height: 100%;
 }
 body{
+	opacity: 0;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	margin: 0;
@@ -11,6 +12,14 @@ body{
 	overflow: hidden;
 	position: relative;
 	word-wrap: break-word;
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-ms-transition: opacity 1s;
+	-o-transition: opacity 1s;
+	transition: opacity 1s;
+}
+body.show{
+	opacity: 1;
 }
 pre{
 	word-wrap: normal;
