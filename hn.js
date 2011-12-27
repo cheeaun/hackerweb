@@ -319,6 +319,14 @@
 	if (supportOrientation) w.onorientationchange = scrollTop;
 	
 	w.addEventListener('load', function(){
-		body.classList.add('show');
+		var scrollCheck = setInterval(function(){
+			var top = getScrollTop();
+			if (top <= 1){
+				clearInterval(scrollCheck);
+				setTimeout(function(){
+					body.classList.add('show');
+				}, 1000);
+			}
+		}, 15);
 	}, false);
 }(window, document);
