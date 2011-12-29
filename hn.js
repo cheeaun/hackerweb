@@ -60,11 +60,11 @@
 		tmpl = function(template, data){
 			var t = tmplCache[template];
 			if (!t){
-				t = $(template + '-tmpl').textContent;
+				t = Hogan.compile($(template + '-tmpl').textContent);
 				tmplCache[template] = t;
 			}
 			if (!data) return t;
-			return Mustache.to_html(t, data);
+			return t.render(data);
 		};
 	
 	var currentView = null;
@@ -127,7 +127,7 @@
 								tmpl2 = tmpl('comments');
 							data.title = data.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
 							data.has_comments = !!data.comments.length;
-							var html = Mustache.to_html(tmpl1, data, {comments_list: tmpl2});
+							var html = tmpl1.render(data, {comments_list: tmpl2});
 							viewHeading.innerHTML = data.title;
 							viewSection.innerHTML = html;
 							var links = viewSection.querySelectorAll('a');
