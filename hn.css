@@ -975,10 +975,14 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 }
 
 @media only screen and (max-height: 280px){
-	header.fake{
-		height: 32px;
-	}
+	header.fake,
 	.view>header{
+		background-image: url(images/navbar-landscape-bg.png);
+		-webkit-background-size: 1px 32px;
+		-moz-background-size: 1px 32px;
+		-ms-background-size: 1px 32px;
+		-o-background-size: 1px 32px;
+		background-size: 1px 32px;
 		height: 32px;
 		line-height: 32px;
 	}
