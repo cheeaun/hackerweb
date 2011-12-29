@@ -67,10 +67,6 @@
 			return Mustache.to_html(t, data);
 		};
 	
-	var $commentsScrollSection = d.querySelector('#view-comments .scroll section');
-	$commentsScrollSection.addEventListener('scroll', function(){
-		amplify.store('hacker-item-scrolltop', $commentsScrollSection.scrollTop);
-	}, false);
 	var currentView = null;
 	
 	var routes = {
@@ -144,31 +140,45 @@
 					$commentsScroll.classList.add('loading');
 					if (post){
 						loadPost(post);
-						$commentsScrollSection.scrollTop = amplify.store('hacker-item-scrolltop');
 					} else {
 						hnapi.item(id, loadPost);
-						amplify.store('hacker-item-scrolltop', 0);
 					}
 				}
-			},
-			after: function(){
-				amplify.store('hacker-item-scrolltop', 0);
 			}
 		}
 	};
-
-	if (isStandalone){
-		var hash = amplify.store('hacker-hash');
-		if (hash) location.hash = hash;
-	}
+	
 	Router(routes).configure({
 		on: function(){
-			if (isStandalone) amplify.store('hacker-hash', location.hash);
+			amplify.store('hacker-hash', location.hash);
 		},
 		notfound: function(){
 			location.hash = '/';
 		}
-	}).init('/');
+	}).init(amplify.store('hacker-hash') || '/');
+	
+	w.addEventListener('pagehide', function(){
+		amplify.store('hacker-hash', location.hash);
+		var views = d.querySelectorAll('.view'),
+			hackerScrollTops = {};
+		for (var i=0, l=views.length; i<l; i++){
+			var view = views[i],
+				viewID = view.id,
+				scrollSection = view.querySelector('.scroll section');
+			hackerScrollTops[viewID] = scrollSection.scrollTop || 0;
+		}
+		amplify.store('hacker-scrolltops', hackerScrollTops);
+	}, false);
+	w.addEventListener('pageshow', function(){
+		var hash = amplify.store('hacker-hash'),
+			hackerScrollTops = amplify.store('hacker-scrolltops');
+		setTimeout(function(){
+			location.hash = amplify.store('hacker-hash');
+			for (var id in hackerScrollTops){
+				$(id).querySelector('.scroll section').scrollTop = hackerScrollTops[id];
+			}
+		}, 1);
+	}, false);
 	
 	var $viewSections = d.querySelectorAll('.view>.scroll');
 	for (var i=0, l=$viewSections.length; i<l; i++){
@@ -284,19 +294,13 @@
 			$hnlist.innerHTML = html;
 		};
 	
-	$homeScrollSection.addEventListener('scroll', function(){
-		amplify.store('hacker-news-scrolltop', $homeScrollSection.scrollTop);
-	}, false);
-	
 	var news = amplify.store('hacker-news');
 	if (news){
 		loadNews(news);
-		$homeScrollSection.scrollTop = amplify.store('hacker-news-scrolltop');
 	} else {
 		$homeScroll.classList.add('loading');
 		setTimeout(function(){
 			hnapi.news(loadNews);
-			amplify.store('hacker-news-scrolltop', 0);
 		}, 100);
 	}
 	
