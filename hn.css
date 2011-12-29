@@ -548,39 +548,37 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-position: right center;
 }
 
-.view article{
-	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
-	box-flex: 1;
-}
-.view article header{
+.view .post-content header{
 	padding: 10px 15px;
 	text-shadow: 0 1px rgba(255,255,255,.85);
 }
-.view article header h1,
-.view article header p{
+.view .post-content header h1,
+.view .post-content header p{
 	margin: 0;
 	padding: 0;
 }
-.view article header h1 a{
+.view .post-content header h1 a{
 	display: block;
 }
-.view article header .metadata{
+.view .post-content header h1 a .link-text{
+	font-size: 13px;
+}
+.view .post-content header .metadata{
 	font-size: 13px;
 	color: #666d74;
 }
-.view article header h1{
+.view .post-content header h1{
 	font-size: 17px;
 	line-height: 1.2em;
 }
-.view article header h1 a{
+.view .post-content header h1 a{
 	color: #000;
 	text-decoration: none;
 }
-.view article header + .grouped-tableview{
+.view .post-content header + .grouped-tableview{
 	margin-top: 0;
 }
-.view article .post-content{
+.view .post-content{
 	padding-bottom: 1px;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,.12)));
 	background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
@@ -596,23 +594,23 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-repeat: repeat-x;
 	background-position: bottom;
 }
-.view article section.comments{
+.view section.comments{
 	min-height: 100%;
 	border-top: 1px solid #9297a2;
 	background-color: #fff;
 	font-size: 13px;
 	overflow: hidden;
 }
-.view article section.comments ul{
+.view section.comments ul{
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
-.view article section.comments ul li{
+.view section.comments ul li{
 	padding: 15px;
 	border-bottom: 1px solid #ddd;
 }
-.view article section.comments ul ul li{
+.view section.comments ul ul li{
 	padding: 0 0 0 15px;
 	border: 0;
 	background: transparent url(images/comment-arrow.png) no-repeat 0 4px;
@@ -623,10 +621,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-size: 10px 9px;
 	color: #333;
 }
-.view article section.comments p{
+.view section.comments p{
 	margin: 8px 0;
 }
-.view article section.comments p.metadata{
+.view section.comments p.metadata{
 	color: #666d74;
 	padding: 0;
 	margin: 0;
@@ -634,10 +632,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	display: -moz-box;
 	display: box;
 }
-.view article section.comments p.metadata b{
+.view section.comments p.metadata b{
 	color: #b23914;
 }
-.view article section.comments p.metadata time{
+.view section.comments p.metadata time{
 	display: block;
 	text-align: right;
 	-webkit-box-flex: 1;
@@ -646,13 +644,13 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	font-weight: bold;
 	color: #888;
 }
-.view article section.comments pre{
+.view section.comments pre{
 	margin: 0 0 8px;
 	overflow: auto;
 	padding: 5px 0;
 	background-color: #eee;
 }
-.view article section.comments p.no-comments{
+.view section.comments p.no-comments{
 	text-align: center;
 	color: #aaa;
 	font-weight: bold;
