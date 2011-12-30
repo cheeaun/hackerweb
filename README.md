@@ -12,7 +12,7 @@ This mobile web app primarily works on iOS 5 Mobile Safari. It uses these wonder
 
 - [Tappable](https://github.com/cheeaun/tappable) - touch-friendly tap events
 - [Director](https://github.com/flatiron/director) - location.hash router
-- [Mustache.js](https://github.com/janl/mustache.js/) - logic-less templating
+- [Hogan.js](https://github.com/twitter/hogan.js) - logic-less templating
 - [Amplify.Store](http://amplifyjs.com/api/store/) - client-side storage
 - [Viper](https://github.com/alpha123/Viper/) - simple animation
 - Vanilla JavaScript - everything else
