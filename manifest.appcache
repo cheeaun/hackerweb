@@ -1,11 +1,12 @@
 CACHE MANIFEST
-# 2001-12-22:v1
+# 2001-12-31:v1
 
 index.html
 hn.css
 scripts.js
 hn.js
 images/navbar-bg.png
+images/navbar-landscape-bg.png
 images/activity-indicator.png
 images/refresh-icon.png
 images/button.png
