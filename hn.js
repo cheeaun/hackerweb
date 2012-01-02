@@ -324,6 +324,13 @@
 		$homeScroll.classList.add('loading');
 		setTimeout(function(){
 			hnapi.news(loadNews);
+			// Preload news2 to prevent discrepancies between /news and /news2 results
+			hnapi.news2(function(data){
+				if (!data) return;
+				amplify.store('hacker-news2', data, {
+					expires: 1000*60*5 // 5 minutes
+				});
+			});
 		}, 100);
 	}
 	
