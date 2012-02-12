@@ -13,14 +13,20 @@
  *  limitations under the License.
  */
 
-var HoganTemplate = (function () {
 
-  function constructor(text) {
-    this.text = text;
+
+var Hogan = {};
+
+(function (Hogan) {
+  Hogan.Template = function constructor(renderFunc, text, compiler) {
+    if (renderFunc) {
+      this.r = renderFunc;
+    }
+    this.c = compiler;
+    this.text = text || '';
   }
 
-  constructor.prototype = {
-
+  Hogan.Template.prototype = {
     // render: replaced by generated code.
     r: function (context, partials, indent) { return ''; },
 
@@ -28,6 +34,11 @@ var HoganTemplate = (function () {
     v: hoganEscape,
 
     render: function render(context, partials, indent) {
+      return this.ri([context], partials || {}, indent);
+    },
+
+    // render internal -- a hook for overrides that catches partials too
+    ri: function (context, partials, indent) {
       return this.r(context, partials, indent);
     },
 
@@ -39,7 +50,11 @@ var HoganTemplate = (function () {
         return '';
       }
 
-      return partial.r(context, partials, indent);
+      if (this.c && typeof partial == 'string') {
+        partial = this.c.compile(partial);
+      }
+
+      return partial.ri(context, partials, indent);
     },
 
     // render a section
@@ -68,8 +83,8 @@ var HoganTemplate = (function () {
         return false;
       }
 
-      if (!inverted && typeof val == 'function') {
-        val = this.ls(val, ctx, partials, start, end, tags);
+      if (typeof val == 'function') {
+        val = this.ls(val, ctx, partials, inverted, start, end, tags);
       }
 
       pass = (val === '') || !!val;
@@ -83,7 +98,6 @@ var HoganTemplate = (function () {
 
     // find values with dotted names
     d: function(key, ctx, partials, returnFound) {
-
       var names = key.split('.'),
           val = this.f(names[0], ctx, partials, returnFound),
           cx = null;
@@ -142,10 +156,11 @@ var HoganTemplate = (function () {
 
     // higher order templates
     ho: function(val, cx, partials, text, tags) {
+      var compiler = this.c;
       var t = val.call(cx, text, function(t) {
-        return Hogan.compile(t, {delimiters: tags}).render(cx, partials);
+        return compiler.compile(t, {delimiters: tags}).render(cx, partials);
       });
-      var s = Hogan.compile(t.toString(), {delimiters: tags}).render(cx, partials);
+      var s = compiler.compile(t.toString(), {delimiters: tags}).render(cx, partials);
       this.b = s;
       return false;
     },
@@ -154,16 +169,22 @@ var HoganTemplate = (function () {
     b: '',
 
     // lambda replace section
-    ls: function(val, ctx, partials, start, end, tags) {
+    ls: function(val, ctx, partials, inverted, start, end, tags) {
       var cx = ctx[ctx.length - 1],
-          t = val.call(cx);
+          t = null;
 
-      if (val.length > 0) {
+      if (!inverted && this.c && val.length > 0) {
         return this.ho(val, cx, partials, this.text.substring(start, end), tags);
       }
 
+      t = val.call(cx);
+
       if (typeof t == 'function') {
-        return this.ho(t, cx, partials, this.text.substring(start, end), tags);
+        if (inverted) {
+          return true;
+        } else if (this.c) {
+          return this.ho(t, cx, partials, this.text.substring(start, end), tags);
+        }
       }
 
       return t;
@@ -172,7 +193,17 @@ var HoganTemplate = (function () {
     // lambda replace variable
     lv: function(val, ctx, partials) {
       var cx = ctx[ctx.length - 1];
-      return Hogan.compile(val.call(cx).toString()).render(cx, partials);
+      var result = val.call(cx);
+      if (typeof result == 'function') {
+        result = result.call(cx);
+      }
+      result = result.toString();
+
+      if (this.c && ~result.indexOf("{{")) {
+        return this.c.compile(result).render(cx, partials);
+      }
+
+      return result;
     }
 
   };
@@ -185,7 +216,7 @@ var HoganTemplate = (function () {
       hChars =/[&<>\"\']/;
 
   function hoganEscape(str) {
-    str = String(str === null ? '' : str);
+    str = String((str === null || str === undefined) ? '' : str);
     return hChars.test(str) ?
       str
         .replace(rAmp,'&amp;')
@@ -200,12 +231,12 @@ var HoganTemplate = (function () {
     return Object.prototype.toString.call(a) === '[object Array]';
   };
 
-  return constructor;
+})(typeof exports !== 'undefined' ? exports : Hogan);
 
-})();
 
-var Hogan = (function () {
 
+
+(function (Hogan) {
   // Setup regex  assignments
   // remove whitespace according to Mustache spec
   var rIsWhitespace = /\S/,
@@ -218,7 +249,7 @@ var Hogan = (function () {
         '<': 6, '=': 7, '_v': 8, '{': 9, '&': 10
       };
 
-  function scan(text, delimiters) {
+  Hogan.scan = function scan(text, delimiters) {
     var len = text.length,
         IN_TEXT = 0,
         IN_TAG_TYPE = 1,
@@ -330,7 +361,11 @@ var Hogan = (function () {
           i += ctag.length - 1;
           state = IN_TEXT;
           if (tagType == '{') {
-            i++;
+            if (ctag == '}}') {
+              i++;
+            } else {
+              cleanTripleStache(tokens[tokens.length - 1]);
+            }
           }
         } else {
           buf += text.charAt(i);
@@ -341,6 +376,12 @@ var Hogan = (function () {
     filterLine(seenTag, true);
 
     return tokens;
+  }
+
+  function cleanTripleStache(token) {
+    if (token.n.substr(token.n.length - 1) === '}') {
+      token.n = token.n.substring(0, token.n.length - 1);
+    }
   }
 
   function trim(s) {
@@ -415,18 +456,16 @@ var Hogan = (function () {
     }
   }
 
-  function generate(tree, text, options) {
-    var code = 'i = i || "";var c = [cx];var b = i + "";var _ = this;'
-      + walk(tree)
-      + 'return b;';
+  function writeCode(tree) {
+    return 'i = i || "";var b = i + "";var _ = this;' + walk(tree) + 'return b;';
+  }
 
+  Hogan.generate = function (code, text, options) {
     if (options.asString) {
-      return 'function(cx,p,i){' + code + ';}';
+      return 'function(c,p,i){' + code + ';}';
     }
 
-    var template = new HoganTemplate(text);
-    template.r = new Function('cx', 'p', 'i', code);
-    return template;
+    return new Hogan.Template(new Function('c', 'p', 'i', code), text, Hogan);
   }
 
   function esc(s) {
@@ -482,7 +521,7 @@ var Hogan = (function () {
   }
 
   function partial(tok) {
-    return 'b += _.rp("' +  esc(tok.n) + '",c[c.length - 1],p,"' + (tok.indent || '') + '");';
+    return 'b += _.rp("' +  esc(tok.n) + '",c,p,"' + (tok.indent || '') + '");';
   }
 
   function tripleStache(id, method) {
@@ -497,49 +536,37 @@ var Hogan = (function () {
     return 'b += ' + id + ';';
   }
 
-  return ({
-    scan: scan,
+  Hogan.parse = function(tokens, options) {
+    options = options || {};
+    return buildTree(tokens, '', [], options.sectionTags || []);
+  },
 
-    parse: function(tokens, options) {
-      options = options || {};
-      return buildTree(tokens, '', [], options.sectionTags || []);
-    },
+  Hogan.cache = {};
 
-    cache: {},
+  Hogan.compile = function(text, options) {
+    // options
+    //
+    // asString: false (default)
+    //
+    // sectionTags: [{o: '_foo', c: 'foo'}]
+    // An array of object with o and c fields that indicate names for custom
+    // section tags. The example above allows parsing of {{_foo}}{{/foo}}.
+    //
+    // delimiters: A string that overrides the default delimiters.
+    // Example: "<% %>"
+    //
+    options = options || {};
 
-    compile: function(text, options) {
-      // options
-      //
-      // asString: false (default)
-      //
-      // sectionTags: [{o: '_foo', c: 'foo'}]
-      // An array of object with o and c fields that indicate names for custom
-      // section tags. The example above allows parsing of {{_foo}}{{/foo}}.
-      //
-      // delimiters: A string that overrides the default delimiters.
-      // Example: "<% %>"
-      //
-      options = options || {};
+    var key = text + '||' + !!options.asString;
 
-      var t = this.cache[text];
+    var t = this.cache[key];
 
-      if (t) {
-        return t;
-      }
-
-      t = generate(this.parse(scan(text, options.delimiters), options), text, options);
-      return this.cache[text] = t;
+    if (t) {
+      return t;
     }
-  });
-})();
 
-// Export the hogan constructor for Node.js and CommonJS.
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = Hogan;
-  module.exports.Template = HoganTemplate;
-} else if (typeof define === 'function' && define.amd) {
-  define(function () { return Hogan; });
-} else if (typeof exports !== 'undefined') {
-  exports.Hogan = Hogan;
-  exports.HoganTemplate = HoganTemplate;
-}
+    t = this.generate(writeCode(this.parse(this.scan(text, options.delimiters), options)), text, options);
+    return this.cache[key] = t;
+  };
+})(typeof exports !== 'undefined' ? exports : Hogan);
+

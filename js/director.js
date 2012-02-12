@@ -1,7 +1,8 @@
 
+
 //
-// Generated on Tue Dec 06 2011 04:47:21 GMT-0500 (EST) by Nodejitsu, Inc (Using Codesurgeon).
-// Version 1.0.7
+// Generated on Sun Feb 12 2012 01:57:32 GMT+0000 (MPST) by Nodejitsu, Inc (Using Codesurgeon).
+// Version 1.0.9-1
 //
 
 (function (exports) {
@@ -33,12 +34,14 @@ if (!Array.isArray){
   };
 }
 
+var dloc = document.location;
+
 var listener = {
   mode: 'modern',
-  hash: location.hash,
+  hash: dloc.hash,
 
   check: function () {
-    var h = location.hash;
+    var h = dloc.hash;
     if (h != this.hash) {
       this.hash = h;
       this.onHashChanged();
@@ -122,7 +125,7 @@ var listener = {
       this.writeFrame(s);
     }
 
-    location.hash = (s[0] === '/') ? s : '/' + s;
+    dloc.hash = (s[0] === '/') ? s : '/' + s;
     return this;
   },
 
@@ -138,8 +141,8 @@ var listener = {
   syncHash: function () {
     // IE support...
     var s = this._hash;
-    if (s != location.hash) {
-      location.hash = s;
+    if (s != dloc.hash) {
+      dloc.hash = s;
     }
     return this;
   },
@@ -165,15 +168,15 @@ var Router = exports.Router = function (routes) {
 Router.prototype.init = function (r) {
   var self = this;
   this.handler = function() {
-    var hash = location.hash.replace(/^#/, '');
+    var hash = dloc.hash.replace(/^#/, '');
     self.dispatch('on', hash);
   };
 
-  if (location.hash === '' && r) {
-    location.hash = r;
+  if (dloc.hash === '' && r) {
+    dloc.hash = r;
   }
 
-  if (location.hash.length > 0) {
+  if (dloc.hash.length > 0) {
     this.handler();
   }
 
@@ -182,7 +185,7 @@ Router.prototype.init = function (r) {
 };
 
 Router.prototype.explode = function () {
-  var v = location.hash;
+  var v = dloc.hash;
   if (v[1] === '/') { v=v.slice(1) }
   return v.slice(1, v.length).split("/");
 };
@@ -300,7 +303,7 @@ function paramifyString(str, params, mod) {
             }
         }
     }
-    return mod === str ? "([a-zA-Z0-9-]+)" : mod;
+    return mod === str ? "([._a-zA-Z0-9-]+)" : mod;
 }
 
 function regifyString(str, params) {
@@ -401,8 +404,10 @@ Router.prototype.dispatch = function(method, path, callback) {
 Router.prototype.invoke = function(fns, thisArg, callback) {
     var self = this;
     if (this.async) {
-        _asyncEverySeries(fns, function(fn, next) {
-            if (typeof fn == "function") {
+        _asyncEverySeries(fns, function apply(fn, next) {
+            if (Array.isArray(fn)) {
+                return _asyncEverySeries(fn, apply, next);
+            } else if (typeof fn == "function") {
                 fn.apply(thisArg, fns.captures.concat(next));
             }
         }, function() {

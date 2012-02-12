@@ -48,6 +48,9 @@
 			var touch = e.targetTouches[0];
 			return getTargetByCoords(touch.clientX, touch.clientY);
 		},
+		clean = function(str){
+			return str.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
+		},
 		addClass = function(el, className){
 			if (!className) return;
 			if (el.classList){
