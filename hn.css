@@ -523,7 +523,7 @@ ol.grouped-tableview-links li>a.disclosure:after{
 	position: absolute;
 	top: 0;
 	right: 10px;
-	width: 8.5px;
+	width: 10px;
 	height: 100%;
 	background: transparent url(images/disclosure-indicator.png) no-repeat left center;
 	background-size: 20px auto;
