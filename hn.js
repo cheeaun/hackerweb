@@ -158,7 +158,6 @@
 								links[i].target = '_blank';
 							}
 						};
-					viewHeading.innerHTML = viewHeading.dataset.loadingText;
 					viewSection.innerHTML = '';
 					$commentsScroll.classList.add('loading');
 					if (post){
