@@ -656,6 +656,24 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	font-weight: bold;
 	margin: 50px 0 250px;
 }
+.view section.comments button.comments-toggle{
+	display: block;
+	width: 100%;
+	cursor: pointer;
+	border: 0;
+	padding: 6px 10px;
+	font-weight: bold;
+	color: #666;
+	background-color: #e0e0e0;
+	border-radius: 6px;
+	text-shadow: 0 1px rgba(255,255,255,.75);
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	margin: 2px 0 4px;
+}
+.view section.comments button.comments-toggle.tappable-active{
+	color: #444;
+	background-color: #c0c0c0;
+}
 .link-text{
 	color: #385487;
 	font-weight: bold;

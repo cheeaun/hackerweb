@@ -157,6 +157,22 @@
 							for (var i=0, l=links.length; i<l; i++){
 								links[i].target = '_blank';
 							}
+							// 20K chars will be the max to trigger collapsible comments.
+							// I can use number of comments as the condition but some comments
+							// might have too many chars and make the page longer.
+							if (html.length <= 20000) return;
+							var subUls = viewSection.querySelectorAll('.comments>ul>li>ul');
+							var tmpl3 = tmpl('comments-toggle');
+							for (var j=0, l=subUls.length; j<l; j++){
+								var subUl = subUls[j],
+									commentsCount = subUl.querySelectorAll('.metadata').length;
+								subUl.style.display = 'none';
+								if (commentsCount){
+									subUl.insertAdjacentHTML('beforebegin', tmpl3.render({
+										comments_count: commentsCount
+									}));
+								}
+							}
 						};
 					viewSection.innerHTML = '';
 					$commentsScroll.classList.add('loading');
@@ -281,6 +297,13 @@
 		noScrollDelay: 100,
 		onTap: function(e, target){
 			location.hash = target.hash;
+		}
+	});
+	tappable('button.comments-toggle', function(e, target){
+		var ul = target.nextElementSibling;
+		if (ul){
+			var ulStyle = ul.style;
+			ulStyle.display = (ulStyle.display == 'none') ? '' : 'none';
 		}
 	});
 	
