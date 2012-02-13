@@ -3,9 +3,12 @@ Hacker News mobile web app
 
 **Note**: If you think this README is lame, try this **[awesome landing page](http://cheeaun.github.com/hnmobile/landing/)**.
 
-This is one of my silly mini-projects. I create this initially to try out iOS 5 Mobile Safari's new `-webkit-overflow-scrolling: touch` CSS support. I need some sort of content for scrolling, so why not [Hacker News](http://news.ycombinator.com/)' stories?
+This is one of my silly mini-projects. I create this initially to try out iOS 5 Mobile Safari's new `-webkit-overflow-scrolling: touch` CSS support. I need some sort of content for scrolling, so why not [Hacker News](http://news.ycombinator.com/)' stories? I'm also trying something called [**Fake it 'til you make it**](http://snook.ca/archives/conferences/fake-it) which I make the web app looks (and feels) like a native mobile app. In this case, like a native iOS app.
 
-I'm also trying something called [**Fake it 'til you make it**](http://snook.ca/archives/conferences/fake-it) which I make the web app looks (and feels) like a native mobile app. In this case, like a native iOS app.
+As I continue developing this app, it turns out pretty good. Currently it has **very basic** features:
+
+- View 'front page' stories from Hacker News.
+- View individual story with all its comments, threaded.
 
 Here are some screenshots. Click to see them in their full **retina** glory.
 
