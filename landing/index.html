@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Hacker News mobile web app</title>
+<style>
+body{
+	text-align: center;
+	font-family: helvetica, arial, sans-serif;
+	margin: 0;
+	padding: 120px 0;
+	-webkit-box-shadow: inset 0 0 10px #ccc;
+	-moz-box-shadow: inset 0 0 60px #ccc;
+	-ms-box-shadow: inset 0 0 60px #ccc;
+	-o-box-shadow: inset 0 0 60px #ccc;
+	box-shadow: inset 0 0 60px #ccc;
+}
+header{
+	padding: 0 0 120px;
+}
+header h1,
+header p{
+	margin: 0;
+	padding: 0;
+}
+header h1{
+	font-size: 50px;
+	letter-spacing: -.1ex;
+	text-shadow: 0 0 3px #ddd;
+}
+header p{
+	margin-top: 10px;
+}
+p{
+	margin: 60px 0;
+	color: #666;
+	text-shadow: 0 0 3px #ddd;
+}
+a{
+	color: #08C;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+.share{
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+</style>
+<script>
+if (location.hostname == 'cheeaun.github.com'){
+	var _gaq = [['_setAccount', 'UA-23235796-3'], ['_trackPageview'], ['_trackPageLoadTime']];
+	(function(d, t){
+		var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+		g.src = ('https:' == d.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g, s);
+	}(document, 'script'));
+}
+</script>
+<header>
+	<h1>Hacker News mobile web app</h1>
+	<p>Looks <em>and</em> feels like a native iOS app.</p>
+</header>
+<img src="app.png" width="746" height="1460" alt="Screenshot of Hacker News mobile web app">
+<p>Try it now on your iOS5 Safari web browser.<br>
+Go to <a href="http://cheeaun.github.com/hnmobile/">cheeaun.github.com/hnmobile</a> or <a href="http://goo.gl/6Qx19">goo.gl/6Qx19</a> or scan this&hellip;</p>
+<img src="http://goo.gl/6Qx19.qr" width="150" height="150" alt="QR code for goo.gl/6Qx19">
+<p>iPhone 4S image is from <a href="http://kaishinlab.com/vector-iphone/">KaishinLab</a>.</p>
+
+<div class="share">
+<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-related="cheeaun" data-hashtags="hnmobile">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
