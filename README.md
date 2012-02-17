@@ -39,3 +39,26 @@ License
 -------
 
 Licensed under the [MIT License](http://cheeaun.mit-license.org/).
+
+Other similar mobile apps
+-------------------------
+
+This is the not the first app to introduce a mobile-friendly version of Hacker News. Others have tried doing the same thing, despite some slight differences.
+
+### Web
+
+- [http://ihackernews.com/]() by Ronnie Roller
+- [http://hn.gethifi.com/]() by Joel Sutherland and Kris Jordan
+- [http://www.icombinator.net/]() by Benny Wong
+- [http://smus.com/x/hackernews/]() by Boris Smus
+
+### iPhone
+
+- [http://michaelgrinich.com/hackernews/]() by Michael Grinich
+- [http://newsyc.me/]() by Grant Paul
+- [http://www.hnreaderapp.com/]() by Ryan Scherf and Steve Finkelstein
+
+### Android
+
+- [http://gluegadget.com/hndroid/]() by Amir Mohammad Saied
+- [http://etc.jazzychad.net/hnandroid.html]() by Chad Etzel
