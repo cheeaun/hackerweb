@@ -174,6 +174,7 @@
 								}
 							}
 						};
+					viewHeading.innerHTML = '';
 					viewSection.innerHTML = '';
 					$commentsScroll.classList.add('loading');
 					if (post){
