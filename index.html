@@ -9,12 +9,23 @@
 <link rel="apple-touch-icon-precomposed" href="icons/touch-icon.png">
 <script>
 if (location.hostname == 'cheeaun.github.com'){
-	var _gaq = [['_setAccount', 'UA-23235796-3'], ['_trackPageview'], ['_trackPageLoadTime']];
+	var _gaq = [['_setAccount', 'UA-23235796-3'], ['_trackPageview']];
 	(function(d, t){
 		var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
 		g.src = ('https:' == d.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		s.parentNode.insertBefore(g, s);
 	}(document, 'script'));
+	var Muscula = {
+		settings: {
+			logId: 'NDkd1WB-dkALH'
+		}
+	};
+	(function(d, t){
+		var m = d.createElement(t), s = d.getElementsByTagName(t)[0];
+		m.src = (d.location.protocol == 'https:' ? 'https:' : 'http:') + '//musculahq.appspot.com/Muscula.js';
+		s.parentNode.insertBefore(m, s);
+		Muscula.run = function(s){ eval(s); Muscula.run = function(){}; };
+	})(document, 'script');
 }
 </script>
 </head>
