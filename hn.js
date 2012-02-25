@@ -248,22 +248,31 @@
 	tappable('.view>header h1', {
 		onTap: function(e, target){
 			var section = target.parentNode.nextElementSibling.firstElementChild;
-			if (section.scrollTop == 0) return;
-			// Reset the overflow because the momentum ignores scrollTop setting
-			var originalOverflow = section.style.overflow;
-			section.style.overflow = 'hidden';
-			setTimeout(function(){
-				section.style.overflow = originalOverflow;
-				var anim = Viper({
-					object: section,
-					transition: Viper.Transitions.sine,
-					property: 'scrollTop',
-					to: 0,
-					fps: 60 // pushing the limit?
-				});
-				anim.start();
-				anim = null;
-			}, 300);
+			if (section.scrollTop == 0){
+				// Show address bar
+				var originalHeight = body.style.height;
+				body.style.height = '100%';
+				setTimeout(function(){
+					body.style.height = originalHeight;
+				}, 1);
+			} else {
+				// Scroll the section to top
+				// Reset the overflow because the momentum ignores scrollTop setting
+				var originalOverflow = section.style.overflow;
+				section.style.overflow = 'hidden';
+				setTimeout(function(){
+					section.style.overflow = originalOverflow;
+					var anim = Viper({
+						object: section,
+						transition: Viper.Transitions.sine,
+						property: 'scrollTop',
+						to: 0,
+						fps: 60 // pushing the limit?
+					});
+					anim.start();
+					anim = null;
+				}, 300);
+			}
 		}
 	});
 	tappable('.tableview-links li>a:first-child, .grouped-tableview-links li>a:first-child', {
