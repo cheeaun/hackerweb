@@ -345,7 +345,7 @@
 		loadNews(news);
 	} else {
 		$homeScroll.classList.add('loading');
-		setTimeout(function(){
+		w.addEventListener('load', function(){
 			hnapi.news(loadNews);
 			// Preload news2 to prevent discrepancies between /news and /news2 results
 			hnapi.news2(function(data){
@@ -354,7 +354,7 @@
 					expires: 1000*60*5 // 5 minutes
 				});
 			});
-		}, 100);
+		});
 	}
 	
 	// Some useful tips from http://24ways.org/2011/raising-the-bar-on-mobile
