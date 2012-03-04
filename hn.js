@@ -395,4 +395,13 @@
 			}
 		}, 15);
 	}, false);
+
+	// Programmatically update the app cache
+	if (w.applicationCache) w.addEventListener('load', function(){
+		w.applicationCache.addEventListener('updateready', function(){
+			if (w.applicationCache.status == w.applicationCache.UPDATEREADY){
+				w.applicationCache.swapCache();
+			}
+		}, false);
+	}, false);
 }(window, document);
