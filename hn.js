@@ -1,7 +1,6 @@
 !function(w, d){
 	var body = d.body,
 		$ = function(id){ return d.getElementById(id) },
-		isStandalone = 'standalone' in w.navigator && w.navigator.standalone,
 		$hnlist = $('hnlist'),
 		hideAllViews = function(){
 			var views = d.querySelectorAll('.view');
