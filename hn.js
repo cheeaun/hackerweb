@@ -88,7 +88,7 @@
 				throw e;
 			},
 			serverError: function(e){
-				alert('Server is currently available. Please try again later.');
+				alert('Server is currently unavailable. Please try again later.');
 				throw e;
 			}
 		};
