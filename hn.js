@@ -81,6 +81,16 @@
 			}
 			if (!data) return t;
 			return t.render(data);
+		},
+		errors = {
+			connectionError: function(e){
+				alert('Could not connect to server.');
+				throw e;
+			},
+			serverError: function(e){
+				alert('Server is currently available. Please try again later.');
+				throw e;
+			}
 		};
 	
 	var currentView = null;
@@ -141,7 +151,10 @@
 						$commentsScroll = view.querySelector('.scroll'),
 						loadPost = function(data){
 							$commentsScroll.classList.remove('loading');
-							if (!data) return;
+							if (!data || data.error){
+								errors.serverError();
+								return;
+							}
 							amplify.store.sessionStorage('hacker-item-' + id, data, {
 								expires: 1000*60*10 // 10 minutes
 							});
@@ -179,7 +192,7 @@
 					if (post){
 						loadPost(post);
 					} else {
-						hnapi.item(id, loadPost);
+						hnapi.item(id, loadPost, errors.connectionError);
 					}
 				}
 			}
@@ -239,7 +252,23 @@
 			$homeScroll.classList.add('loading');
 			setTimeout(function(){
 				var news = amplify.store('hacker-news');
-				news ? loadNews(news) : hnapi.news(loadNews);
+				if (news){
+					loadNews(news);
+				} else {
+					hnapi.news(function(news){
+						loadNews(news);
+						// Force preload news2 if news expired
+						hnapi.news2(function(data){
+							if (!data || data.error){
+								errors.serverError();
+								return;
+							}
+							amplify.store('hacker-news2', data, {
+								expires: 1000*60*5 // 5 minutes
+							});
+						});
+					}, errors.connectionError);
+				}
 			}, 500); // Cheat a little to make user think that it's doing something
 		}
 	});
@@ -282,7 +311,10 @@
 			if (target.classList.contains('more-link')){
 				var loadNews2 = function(data){
 					target.classList.remove('loading');
-					if (!data) return;
+					if (!data  || data.error){
+						errors.serverError();
+						return;
+					}
 					var targetParent = target.parentNode;
 					targetParent.parentNode.removeChild(targetParent);
 					amplify.store('hacker-news2', data, {
@@ -295,7 +327,7 @@
 				target.classList.add('loading');
 				news2 ? setTimeout(function(){
 					loadNews2(news2); // Cheat here too
-				}, 500) : hnapi.news2(loadNews2);
+				}, 500) : hnapi.news2(loadNews2, errors.connectionError);
 			} else if (/^#\//.test(target.getAttribute('href'))){ // "local" links
 				location.hash = target.hash;
 			}
@@ -336,8 +368,8 @@
 		},
 		loadNews = function(data){
 			$homeScroll.classList.remove('loading');
-			if (!data){
-				alert('Things borked, try reload plz?');
+			if (!data || data.error){
+				errors.serverError();
 				return;
 			}
 			amplify.store('hacker-news', data, {
@@ -354,14 +386,19 @@
 	} else {
 		$homeScroll.classList.add('loading');
 		w.addEventListener('load', function(){
-			hnapi.news(loadNews);
-			// Preload news2 to prevent discrepancies between /news and /news2 results
-			hnapi.news2(function(data){
-				if (!data) return;
-				amplify.store('hacker-news2', data, {
-					expires: 1000*60*5 // 5 minutes
+			hnapi.news(function(news){
+				loadNews(news);
+				// Preload news2 to prevent discrepancies between /news and /news2 results
+				hnapi.news2(function(data){
+					if (!data || data.error){
+						errors.serverError();
+						return;
+					}
+					amplify.store('hacker-news2', data, {
+						expires: 1000*60*5 // 5 minutes
+					});
 				});
-			});
+			}, errors.connectionError);
 		});
 	}
 	
