@@ -386,19 +386,23 @@
 	} else {
 		$homeScroll.classList.add('loading');
 		w.addEventListener('load', function(){
-			hnapi.news(function(news){
-				loadNews(news);
-				// Preload news2 to prevent discrepancies between /news and /news2 results
-				hnapi.news2(function(data){
-					if (!data || data.error){
-						errors.serverError();
-						return;
-					}
-					amplify.store('hacker-news2', data, {
-						expires: 1000*60*5 // 5 minutes
+			// Slight delay to make Mobile Safari thinks that page is already loaded
+			// and hides the location bar
+			setTimeout(function(){
+				hnapi.news(function(news){
+					loadNews(news);
+					// Preload news2 to prevent discrepancies between /news and /news2 results
+					hnapi.news2(function(data){
+						if (!data || data.error){
+							errors.serverError();
+							return;
+						}
+						amplify.store('hacker-news2', data, {
+							expires: 1000*60*5 // 5 minutes
+						});
 					});
-				});
-			}, errors.connectionError);
+				}, errors.connectionError);
+			}, 1);
 		});
 	}
 	
