@@ -447,7 +447,7 @@
 	
 	// Use GA to track the update rate of this manifest appcache thing
 	// and see how fast users are updated to the latest cache/version
-	if (typeof _gaq != 'undefined') w.addEventListener('load', function(){
+	if (typeof _gaq != 'undefined' && w.applicationCache) w.addEventListener('load', function(){
 		setTimeout(function(){
 			var r = new XMLHttpRequest();
 			r.open('GET', 'manifest.appcache', true);
