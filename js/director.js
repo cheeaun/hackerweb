@@ -38,10 +38,10 @@ var dloc = document.location;
 
 var listener = {
   mode: 'modern',
-  hash: dloc.hash,
+  hash: location.hash,
 
   check: function () {
-    var h = dloc.hash;
+    var h = location.hash;
     if (h != this.hash) {
       this.hash = h;
       this.onHashChanged();
@@ -125,7 +125,7 @@ var listener = {
       this.writeFrame(s);
     }
 
-    dloc.hash = (s[0] === '/') ? s : '/' + s;
+    location.hash = (s[0] === '/') ? s : '/' + s;
     return this;
   },
 
@@ -141,8 +141,8 @@ var listener = {
   syncHash: function () {
     // IE support...
     var s = this._hash;
-    if (s != dloc.hash) {
-      dloc.hash = s;
+    if (s != location.hash) {
+      location.hash = s;
     }
     return this;
   },
@@ -168,15 +168,15 @@ var Router = exports.Router = function (routes) {
 Router.prototype.init = function (r) {
   var self = this;
   this.handler = function() {
-    var hash = dloc.hash.replace(/^#/, '');
+    var hash = location.hash.replace(/^#/, '');
     self.dispatch('on', hash);
   };
 
-  if (dloc.hash === '' && r) {
-    dloc.hash = r;
+  if (location.hash === '' && r) {
+    location.hash = r;
   }
 
-  if (dloc.hash.length > 0) {
+  if (location.hash.length > 0) {
     this.handler();
   }
 
@@ -185,7 +185,7 @@ Router.prototype.init = function (r) {
 };
 
 Router.prototype.explode = function () {
-  var v = dloc.hash;
+  var v = location.hash;
   if (v[1] === '/') { v=v.slice(1) }
   return v.slice(1, v.length).split("/");
 };
