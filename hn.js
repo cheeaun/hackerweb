@@ -224,7 +224,7 @@
 		var hash = amplify.store('hacker-hash'),
 			hackerScrollTops = amplify.store('hacker-scrolltops');
 		setTimeout(function(){
-			location.hash = amplify.store('hacker-hash');
+			if (hash) location.hash = hash;
 			for (var id in hackerScrollTops){
 				$(id).querySelector('.scroll section').scrollTop = hackerScrollTops[id];
 			}
