@@ -444,4 +444,20 @@
 			}
 		}, false);
 	}, false);
+	
+	// Use GA to track the update rate of this manifest appcache thing
+	// and see how fast users are updated to the latest cache/version
+	if (typeof _gaq != 'undefined') w.addEventListener('load', function(){
+		setTimeout(function(){
+			var r = new XMLHttpRequest();
+			r.open('GET', 'manifest.appcache', true);
+			r.onload = function(){
+				var text = this.responseText;
+				if (!text) return;
+				var version = (text.match(/#\s\d[^\n\r]+/) || [])[0];
+				if (version) _gaq.push(['_trackEvent', 'Appcache', 'Version', version.replace(/^#\s/, '')]);
+			};
+			r.send();
+		}, 1000);
+	}, false);
 }(window, document);
