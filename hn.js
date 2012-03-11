@@ -224,7 +224,7 @@
 		var hash = amplify.store('hacker-hash'),
 			hackerScrollTops = amplify.store('hacker-scrolltops');
 		setTimeout(function(){
-			location.hash = amplify.store('hacker-hash');
+			if (hash) location.hash = hash;
 			for (var id in hackerScrollTops){
 				$(id).querySelector('.scroll section').scrollTop = hackerScrollTops[id];
 			}
@@ -386,19 +386,23 @@
 	} else {
 		$homeScroll.classList.add('loading');
 		w.addEventListener('load', function(){
-			hnapi.news(function(news){
-				loadNews(news);
-				// Preload news2 to prevent discrepancies between /news and /news2 results
-				hnapi.news2(function(data){
-					if (!data || data.error){
-						errors.serverError();
-						return;
-					}
-					amplify.store('hacker-news2', data, {
-						expires: 1000*60*5 // 5 minutes
+			// Slight delay to make Mobile Safari thinks that page is already loaded
+			// and hides the location bar
+			setTimeout(function(){
+				hnapi.news(function(news){
+					loadNews(news);
+					// Preload news2 to prevent discrepancies between /news and /news2 results
+					hnapi.news2(function(data){
+						if (!data || data.error){
+							errors.serverError();
+							return;
+						}
+						amplify.store('hacker-news2', data, {
+							expires: 1000*60*5 // 5 minutes
+						});
 					});
-				});
-			}, errors.connectionError);
+				}, errors.connectionError);
+			}, 1);
 		});
 	}
 	
@@ -443,5 +447,21 @@
 				w.applicationCache.swapCache();
 			}
 		}, false);
+	}, false);
+	
+	// Use GA to track the update rate of this manifest appcache thing
+	// and see how fast users are updated to the latest cache/version
+	if (typeof _gaq != 'undefined') w.addEventListener('load', function(){
+		setTimeout(function(){
+			var r = new XMLHttpRequest();
+			r.open('GET', 'manifest.appcache', true);
+			r.onload = function(){
+				var text = this.responseText;
+				if (!text) return;
+				var version = (text.match(/#\s\d[^\n\r]+/) || [])[0];
+				if (version) _gaq.push(['_trackEvent', 'Appcache', 'Version', version.replace(/^#\s/, '')]);
+			};
+			r.send();
+		}, 1000);
 	}, false);
 }(window, document);

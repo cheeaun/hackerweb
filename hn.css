@@ -729,6 +729,14 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	animation-timing-function: ease-in-out;
 	animation-duration: 350ms;
 }
+.slow-anim .view,
+.slow-anim .view>.scroll,
+.slow-anim .view>header h1,
+.slow-anim .view>header .header-button{
+	-webkit-animation-duration: 3.5s;
+	-moz-animation-duration: 3.5s;
+	animation-duration: 3.5s;
+}
 
 .sliding{
 	pointer-events: none;
@@ -964,6 +972,9 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	border: 1px solid #000;
 	margin: -1px;
 	pointer-events: none;
+}
+.slow-anim .flip{
+	-webkit-animation-duration: 7s;
 }
 
 .flip-out-to-left {

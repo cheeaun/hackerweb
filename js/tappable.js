@@ -75,6 +75,8 @@
 		for (var key in defaults) options[key] = opts[key] || defaults[key];
 		
 		var el = options.containerElement || d.body,
+			startX,
+			startY,
 			startTarget,
 			elBound,
 			cancel = false,
@@ -103,6 +105,13 @@
 			}
 			if (inactiveClassDelay) clearTimeout(inactiveClassTimeout);
 			
+			startX = e.clientX;
+			startY = e.clientY;
+			if (!startX || !startY){
+				var touch = e.targetTouches[0];
+				startX = touch.clientX;
+				startY = touch.clientY;
+			}
 			startTarget = target;
 			cancel = false;
 			moveOut = false;
@@ -147,7 +156,7 @@
 					removeClass(startTarget, activeClass);
 					options.onMoveOut.call(el, e, target);
 				}
-			} else if (!cancel){
+			} else if (!cancel && Math.abs(y - startY) > 10){
 				cancel = true;
 				removeClass(startTarget, activeClass);
 				options.onCancel.call(target, e);
