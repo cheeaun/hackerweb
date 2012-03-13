@@ -1,0 +1,23 @@
+<li id="story-{{id}}" class="post-{{type}}">
+	<a href="{{url}}" {{#disclosure}}class="pad-right{{/disclosure}}">
+		<div class="number">{{i}}.</div>
+		<div class="story">
+			<b>{{{title}}}</b>
+			{{#user}}
+				<span class="metadata">
+					{{#domain}}<span class="link-text">{{domain}}</span><br>{{/domain}}
+					<span class="inline-block">{{points}} {{i_point}} by {{user}}</span> 
+					<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} {{i_comment}}{{/comments_count}}</span>
+				</span>
+			{{/user}}
+			{{^user}}
+				<span class="metadata">
+					<span class="inline-block">{{time_ago}}</span>
+				</span>
+			{{/user}}
+		</div>
+	</a>
+	{{#disclosure}}
+		<a href="#/item/{{id}}" class="detail-disclosure"><span></span></a>
+	{{/disclosure}}
+</li>

@@ -30,19 +30,31 @@ This mobile web app primarily works on iOS 5 Mobile Safari. It uses these wonder
 
 Also uses the [unofficial Hacker News API](http://node-hnapi.herokuapp.com/), [open-sourced](https://github.com/cheeaun/node-hnapi).
 
-How to run this locally
+More technical stuff
 -----------------------
+
+### Running a local server
 
 	git clone git@github.com:cheeaun/hnmobile.git
 	cd hnmobile
 	node server.js -noappcache
 
-The `-noappcache` argument is to prevent browsers from caching everything in the Application Cache. Also optionally, use [supervisor](https://github.com/isaacs/node-supervisor) to make your life better:
+The `-noappcache` argument is to prevent browsers from caching everything in the Application Cache.
 
-	npm install supervisor -g
-	supervisor -- server.js -noappcache
+### Changes to scripts
 
-Whenever there are changes in the `/js` folder, run `node make-scripts.js` to regenerate `scripts.js`.
+If there are changes in the `/js` folder, run this to regenerate `scripts.js` (skip the npm install if `uglify-js` is already installed):
+
+	npm install uglify-js
+	node make-scripts.js
+
+### Changes to templates
+
+If there are changes in the `/templates` folder, run this to regenerate `scripts.js` (skip the npm install if `uglify-js` and `hogan.js` are already installed):
+
+	npm install uglify-js
+	npm install git://github.com/twitter/hogan.js.git
+	node make-templates.js
 
 Contributing and Feedback
 -------------------------

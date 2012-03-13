@@ -13,17 +13,15 @@
  *  limitations under the License.
  */
 
-
-
 var Hogan = {};
 
-(function (Hogan) {
-  Hogan.Template = function constructor(renderFunc, text, compiler) {
-    if (renderFunc) {
-      this.r = renderFunc;
-    }
+(function (Hogan, useArrayBuffer) {
+  Hogan.Template = function (renderFunc, text, compiler, options) {
+    this.r = renderFunc || this.r;
     this.c = compiler;
+    this.options = options;
     this.text = text || '';
+    this.buf = (useArrayBuffer) ? [] : '';
   }
 
   Hogan.Template.prototype = {
@@ -32,6 +30,9 @@ var Hogan = {};
 
     // variable escaping
     v: hoganEscape,
+
+    // triple stache
+    t: coerceToString,
 
     render: function render(context, partials, indent) {
       return this.ri([context], partials || {}, indent);
@@ -51,7 +52,7 @@ var Hogan = {};
       }
 
       if (this.c && typeof partial == 'string') {
-        partial = this.c.compile(partial);
+        partial = this.c.compile(partial, this.options);
       }
 
       return partial.ri(context, partials, indent);
@@ -59,20 +60,18 @@ var Hogan = {};
 
     // render a section
     rs: function(context, partials, section) {
-      var buf = '',
-          tail = context[context.length - 1];
+      var tail = context[context.length - 1];
 
       if (!isArray(tail)) {
-        return buf = section(context, partials);
+        section(context, partials, this);
+        return;
       }
 
       for (var i = 0; i < tail.length; i++) {
         context.push(tail[i]);
-        buf += section(context, partials);
+        section(context, partials, this);
         context.pop();
       }
-
-      return buf;
     },
 
     // maybe start a section
@@ -157,16 +156,20 @@ var Hogan = {};
     // higher order templates
     ho: function(val, cx, partials, text, tags) {
       var compiler = this.c;
+      var options = this.options;
+      options.delimiters = tags;
       var t = val.call(cx, text, function(t) {
-        return compiler.compile(t, {delimiters: tags}).render(cx, partials);
+        return compiler.compile(t, options).render(cx, partials);
       });
-      var s = compiler.compile(t.toString(), {delimiters: tags}).render(cx, partials);
-      this.b = s;
+      this.b(compiler.compile(t.toString(), options).render(cx, partials));
       return false;
     },
 
-    // higher order template result buffer
-    b: '',
+    // template result buffering
+    b: (useArrayBuffer) ? function(s) { this.buf.push(s); } :
+                          function(s) { this.buf += s; },
+    fl: (useArrayBuffer) ? function() { var r = this.buf.join(''); this.buf = []; return r; } :
+                           function() { var r = this.buf; this.buf = ''; return r; },
 
     // lambda replace section
     ls: function(val, ctx, partials, inverted, start, end, tags) {
@@ -197,10 +200,10 @@ var Hogan = {};
       if (typeof result == 'function') {
         result = result.call(cx);
       }
-      result = result.toString();
+      result = coerceToString(result);
 
-      if (this.c && ~result.indexOf("{{")) {
-        return this.c.compile(result).render(cx, partials);
+      if (this.c && ~result.indexOf("{\u007B")) {
+        return this.c.compile(result, this.options).render(cx, partials);
       }
 
       return result;
@@ -215,8 +218,13 @@ var Hogan = {};
       rQuot = /\"/g,
       hChars =/[&<>\"\']/;
 
+
+  function coerceToString(val) {
+    return String((val === null || val === undefined) ? '' : val);
+  }
+
   function hoganEscape(str) {
-    str = String((str === null || str === undefined) ? '' : str);
+    str = coerceToString(str);
     return hChars.test(str) ?
       str
         .replace(rAmp,'&amp;')
@@ -232,341 +240,3 @@ var Hogan = {};
   };
 
 })(typeof exports !== 'undefined' ? exports : Hogan);
-
-
-
-
-(function (Hogan) {
-  // Setup regex  assignments
-  // remove whitespace according to Mustache spec
-  var rIsWhitespace = /\S/,
-      rQuot = /\"/g,
-      rNewline =  /\n/g,
-      rCr = /\r/g,
-      rSlash = /\\/g,
-      tagTypes = {
-        '#': 1, '^': 2, '/': 3,  '!': 4, '>': 5,
-        '<': 6, '=': 7, '_v': 8, '{': 9, '&': 10
-      };
-
-  Hogan.scan = function scan(text, delimiters) {
-    var len = text.length,
-        IN_TEXT = 0,
-        IN_TAG_TYPE = 1,
-        IN_TAG = 2,
-        state = IN_TEXT,
-        tagType = null,
-        tag = null,
-        buf = '',
-        tokens = [],
-        seenTag = false,
-        i = 0,
-        lineStart = 0,
-        otag = '{{',
-        ctag = '}}';
-
-    function addBuf() {
-      if (buf.length > 0) {
-        tokens.push(new String(buf));
-        buf = '';
-      }
-    }
-
-    function lineIsWhitespace() {
-      var isAllWhitespace = true;
-      for (var j = lineStart; j < tokens.length; j++) {
-        isAllWhitespace =
-          (tokens[j].tag && tagTypes[tokens[j].tag] < tagTypes['_v']) ||
-          (!tokens[j].tag && tokens[j].match(rIsWhitespace) === null);
-        if (!isAllWhitespace) {
-          return false;
-        }
-      }
-
-      return isAllWhitespace;
-    }
-
-    function filterLine(haveSeenTag, noNewLine) {
-      addBuf();
-
-      if (haveSeenTag && lineIsWhitespace()) {
-        for (var j = lineStart, next; j < tokens.length; j++) {
-          if (!tokens[j].tag) {
-            if ((next = tokens[j+1]) && next.tag == '>') {
-              // set indent to token value
-              next.indent = tokens[j].toString()
-            }
-            tokens.splice(j, 1);
-          }
-        }
-      } else if (!noNewLine) {
-        tokens.push({tag:'\n'});
-      }
-
-      seenTag = false;
-      lineStart = tokens.length;
-    }
-
-    function changeDelimiters(text, index) {
-      var close = '=' + ctag,
-          closeIndex = text.indexOf(close, index),
-          delimiters = trim(
-            text.substring(text.indexOf('=', index) + 1, closeIndex)
-          ).split(' ');
-
-      otag = delimiters[0];
-      ctag = delimiters[1];
-
-      return closeIndex + close.length - 1;
-    }
-
-    if (delimiters) {
-      delimiters = delimiters.split(' ');
-      otag = delimiters[0];
-      ctag = delimiters[1];
-    }
-
-    for (i = 0; i < len; i++) {
-      if (state == IN_TEXT) {
-        if (tagChange(otag, text, i)) {
-          --i;
-          addBuf();
-          state = IN_TAG_TYPE;
-        } else {
-          if (text.charAt(i) == '\n') {
-            filterLine(seenTag);
-          } else {
-            buf += text.charAt(i);
-          }
-        }
-      } else if (state == IN_TAG_TYPE) {
-        i += otag.length - 1;
-        tag = tagTypes[text.charAt(i + 1)];
-        tagType = tag ? text.charAt(i + 1) : '_v';
-        if (tagType == '=') {
-          i = changeDelimiters(text, i);
-          state = IN_TEXT;
-        } else {
-          if (tag) {
-            i++;
-          }
-          state = IN_TAG;
-        }
-        seenTag = i;
-      } else {
-        if (tagChange(ctag, text, i)) {
-          tokens.push({tag: tagType, n: trim(buf), otag: otag, ctag: ctag,
-                       i: (tagType == '/') ? seenTag - ctag.length : i + otag.length});
-          buf = '';
-          i += ctag.length - 1;
-          state = IN_TEXT;
-          if (tagType == '{') {
-            if (ctag == '}}') {
-              i++;
-            } else {
-              cleanTripleStache(tokens[tokens.length - 1]);
-            }
-          }
-        } else {
-          buf += text.charAt(i);
-        }
-      }
-    }
-
-    filterLine(seenTag, true);
-
-    return tokens;
-  }
-
-  function cleanTripleStache(token) {
-    if (token.n.substr(token.n.length - 1) === '}') {
-      token.n = token.n.substring(0, token.n.length - 1);
-    }
-  }
-
-  function trim(s) {
-    if (s.trim) {
-      return s.trim();
-    }
-
-    return s.replace(/^\s*|\s*$/g, '');
-  }
-
-  function tagChange(tag, text, index) {
-    if (text.charAt(index) != tag.charAt(0)) {
-      return false;
-    }
-
-    for (var i = 1, l = tag.length; i < l; i++) {
-      if (text.charAt(index + i) != tag.charAt(i)) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
-  function buildTree(tokens, kind, stack, customTags) {
-    var instructions = [],
-        opener = null,
-        token = null;
-
-    while (tokens.length > 0) {
-      token = tokens.shift();
-      if (token.tag == '#' || token.tag == '^' || isOpener(token, customTags)) {
-        stack.push(token);
-        token.nodes = buildTree(tokens, token.tag, stack, customTags);
-        instructions.push(token);
-      } else if (token.tag == '/') {
-        if (stack.length === 0) {
-          throw new Error('Closing tag without opener: /' + token.n);
-        }
-        opener = stack.pop();
-        if (token.n != opener.n && !isCloser(token.n, opener.n, customTags)) {
-          throw new Error('Nesting error: ' + opener.n + ' vs. ' + token.n);
-        }
-        opener.end = token.i;
-        return instructions;
-      } else {
-        instructions.push(token);
-      }
-    }
-
-    if (stack.length > 0) {
-      throw new Error('missing closing tag: ' + stack.pop().n);
-    }
-
-    return instructions;
-  }
-
-  function isOpener(token, tags) {
-    for (var i = 0, l = tags.length; i < l; i++) {
-      if (tags[i].o == token.n) {
-        token.tag = '#';
-        return true;
-      }
-    }
-  }
-
-  function isCloser(close, open, tags) {
-    for (var i = 0, l = tags.length; i < l; i++) {
-      if (tags[i].c == close && tags[i].o == open) {
-        return true;
-      }
-    }
-  }
-
-  function writeCode(tree) {
-    return 'i = i || "";var b = i + "";var _ = this;' + walk(tree) + 'return b;';
-  }
-
-  Hogan.generate = function (code, text, options) {
-    if (options.asString) {
-      return 'function(c,p,i){' + code + ';}';
-    }
-
-    return new Hogan.Template(new Function('c', 'p', 'i', code), text, Hogan);
-  }
-
-  function esc(s) {
-    return s.replace(rSlash, '\\\\')
-            .replace(rQuot, '\\\"')
-            .replace(rNewline, '\\n')
-            .replace(rCr, '\\r');
-  }
-
-  function chooseMethod(s) {
-    return (~s.indexOf('.')) ? 'd' : 'f';
-  }
-
-  function walk(tree) {
-    var code = '';
-    for (var i = 0, l = tree.length; i < l; i++) {
-      var tag = tree[i].tag;
-      if (tag == '#') {
-        code += section(tree[i].nodes, tree[i].n, chooseMethod(tree[i].n),
-                        tree[i].i, tree[i].end, tree[i].otag + " " + tree[i].ctag);
-      } else if (tag == '^') {
-        code += invertedSection(tree[i].nodes, tree[i].n,
-                                chooseMethod(tree[i].n));
-      } else if (tag == '<' || tag == '>') {
-        code += partial(tree[i]);
-      } else if (tag == '{' || tag == '&') {
-        code += tripleStache(tree[i].n, chooseMethod(tree[i].n));
-      } else if (tag == '\n') {
-        code += text('"\\n"' + (tree.length-1 == i ? '' : ' + i'));
-      } else if (tag == '_v') {
-        code += variable(tree[i].n, chooseMethod(tree[i].n));
-      } else if (tag === undefined) {
-        code += text('"' + esc(tree[i]) + '"');
-      }
-    }
-    return code;
-  }
-
-  function section(nodes, id, method, start, end, tags) {
-    return 'if(_.s(_.' + method + '("' + esc(id) + '",c,p,1),' +
-           'c,p,0,' + start + ',' + end + ', "' + tags + '")){' +
-           'b += _.rs(c,p,' +
-           'function(c,p){ var b = "";' +
-           walk(nodes) +
-           'return b;});c.pop();}' +
-           'else{b += _.b; _.b = ""};';
-  }
-
-  function invertedSection(nodes, id, method) {
-    return 'if (!_.s(_.' + method + '("' + esc(id) + '",c,p,1),c,p,1,0,0,"")){' +
-           walk(nodes) +
-           '};';
-  }
-
-  function partial(tok) {
-    return 'b += _.rp("' +  esc(tok.n) + '",c,p,"' + (tok.indent || '') + '");';
-  }
-
-  function tripleStache(id, method) {
-    return 'b += (_.' + method + '("' + esc(id) + '",c,p,0));';
-  }
-
-  function variable(id, method) {
-    return 'b += (_.v(_.' + method + '("' + esc(id) + '",c,p,0)));';
-  }
-
-  function text(id) {
-    return 'b += ' + id + ';';
-  }
-
-  Hogan.parse = function(tokens, options) {
-    options = options || {};
-    return buildTree(tokens, '', [], options.sectionTags || []);
-  },
-
-  Hogan.cache = {};
-
-  Hogan.compile = function(text, options) {
-    // options
-    //
-    // asString: false (default)
-    //
-    // sectionTags: [{o: '_foo', c: 'foo'}]
-    // An array of object with o and c fields that indicate names for custom
-    // section tags. The example above allows parsing of {{_foo}}{{/foo}}.
-    //
-    // delimiters: A string that overrides the default delimiters.
-    // Example: "<% %>"
-    //
-    options = options || {};
-
-    var key = text + '||' + !!options.asString;
-
-    var t = this.cache[key];
-
-    if (t) {
-      return t;
-    }
-
-    t = this.generate(writeCode(this.parse(this.scan(text, options.delimiters), options)), text, options);
-    return this.cache[key] = t;
-  };
-})(typeof exports !== 'undefined' ? exports : Hogan);
-

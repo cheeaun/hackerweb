@@ -76,81 +76,8 @@ if (location.hostname == 'cheeaun.github.com'){
 		</section>
 	</div>
 </div>
-<script type="text/html" id="post-tmpl">
-	<li id="story-{{id}}" class="post-{{type}}">
-		<a href="{{url}}" {{#disclosure}}class="pad-right{{/disclosure}}">
-			<div class="number">{{i}}.</div>
-			<div class="story">
-				<b>{{{title}}}</b>
-				{{#user}}
-					<span class="metadata">
-						{{#domain}}<span class="link-text">{{domain}}</span><br>{{/domain}}
-						<span class="inline-block">{{points}} points by {{user}}</span>
-						<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} comments{{/comments_count}}</span>
-					</span>
-				{{/user}}
-				{{^user}}
-					<span class="metadata">
-						<span class="inline-block">{{time_ago}}</span>
-					</span>
-				{{/user}}
-			</div>
-		</a>
-		{{#disclosure}}
-			<a href="#/item/{{id}}" class="detail-disclosure"><span></span></a>
-		{{/disclosure}}
-	</li>
-</script>
-<script type="text/html" id="post-comments-tmpl">
-	<div class="post-content">
-		<header>
-			<h1>
-				<a href="{{url}}" target="_blank">{{{title}}}<br>
-				{{#user}}
-					{{#domain}}<span class="link-text">{{domain}}</span>{{/domain}}
-				{{/user}}
-				</a>
-			</h1>
-			<p class="metadata">
-				{{#user}}
-					<span class="inline-block">{{points}} points by {{user}}</span>
-					<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} comments{{/comments_count}}</span>
-				{{/user}}
-				{{^user}}
-					<span class="inline-block">{{time_ago}}</span>
-				{{/user}}
-			</p>
-		</header>
-		{{#content}}
-			<section class="grouped-tableview">{{{content}}}</section>
-		{{/content}}
-	</div>
-	<section class="comments">
-		{{#has_comments}}
-			<ul>
-				{{>comments_list}}
-			</ul>
-		{{/has_comments}}
-		{{^has_comments}}
-			<p class="no-comments">No comments.</p>
-		{{/has_comments}}
-	</section>
-</script>
-<script type="text/html" id="comments-tmpl">
-	{{#comments}}
-		<li>
-			<p class="metadata"><b>{{user}}</b> <time>{{time_ago}}</time></p>
-			<p>{{{content}}}
-			<ul>
-				{{>comments_list}}
-			</ul>
-		</li>
-	{{/comments}}
-</script>
-<script type="text/html" id="comments-toggle-tmpl">
-	<button class="comments-toggle">{{comments_count}} replies</button>
-</script>
 <script src="scripts.js"></script>
+<script src="templates.js"></script>
 <script src="hn.js"></script>
 </body>
 </html>

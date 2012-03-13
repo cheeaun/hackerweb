@@ -72,13 +72,9 @@
 			outClass.add(wise[0]);
 			inClass.add(wise[1]);
 		},
-		tmplCache = {},
 		tmpl = function(template, data){
-			var t = tmplCache[template];
-			if (!t){
-				t = Hogan.compile($(template + '-tmpl').textContent);
-				tmplCache[template] = t;
-			}
+			var t = TEMPLATES[template];
+			if (!t) return;
 			if (!data) return t;
 			return t.render(data);
 		},
@@ -162,6 +158,8 @@
 								tmpl2 = tmpl('comments');
 							data.title = data.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
 							data.has_comments = !!data.comments.length;
+							data.i_point = data.points == 1 ? 'point' : 'points';
+							data.i_comment = data.comments_count == 1 ? 'comment' : 'comments';
 							var html = tmpl1.render(data, {comments_list: tmpl2});
 							viewHeading.innerHTML = data.title;
 							viewSection.innerHTML = html;
@@ -181,7 +179,8 @@
 								subUl.style.display = 'none';
 								if (commentsCount){
 									subUl.insertAdjacentHTML('beforebegin', tmpl3.render({
-										comments_count: commentsCount
+										comments_count: commentsCount,
+										i_reply: commentsCount == 1 ? 'reply' : 'replies'
 									}));
 								}
 							}
@@ -362,6 +361,8 @@
 				}
 				if (item.type == 'link') item.disclosure = true;
 				item.i = i++;
+				item.i_point = item.points == 1 ? 'point' : 'points';
+				item.i_comment = item.comments_count == 1 ? 'comment' : 'comments';
 				html += tmpl('post', item);
 			});
 			return html;
