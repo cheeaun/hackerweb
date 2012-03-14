@@ -1,0 +1,33 @@
+<div class="post-content">
+	<header>
+		<h1>
+			<a href="{{url}}" target="_blank">{{{title}}}<br>
+			{{#user}}
+				{{#domain}}<span class="link-text">{{domain}}</span>{{/domain}}
+			{{/user}}
+			</a>
+		</h1>
+		<p class="metadata">
+			{{#user}}
+				<span class="inline-block">{{points}} {{i_point}} by {{user}}</span>
+				<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} {{i_comment}}{{/comments_count}}</span>
+			{{/user}}
+			{{^user}}
+				<span class="inline-block">{{time_ago}}</span>
+			{{/user}}
+		</p>
+	</header>
+	{{#content}}
+		<section class="grouped-tableview">{{{content}}}</section>
+	{{/content}}
+</div>
+<section class="comments">
+	{{#has_comments}}
+		<ul>
+			{{>comments_list}}
+		</ul>
+	{{/has_comments}}
+	{{^has_comments}}
+		<p class="no-comments">No comments.</p>
+	{{/has_comments}}
+</section>

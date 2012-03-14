@@ -1,9 +1,10 @@
 CACHE MANIFEST
-# 2012-03-11:v1
+# 2012-03-14:v1
 
 index.html
 hn.css
 scripts.js
+templates.js
 hn.js
 images/navbar-bg.png
 images/navbar-landscape-bg.png
