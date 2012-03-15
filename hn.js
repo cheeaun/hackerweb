@@ -160,6 +160,11 @@
 							data.has_comments = !!data.comments.length;
 							data.i_point = data.points == 1 ? 'point' : 'points';
 							data.i_comment = data.comments_count == 1 ? 'comment' : 'comments';
+							if (data.poll){
+								data.poll.forEach(function(p){
+									p.i_point = p.points == 1 ? 'point' : 'points';
+								})
+							}
 							var html = tmpl1.render(data, {comments_list: tmpl2});
 							viewHeading.innerHTML = data.title;
 							viewSection.innerHTML = html;
