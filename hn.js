@@ -156,6 +156,8 @@
 							});
 							var tmpl1 = tmpl('post-comments'),
 								tmpl2 = tmpl('comments');
+							// If "local" link, link to Hacker News web site
+							if (/^item/i.test(data.url)) data.url = 'http://news.ycombinator.com/' + data.url;
 							data.title = data.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
 							data.has_comments = !!data.comments.length;
 							data.i_point = data.points == 1 ? 'point' : 'points';
