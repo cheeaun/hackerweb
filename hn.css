@@ -448,6 +448,12 @@ header.fake,
 .grouped-tableview p:last-child{
 	margin: 0;
 }
+.grouped-tableview ul,
+.grouped-tableview ol{
+	margin: 0 0 0 2em;
+	padding: 0;
+	line-height: 1.5em;
+}
 ul.grouped-tableview,
 ol.grouped-tableview{
 	display: block;

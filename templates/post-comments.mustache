@@ -18,7 +18,14 @@
 		</p>
 	</header>
 	{{#content}}
-		<section class="grouped-tableview">{{{content}}}</section>
+		<section class="grouped-tableview">
+			{{{content}}}
+			<ul class="poll">
+			{{#poll}}
+				<li><b>{{points}}</b> {{i_point}}: {{item}}</li>
+			{{/poll}}
+			</ul>
+		</section>
 	{{/content}}
 </div>
 <section class="comments">
