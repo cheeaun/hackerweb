@@ -444,12 +444,18 @@
 		}, 15);
 	}, false);
 
-	// Programmatically update the app cache
+	// "Naturally" reload when an update is available
 	if (w.applicationCache) w.addEventListener('load', function(){
+		var reload = false;
 		w.applicationCache.addEventListener('updateready', function(){
 			if (w.applicationCache.status == w.applicationCache.UPDATEREADY){
 				w.applicationCache.swapCache();
+				reload = true;
 			}
+		}, false);
+
+		w.addEventListener('pageshow', function(){
+			if (reload) location.reload();
 		}, false);
 	}, false);
 	
