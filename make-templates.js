@@ -28,7 +28,9 @@ fs.readdir('templates', function(e, files){
 	// Uglify to further shrink the file size
 	var ast = parser.parse(code);
 	ast = uglify.ast_mangle(ast);
-	ast = uglify.ast_squeeze(ast);
+	ast = uglify.ast_squeeze(ast, {
+		make_seqs: false // it somehow f'ed up the sequence for this piece of code
+	});
 	var finalCode = uglify.gen_code(ast);
 	fs.writeFile('templates.js', finalCode, function(){
 		console.log('templates.js created.');
