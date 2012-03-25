@@ -526,7 +526,7 @@
 	}, false);
 
 	// "Naturally" reload when an update is available
-	if (w.applicationCache) w.addEventListener('load', function(){
+	if (w.applicationCache){
 		var reload = false;
 		w.applicationCache.addEventListener('updateready', function(){
 			if (w.applicationCache.status == w.applicationCache.UPDATEREADY){
@@ -536,9 +536,17 @@
 		}, false);
 
 		w.addEventListener('pageshow', function(){
-			if (reload) location.reload();
+			if (reload){
+				 location.reload();
+			} else if (!amplify.store('hacker-update-delay')){
+				w.applicationCache.update();
+				// Delay check update to after next 6 hours
+				amplify.store('hacker-update-delay', 1, {
+					expires: 1000*60*60*12 // 6 hours
+				});
+			}
 		}, false);
-	}, false);
+	}
 	
 	// Use GA to track the update rate of this manifest appcache thing
 	// and see how fast users are updated to the latest cache/version
