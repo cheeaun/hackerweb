@@ -42,6 +42,10 @@
 		
 		item: function(id, success, error){
 			req(hnapi.url + 'item/' + id, success, error);
+		},
+
+		comments: function(id, success, error){
+			req(hnapi.url + 'comments/' + id, success, error);
 		}
 		
 	};

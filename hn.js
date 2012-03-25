@@ -145,15 +145,27 @@
 				if (id){
 					var post = amplify.store.sessionStorage('hacker-item-' + id),
 						$commentsScroll = view.querySelector('.scroll'),
-						loadPost = function(data){
-							$commentsScroll.classList.remove('loading');
-							if (!data || data.error){
-								errors.serverError();
-								return;
-							}
-							amplify.store.sessionStorage('hacker-item-' + id, data, {
-								expires: 1000*60*10 // 10 minutes
-							});
+						loadComments = function(data, id){
+							if (!data || data.error) return;
+							amplify.store.sessionStorage('hacker-comments-' + id, data);
+							viewSection.querySelector('.comments>ul').innerHTML += '<li class="more-link-container"><a class="more-link" data-id="' + id + '">More&hellip;</a></li>';
+							if (!data.more_comments_id) return;
+							// Keep getting more and more comments...
+							var loadMoreComments = function(id){
+								var comments = amplify.store.sessionStorage('hacker-comments-' + id);
+								if (!comments){
+									hnapi.comments(id, function(data){
+										if (!data || data.error) return;
+										amplify.store.sessionStorage('hacker-comments-' + id, data);
+										if (data.more_comments_id) loadMoreComments(data.more_comments_id);
+									});
+								} else {
+									if (comments.more_comments_id) loadMoreComments(comments.more_comments_id);
+								}
+							};
+							loadMoreComments(data.more_comments_id);
+						},
+						loadPost = function(data, id){
 							var tmpl1 = tmpl('post-comments'),
 								tmpl2 = tmpl('comments');
 							// If "local" link, link to Hacker News web site
@@ -184,6 +196,7 @@
 								var subUl = subUls[j],
 									commentsCount = subUl.querySelectorAll('.metadata').length;
 								subUl.style.display = 'none';
+								subUl.classList.add('toggleable');
 								if (commentsCount){
 									subUl.insertAdjacentHTML('beforebegin', tmpl3.render({
 										comments_count: commentsCount,
@@ -191,14 +204,36 @@
 									}));
 								}
 							}
+							// Grab 'More' comments
+							if (data.more_comments_id){
+								var id = data.more_comments_id;
+								var comments = amplify.store.sessionStorage('hacker-comments-' + id);
+								if (comments){
+									loadComments(comments, id);
+								} else {
+									hnapi.comments(id, function(data){
+										loadComments(data, id);
+									});
+								}
+							}
 						};
 					viewHeading.innerHTML = '';
 					viewSection.innerHTML = '';
-					$commentsScroll.classList.add('loading');
 					if (post){
-						loadPost(post);
+						loadPost(post, id);
 					} else {
-						hnapi.item(id, loadPost, errors.connectionError);
+						$commentsScroll.classList.add('loading');
+						hnapi.item(id, function(data){
+							$commentsScroll.classList.remove('loading');
+							if (!data || data.error){
+								errors.serverError();
+								return;
+							}
+							amplify.store.sessionStorage('hacker-item-' + id, data, {
+								expires: 1000*60*10 // 10 minutes
+							});
+							loadPost(data, id);
+						}, errors.connectionError);
 					}
 				}
 			}
@@ -316,24 +351,29 @@
 		onTap: function(e, target){
 			if (target.classList.contains('more-link')){
 				var loadNews2 = function(data){
-					target.classList.remove('loading');
-					if (!data  || data.error){
-						errors.serverError();
-						return;
-					}
 					var targetParent = target.parentNode;
 					targetParent.parentNode.removeChild(targetParent);
-					amplify.store('hacker-news2', data, {
-						expires: 1000*60*5 // 5 minutes
-					});
 					var html = markupNews(data, 31);
 					$hnlist.insertAdjacentHTML('beforeend', html);
 				};
 				var news2 = amplify.store('hacker-news2');
 				target.classList.add('loading');
-				news2 ? setTimeout(function(){
-					loadNews2(news2); // Cheat here too
-				}, 500) : hnapi.news2(loadNews2, errors.connectionError);
+				if (news2){
+					setTimeout(function(){
+						target.classList.remove('loading');
+						loadNews2(news2); // Cheat here too
+					}, 500);
+				} else {
+					hnapi.news2(function(data){
+						target.classList.remove('loading');
+						if (!data  || data.error){
+							errors.serverError();
+							return;
+						}
+						amplify.store('hacker-news2', data);
+						loadNews2(data);
+					}, errors.connectionError);
+				}
 			} else if (/^#\//.test(target.getAttribute('href'))){ // "local" links
 				location.hash = target.hash;
 			}
@@ -351,6 +391,45 @@
 		if (ul){
 			var ulStyle = ul.style;
 			ulStyle.display = (ulStyle.display == 'none') ? '' : 'none';
+		}
+	});
+	tappable('section.comments li>a.more-link', function(e, target){
+		var id = target.dataset.id;
+		var comments = amplify.store.sessionStorage('hacker-comments-' + id);
+		if (comments){
+			var tmpl1 = tmpl('comments'),
+				html = tmpl1.render(comments, {comments_list: tmpl1}),
+				li = target.parentNode,
+				ul = li.parentNode,
+				more_comments_id = comments.more_comments_id;
+			if (more_comments_id && amplify.store.sessionStorage('hacker-comments-' + more_comments_id)){
+				html += '<li class="more-link-container"><a class="more-link" data-id="' + more_comments_id + '">More&hellip;</a></li>';
+			}
+			ul.removeChild(li);
+			ul.insertAdjacentHTML('beforeend', html);
+
+			var links = ul.querySelectorAll('a');
+			for (var i=0, l=links.length; i<l; i++){
+				links[i].target = '_blank';
+			}
+
+			var subUls = ul.querySelectorAll('li>ul:not(.toggleable)');
+			var tmpl2 = tmpl('comments-toggle');
+			for (var i=0, l=subUls.length; i<l; i++){
+				var subUl = subUls[i];
+				var commentsCount = subUl.querySelectorAll('.metadata').length;
+				subUl.style.display = 'none';
+				subUl.classList.add('toggleable');
+				if (commentsCount){
+					subUl.insertAdjacentHTML('beforebegin', tmpl2.render({
+						comments_count: commentsCount,
+						i_reply: commentsCount == 1 ? 'reply' : 'replies'
+					}));
+				}
+			}
+		} else {
+			// TODO: Need funnier error message than this.
+			alert('Oops, the comments have expired.');
 		}
 	});
 	
@@ -375,14 +454,6 @@
 			return html;
 		},
 		loadNews = function(data){
-			$homeScroll.classList.remove('loading');
-			if (!data || data.error){
-				errors.serverError();
-				return;
-			}
-			amplify.store('hacker-news', data, {
-				expires: 1000*60*10 // 10 minutes
-			});
 			var html = markupNews(data);
 			html += '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>';
 			$hnlist.innerHTML = html;
@@ -397,17 +468,23 @@
 			// Slight delay to make Mobile Safari thinks that page is already loaded
 			// and hides the location bar
 			setTimeout(function(){
-				hnapi.news(function(news){
-					loadNews(news);
+				hnapi.news(function(data){
+					$homeScroll.classList.remove('loading');
+					if (!data || data.error){
+						errors.serverError();
+						return;
+					}
+					amplify.store('hacker-news', data, {
+						expires: 1000*60*10 // 10 minutes
+					});
+					loadNews(data);
 					// Preload news2 to prevent discrepancies between /news and /news2 results
 					hnapi.news2(function(data){
 						if (!data || data.error){
 							errors.serverError();
 							return;
 						}
-						amplify.store('hacker-news2', data, {
-							expires: 1000*60*5 // 5 minutes
-						});
+						amplify.store('hacker-news2', data);
 					});
 				}, errors.connectionError);
 			}, 1);
