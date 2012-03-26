@@ -298,6 +298,13 @@
 					loadNews(news);
 				} else {
 					hnapi.news(function(news){
+						if (!news || news.error){
+							errors.serverError();
+							return;
+						}
+						amplify.store('hacker-news', news, {
+							expires: 1000*60*10 // 10 minutes
+						});
 						$homeScroll.classList.remove('loading');
 						loadNews(news);
 						// Force preload news2 if news expired
@@ -306,9 +313,7 @@
 								errors.serverError();
 								return;
 							}
-							amplify.store('hacker-news2', data, {
-								expires: 1000*60*5 // 5 minutes
-							});
+							amplify.store('hacker-news2', data);
 						});
 					}, errors.connectionError);
 				}
