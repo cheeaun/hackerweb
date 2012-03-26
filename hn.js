@@ -294,9 +294,11 @@
 			setTimeout(function(){
 				var news = amplify.store('hacker-news');
 				if (news){
+					$homeScroll.classList.remove('loading');
 					loadNews(news);
 				} else {
 					hnapi.news(function(news){
+						$homeScroll.classList.remove('loading');
 						loadNews(news);
 						// Force preload news2 if news expired
 						hnapi.news2(function(data){
