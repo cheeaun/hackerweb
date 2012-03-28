@@ -420,7 +420,8 @@
 				links[i].target = '_blank';
 			}
 
-			var subUls = ul.querySelectorAll('li>ul:not(.toggleable)');
+			// Ugly selector here because I need to select only the immediate child ULs, not *all* child ULs
+			var subUls = ul.parentNode.parentNode.querySelectorAll('.comments>ul>li>ul:not(.toggleable)');
 			var tmpl2 = tmpl('comments-toggle');
 			for (var i=0, l=subUls.length; i<l; i++){
 				var subUl = subUls[i];
