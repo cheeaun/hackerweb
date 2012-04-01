@@ -548,9 +548,9 @@
 				 location.reload();
 			} else if (!amplify.store('hacker-update-delay')){
 				w.applicationCache.update();
-				// Delay check update to after next 6 hours
+				// Delay check update to after next 1 hour
 				amplify.store('hacker-update-delay', 1, {
-					expires: 1000*60*60*12 // 6 hours
+					expires: 1000*60*60 // 1 hour
 				});
 			}
 		}, false);
