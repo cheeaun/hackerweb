@@ -16,12 +16,15 @@
 var Hogan = {};
 
 (function (Hogan, useArrayBuffer) {
-  Hogan.Template = function (renderFunc, text, compiler, options) {
-    this.r = renderFunc || this.r;
+  Hogan.Template = function (codeObj, text, compiler, options) {
+    codeObj = codeObj || {};
+    this.r = codeObj.code || this.r;
     this.c = compiler;
     this.options = options;
     this.text = text || '';
-    this.buf = (useArrayBuffer) ? [] : '';
+    this.partials = codeObj.partials || {};
+    this.subs = codeObj.subs || {};
+    this.ib();
   }
 
   Hogan.Template.prototype = {
@@ -43,16 +46,43 @@ var Hogan = {};
       return this.r(context, partials, indent);
     },
 
-    // tries to find a partial in the curent scope and render it
-    rp: function(name, context, partials, indent) {
-      var partial = partials[name];
+    // ensurePartial
+    ep: function(symbol, partials) {
+      var partial = this.partials[symbol];
 
-      if (!partial) {
-        return '';
+      // check to see that if we've instantiated this partial before
+      var template = partials[partial.name];
+      if (partial.instance && partial.base == template) {
+        return partial.instance;
       }
 
-      if (this.c && typeof partial == 'string') {
-        partial = this.c.compile(partial, this.options);
+      if (typeof template == 'string') {
+        if (!this.c) {
+          throw new Error("No compiler available.");
+        }
+        template = this.c.compile(template, this.options);
+      }
+
+      if (!template) {
+        return null;
+      }
+
+      // We use this to check whether the partials dictionary has changed
+      this.partials[symbol].base = template;
+
+      if (partial.subs) {
+        template = createSpecializedPartial(template, partial.subs, partial.partials);
+      }
+
+      this.partials[symbol].instance = template;
+      return template;
+    },
+
+    // tries to find a partial in the curent scope and render it
+    rp: function(symbol, context, partials, indent) {
+      var partial = this.ep(symbol, partials);
+      if (!partial) {
+        return '';
       }
 
       return partial.ri(context, partials, indent);
@@ -83,7 +113,7 @@ var Hogan = {};
       }
 
       if (typeof val == 'function') {
-        val = this.ls(val, ctx, partials, inverted, start, end, tags);
+        val = this.ms(val, ctx, partials, inverted, start, end, tags);
       }
 
       pass = (val === '') || !!val;
@@ -106,7 +136,7 @@ var Hogan = {};
       }
 
       for (var i = 1; i < names.length; i++) {
-        if (val && typeof val == 'object' && names[i] in val) {
+        if (val && typeof val == 'object' && val[names[i]] != null) {
           cx = val;
           val = val[names[i]];
         } else {
@@ -120,7 +150,7 @@ var Hogan = {};
 
       if (!returnFound && typeof val == 'function') {
         ctx.push(cx);
-        val = this.lv(val, ctx, partials);
+        val = this.mv(val, ctx, partials);
         ctx.pop();
       }
 
@@ -135,7 +165,7 @@ var Hogan = {};
 
       for (var i = ctx.length - 1; i >= 0; i--) {
         v = ctx[i];
-        if (v && typeof v == 'object' && key in v) {
+        if (v && typeof v == 'object' && v[key] != null) {
           val = v[key];
           found = true;
           break;
@@ -147,69 +177,99 @@ var Hogan = {};
       }
 
       if (!returnFound && typeof val == 'function') {
-        val = this.lv(val, ctx, partials);
+        val = this.mv(val, ctx, partials);
       }
 
       return val;
     },
 
     // higher order templates
-    ho: function(val, cx, partials, text, tags) {
-      var compiler = this.c;
-      var options = this.options;
-      options.delimiters = tags;
-      var t = val.call(cx, text, function(t) {
-        return compiler.compile(t, options).render(cx, partials);
-      });
-      this.b(compiler.compile(t.toString(), options).render(cx, partials));
+    ls: function(func, cx, partials, text, tags) {
+      var oldTags = this.options.delimiters;
+
+      this.options.delimiters = tags;
+      this.b(this.ct(coerceToString(func.call(cx, text)), cx, partials));
+      this.options.delimiters = oldTags;
+
       return false;
+    },
+
+    // compile text
+    ct: function(text, cx, partials) {
+      if (this.options.disableLambda) {
+        throw new Error('Lambda features disabled.');
+      }
+      return this.c.compile(text, this.options).render(cx, partials);
     },
 
     // template result buffering
     b: (useArrayBuffer) ? function(s) { this.buf.push(s); } :
                           function(s) { this.buf += s; },
+
     fl: (useArrayBuffer) ? function() { var r = this.buf.join(''); this.buf = []; return r; } :
                            function() { var r = this.buf; this.buf = ''; return r; },
+    // init the buffer
+    ib: function () {
+      this.buf = (useArrayBuffer) ? [] : '';
+    },
 
-    // lambda replace section
-    ls: function(val, ctx, partials, inverted, start, end, tags) {
+    // method replace section
+    ms: function(func, ctx, partials, inverted, start, end, tags) {
       var cx = ctx[ctx.length - 1],
-          t = null;
+          result = func.call(cx);
 
-      if (!inverted && this.c && val.length > 0) {
-        return this.ho(val, cx, partials, this.text.substring(start, end), tags);
-      }
-
-      t = val.call(cx);
-
-      if (typeof t == 'function') {
+      if (typeof result == 'function') {
         if (inverted) {
           return true;
-        } else if (this.c) {
-          return this.ho(t, cx, partials, this.text.substring(start, end), tags);
+        } else {
+          return this.ls(result, cx, partials, this.text.substring(start, end), tags);
         }
       }
 
-      return t;
+      return result;
     },
 
-    // lambda replace variable
-    lv: function(val, ctx, partials) {
+    // method replace variable
+    mv: function(func, ctx, partials) {
       var cx = ctx[ctx.length - 1];
-      var result = val.call(cx);
-      if (typeof result == 'function') {
-        result = result.call(cx);
-      }
-      result = coerceToString(result);
+      var result = func.call(cx);
 
-      if (this.c && ~result.indexOf("{\u007B")) {
-        return this.c.compile(result, this.options).render(cx, partials);
+      if (typeof result == 'function') {
+        return this.ct(coerceToString(result.call(cx)), cx, partials);
       }
 
       return result;
+    },
+
+    sub: function(name, context, partials) {
+      var f = this.subs[name];
+      if (f) {
+        f(context, partials, this);
+      }
     }
 
   };
+
+  function createSpecializedPartial(instance, subs, partials) {
+    function PartialTemplate() {};
+    PartialTemplate.prototype = instance;
+    function Substitutions() {};
+    Substitutions.prototype = instance.subs;
+    var key;
+    var partial = new PartialTemplate();
+    partial.subs = new Substitutions();
+    partial.ib();
+
+    for (key in subs) {
+      partial.subs[key] = subs[key];
+    }
+
+    for (key in partials) {
+      partial.partials[key] = partials[key];
+    }
+
+    return partial;
+  }
 
   var rAmp = /&/g,
       rLt = /</g,
@@ -217,7 +277,6 @@ var Hogan = {};
       rApos =/\'/g,
       rQuot = /\"/g,
       hChars =/[&<>\"\']/;
-
 
   function coerceToString(val) {
     return String((val === null || val === undefined) ? '' : val);
