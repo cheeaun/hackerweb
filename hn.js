@@ -547,11 +547,13 @@
 			if (reload){
 				 location.reload();
 			} else if (!amplify.store('hacker-update-delay')){
-				w.applicationCache.update();
-				// Delay check update to after next 1 hour
-				amplify.store('hacker-update-delay', 1, {
-					expires: 1000*60*60 // 1 hour
-				});
+				try { // There's nothing to update for first-time load, browser freaks out :/
+					w.applicationCache.update();
+					// Delay check update to after next 1 hour
+					amplify.store('hacker-update-delay', 1, {
+						expires: 1000*60*60 // 1 hour
+					});
+				} catch (e){}
 			}
 		}, false);
 	}
