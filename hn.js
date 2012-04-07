@@ -167,9 +167,15 @@
 						},
 						loadPost = function(data, id){
 							var tmpl1 = tmpl('post-comments'),
-								tmpl2 = tmpl('comments');
+								tmpl2 = tmpl('comments'),
+								a = d.createElement('a');
 							// If "local" link, link to Hacker News web site
-							if (/^item/i.test(data.url)) data.url = 'http://news.ycombinator.com/' + data.url;
+							if (/^item/i.test(data.url)){
+								data.url = 'http://news.ycombinator.com/' + data.url;
+							} else {
+								a.href = data.url;
+								data.domain = a.hostname.replace(/^www\./, '');
+							}
 							data.title = data.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
 							data.has_comments = !!data.comments.length;
 							data.i_point = data.points == 1 ? 'point' : 'points';
@@ -420,12 +426,15 @@
 		markupNews = function(data, i){
 			var html = '';
 			if (!i) i = 1;
+			var a = d.createElement('a');
 			data.forEach(function(item){
 				item.title = item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
 				if (/^item/i.test(item.url)){
 					item.url = '#/item/' + item.id;
 				} else {
 					item.external = true;
+					a.href = item.url;
+					item.domain = a.hostname.replace(/^www\./, '');
 				}
 				if (item.type == 'link') item.disclosure = true;
 				item.i = i++;
