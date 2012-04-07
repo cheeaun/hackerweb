@@ -1,5 +1,16 @@
-(function(w, d){
-	
+(function(root, factory){
+	// Set up Tappable appropriately for the environment.
+	if (typeof define === 'function' && define.amd){
+		// AMD
+		define('tappable', [], function(){
+			factory(root, root.document);
+		});
+	} else {
+		// Browser global scope
+		factory(root, root.document);
+	}
+}(this, function(w, d){
+
 	var matchesSelector = function(node, selector){
 			var root = d.documentElement,
 				matches = root.matchesSelector || root.mozMatchesSelector || root.webkitMatchesSelector || root.msMatchesSelector;
@@ -12,10 +23,11 @@
 			} while (!matches && (node = node.parentNode) && node.ownerDocument);
 			return matches ? node : false;
 		};
-	
+
 	var abs = Math.abs,
 		noop = function(){},
 		defaults = {
+			containerElement: d.body,
 			noScroll: false,
 			activeClass: 'tappable-active',
 			onTap: noop,
@@ -68,13 +80,13 @@
 			}
 			el.className = el.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)'), '$1');
 		};
-	
+
 	w.tappable = function(selector, opts){
 		if (typeof opts == 'function') opts = { onTap: opts };
 		var options = {};
 		for (var key in defaults) options[key] = opts[key] || defaults[key];
 		
-		var el = options.containerElement || d.body,
+		var el = options.containerElement,
 			startX,
 			startY,
 			startTarget,
@@ -99,7 +111,7 @@
 				clearTimeout(activeClassTimeout);
 				activeClassTimeout = setTimeout(function(){
 					addClass(target, activeClass);
-				}, activeClassDelay)
+				}, activeClassDelay);
 			} else {
 				addClass(target, activeClass);
 			}
@@ -204,5 +216,5 @@
 			if (target) e.preventDefault();
 		}, false);
 	};
-	
-})(window, document);
+
+}));
