@@ -8,16 +8,20 @@
 			if (!success) success = function(){};
 			if (!error) error = function(){};
 			if ('withCredentials' in r){ // CORS
-				r.open('GET', url + '?' + date(), true);
-				r.onload = function(){
-					try {
-						success(JSON.parse(this.responseText));
-					} catch(e){
-						error(e);
-					}
-				};
-				r.onerror = error;
-				r.send();
+				try {
+					r.open('GET', url + '?' + date(), true);
+					r.onload = function(){
+						try {
+							success(JSON.parse(this.responseText));
+						} catch(e){
+							error(e);
+						}
+					};
+					r.onerror = error;
+					r.send();
+				} catch (e){
+					error(e);
+				}
 			} else {
 				var s = document.createElement('script'),
 					callback = 'callback' + date();
