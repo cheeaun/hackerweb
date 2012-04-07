@@ -230,7 +230,7 @@
 								return;
 							}
 							amplify.store.sessionStorage('hacker-item-' + id, data, {
-								expires: 1000*60*10 // 10 minutes
+								expires: 1000*60*5 // 5 minutes
 							});
 							loadPost(data, id);
 						}, errors.connectionError);
@@ -289,35 +289,9 @@
 	tappable('#view-home-refresh', {
 		noScroll: true,
 		onTap: function(e){
-			$hnlist.innerHTML = '';
-			$homeScroll.classList.add('loading');
-			setTimeout(function(){
-				var news = amplify.store('hacker-news');
-				if (news){
-					$homeScroll.classList.remove('loading');
-					loadNews(news);
-				} else {
-					hnapi.news(function(news){
-						if (!news || news.error){
-							errors.serverError();
-							return;
-						}
-						amplify.store('hacker-news', news, {
-							expires: 1000*60*10 // 10 minutes
-						});
-						$homeScroll.classList.remove('loading');
-						loadNews(news);
-						// Force preload news2 if news expired
-						hnapi.news2(function(data){
-							if (!data || data.error){
-								errors.serverError();
-								return;
-							}
-							amplify.store('hacker-news2', data);
-						});
-					}, errors.connectionError);
-				}
-			}, 500); // Cheat a little to make user think that it's doing something
+			reloadNews({
+				delay: 500 // Cheat a little to make user think that it's doing something
+			});
 		}
 	});
 	
@@ -465,25 +439,39 @@
 			var html = markupNews(data);
 			html += '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>';
 			$hnlist.innerHTML = html;
-		};
-	
-	var news = amplify.store('hacker-news');
-	if (news){
-		loadNews(news);
-	} else {
-		$homeScroll.classList.add('loading');
-		w.addEventListener('load', function(){
-			// Slight delay to make Mobile Safari thinks that page is already loaded
-			// and hides the location bar
-			setTimeout(function(){
+		},
+		loadingNews = false,
+		reloadNews = function(opts){
+			if (loadingNews) return;
+			if (!opts) opts = {};
+			var news = amplify.store('hacker-news');
+			if (news){
+				var delay = opts.delay;
+				if (delay){
+					loadingNews = true;
+					$hnlist.innerHTML = '';
+					$homeScroll.classList.add('loading');
+					setTimeout(function(){
+						loadingNews = false;
+						$homeScroll.classList.remove('loading');
+						loadNews(news);
+					}, delay);
+				} else {
+					loadNews(news);
+				}
+			} else {
+				loadingNews = true;
+				$hnlist.innerHTML = '';
+				$homeScroll.classList.add('loading');
 				hnapi.news(function(data){
+					loadingNews = false;
 					$homeScroll.classList.remove('loading');
 					if (!data || data.error){
 						errors.serverError();
 						return;
 					}
 					amplify.store('hacker-news', data, {
-						expires: 1000*60*10 // 10 minutes
+						expires: 1000*60*5 // 5 minutes
 					});
 					loadNews(data);
 					// Preload news2 to prevent discrepancies between /news and /news2 results
@@ -494,10 +482,22 @@
 						}
 						amplify.store('hacker-news2', data);
 					});
-				}, errors.connectionError);
-			}, 1);
-		});
-	}
+				}, function(e){
+					loadingNews = false;
+					errors.connectionError(e);
+				});
+			}
+		};
+	
+	reloadNews();
+	// Auto-reload news for some specific situations...
+	w.addEventListener('pageshow', function(){
+		setTimeout(function(){
+			if (currentView == 'home' && $hnlist.innerHTML && !amplify.store('hacker-news')){
+				reloadNews();
+			}
+		}, 1);
+	}, false);
 	
 	// Some useful tips from http://24ways.org/2011/raising-the-bar-on-mobile
 	var supportOrientation = typeof w.orientation != 'undefined',
