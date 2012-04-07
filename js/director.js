@@ -1,7 +1,7 @@
 
 
 //
-// Generated on Sun Feb 12 2012 01:57:32 GMT+0000 (MPST) by Nodejitsu, Inc (Using Codesurgeon).
+// Generated on Sat Apr 07 2012 14:16:48 GMT+0800 (Malay Peninsula Standard Time) by Nodejitsu, Inc (Using Codesurgeon).
 // Version 1.0.9-1
 //
 
@@ -331,6 +331,7 @@ Router.prototype.configure = function(options) {
     this.strict = typeof options.strict === "undefined" ? true : options.strict;
     this.notfound = options.notfound;
     this.resource = options.resource;
+    this.parseBody = typeof options.parseBody === "undefined" ? true : options.parseBody;
     this.every = {
         after: options.after || null,
         before: options.before || null,
@@ -355,6 +356,11 @@ Router.prototype.on = Router.prototype.route = function(method, path, route) {
         route = path;
         path = method;
         method = "on";
+    }
+    if (Array.isArray(path)) {
+        return path.forEach(function(p) {
+            self.on(method, p, route);
+        });
     }
     if (path.source) {
         path = path.source.replace(/\\\//ig, "/");
@@ -568,7 +574,7 @@ Router.prototype.mount = function(routes, path) {
     function insertOrMount(route, local) {
         var rename = route, parts = route.split(self.delimiter), routeType = typeof routes[route], isRoute = parts[0] === "" || !self._methods[parts[0]], event = isRoute ? "on" : rename;
         if (isRoute) {
-            rename = rename.slice(self.delimiter.length);
+            rename = rename.slice((rename.match(new RegExp(self.delimiter)) || [ "" ])[0].length);
             parts.shift();
         }
         if (isRoute && routeType === "object" && !Array.isArray(routes[route])) {
