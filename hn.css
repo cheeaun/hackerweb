@@ -609,6 +609,70 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-repeat: repeat-x;
 	background-position: bottom;
 }
+
+.view .post-content .poll{
+	margin: 0;
+	list-style: none;
+}
+.view .post-content .poll li{
+	margin-bottom: 9px;
+}
+.view .post-content .poll li .poll-details{
+	display: table;
+	width: 100%;
+}
+.view .post-content .poll li .poll-details b{
+	display: table-cell;
+	color: #333;
+}
+.view .post-content .poll li .poll-details .points{
+	display: table-cell;
+	white-space: nowrap;
+	color: #888;
+	text-align: right;
+	vertical-align: bottom;
+}
+.view .post-content .poll li .poll-bar{
+	background-color: #fff;
+	width: 100%;
+	height: 9px;
+	border-radius: 5px;
+	overflow: hidden;
+	box-shadow: inset 0 0 2px #808080, 0 1px #fff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#fff));
+	background-image: -webkit-linear-gradient(top, #ddd, #fff);
+	background-image: -moz-linear-gradient(top, #ddd, #fff);
+	background-image: -ms-linear-gradient(top, #ddd, #fff);
+	background-image: -o-linear-gradient(top, #ddd, #fff);
+	background-image: linear-gradient(top, #ddd, #fff);
+	background-repeat: repeat-x;
+	-webkit-background-size: 10px 9px;
+	-moz-background-size: 10px 9px;
+	-ms-background-size: 10px 9px;
+	-o-background-size: 10px 9px;
+	background-size: 10px 9px;
+}
+.view .post-content .poll li .poll-bar span{
+	display: block;
+	width: 0;
+	height: 9px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	box-shadow: inset 0 0 2px #0b3a88;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#2f64b7), to(#77adf6));
+	background-image: -webkit-linear-gradient(top, #2f64b7, #77adf6);
+	background-image: -moz-linear-gradient(top, #2f64b7, #77adf6);
+	background-image: -ms-linear-gradient(top, #2f64b7, #77adf6);
+	background-image: -o-linear-gradient(top, #2f64b7, #77adf6);
+	background-image: linear-gradient(top, #2f64b7, #77adf6);
+	background-repeat: repeat-x;
+	-webkit-background-size: 10px 9px;
+	-moz-background-size: 10px 9px;
+	-ms-background-size: 10px 9px;
+	-o-background-size: 10px 9px;
+	background-size: 10px 9px;
+}
+
 .view section.comments{
 	min-height: 100%;
 	border-top: 1px solid #9297a2;

@@ -17,16 +17,21 @@
 			{{/user}}
 		</p>
 	</header>
-	{{#content}}
+	{{#has_content}}
 		<section class="grouped-tableview">
 			{{{content}}}
-			<ul class="poll">
-			{{#poll}}
-				<li><b>{{points}}</b> {{i_point}}: {{item}}</li>
-			{{/poll}}
-			</ul>
+			{{#has_poll}}
+				<ul class="poll">
+				{{#poll}}
+					<li>
+						<span class="poll-details"><b>{{item}}</b> <span class="points">{{points}} {{i_point}}</span></span>
+						<div class="poll-bar"><span style="width: {{width}}"></span></div>
+					</li>
+				{{/poll}}
+				</ul>
+			{{/has_poll}}
 		</section>
-	{{/content}}
+	{{/has_content}}
 </div>
 <section class="comments">
 	{{#has_comments}}

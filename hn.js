@@ -180,10 +180,18 @@
 							data.has_comments = !!data.comments.length;
 							data.i_point = data.points == 1 ? 'point' : 'points';
 							data.i_comment = data.comments_count == 1 ? 'comment' : 'comments';
+							data.has_content = !!data.content;
 							if (data.poll){
+								var total = 0;
 								data.poll.forEach(function(p){
-									p.i_point = p.points == 1 ? 'point' : 'points';
-								})
+									var points = p.points;
+									total += points;
+									p.i_point = points == 1 ? 'point' : 'points';
+								});
+								data.poll.forEach(function(p){
+									p.width = Math.ceil(p.points/total*100) + '%';
+								});
+								data.has_poll = data.has_content = true;
 							}
 							var html = tmpl1.render(data, {comments_list: tmpl2});
 							viewHeading.innerHTML = data.title;
