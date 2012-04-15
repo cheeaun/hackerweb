@@ -738,9 +738,11 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 .view section.comments button.comments-toggle{
 	display: block;
 	width: 100%;
+	height: 26px;
+	line-height: 26px;
 	cursor: pointer;
 	border: 0;
-	padding: 6px 10px;
+	padding: 0 10px;
 	font-weight: bold;
 	color: #666;
 	background-color: #e0e0e0;
@@ -748,6 +750,18 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	text-shadow: 0 1px rgba(255,255,255,.75);
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	margin: 2px 0 4px;
+	box-shadow: inset 0 0 1px rgba(0,0,0,.2), inset 0 1px rgba(0,0,0,.1);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.5)), to(rgba(255,255,255,0)));
+	background-image: -webkit-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
+	background-image: -moz-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
+	background-image: -ms-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
+	background-image: -o-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
+	background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
+	-webkit-background-size: 10px 26px;
+	-moz-background-size: 10px 26px;
+	-ms-background-size: 10px 26px;
+	-o-background-size: 10px 26px;
+	background-size: 10px 26px;
 }
 .view section.comments button.comments-toggle.tappable-active{
 	color: #444;
