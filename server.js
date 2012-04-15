@@ -18,6 +18,8 @@ var types = {
 };
 
 http.createServer(function(req, res){
+	console.log(req.url);
+	
 	var filePath = '.' + req.url;
 	if (filePath == './') filePath += 'index.html';
 
