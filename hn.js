@@ -89,7 +89,8 @@
 			}
 		};
 	
-	var currentView = null;
+	var currentView = null,
+		currentItemID = null;
 	
 	var routes = {
 		'/': function(){
@@ -143,12 +144,14 @@
 				}
 				currentView = 'comments';
 				if (id){
+					currentItemID = id;
 					var post = amplify.store.sessionStorage('hacker-item-' + id),
 						$commentsScroll = view.querySelector('.scroll'),
 						loadComments = function(data, id){
 							if (!data || data.error) return;
 							amplify.store.sessionStorage('hacker-comments-' + id, data);
-							viewSection.querySelector('.comments>ul').innerHTML += '<li class="more-link-container"><a class="more-link" data-id="' + id + '">More&hellip;</a></li>';
+							var ul = viewSection.querySelector('.comments>ul');
+							if (!ul.querySelector('.more-link-container')) ul.innerHTML += '<li class="more-link-container"><a class="more-link" data-id="' + id + '">More&hellip;</a></li>';
 							if (!data.more_comments_id) return;
 							// Keep getting more and more comments...
 							var loadMoreComments = function(id){
@@ -238,6 +241,9 @@
 					} else {
 						$commentsScroll.classList.add('loading');
 						hnapi.item(id, function(data){
+							// Avoiding the case where the wrong post is loaded when connection is slow
+							if (currentView != 'comments' || currentItemID != id) return;
+
 							$commentsScroll.classList.remove('loading');
 							if (!data || data.error){
 								errors.serverError();
