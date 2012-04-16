@@ -196,6 +196,8 @@
 								});
 								data.has_poll = data.has_content = true;
 							}
+							data.short_hn_url = 'news.ycombinator.com/item?id=' + id;
+							data.hn_url = 'http://' + data.short_hn_url;
 							var html = tmpl1.render(data, {comments_list: tmpl2});
 							viewHeading.innerHTML = data.title;
 							viewSection.innerHTML = html;
@@ -387,6 +389,11 @@
 			location.hash = target.hash;
 		}
 	});
+	tappable('.external-button', {
+		allowClick: true,
+		activeClassDelay: 80,
+		inactiveClassDelay: 500
+	})
 	tappable('button.comments-toggle', function(e, target){
 		var ul = target.nextElementSibling;
 		if (ul){

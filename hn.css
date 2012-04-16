@@ -582,6 +582,17 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	font-size: 13px;
 	color: #666d74;
 }
+.view .post-content header .metadata a.external-link{
+	color: #666d74;
+	text-decoration: none;
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	padding-left: 16px;
+	background: transparent url(images/external-arrow.png) no-repeat 0 50%;
+	background-size: 12px 10px;
+}
 .view .post-content header h1{
 	font-size: 17px;
 	line-height: 1.2em;
