@@ -1,4 +1,4 @@
-!function(w, d){
+(function(w, d){
 	var body = d.body,
 		$ = function(id){ return d.getElementById(id) },
 		$hnlist = $('hnlist'),
@@ -603,4 +603,4 @@
 			r.send();
 		}, 1000);
 	}, false);
-}(window, document);
+})(window, document);
