@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 2012-04-16:v1
+# 2012-04-17:v1
 
 index.html
 hn.css
@@ -15,6 +15,7 @@ images/button-active.png
 images/back-button.png
 images/back-button-active.png
 images/detail-disclosure-button.png
+images/external-arrow.png
 images/disclosure-indicator.png
 icons/touch-icon.png
 
