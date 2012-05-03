@@ -179,7 +179,6 @@
 								a.href = data.url;
 								data.domain = a.hostname.replace(/^www\./, '');
 							}
-							data.title = data.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
 							data.has_comments = !!data.comments.length;
 							data.i_point = data.points == 1 ? 'point' : 'points';
 							data.i_comment = data.comments_count == 1 ? 'comment' : 'comments';
@@ -449,7 +448,6 @@
 			if (!i) i = 1;
 			var a = d.createElement('a');
 			data.forEach(function(item){
-				item.title = item.title.replace(/([^\s])\s+([^\s]+)\s*$/, '$1&nbsp;$2');
 				if (/^item/i.test(item.url)){
 					item.url = '#/item/' + item.id;
 				} else {
