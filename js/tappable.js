@@ -90,6 +90,7 @@
 			startX,
 			startY,
 			startTarget,
+			prevTarget,
 			elBound,
 			cancel = false,
 			moveOut = false,
@@ -115,7 +116,7 @@
 			} else {
 				addClass(target, activeClass);
 			}
-			if (inactiveClassDelay) clearTimeout(inactiveClassTimeout);
+			if (inactiveClassDelay && target == prevTarget) clearTimeout(inactiveClassTimeout);
 			
 			startX = e.clientX;
 			startY = e.clientY;
@@ -201,6 +202,7 @@
 				}, 1);
 			}
 			
+			prevTarget = startTarget;
 			startTarget = null;
 		}, false);
 		

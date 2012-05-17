@@ -87,7 +87,20 @@
 				alert('Server is currently unavailable. Please try again later.');
 				throw e;
 			}
+		},
+		getScreenState = function(){
+			return /wide/i.test(w.getComputedStyle(body,':after').getPropertyValue('content')) ? 'wide' : 'narrow';
 		};
+
+	// Wide screen state
+	var isWideScreen = getScreenState() == 'wide';
+	window.onresize = function(){
+		var wide = getScreenState() == 'wide';
+		if (wide != isWideScreen){
+			isWideScreen = wide;
+			location.reload();
+		}
+	};
 	
 	var currentView = null,
 		currentItemID = null;
@@ -95,35 +108,51 @@
 	var routes = {
 		'/': function(){
 			var view = $('view-home');
-			if (!currentView){
+			if (!isWideScreen){
+				if (!currentView){
+					hideAllViews();
+					view.classList.remove('hidden');
+				} else if (currentView == 'about'){
+					flip({
+						in: view,
+						out: $('view-' + currentView),
+						direction: 'anticlockwise'
+					});
+				} else if (currentView != 'home'){
+					slide({
+						in: view,
+						out: $('view-' + currentView),
+						direction: 'ltr'
+					});
+				}
+			} else {
 				hideAllViews();
+				$('overlay').classList.add('hide');
 				view.classList.remove('hidden');
-			} else if (currentView == 'about'){
-				flip({
-					in: view,
-					out: $('view-' + currentView),
-					direction: 'anticlockwise'
-				});
-			} else if (currentView != 'home'){
-				slide({
-					in: view,
-					out: $('view-' + currentView),
-					direction: 'ltr'
-				});
+				$('view-comments').classList.remove('hidden');
 			}
 			currentView = 'home';
 		},
 		'/about': function(){
 			var view = $('view-about');
-			if (!currentView){
-				hideAllViews();
+			if (!isWideScreen){
+				if (!currentView){
+					hideAllViews();
+					view.classList.remove('hidden');
+				} else if (currentView != 'about'){
+					flip({
+						in: view,
+						out: $('view-home'),
+						direction: 'clockwise'
+					});
+				}
+			} else {
 				view.classList.remove('hidden');
-			} else if (currentView != 'about'){
-				flip({
-					in: view,
-					out: $('view-home'),
-					direction: 'clockwise'
-				});
+				$('view-home').classList.remove('hidden');
+				$('view-comments').classList.remove('hidden');
+				setTimeout(function(){
+					$('overlay').classList.remove('hide');
+				}, 1);
 			}
 			currentView = 'about';
 		},
@@ -132,15 +161,24 @@
 				var view = $('view-comments'),
 					viewHeading = view.querySelector('header h1'),
 					viewSection = view.querySelector('section');
-				if (!currentView){
+				if (!isWideScreen){
+					if (!currentView){
+						hideAllViews();
+						view.classList.remove('hidden');
+					} else if (currentView != 'comments') {
+						slide({
+							in: view,
+							out: $('view-' + currentView),
+							direction: 'rtl'
+						});
+					}
+				} else {
 					hideAllViews();
+					$('overlay').classList.add('hide');
 					view.classList.remove('hidden');
-				} else if (currentView != 'comments') {
-					slide({
-						in: view,
-						out: $('view-' + currentView),
-						direction: 'rtl'
-					});
+					var homeView = $('view-home');
+					homeView.classList.remove('hidden');
+					PubSub.publish('selectCurrentStory', id);
 				}
 				currentView = 'comments';
 				if (id){
@@ -207,7 +245,7 @@
 							// 20K chars will be the max to trigger collapsible comments.
 							// I can use number of comments as the condition but some comments
 							// might have too many chars and make the page longer.
-							if (html.length <= 20000) return;
+							if (html.length <= 20000 || isWideScreen) return;
 							var subUls = viewSection.querySelectorAll('.comments>ul>li>ul');
 							var tmpl3 = tmpl('comments-toggle');
 							for (var j=0, l=subUls.length; j<l; j++){
@@ -238,6 +276,7 @@
 					viewHeading.innerHTML = '';
 					viewSection.innerHTML = '';
 					if (post){
+						$commentsScroll.classList.remove('loading'); // Happens when the previous selected comments are still loading
 						loadPost(post, id);
 					} else {
 						$commentsScroll.classList.add('loading');
@@ -304,7 +343,12 @@
 	tappable('.view>header a.header-button[href]', {
 		noScroll: true,
 		onTap: function(e, target){
-			location.hash = target.hash;
+			var hash = target.hash;
+			if (isWideScreen && hash == '#/' && history.length>1){
+				history.back();
+			} else {
+				location.hash = hash;
+			}
 		}
 	});
 	tappable('#view-home-refresh', {
@@ -315,7 +359,6 @@
 			});
 		}
 	});
-	
 	tappable('.view>header h1', {
 		onTap: function(e, target){
 			var section = target.parentNode.nextElementSibling.firstElementChild;
@@ -346,10 +389,26 @@
 			}
 		}
 	});
+	var listTappedDelay;
 	tappable('.tableview-links li>a:first-child, .grouped-tableview-links li>a:first-child', {
 		allowClick: true,
-		activeClassDelay: 80,
-		inactiveClassDelay: 1000,
+		activeClassDelay: 100,
+		inactiveClassDelay: isWideScreen ? 100 : 1000,
+		onStart: function(e, target){
+			if (!isWideScreen) return;
+			var ul = target.parentNode.parentNode;
+			listTappedDelay = setTimeout(function(){
+				ul.classList.add('list-tapped');
+			}, 100);
+		},
+		onMove: function(){
+			clearTimeout(listTappedDelay);
+		},
+		onEnd: function(e, target){
+			if (!isWideScreen) return;
+			var ul = target.parentNode.parentNode;
+			ul.classList.remove('list-tapped');
+		},
 		onTap: function(e, target){
 			if (target.classList.contains('more-link')){
 				var loadNews2 = function(data){
@@ -440,6 +499,21 @@
 			alert('Oops, the comments have expired.');
 		}
 	});
+
+	PubSub.subscribe('selectCurrentStory', function(msg, id){
+		if (!id) id = (location.hash.match(/item\/(\d+)/) || [,''])[1];
+		if (!id) return;
+		var homeView = $('view-home');
+		var selectedLink = homeView.querySelector('a[href].selected');
+		if (selectedLink) selectedLink.classList.remove('selected');
+		var link = homeView.querySelector('a[href*="item/' + id + '"]');
+		if (link){
+			link.classList.add('selected');
+			setTimeout(function(){
+				link.scrollIntoViewIfNeeded ? link.scrollIntoViewIfNeeded() : link.scrollIntoView();
+			}, 1);
+		}
+	});
 	
 	var $homeScroll = d.querySelector('#view-home .scroll'),
 		$homeScrollSection = $homeScroll.querySelector('section'),
@@ -455,7 +529,8 @@
 					a.href = item.url;
 					item.domain = a.hostname.replace(/^www\./, '');
 				}
-				if (item.type == 'link') item.disclosure = true;
+				if (!isWideScreen && item.type == 'link') item.disclosure = true;
+				if (isWideScreen) item.url = '#/item/' + item.id;
 				item.i = i++;
 				item.i_point = item.points == 1 ? 'point' : 'points';
 				item.i_comment = item.comments_count == 1 ? 'comment' : 'comments';
@@ -467,6 +542,7 @@
 			var html = markupNews(data);
 			html += '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>';
 			$hnlist.innerHTML = html;
+			PubSub.publish('selectCurrentStory');
 		},
 		loadingNews = false,
 		reloadNews = function(opts){
@@ -526,6 +602,7 @@
 			}
 		}, 1);
 	}, false);
+	PubSub.subscribe('screenStateChange', reloadNews);
 	
 	// Some useful tips from http://24ways.org/2011/raising-the-bar-on-mobile
 	var supportOrientation = typeof w.orientation != 'undefined',
@@ -542,24 +619,29 @@
 				body.style.height = w.innerHeight + 'px';
 			}, 1);
 		};
-	scrollTop();
-	if (supportOrientation) w.onorientationchange = scrollTop;
-	
-	w.addEventListener('load', function(){
-		var scrollCheck = setInterval(function(){
-			var top = getScrollTop();
-			if (top <= 1){
-				clearInterval(scrollCheck);
-				setTimeout(function(){
-					var loader = $('apploader');
-					loader.classList.add('hide');
-					loader.addEventListener('webkitTransitionEnd', function(){
-						loader.parentNode.removeChild(loader);
-					}, false);
-				}, 400);
-			}
-		}, 15);
-	}, false);
+	if (!isWideScreen){
+		scrollTop();
+		if (supportOrientation) w.onorientationchange = scrollTop;
+
+		w.addEventListener('load', function(){
+			var scrollCheck = setInterval(function(){
+				var top = getScrollTop();
+				if (top <= 1){
+					clearInterval(scrollCheck);
+					setTimeout(function(){
+						var loader = $('apploader');
+						loader.classList.add('hide');
+						loader.addEventListener('webkitTransitionEnd', function(){
+							loader.parentNode.removeChild(loader);
+						}, false);
+					}, 400);
+				}
+			}, 15);
+		}, false);
+	} else {
+		var loader = $('apploader');
+		loader.parentNode.removeChild(loader);
+	}
 
 	// "Naturally" reload when an update is available
 	if (w.applicationCache){
