@@ -623,6 +623,7 @@
 		var postContentSection = viewSection.querySelector('.post-content');
 		var commentsSection = viewSection.querySelector('.comments');
 		var viewSectionHeight = viewSection.offsetHeight;
+		commentsSection.style.minHeight = 'auto';
 		if (commentsSection.scrollHeight <= viewSectionHeight){
 			commentsSection.style.minHeight = (viewSectionHeight - postContentSection.offsetHeight + 1) + 'px';
 		}
