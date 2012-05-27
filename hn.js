@@ -232,7 +232,7 @@
 									p.i_point = points == 1 ? 'point' : 'points';
 								});
 								data.poll.forEach(function(p){
-									p.width = Math.ceil(p.points/total*100) + '%';
+									p.width = (p.points/total*100).toFixed(1) + '%';
 								});
 								data.has_poll = data.has_content = true;
 							}
