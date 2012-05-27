@@ -287,7 +287,9 @@
 					viewSection.innerHTML = '';
 					if (post){
 						$commentsScroll.classList.remove('loading'); // Happens when the previous selected comments are still loading
-						loadPost(post, id);
+						setTimeout(function(){
+							loadPost(post, id);
+						}, 1);
 					} else {
 						$commentsScroll.classList.add('loading');
 						hnapi.item(id, function(data){
