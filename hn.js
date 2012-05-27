@@ -402,10 +402,12 @@
 			}, 100);
 		},
 		onMove: function(){
+			if (!isWideScreen) return;
 			clearTimeout(listTappedDelay);
 		},
 		onEnd: function(e, target){
 			if (!isWideScreen) return;
+			clearTimeout(listTappedDelay);
 			var ul = target.parentNode.parentNode;
 			ul.classList.remove('list-tapped');
 		},
