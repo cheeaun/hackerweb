@@ -452,6 +452,10 @@ header.fake,
 	background-position: top right;
 }
 
+#view-home .tableview-links li>a[href^=#/item]{
+	-webkit-touch-callout: none;
+}
+
 .grouped-tableview{
 	margin: 10px 9px 11px;
 	border: 1px solid #a1a7ae;
@@ -1353,9 +1357,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		-moz-box-direction: normal;
 		box-direction: normal;
 		background-color: #fff;
-	}
-	#view-home .tableview-links li > a{
-		-webkit-touch-callout: none;
 	}
 	#view-home .tableview-links li > a .story b{
 		-webkit-line-clamp: 2;
