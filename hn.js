@@ -242,6 +242,9 @@
 							viewHeading.innerHTML = data.title;
 							viewSection.innerHTML = html;
 
+							// Adjust comments section height
+							PubSub.publish('adjustCommentsSection');
+
 							// Make all links open in new tab/window
 							var links = viewSection.querySelectorAll('a');
 							for (var i=0, l=links.length; i<l; i++){
@@ -266,7 +269,7 @@
 									}));
 								}
 							}
-							
+
 							// Grab 'More' comments
 							if (data.more_comments_id){
 								var id = data.more_comments_id;
@@ -614,9 +617,23 @@
 			}
 		}, 1);
 	}, false);
-	PubSub.subscribe('screenStateChange', function(){
-		PubSub.publish('reloadNews');
+
+	PubSub.subscribe('adjustCommentsSection', function(){
+		var viewSection = d.querySelector('#view-comments section');
+		var postContentSection = viewSection.querySelector('.post-content');
+		var commentsSection = viewSection.querySelector('.comments');
+		var viewSectionHeight = viewSection.offsetHeight;
+		if (commentsSection.scrollHeight <= viewSectionHeight){
+			commentsSection.style.minHeight = (viewSectionHeight - postContentSection.offsetHeight + 1) + 'px';
+		}
 	});
+
+	window.addEventListener('resize', function(){
+		PubSub.publish('adjustCommentsSection');
+	}, false);
+	window.addEventListener('orientationchange', function(){
+		PubSub.publish('adjustCommentsSection');
+	}, false);
 	
 	// Some useful tips from http://24ways.org/2011/raising-the-bar-on-mobile
 	var supportOrientation = typeof w.orientation != 'undefined',
