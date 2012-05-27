@@ -129,7 +129,10 @@
 				hideAllViews();
 				$('overlay').classList.add('hide');
 				view.classList.remove('hidden');
-				$('view-comments').classList.remove('hidden');
+				var viewComments = $('view-comments');
+				viewComments.classList.remove('hidden');
+				viewComments.querySelector('section').innerHTML = '<div class="view-blank-state-text">No Stories Selected.</div>';
+				PubSub.publish('updateCurrentStory');
 			}
 			currentView = 'home';
 		},
@@ -178,7 +181,7 @@
 					view.classList.remove('hidden');
 					var homeView = $('view-home');
 					homeView.classList.remove('hidden');
-					PubSub.publish('selectCurrentStory', id);
+					PubSub.publish('updateCurrentStory', id);
 				}
 				currentView = 'comments';
 				if (id){
@@ -502,12 +505,13 @@
 		}
 	});
 
-	PubSub.subscribe('selectCurrentStory', function(msg, id){
+	PubSub.subscribe('updateCurrentStory', function(msg, id){
 		if (!id) id = (location.hash.match(/item\/(\d+)/) || [,''])[1];
-		if (!id) return;
 		var homeView = $('view-home');
 		var selectedLink = homeView.querySelector('a[href].selected');
 		if (selectedLink) selectedLink.classList.remove('selected');
+		// If there's no ID, still clear the selected link
+		if (!id) return;
 		var link = homeView.querySelector('a[href*="item/' + id + '"]');
 		if (link){
 			link.classList.add('selected');
@@ -544,7 +548,7 @@
 			var html = markupNews(data);
 			html += '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>';
 			$hnlist.innerHTML = html;
-			PubSub.publish('selectCurrentStory');
+			PubSub.publish('updateCurrentStory');
 		},
 		loadingNews = false;
 	

@@ -175,6 +175,7 @@ header.fake,
 	-moz-box-orient: vertical;
 	box-orient: vertical;
 	height: 100%;
+	position: relative;
 }
 .view>.scroll.striped{
 	background-color: #cbd2d8;
@@ -228,7 +229,6 @@ header.fake,
 	color: #2f343c;
 }
 .view>.scroll.loading{
-	position: relative;
 	background-color: transparent;
 }
 .view>.scroll.loading>.loader{
@@ -278,6 +278,16 @@ header.fake,
 	83.33% { background-position: 0 -200px; }
 	91.67% { background-position: 0 -220px; }
 	100% { background-position: 0 0; }
+}
+.view-blank-state-text{
+	color: #666;
+	text-shadow: 0 1px #fff;
+	height: 20px;
+	line-height: 20px;
+	position: absolute;
+	top: 45%;
+	width: 100%;
+	text-align: center;
 }
 .tableview{
 	margin: 0;
