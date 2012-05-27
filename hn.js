@@ -354,7 +354,7 @@
 	tappable('#view-home-refresh', {
 		noScroll: true,
 		onTap: function(e){
-			reloadNews({
+			PubSub.publish('reloadNews', {
 				delay: 500 // Cheat a little to make user think that it's doing something
 			});
 		}
@@ -544,65 +544,68 @@
 			$hnlist.innerHTML = html;
 			PubSub.publish('selectCurrentStory');
 		},
-		loadingNews = false,
-		reloadNews = function(opts){
-			if (loadingNews) return;
-			if (!opts) opts = {};
-			var news = amplify.store('hacker-news');
-			if (news){
-				var delay = opts.delay;
-				if (delay){
-					loadingNews = true;
-					$hnlist.innerHTML = '';
-					$homeScroll.classList.add('loading');
-					setTimeout(function(){
-						loadingNews = false;
-						$homeScroll.classList.remove('loading');
-						loadNews(news);
-					}, delay);
-				} else {
-					loadNews(news);
-				}
-			} else {
+		loadingNews = false;
+	
+	PubSub.subscribe('reloadNews', function(msg, opts){
+		if (loadingNews) return;
+		if (!opts) opts = {};
+		var news = amplify.store('hacker-news');
+		if (news){
+			var delay = opts.delay;
+			if (delay){
 				loadingNews = true;
 				$hnlist.innerHTML = '';
 				$homeScroll.classList.add('loading');
-				hnapi.news(function(data){
+				setTimeout(function(){
 					loadingNews = false;
 					$homeScroll.classList.remove('loading');
+					loadNews(news);
+				}, delay);
+			} else {
+				loadNews(news);
+			}
+		} else {
+			loadingNews = true;
+			$hnlist.innerHTML = '';
+			$homeScroll.classList.add('loading');
+			hnapi.news(function(data){
+				loadingNews = false;
+				$homeScroll.classList.remove('loading');
+				if (!data || data.error){
+					errors.serverError();
+					return;
+				}
+				amplify.store('hacker-news', data, {
+					expires: 1000*60*5 // 5 minutes
+				});
+				loadNews(data);
+				// Preload news2 to prevent discrepancies between /news and /news2 results
+				hnapi.news2(function(data){
 					if (!data || data.error){
 						errors.serverError();
 						return;
 					}
-					amplify.store('hacker-news', data, {
-						expires: 1000*60*5 // 5 minutes
-					});
-					loadNews(data);
-					// Preload news2 to prevent discrepancies between /news and /news2 results
-					hnapi.news2(function(data){
-						if (!data || data.error){
-							errors.serverError();
-							return;
-						}
-						amplify.store('hacker-news2', data);
-					});
-				}, function(e){
-					loadingNews = false;
-					errors.connectionError(e);
+					amplify.store('hacker-news2', data);
 				});
-			}
-		};
-	
-	reloadNews();
+			}, function(e){
+				loadingNews = false;
+				errors.connectionError(e);
+			});
+		}
+	});
+
+	PubSub.publish('reloadNews');
 	// Auto-reload news for some specific situations...
 	w.addEventListener('pageshow', function(){
 		setTimeout(function(){
 			if (currentView == 'home' && $hnlist.innerHTML && !amplify.store('hacker-news')){
-				reloadNews();
+				PubSub.publish('reloadNews');
 			}
 		}, 1);
 	}, false);
-	PubSub.subscribe('screenStateChange', reloadNews);
+	PubSub.subscribe('screenStateChange', function(){
+		PubSub.publish('reloadNews');
+	});
 	
 	// Some useful tips from http://24ways.org/2011/raising-the-bar-on-mobile
 	var supportOrientation = typeof w.orientation != 'undefined',
