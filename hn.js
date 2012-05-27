@@ -241,10 +241,13 @@
 							var html = tmpl1.render(data, {comments_list: tmpl2});
 							viewHeading.innerHTML = data.title;
 							viewSection.innerHTML = html;
+
+							// Make all links open in new tab/window
 							var links = viewSection.querySelectorAll('a');
 							for (var i=0, l=links.length; i<l; i++){
 								links[i].target = '_blank';
 							}
+
 							// 20K chars will be the max to trigger collapsible comments.
 							// I can use number of comments as the condition but some comments
 							// might have too many chars and make the page longer.
@@ -263,6 +266,7 @@
 									}));
 								}
 							}
+							
 							// Grab 'More' comments
 							if (data.more_comments_id){
 								var id = data.more_comments_id;
