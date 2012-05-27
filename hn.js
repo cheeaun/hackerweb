@@ -583,7 +583,7 @@
 					return;
 				}
 				amplify.store('hacker-news', data, {
-					expires: 1000*60*5 // 5 minutes
+					expires: 1000*60*10 // 10 minutes
 				});
 				loadNews(data);
 				// Preload news2 to prevent discrepancies between /news and /news2 results
