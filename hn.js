@@ -306,6 +306,7 @@
 	Router(routes).configure({
 		on: function(){
 			amplify.store('hacker-hash', location.hash);
+			_gaq.push(['_trackPageview', location.pathname + location.hash]);
 		},
 		notfound: function(){
 			location.hash = '/';
