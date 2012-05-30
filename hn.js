@@ -132,6 +132,8 @@
 				var viewComments = $('view-comments');
 				viewComments.classList.remove('hidden');
 				viewComments.querySelector('section').innerHTML = '<div class="view-blank-state-text">No Stories Selected.</div>';
+				viewComments.querySelector('header h1').innerHTML = '';
+				viewComments.querySelector('header a.header-back-button').style.display = 'none';
 				PubSub.publish('updateCurrentStory');
 			}
 			currentView = 'home';
@@ -163,7 +165,8 @@
 			on: function(id){
 				var view = $('view-comments'),
 					viewHeading = view.querySelector('header h1'),
-					viewSection = view.querySelector('section');
+					viewSection = view.querySelector('section'),
+					viewBackButton = view.querySelector('header a.header-back-button');
 				if (!isWideScreen){
 					if (!currentView){
 						hideAllViews();
@@ -241,6 +244,7 @@
 							var html = tmpl1.render(data, {comments_list: tmpl2});
 							viewHeading.innerHTML = data.title;
 							viewSection.innerHTML = html;
+							if (isWideScreen) viewBackButton.style.display = '';
 
 							// Adjust comments section height
 							PubSub.publish('adjustCommentsSection');
@@ -285,6 +289,7 @@
 						};
 					viewHeading.innerHTML = '';
 					viewSection.innerHTML = '';
+					if (isWideScreen) viewBackButton.style.display = 'none';
 					if (post){
 						$commentsScroll.classList.remove('loading'); // Happens when the previous selected comments are still loading
 						setTimeout(function(){
