@@ -1386,6 +1386,14 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	#view-comments>header a.header-back-button button{
 		display: none;
 	}
+	.view .post-content header h1{
+		font-size: 20px;
+		line-height: 1.05em;
+	}
+	.view .post-content header h1 a .link-text,
+	.view section.comments{
+		font-size: 14px;
+	}
 	.view > .scroll.striped{
 		background-color: #E2E5EA;
 		background-image: -webkit-linear-gradient(top, #E2E5EA, #D0D2D8);
