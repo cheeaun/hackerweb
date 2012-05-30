@@ -179,7 +179,6 @@ header.fake,
 }
 .view>.scroll.striped{
 	background-color: #cbd2d8;
-	background-image: -webkit-gradient(linear, left top, right top, from(#c5ccd4), color-stop(0.714, #c5ccd4), color-stop(0.714, #cbd2d8), to(#cbd2d8)); 
 	background-image: -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	background-image: -moz-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	background-image: -ms-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
@@ -327,7 +326,6 @@ header.fake,
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#4286f5), to(#194fdb));
 	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
 	background-image: -moz-linear-gradient(top, #4286f5, #194fdb);
 	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
@@ -528,7 +526,6 @@ ol.grouped-tableview-links li>a{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#4286f5), to(#194fdb));
 	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
 	background-image: -moz-linear-gradient(top, #4286f5, #194fdb);
 	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
@@ -632,7 +629,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 }
 .view .post-content{
 	padding-bottom: 1px;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,.12)));
 	background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
 	background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
 	background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
@@ -676,7 +672,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	border-radius: 5px;
 	overflow: hidden;
 	box-shadow: inset 0 0 2px #808080, 0 1px #fff;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#fff));
 	background-image: -webkit-linear-gradient(top, #ddd, #fff);
 	background-image: -moz-linear-gradient(top, #ddd, #fff);
 	background-image: -ms-linear-gradient(top, #ddd, #fff);
@@ -696,7 +691,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
 	box-shadow: inset 0 0 2px #0b3a88;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#2f64b7), to(#77adf6));
 	background-image: -webkit-linear-gradient(top, #2f64b7, #77adf6);
 	background-image: -moz-linear-gradient(top, #2f64b7, #77adf6);
 	background-image: -ms-linear-gradient(top, #2f64b7, #77adf6);
@@ -789,7 +783,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	margin: 2px auto 4px;
 	box-shadow: inset 0 0 1px rgba(0,0,0,.2), inset 0 1px rgba(0,0,0,.1);
-	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.5)), to(rgba(255,255,255,0)));
 	background-image: -webkit-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
 	background-image: -moz-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
 	background-image: -ms-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
@@ -822,7 +815,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#4286f5), to(#194fdb));
 	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
 	background-image: -moz-linear-gradient(top, #4286f5, #194fdb);
 	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
@@ -1227,11 +1219,11 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		display: none;
 	}
 	body{
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#000), to(#000));
-		background-image: -moz-gradient(linear, left top, left bottom, from(#000), to(#000));
-		background-image: -ms-gradient(linear, left top, left bottom, from(#000), to(#000));
-		background-image: -o-gradient(linear, left top, left bottom, from(#000), to(#000));
-		background-image: gradient(linear, left top, left bottom, from(#000), to(#000));
+		background-image: -webkit-linear-gradient(top, #000, #000);
+		background-image: -moz-linear-gradient(top, #000, #000);
+		background-image: -ms-linear-gradient(top, #000, #000);
+		background-image: -o-linear-gradient(top, #000, #000);
+		background-image: linear-gradient(top, #000, #000);
 		-webkit-background-size: 10px 10px;
 		-moz-background-size: 10px 10px;
 		-ms-background-size: 10px 10px;
@@ -1261,13 +1253,8 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		opacity: 0;
 		pointer-events: none;
 	}
-	#view-home{
-		width: 320px;
-		border-right: 1px solid #000;
-		-webkit-box-direction: reverse;
-		-moz-box-direction: reverse;
-		box-direction: reverse;
-		left: 0;
+	header.fake{
+		display: none;
 	}
 	.view>header{
 		color: #656C73;
@@ -1292,21 +1279,38 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		-o-border-image: url(images/silver-button-active.png) 4 10 4 10;
 	/*	border-image: url(images/silver-button-active.png) 4 10 4 10;*/
 	}
-	.view>footer{
-		color: #656C73;
-		background: #d2d4db url(images/silver-button-bar.png) repeat-x;
-		-webkit-background-size: 1px 44px;
-		-moz-background-size: 1px 44px;
-		-ms-background-size: 1px 44px;
-		-o-background-size: 1px 44px;
-		background-size: 1px 44px;
-		height: 44px;
-		line-height: 44px;
-		width: 100%;
-		-webkit-user-select: none;
-		-webkit-touch-callout: none;
-		border-bottom-left-radius: 3px;
-		border-bottom-right-radius: 5px;
+	#view-home{
+		width: 320px;
+		border-right: 1px solid #000;
+		-webkit-box-direction: reverse;
+		-moz-box-direction: reverse;
+		box-direction: reverse;
+		left: 0;
+	}
+	#view-home>header{
+		position: relative;
+		background-image: url(images/silver-button-bar.png);
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 3px;
+	}
+	#view-home>header h1{
+		display: none;
+	}
+	#view-home .scroll{
+		-webkit-box-direction: normal;
+		-moz-box-direction: normal;
+		box-direction: normal;
+		background-color: #fff;
+	}
+	#view-home .tableview-links li > a .story b{
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+		display: -webkit-box;
+		display: -moz-box;
+		display: box;
+		-webkit-box-orient: vertical;
+		-moz-box-orient: vertical;
+		box-orient: vertical;
 	}
 	#view-about{
 		width: 540px;
@@ -1343,50 +1347,61 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	#view-about > .scroll > section{
 		padding: 21px 22px;
 	}
-	#view-home>header{
-		position: relative;
-		background-image: url(images/silver-button-bar.png);
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 3px;
-	}
-	#view-home>header h1{
-		display: none;
-	}
-	#view-home .scroll{
-		-webkit-box-direction: normal;
-		-moz-box-direction: normal;
-		box-direction: normal;
-		background-color: #fff;
-	}
-	#view-home .tableview-links li > a .story b{
-		-webkit-line-clamp: 2;
-		overflow: hidden;
-		display: -webkit-box;
-		display: -moz-box;
-		display: box;
-		-webkit-box-orient: vertical;
-		-moz-box-orient: vertical;
-		box-orient: vertical;
-	}
 	#view-comments{
 		left: 321px;
 		right: 0;
 		width: auto;
+		-webkit-box-direction: reverse;
+		-moz-box-direction: reverse;
+		box-direction: reverse;
 	}
-	header.fake,
+	#view-comments .scroll{
+		-webkit-box-direction: normal;
+		-moz-box-direction: normal;
+		box-direction: normal;
+	}
 	#view-comments>header{
+		position: relative;
+		background-image: url(images/silver-button-bar.png);
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 5px;
+	}
+	#view-comments>header h1{
+		text-align: left;
+		font-size: 14px;
+		padding-left: 44px !important;
+		padding-right: 10px !important;
+	}
+	#view-comments>header a.header-back-button{
+		padding: 0;
+		height: 44px;
+		width: 44px;
+		background: transparent url(images/close-button.png) no-repeat center;
+		-webkit-background-size: 9px 10px;
+		-moz-background-size: 9px 10px;
+		-ms-background-size: 9px 10px;
+		-o-background-size: 9px 10px;
+		background-size: 9px 10px;
+	}
+	#view-comments>header a.header-back-button button{
 		display: none;
 	}
 	.view > .scroll.striped{
 		background-color: #E2E5EA;
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#E2E5EA), to(#D0D2D8));
-		background-image: -moz-gradient(linear, left top, left bottom, from(#E2E5EA), to(#D0D2D8));
-		background-image: -ms-gradient(linear, left top, left bottom, from(#E2E5EA), to(#D0D2D8));
-		background-image: -o-gradient(linear, left top, left bottom, from(#E2E5EA), to(#D0D2D8));
-		background-image: gradient(linear, left top, left bottom, from(#E2E5EA), to(#D0D2D8));
+		background-image: -webkit-linear-gradient(top, #E2E5EA, #D0D2D8);
+		background-image: -moz-linear-gradient(top, #E2E5EA, #D0D2D8);
+		background-image: -ms-linear-gradient(top, #E2E5EA, #D0D2D8);
+		background-image: -o-linear-gradient(top, #E2E5EA, #D0D2D8);
+		background-image: linear-gradient(top, #E2E5EA, #D0D2D8);
+		-webkit-background-size: 1px 100%;
+		-moz-background-size: 1px 100%;
+		-ms-background-size: 1px 100%;
+		-o-background-size: 1px 100%;
+		background-size: 1px 100%;
 	}
 	.view .post-content{
-		background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,.08)));
+		background-color: #dedfe5;
+		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08));
 		background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08));
 		background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08));
 		background-image: -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08));
@@ -1394,11 +1409,16 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	}
 	.post-content header{
 		box-shadow: inset 0 1px #fff;
-		background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,.75)), to(rgba(255,255,255,0)));
-		background-image: -moz-gradient(linear, left top, left bottom, from(rgba(255,255,255,.75)), to(rgba(255,255,255,0)));
-		background-image: -ms-gradient(linear, left top, left bottom, from(rgba(255,255,255,.75)), to(rgba(255,255,255,0)));
-		background-image: -o-gradient(linear, left top, left bottom, from(rgba(255,255,255,.75)), to(rgba(255,255,255,0)));
-		background-image: gradient(linear, left top, left bottom, from(rgba(255,255,255,.75)), to(rgba(255,255,255,0)));
+		background-image: -webkit-linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
+		background-image: -moz-linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
+		background-image: -ms-linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
+		background-image: -o-linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
+		background-image: linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
+		-webkit-background-size: 1px 100%;
+		-moz-background-size: 1px 100%;
+		-ms-background-size: 1px 100%;
+		-o-background-size: 1px 100%;
+		background-size: 1px 100%;
 	}
 	#y-touch-icon{
 		width: 72px;
