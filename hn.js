@@ -312,10 +312,13 @@
 		}
 	};
 	
+	var prevRoute, currentRoute;
 	Router(routes).configure({
 		on: function(){
-			amplify.store('hacker-hash', location.hash);
-			_gaq.push(['_trackPageview', location.pathname + location.hash]);
+			prevRoute = currentRoute;
+			currentRoute = location.hash;
+			amplify.store('hacker-hash', currentRoute);
+			_gaq.push(['_trackPageview', location.pathname + currentRoute]);
 		},
 		notfound: function(){
 			location.hash = '/';
@@ -357,8 +360,8 @@
 		noScroll: true,
 		onTap: function(e, target){
 			var hash = target.hash;
-			if (isWideScreen && hash == '#/' && history.length>1){
-				history.back();
+			if (isWideScreen && /about/i.test(currentRoute) && hash == '#/' && prevRoute){
+				location.hash = prevRoute;
 			} else {
 				location.hash = hash;
 			}
