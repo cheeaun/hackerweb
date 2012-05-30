@@ -247,7 +247,9 @@
 							if (isWideScreen) viewBackButton.style.display = '';
 
 							// Adjust comments section height
-							PubSub.publish('adjustCommentsSection');
+							setTimeout(function(){
+								PubSub.publish('adjustCommentsSection');
+							}, 1);
 
 							// Make all links open in new tab/window
 							var links = viewSection.querySelectorAll('a');
@@ -292,9 +294,7 @@
 					if (isWideScreen) viewBackButton.style.display = 'none';
 					if (post){
 						$commentsScroll.classList.remove('loading'); // Happens when the previous selected comments are still loading
-						setTimeout(function(){
-							loadPost(post, id);
-						}, 1);
+						loadPost(post, id);
 					} else {
 						$commentsScroll.classList.add('loading');
 						hnapi.item(id, function(data){
