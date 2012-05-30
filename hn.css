@@ -764,7 +764,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	text-align: center;
 	color: #aaa;
 	font-weight: bold;
-	margin: 50px 0 250px;
+	margin: 50px 0;
 }
 .view section.comments button.comments-toggle{
 	display: block;
