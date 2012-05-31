@@ -1408,7 +1408,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		opacity: 1;
 	}
 	.view .post-content header h1{
-		font-size: 20px;
+		font-size: 18px;
 		line-height: 1.05em;
 	}
 	.view .post-content header h1 a .link-text,
