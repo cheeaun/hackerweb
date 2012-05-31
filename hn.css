@@ -769,7 +769,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 .view section.comments button.comments-toggle{
 	display: block;
 	width: 100%;
-	max-width: 320px;
+	max-width: 300px;
 	height: 26px;
 	line-height: 26px;
 	cursor: pointer;
