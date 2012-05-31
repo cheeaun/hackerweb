@@ -96,11 +96,11 @@ header.fake,
 	margin: 0;
 	text-decoration: none;
 	border-width: 2px 5px;
-	-webkit-border-image: url(images/button.png) 4 10 4 10;
-	-moz-border-image: url(images/button.png) 4 10 4 10;
-	-ms-border-image: url(images/button.png) 4 10 4 10;
-	-o-border-image: url(images/button.png) 4 10 4 10;
-/*	border-image: url(images/button.png) 4 10 4 10;*/
+	-webkit-border-image: url(images/button.png) 4 10 4 10 fill;
+	-moz-border-image: url(images/button.png) 4 10 4 10 fill;
+	-ms-border-image: url(images/button.png) 4 10 4 10 fill;
+	-o-border-image: url(images/button.png) 4 10 4 10 fill;
+/*	border-image: url(images/button.png) 4 10 4 10 fill;*/
 	background: transparent url(images/button-active.png) no-repeat;
 	-webkit-background-size: 0 0;
 	-moz-background-size: 0 0;
@@ -115,28 +115,28 @@ header.fake,
 	vertical-align: text-bottom;
 }
 .header-button.tappable-active button{
-	-webkit-border-image: url(images/button-active.png) 4 10 4 10;
-	-moz-border-image: url(images/button-active.png) 4 10 4 10;
-	-ms-border-image: url(images/button-active.png) 4 10 4 10;
-	-o-border-image: url(images/button-active.png) 4 10 4 10;
-/*	border-image: url(images/button-active.png) 4 10 4 10;*/
+	-webkit-border-image: url(images/button-active.png) 4 10 4 10 fill;
+	-moz-border-image: url(images/button-active.png) 4 10 4 10 fill;
+	-ms-border-image: url(images/button-active.png) 4 10 4 10 fill;
+	-o-border-image: url(images/button-active.png) 4 10 4 10 fill;
+/*	border-image: url(images/button-active.png) 4 10 4 10 fill;*/
 }
 .header-back-button button{
 	padding: 0 4px 0 0;
 	border-width: 2px 4px 2px 13px;
-	-webkit-border-image: url(images/back-button.png) 4 8 4 26;
-	-moz-border-image: url(images/back-button.png) 4 8 4 26;
-	-ms-border-image: url(images/back-button.png) 4 8 4 26;
-	-o-border-image: url(images/back-button.png) 4 8 4 26;
-/*	border-image: url(images/back-button.png) 4 8 4 26;*/
+	-webkit-border-image: url(images/back-button.png) 4 8 4 26 fill;
+	-moz-border-image: url(images/back-button.png) 4 8 4 26 fill;
+	-ms-border-image: url(images/back-button.png) 4 8 4 26 fill;
+	-o-border-image: url(images/back-button.png) 4 8 4 26 fill;
+/*	border-image: url(images/back-button.png) 4 8 4 26 fill;*/
 	background-image: url(images/back-button-active.png);
 }
 .header-back-button.tappable-active button{
-	-webkit-border-image: url(images/back-button-active.png) 4 8 4 26;
-	-moz-border-image: url(images/back-button-active.png) 4 8 4 26;
-	-ms-border-image: url(images/back-button-active.png) 4 8 4 26;
-	-o-border-image: url(images/back-button-active.png) 4 8 4 26;
-/*	border-image: url(images/back-button-active.png) 4 8 4 26;*/
+	-webkit-border-image: url(images/back-button-active.png) 4 8 4 26 fill;
+	-moz-border-image: url(images/back-button-active.png) 4 8 4 26 fill;
+	-ms-border-image: url(images/back-button-active.png) 4 8 4 26 fill;
+	-o-border-image: url(images/back-button-active.png) 4 8 4 26 fill;
+/*	border-image: url(images/back-button-active.png) 4 8 4 26 fill;*/
 }
 .header-button-left{
 	left: 0;
@@ -1265,19 +1265,19 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		text-shadow: 0 1px rgba(255, 255, 255, .75);
 	}
 	.header-button button{
-		-webkit-border-image: url(images/silver-button.png) 4 10 4 10;
-		-moz-border-image: url(images/silver-button.png) 4 10 4 10;
-		-ms-border-image: url(images/silver-button.png) 4 10 4 10;
-		-o-border-image: url(images/silver-button.png) 4 10 4 10;
-	/*	border-image: url(images/silver-button.png) 4 10 4 10;*/
+		-webkit-border-image: url(images/silver-button.png) 4 10 4 10 fill;
+		-moz-border-image: url(images/silver-button.png) 4 10 4 10 fill;
+		-ms-border-image: url(images/silver-button.png) 4 10 4 10 fill;
+		-o-border-image: url(images/silver-button.png) 4 10 4 10 fill;
+	/*	border-image: url(images/silver-button.png) 4 10 4 10 fill;*/
 		background-image: url(images/silver-button-active.png);
 	}
 	.header-button.tappable-active button{
-		-webkit-border-image: url(images/silver-button-active.png) 4 10 4 10;
-		-moz-border-image: url(images/silver-button-active.png) 4 10 4 10;
-		-ms-border-image: url(images/silver-button-active.png) 4 10 4 10;
-		-o-border-image: url(images/silver-button-active.png) 4 10 4 10;
-	/*	border-image: url(images/silver-button-active.png) 4 10 4 10;*/
+		-webkit-border-image: url(images/silver-button-active.png) 4 10 4 10 fill;
+		-moz-border-image: url(images/silver-button-active.png) 4 10 4 10 fill;
+		-ms-border-image: url(images/silver-button-active.png) 4 10 4 10 fill;
+		-o-border-image: url(images/silver-button-active.png) 4 10 4 10 fill;
+	/*	border-image: url(images/silver-button-active.png) 4 10 4 10 fill;*/
 	}
 	#view-home{
 		width: 320px;
