@@ -1386,6 +1386,27 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	#view-comments>header a.header-back-button button{
 		display: none;
 	}
+	#view-comments>header a.header-back-button:after{
+		pointer-events: none;
+		opacity: 0;
+		content: '';
+		display: block;
+		width: 100px;
+		height: 100px;
+		position: absolute;
+		left: -28px;
+		top: -28px;
+		z-index: 1;
+		background: transparent url(images/button-bar-press-indicator.png) no-repeat;
+		background-image: -webkit-radial-gradient(center contain, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 100%);
+		background-image: -moz-radial-gradient(center contain, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 100%);
+		background-image: -ms-radial-gradient(center contain, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 100%);
+		background-image: -o-radial-gradient(center contain, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 100%);
+		background-image: radial-gradient(center contain, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 100%);
+	}
+	#view-comments>header a.header-back-button.tappable-active:after{
+		opacity: 1;
+	}
 	.view .post-content header h1{
 		font-size: 20px;
 		line-height: 1.05em;
