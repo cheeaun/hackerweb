@@ -470,11 +470,6 @@
 			location.hash = target.hash;
 		}
 	});
-	tappable('.external-button', {
-		allowClick: true,
-		activeClassDelay: 80,
-		inactiveClassDelay: 500
-	})
 	tappable('button.comments-toggle', function(e, target){
 		var ul = target.nextElementSibling;
 		if (ul){
