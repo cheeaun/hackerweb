@@ -412,7 +412,7 @@
 	});
 	var listTappedDelay;
 	tappable('.tableview-links li>a:first-child, .grouped-tableview-links li>a:first-child', {
-		allowClick: true,
+		allowClick: !isWideScreen,
 		activeClassDelay: 100,
 		inactiveClassDelay: isWideScreen ? 100 : 1000,
 		onStart: function(e, target){
