@@ -260,7 +260,7 @@
 							// 20K chars will be the max to trigger collapsible comments.
 							// I can use number of comments as the condition but some comments
 							// might have too many chars and make the page longer.
-							if (html.length <= 20000 || isWideScreen) return;
+							if (html.length <= 20000) return;
 							var subUls = viewSection.querySelectorAll('.comments>ul>li>ul');
 							var tmpl3 = tmpl('comments-toggle');
 							for (var j=0, l=subUls.length; j<l; j++){
