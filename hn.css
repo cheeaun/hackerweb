@@ -201,7 +201,6 @@ header.fake,
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 	box-flex: 1;
-	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 }
 .view>.scroll>.loader{
@@ -1335,6 +1334,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	}
 	#view-about.hidden{
 		-webkit-transform: translateY(175%);
+		-moz-transform: translateY(175%);
+		-ms-transform: translateY(175%);
+		-o-transform: translateY(175%);
+		transform: translateY(175%);
 	}
 	#view-about>header{
 		border-top-left-radius: 5px;
