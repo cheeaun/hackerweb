@@ -369,19 +369,16 @@ header.fake,
 .tableview-links li>a.detail-disclosure{
 	padding-right: 44px;
 }
-.tableview-links li>a.disclosure{
-	padding-right: 30px;
-	position: relative;
-}
 .tableview-links li>a.disclosure:after{
 	content: '';
-	position: absolute;
-	top: 0;
-	right: 11px;
-	width: 10px;
-	height: 100%;
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	pointer-events: none;
 	background: transparent url(images/disclosure-indicator.png) no-repeat left center;
 	background-size: 20px auto;
+	width: 10px;
+	margin: 0 11px;
 }
 .tableview-links li>a.disclosure.tappable-active:after{
 	background-position: right center;
