@@ -1130,7 +1130,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	-webkit-animation-timing-function: ease-in-out;
 	-webkit-animation-duration: .7s;
 	-webkit-backface-visibility: hidden;
-	-webkit-transform:;
 	border: 1px solid #000;
 	margin: -1px;
 	pointer-events: none;
