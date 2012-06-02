@@ -460,6 +460,8 @@
 				}
 			} else if (/^#\//.test(target.getAttribute('href'))){ // "local" links
 				location.hash = target.hash;
+			} else if (target.href){
+				w.open(target.href);
 			}
 		}
 	});
