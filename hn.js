@@ -465,7 +465,7 @@
 			}
 		}
 	});
-	tappable('.tableview-links li>a.detail-disclosure', {
+	tappable('.tableview-links li>a.detail-disclosure-button', {
 		noScroll: true,
 		noScrollDelay: 100,
 		onTap: function(e, target){
