@@ -550,8 +550,12 @@
 					a.href = item.url;
 					item.domain = a.hostname.replace(/^www\./, '');
 				}
-				if (!isWideScreen && item.type == 'link') item.disclosure = true;
-				if (isWideScreen) item.url = item.id ? ('#/item/' + item.id) : item.url;
+				if (isWideScreen){
+					item.url = item.id ? ('#/item/' + item.id) : item.url;
+				} else {
+					if (item.type == 'link') item.detail_disclosure = true;
+					if (item.type == 'ask') item.disclosure = true;
+				}
 				item.i = i++;
 				item.i_point = item.points == 1 ? 'point' : 'points';
 				item.i_comment = item.comments_count == 1 ? 'comment' : 'comments';

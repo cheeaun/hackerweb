@@ -1,5 +1,5 @@
 <li id="story-{{id}}" class="post-{{type}}">
-	<a href="{{url}}" {{#disclosure}}class="pad-right{{/disclosure}}">
+	<a href="{{url}}" {{#detail_disclosure}}class="detail-disclosure{{/detail_disclosure}}{{#disclosure}}class="disclosure"{{/disclosure}}">
 		<div class="number">{{i}}.</div>
 		<div class="story">
 			<b>{{title}}</b>
@@ -17,7 +17,7 @@
 			{{/user}}
 		</div>
 	</a>
-	{{#disclosure}}
-		<a href="#/item/{{id}}" class="detail-disclosure"><span></span></a>
-	{{/disclosure}}
+	{{#detail_disclosure}}
+		<a href="#/item/{{id}}" class="detail-disclosure-button"><span></span></a>
+	{{/detail_disclosure}}
 </li>
