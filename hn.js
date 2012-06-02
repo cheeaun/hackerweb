@@ -131,7 +131,7 @@
 				view.classList.remove('hidden');
 				var viewComments = $('view-comments');
 				viewComments.classList.remove('hidden');
-				viewComments.querySelector('section').innerHTML = '<div class="view-blank-state-text">No Stories Selected.</div>';
+				viewComments.querySelector('section').innerHTML = '<div class="view-blank-state-text">No Story Selected.</div>';
 				viewComments.querySelector('header h1').innerHTML = '';
 				viewComments.querySelector('header a.header-back-button').style.display = 'none';
 				PubSub.publish('updateCurrentStory');
