@@ -551,7 +551,7 @@
 					item.domain = a.hostname.replace(/^www\./, '');
 				}
 				if (!isWideScreen && item.type == 'link') item.disclosure = true;
-				if (isWideScreen) item.url = '#/item/' + item.id;
+				if (isWideScreen) item.url = item.id ? ('#/item/' + item.id) : item.url;
 				item.i = i++;
 				item.i_point = item.points == 1 ? 'point' : 'points';
 				item.i_comment = item.comments_count == 1 ? 'comment' : 'comments';
