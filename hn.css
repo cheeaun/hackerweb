@@ -202,6 +202,7 @@ header.fake,
 	-moz-box-flex: 1;
 	box-flex: 1;
 	-webkit-overflow-scrolling: touch;
+	overflow: auto;
 }
 .view>.scroll>.loader{
 	display: none;
