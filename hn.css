@@ -1294,7 +1294,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	/*	border-image: url(images/silver-button-active.png) 4 10 4 10 fill;*/
 	}
 	#view-home{
-		width: 320px;
+		width: 280px;
 		border-right: 1px solid #000;
 		-webkit-box-direction: reverse;
 		-moz-box-direction: reverse;
@@ -1366,7 +1366,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		padding: 21px 22px;
 	}
 	#view-comments{
-		left: 321px;
+		left: 281px;
 		right: 0;
 		width: auto;
 		-webkit-box-direction: reverse;
@@ -1479,5 +1479,14 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		-o-background-size: 72px 72px;
 		background-size: 72px 72px;
 		border-radius: 12px;
+	}
+}
+
+@media only screen and (min-width: 1000px){
+	#view-home{
+		width: 320px;
+	}
+	#view-comments{
+		left: 321px;
 	}
 }
