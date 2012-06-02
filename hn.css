@@ -1423,12 +1423,12 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		font-size: 14px;
 	}
 	.view > .scroll.striped{
-		background-color: #E2E5EA;
-		background-image: -webkit-linear-gradient(top, #E2E5EA, #D0D2D8);
-		background-image: -moz-linear-gradient(top, #E2E5EA, #D0D2D8);
-		background-image: -ms-linear-gradient(top, #E2E5EA, #D0D2D8);
-		background-image: -o-linear-gradient(top, #E2E5EA, #D0D2D8);
-		background-image: linear-gradient(top, #E2E5EA, #D0D2D8);
+		background-color: #fcfcfc;
+		background-image: -webkit-linear-gradient(top, #fcfcfc, #dadce0);
+		background-image: -moz-linear-gradient(top, #fcfcfc, #dadce0);
+		background-image: -ms-linear-gradient(top, #fcfcfc, #dadce0);
+		background-image: -o-linear-gradient(top, #fcfcfc, #dadce0);
+		background-image: linear-gradient(top, #fcfcfc, #dadce0);
 		-webkit-background-size: 1px 100%;
 		-moz-background-size: 1px 100%;
 		-ms-background-size: 1px 100%;
