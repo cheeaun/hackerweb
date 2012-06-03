@@ -30,14 +30,26 @@ http.createServer(function(req, res){
 				res.writeHead(404);
 				res.end();
 			}
-			fs.readFile(filePath, function(e, content){
-				if (e){
+			fs.stat(filePath, function(err, stats){
+				var isDir = false;
+				if (err){
 					response.writeHead(500);
 					res.end();
+				} else if (stats.isFile() || (isDir = stats.isDirectory())){
+					if (isDir) filePath = filePath.replace(/(.)\/?$/i, '$1/index.html');
+					fs.readFile(filePath, function(e, content){
+						if (e){
+							response.writeHead(500);
+							res.end();
+						} else {
+							var ext = path.extname(filePath).slice(1);
+							res.writeHead(200, {'Content-Type': types[ext] || 'application/octet-stream'});
+							res.end(content, 'utf-8');
+						}
+					});
 				} else {
-					var ext = path.extname(filePath).slice(1);
-					res.writeHead(200, {'Content-Type': types[ext] || 'application/octet-stream'});
-					res.end(content, 'utf-8');
+					res.writeHead(404);
+					res.end();
 				}
 			});
 		} else {
