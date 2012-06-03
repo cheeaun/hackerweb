@@ -464,6 +464,9 @@ header.fake,
 	background-position: top right;
 }
 
+#view-home .tableview-links li>a{
+	min-height: 70px;
+}
 #view-home .tableview-links li>a[href^=#/item]{
 	-webkit-touch-callout: none;
 }
