@@ -554,7 +554,7 @@
 					item.url = item.id ? ('#/item/' + item.id) : item.url;
 				} else {
 					if (item.type == 'link') item.detail_disclosure = true;
-					if (item.type == 'ask') item.disclosure = true;
+					if (/^#\//.test(item.url)) item.disclosure = true;
 				}
 				item.i = i++;
 				item.i_point = item.points == 1 ? 'point' : 'points';
