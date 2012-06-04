@@ -633,6 +633,7 @@
 		var viewSection = d.querySelector('#view-comments section');
 		var postContentSection = viewSection.querySelector('.post-content');
 		var commentsSection = viewSection.querySelector('.comments');
+		if (!commentsSection) return;
 		var viewSectionHeight = viewSection.offsetHeight;
 		commentsSection.style.minHeight = 'auto';
 		if (commentsSection.scrollHeight <= viewSectionHeight){
