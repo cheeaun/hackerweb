@@ -460,7 +460,7 @@
 				}
 			} else if (/^#\//.test(target.getAttribute('href'))){ // "local" links
 				location.hash = target.hash;
-			} else if (target.href){
+			} else if (target.href && isWideScreen){
 				w.open(target.href);
 			}
 		}
