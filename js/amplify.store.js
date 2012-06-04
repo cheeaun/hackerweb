@@ -1,15 +1,15 @@
 /*!
  * Amplify Store - Persistent Client-Side Storage @VERSION
- * 
+ *
  * Copyright 2011 appendTo LLC. (http://appendto.com/team)
  * Dual licensed under the MIT or GPL licenses.
  * http://appendto.com/open-source-licenses
- * 
+ *
  * http://amplifyjs.com
  */
 (function( amplify, undefined ) {
 
-var store = amplify.store = function( key, value, options, type ) {
+var store = amplify.store = function( key, value, options ) {
 	var type = store.type;
 	if ( options && options.type && options.type in store.types ) {
 		type = options.type;
@@ -30,9 +30,9 @@ store.addType = function( type, storage ) {
 		options.type = type;
 		return store( key, value, options );
 	};
-}
+};
 store.error = function() {
-	return "amplify.store quota exceeded"; 
+	return "amplify.store quota exceeded";
 };
 
 var rprefix = /^__amplify__/;
@@ -112,11 +112,14 @@ function createFromStorageInterface( storageType, storage ) {
 // localStorage + sessionStorage
 // IE 8+, Firefox 3.5+, Safari 4+, Chrome 4+, Opera 10.5+, iPhone 2+, Android 2+
 for ( var webStorageType in { localStorage: 1, sessionStorage: 1 } ) {
-	// try/catch for file protocol in Firefox
+	// try/catch for file protocol in Firefox and Private Browsing in Safari 5
 	try {
-		if ( window[ webStorageType ].getItem ) {
-			createFromStorageInterface( webStorageType, window[ webStorageType ] );
-		}
+		// Safari 5 in Private Browsing mode exposes localStorage
+		// but doesn't allow storing data, so we attempt to store and remove an item.
+		// This will unfortunately give us a false negative if we're at the limit.
+		window[ webStorageType ].setItem( "__amplify__", "x" );
+		window[ webStorageType ].removeItem( "__amplify__" );
+		createFromStorageInterface( webStorageType, window[ webStorageType ] );
 	} catch( e ) {}
 }
 
@@ -195,7 +198,7 @@ if ( !store.types.localStorage && window.globalStorage ) {
 		// http://www.w3.org/TR/REC-xml/#NT-Name
 		// simplified to assume the starting character is valid
 		// also removed colon as it is invalid in HTML attribute names
-		key = key.replace( /[^-._0-9A-Za-z\xb7\xc0-\xd6\xd8-\xf6\xf8-\u037d\u37f-\u1fff\u200c-\u200d\u203f\u2040\u2070-\u218f]/g, "-" );
+		key = key.replace( /[^\-._0-9A-Za-z\xb7\xc0-\xd6\xd8-\xf6\xf8-\u037d\u37f-\u1fff\u200c-\u200d\u203f\u2040\u2070-\u218f]/g, "-" );
 		// adjust invalid starting character to deal with our simplified sanitization
 		key = key.replace( /^-/, "_-" );
 
