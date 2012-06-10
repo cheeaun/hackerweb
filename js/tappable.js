@@ -3,7 +3,7 @@
   if (typeof define === 'function' && define.amd){
     // AMD
     define('tappable', [], function(){
-      factory( root, window.document );
+      factory(root, window.document);
       return root.tappable;
     });
   } else {
@@ -11,24 +11,10 @@
     factory(root, window.document);
   }
 }(this, function(w, d){
-  
-  var matchesSelector = function(node, selector){
-      var root = d.documentElement,
-        matches = root.matchesSelector || root.mozMatchesSelector || root.webkitMatchesSelector || root.msMatchesSelector;
-      return matches.call(node, selector);
-    },
-    closest = function(node, selector){
-      var matches = false;
-      do {
-        matches = matchesSelector(node, selector);
-      } while (!matches && (node = node.parentNode) && node.ownerDocument);
-      return matches ? node : false;
-    };
 
   var abs = Math.abs,
     noop = function(){},
     defaults = {
-      containerElement: d.body,
       noScroll: false,
       activeClass: 'tappable-active',
       onTap: noop,
@@ -80,6 +66,18 @@
         return;
       }
       el.className = el.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)'), '$1');
+    },
+    matchesSelector = function(node, selector){
+      var root = d.documentElement,
+        matches = root.matchesSelector || root.mozMatchesSelector || root.webkitMatchesSelector || root.msMatchesSelector;
+      return matches.call(node, selector);
+    },
+    closest = function(node, selector){
+      var matches = false;
+      do {
+        matches = matchesSelector(node, selector);
+      } while (!matches && (node = node.parentNode) && node.ownerDocument);
+      return matches ? node : false;
     };
 
   w.tappable = function(selector, opts){
@@ -87,11 +85,11 @@
     var options = {};
     for (var key in defaults) options[key] = opts[key] || defaults[key];
     
-    var el = options.containerElement,
-      startX,
-      startY,
+    var el = options.containerElement || d.body,
       startTarget,
       prevTarget,
+      startX,
+      startY,
       elBound,
       cancel = false,
       moveOut = false,
@@ -205,18 +203,26 @@
       
       prevTarget = startTarget;
       startTarget = null;
+      setTimeout(function(){
+        startX = startY = null;
+      }, 400);
     }, false);
     
     el.addEventListener('touchcancel', function(e){
       if (!startTarget) return;
       removeClass(startTarget, activeClass);
-      startTarget = null;
+      startTarget = startX = startY = null;
       options.onCancel.call(el, e);
     }, false);
     
     if (!options.allowClick) el.addEventListener('click', function(e){
       var target = closest(e.target, selector);
-      if (target) e.preventDefault();
+      if (target){
+        e.preventDefault();
+      } else if (startX && startY && Math.abs(e.clientX - startX) < 25 && Math.abs(e.clientY - startY) < 25){
+        e.stopPropagation();
+        e.preventDefault();
+      }
     }, false);
   };
 
