@@ -293,8 +293,10 @@
 					viewSection.innerHTML = '';
 					if (isWideScreen) viewBackButton.style.display = 'none';
 					if (post){
-						$commentsScroll.classList.remove('loading'); // Happens when the previous selected comments are still loading
-						loadPost(post, id);
+						setTimeout(function(){
+							$commentsScroll.classList.remove('loading'); // Happens when the previous selected comments are still loading
+							loadPost(post, id);
+						}, 25);
 					} else {
 						$commentsScroll.classList.add('loading');
 						hnapi.item(id, function(data){
@@ -323,7 +325,9 @@
 			prevRoute = currentRoute;
 			currentRoute = location.hash;
 			amplify.store('hacker-hash', currentRoute);
-			_gaq.push(['_trackPageview', location.pathname + currentRoute]);
+			setTimeout(function(){
+				_gaq.push(['_trackPageview', location.pathname + currentRoute]);
+			}, 25);
 		},
 		notfound: function(){
 			location.hash = '/';
