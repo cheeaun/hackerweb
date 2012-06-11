@@ -525,6 +525,7 @@
 	});
 
 	PubSub.subscribe('updateCurrentStory', function(msg, id){
+		if (!isWideScreen) return;
 		if (!id) id = (location.hash.match(/item\/(\d+)/) || [,''])[1];
 		var homeView = $('view-home');
 		var selectedLink = homeView.querySelector('a[href].selected');
