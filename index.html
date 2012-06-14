@@ -17,11 +17,11 @@ if (location.hostname == 'cheeaun.github.com'){
 	}(document, 'script'));
 	window.onerror = function(msg, url, line){
 		// References: https://gist.github.com/1878283 https://github.com/h5bp/html5-boilerplate/wiki/ga-augments
-		url = url || location.href;
-		if (line) url += ':' + line;
+		var file = url || location.href;
+		if (line) file += ':' + line;
 		if (msg.target && msg.type) msg = msg.type;
 		if (!msg.indexOf) msg = 'Non-string, non-event error: ' + (typeof msg);
-		_gaq.push(['_trackEvent', 'Errors', msg, url, null, false]);
+		_gaq.push(['_trackEvent', 'Errors', msg, file, null, false]);
 	};
 }
 </script>
