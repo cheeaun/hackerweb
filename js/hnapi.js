@@ -23,33 +23,48 @@
 					error(e);
 				}
 			} else {
-				var s = document.createElement('script'),
+				var d = w.document,
+					s = d.createElement('script'),
 					callback = 'callback' + date();
 				w[callback] = success;
 				s.onerror = error;
 				s.src = url + '?callback=' + callback;
-				document.body.appendChild(s);
+				d.body.appendChild(s);
 			}
 		};
 	
 	var hnapi = {
 		
-		url: 'http://node-hnapi.herokuapp.com/',
-		
+		url: 'http://node-hnapi.herokuapp.com/', // Heroku
+		url2: 'http://node-hnapi.jit.su/', // Nodejitsu
+		// Note: Nodejitsu is the backup for now, in case Heroku is down (once in a while)
+
 		news: function(success, error){
-			req(hnapi.url + 'news' , success, error);
+			var path = 'news';
+			req(hnapi.url + path, success, function(){
+				req(hnapi.url2 + path, success, error);
+			});
 		},
 		
 		news2: function(success, error){
-			req(hnapi.url + 'news2' , success, error);
+			var path = 'news2';
+			req(hnapi.url + path, success, function(){
+				req(hnapi.url2 + path, success, error);
+			});
 		},
 		
 		item: function(id, success, error){
-			req(hnapi.url + 'item/' + id, success, error);
+			var path = 'item/' + id;
+			req(hnapi.url + path, success, function(){
+				req(hnapi.url2 + path, success, error);
+			});
 		},
 
 		comments: function(id, success, error){
-			req(hnapi.url + 'comments/' + id, success, error);
+			var path = 'comments/' + id;
+			req(hnapi.url + path, success, function(){
+				req(hnapi.url2 + path, success, error);
+			});
 		}
 		
 	};
