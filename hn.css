@@ -1365,6 +1365,14 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 	}
+	#view-about > .scroll.striped{
+		background-color: #e2e5ea;
+		background-image: -webkit-linear-gradient(top, #e2e5ea, #d0d2d8);
+		background-image: -moz-linear-gradient(top, #e2e5ea, #d0d2d8);
+		background-image: -ms-linear-gradient(top, #e2e5ea, #d0d2d8);
+		background-image: -o-linear-gradient(top, #e2e5ea, #d0d2d8);
+		background-image: linear-gradient(top, #e2e5ea, #d0d2d8);
+	}
 	#view-about > .scroll > section{
 		padding: 21px 22px;
 	}
