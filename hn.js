@@ -636,14 +636,18 @@
 
 	PubSub.subscribe('adjustCommentsSection', function(){
 		var viewSection = d.querySelector('#view-comments section');
+		if (!viewSection) return;
 		var postContentSection = viewSection.querySelector('.post-content');
 		var commentsSection = viewSection.querySelector('.comments');
 		if (!commentsSection) return;
-		var viewSectionHeight = viewSection.offsetHeight;
-		commentsSection.style.minHeight = 'auto';
-		if (commentsSection.scrollHeight <= viewSectionHeight){
-			commentsSection.style.minHeight = (viewSectionHeight - postContentSection.offsetHeight + 1) + 'px';
+		var minHeight = viewSection.offsetHeight - postContentSection.offsetHeight + 1;
+		var style = $('comment-section-style');
+		if (!style){
+			style = d.createElement('style');
+			style.id = 'comment-section-style';
+			d.head.appendChild(style);
 		}
+		style.textContent = '.view section.comments{min-height: ' + minHeight + 'px;}';
 	});
 
 	window.addEventListener('resize', function(){
