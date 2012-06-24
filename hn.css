@@ -12,6 +12,7 @@ body{
 	overflow: hidden;
 	position: relative;
 	word-wrap: break-word;
+	-webkit-text-size-adjust: none;
 }
 #apploader{
 	position: absolute;
@@ -1253,7 +1254,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		padding: 4px;
 	}
 	.header-button button{
-		font-size: 12px;
 		height: 24px;
 		line-height: 18px;
 		border-width: 2px 4px;
