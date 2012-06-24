@@ -1418,6 +1418,9 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	#view-about > .scroll > section{
 		padding: 21px 22px;
 	}
+	#view-about .grouped-tableview{
+		font-size: 14px;
+	}
 	#view-comments{
 		left: 281px;
 		right: 0;
