@@ -35,12 +35,17 @@
 	{{/has_content}}
 </div>
 <section class="comments">
-	{{#has_comments}}
-		<ul>
-			{{>comments_list}}
-		</ul>
-	{{/has_comments}}
-	{{^has_comments}}
-		<p class="no-comments">No comments.</p>
-	{{/has_comments}}
+	{{#loading_comments}}
+		<div class="loader">Loading&hellip;</div>
+	{{/loading_comments}}
+	{{^loading_comments}}
+		{{#has_comments}}
+			<ul>
+				{{>comments_list}}
+			</ul>
+		{{/has_comments}}
+		{{^has_comments}}
+				<p class="no-comments">No comments.</p>
+		{{/has_comments}}
+	{{/loading_comments}}
 </section>
