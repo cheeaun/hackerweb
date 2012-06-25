@@ -391,9 +391,6 @@
 			prevRoute = currentRoute;
 			currentRoute = location.hash;
 			amplify.store('hacker-hash', currentRoute);
-			setTimeout(function(){
-				_gaq.push(['_trackPageview', location.pathname + currentRoute]);
-			}, 25);
 		},
 		notfound: function(){
 			location.hash = '/';
