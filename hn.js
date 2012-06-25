@@ -90,6 +90,14 @@
 		},
 		getScreenState = function(){
 			return /wide/i.test(w.getComputedStyle(body,':after').getPropertyValue('content')) ? 'wide' : 'narrow';
+		},
+		// Very basic object cloning, not deep.
+		clone = function(obj){
+			var target = {};
+			for (var i in obj){
+				if (obj.hasOwnProperty(i)) target[i] = obj[i];
+			}
+			return target;
 		};
 
 	// Wide screen state
@@ -193,8 +201,9 @@
 					currentItemID = id;
 					var post = amplify.store.sessionStorage('hacker-item-' + id),
 						$commentsScroll = view.querySelector('.scroll'),
-						loadComments = function(data, id){
-							if (!data || data.error) return;
+						loadComments = function(_data, id){
+							if (!_data || _data.error) return;
+							var data = clone(_data);
 							amplify.store.sessionStorage('hacker-comments-' + id, data);
 							var ul = viewSection.querySelector('.comments>ul');
 							if (!ul.querySelector('.more-link-container')){
@@ -216,8 +225,9 @@
 							};
 							loadMoreComments(data.more_comments_id);
 						},
-						loadPost = function(data, id){
-							var tmpl1 = tmpl('post-comments'),
+						loadPost = function(_data, id){
+							var data = clone(_data),
+								tmpl1 = tmpl('post-comments'),
 								tmpl2 = tmpl('comments'),
 								a = d.createElement('a');
 							// If "local" link, link to Hacker News web site
@@ -494,7 +504,8 @@
 		},
 		onTap: function(e, target){
 			if (target.classList.contains('more-link')){
-				var loadNews2 = function(data){
+				var loadNews2 = function(_data){
+					var data = _data.slice();
 					var targetParent = target.parentNode;
 					targetParent.parentNode.removeChild(targetParent);
 					var html = markupNews(data, 31);
@@ -683,7 +694,8 @@
 			});
 			return html;
 		},
-		loadNews = function(data){
+		loadNews = function(_data){
+			var data = _data.slice();
 			var html = markupNews(data);
 			html += '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>';
 			$hnlist.innerHTML = html;
