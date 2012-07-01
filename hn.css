@@ -395,7 +395,7 @@ header.fake,
 	background: transparent url(images/disclosure-indicator.png) no-repeat left center;
 	background-size: 20px auto;
 	width: 10px;
-	margin: 0 11px;
+	margin: 0 10px;
 }
 .tableview-links li>a.disclosure.tappable-active:after{
 	background-position: right center;
@@ -589,18 +589,22 @@ ol.grouped-tableview li:last-child>a{
 }
 ul.grouped-tableview-links li>a.disclosure,
 ol.grouped-tableview-links li>a.disclosure{
-	position: relative;
+	-webkit-box-align: center;
+	-moz-box-align: center;
+	box-align: center;
 }
 ul.grouped-tableview-links li>a.disclosure:after,
 ol.grouped-tableview-links li>a.disclosure:after{
 	content: '';
-	position: absolute;
-	top: 0;
-	right: 10px;
-	width: 10px;
-	height: 100%;
-	background: transparent url(images/disclosure-indicator.png) no-repeat left center;
-	background-size: 20px auto;
+	display: -webkit-box;
+	display: -moz-box;
+	display: box;
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+	height: 13px;
+	background: transparent url(images/disclosure-indicator-2.png) no-repeat top right;
+	background-size: 10px 26px;
 }
 ul.grouped-tableview-links li>a *,
 ol.grouped-tableview-links li>a *{
@@ -619,7 +623,7 @@ ol.grouped-tableview-links li>a.tappable-active *{
 }
 ul.grouped-tableview-links li>a.disclosure.tappable-active:after,
 ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
-	background-position: right center;
+	background-position: bottom right;
 }
 
 .view .post-content{
