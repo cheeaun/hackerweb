@@ -181,7 +181,7 @@
 					if (!currentView){
 						hideAllViews();
 						view.classList.remove('hidden');
-					} else if (currentView != 'comments') {
+					} else if (currentView != 'comments'){
 						slide({
 							in: view,
 							out: $('view-' + currentView),
