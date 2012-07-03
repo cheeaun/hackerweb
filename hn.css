@@ -1,6 +1,5 @@
 ﻿html{
 	height: 100%;
-	overflow: hidden;
 }
 body{
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -199,7 +198,7 @@ header.fake,
 	text-align: center;
 }
 .view>.scroll.white{
-	background: #fff none !important;
+	background: #fff none;
 }
 .view>.scroll>section{
 	-webkit-box-flex: 1;
@@ -1277,6 +1276,9 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 
 /* Widescreen (Tablet, Desktop) */
 @media only screen and (min-width: 640px){
+	html{
+		overflow: hidden;
+	}
 	body:after{
 		content: 'wide';
 		display: none;
@@ -1294,6 +1296,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		background-size: 10px 10px;
 		background-position: bottom;
 		background-repeat: repeat-x;
+		overflow: hidden;
 	}
 	#apploader{
 		display: none;

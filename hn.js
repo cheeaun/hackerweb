@@ -142,7 +142,9 @@
 				viewComments.querySelector('section').innerHTML = '<div class="view-blank-state-text">No Story Selected.</div>';
 				viewComments.querySelector('header h1').innerHTML = '';
 				viewComments.querySelector('header a.header-back-button').style.display = 'none';
-				viewComments.querySelector('.scroll').classList.remove('white');
+				var viewScrollClass = viewComments.querySelector('.scroll').classList;
+				viewScrollClass.remove('white');
+				viewScrollClass.add('striped');
 				delete viewComments.dataset.id;
 				PubSub.publish('updateCurrentStory');
 			}
@@ -297,7 +299,9 @@
 							if (isWideScreen) viewBackButton.style.display = '';
 
 							// Adjust comments section height
-							PubSub.publish('adjustCommentsSection');
+							setTimeout(function(){
+								PubSub.publishSync('adjustCommentsSection');
+							}, isWideScreen ? 1 : 360); // >350ms, which is the sliding animation duration
 
 							// Grab 'More' comments
 							if (data.more_comments_id){
@@ -316,11 +320,11 @@
 					if (post){
 						if (view.dataset.id == id && !isWideScreen) return;
 						$commentsScroll.querySelector('section').scrollTop = 0;
-						setTimeout(function(){
-							$commentsScroll.classList.remove('loading'); // Happens when the previous selected comments are still loading
-							$commentsScroll.classList.add('white');
-							loadPost(post, id);
-						}, 25);
+						var commentsScrollClass = $commentsScroll.classList;
+						commentsScrollClass.remove('loading'); // Happens when the previous selected comments are still loading
+						commentsScrollClass.remove('striped');
+						commentsScrollClass.add('white');
+						loadPost(post, id);
 					} else {
 						// Render the post data concurrently while loading the comments
 						// if the data is in 'news' or 'news2' cache
@@ -346,16 +350,17 @@
 								}
 							}
 						}
+						var commentsScrollClass = $commentsScroll.classList;
 						if (post){
 							post.loading_comments = true;
-							setTimeout(function(){
-								$commentsScroll.classList.add('white');
-								loadPost(post, id);
-							}, 25); // Hopefully the AJAX request is slower than 25ms :D
+							commentsScrollClass.remove('striped');
+							commentsScrollClass.add('white');
+							loadPost(post, id);
 						} else {
 							viewHeading.innerHTML = '';
 							viewSection.innerHTML = '';
-							$commentsScroll.classList.remove('white');
+							commentsScrollClass.remove('white');
+							commentsScrollClass.add('striped');
 						}
 						$commentsScroll.classList.add('loading');
 						hnapi.item(id, function(data){
@@ -374,7 +379,8 @@
 								id: id,
 								data: data
 							});
-							$commentsScroll.classList.add('white');
+							commentsScrollClass.remove('striped');
+							commentsScrollClass.add('white');
 							loadPost(data, id);
 						}, errors.connectionError);
 					}
@@ -442,7 +448,7 @@
 	tappable('#view-home-refresh', {
 		noScroll: true,
 		onTap: function(e){
-			PubSub.publish('reloadNews', {
+			PubSub.publishSync('reloadNews', {
 				delay: 500 // Cheat a little to make user think that it's doing something
 			});
 		}
@@ -750,12 +756,12 @@
 		}
 	});
 
-	PubSub.publish('reloadNews');
+	PubSub.publishSync('reloadNews');
 	// Auto-reload news for some specific situations...
 	w.addEventListener('pageshow', function(){
 		setTimeout(function(){
 			if (currentView == 'home' && $hnlist.innerHTML && !amplify.store('hacker-news-cached')){
-				PubSub.publish('reloadNews');
+				PubSub.publishSync('reloadNews');
 			}
 		}, 1);
 	}, false);
@@ -777,10 +783,10 @@
 	});
 
 	window.addEventListener('resize', function(){
-		PubSub.publish('adjustCommentsSection');
+		PubSub.publishSync('adjustCommentsSection');
 	}, false);
 	window.addEventListener('orientationchange', function(){
-		PubSub.publish('adjustCommentsSection');
+		PubSub.publishSync('adjustCommentsSection');
 	}, false);
 	
 	// Some useful tips from http://24ways.org/2011/raising-the-bar-on-mobile
