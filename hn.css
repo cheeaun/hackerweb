@@ -482,6 +482,10 @@ header.fake,
 	background-position: top right;
 }
 
+#view-home,
+#view-about{
+	-webkit-user-select: none;
+}
 #view-home .tableview-links li>a{
 	min-height: 70px;
 }
@@ -642,6 +646,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-repeat: repeat-x, repeat;
 	background-position: bottom, top left;
 	-webkit-transform: translate3d(0,0,0);
+	-webkit-user-select: none;
 }
 /* Put some fake stripes at the top of post content, so when you scroll up, you see 'em. */
 .view .post-content:before{
@@ -857,6 +862,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	-ms-background-size: 10px 26px;
 	-o-background-size: 10px 26px;
 	background-size: 10px 26px;
+	-webkit-user-select: none;
 }
 .view section.comments button.comments-toggle.tappable-active{
 	color: #444;
