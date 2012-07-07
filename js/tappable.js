@@ -195,10 +195,7 @@
       
       var rightClick = e.which == 3 || e.button == 2;
       if (!cancel && !moveOut && !rightClick){
-        var target = startTarget;
-        setTimeout(function(){
-          options.onTap.call(el, e, target);
-        }, 1);
+        options.onTap.call(el, e, startTarget);
       }
       
       prevTarget = startTarget;
