@@ -441,12 +441,12 @@ header.fake,
 .tableview-links li>a.selected *{
 	color: #fff;
 }
-.tableview-links.list-tapped li>a.selected{
+.tableview-links.list-tapped li>a.selected:not(.tappable-active){
 	color: #000;
 	background-color: transparent;
 	background-repeat: no-repeat;
 }
-.tableview-links.list-tapped li>a.selected *{
+.tableview-links.list-tapped li>a.selected:not(.tappable-active) *{
 	color: #000;
 }
 .tableview-links li>a.detail-disclosure-button{
