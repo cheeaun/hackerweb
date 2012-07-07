@@ -614,8 +614,10 @@
 		if (!isWideScreen) return;
 		if (!id) id = (location.hash.match(/item\/(\d+)/) || [,''])[1];
 		var homeView = $('view-home');
-		var selectedLink = homeView.querySelector('a[href].selected');
-		if (selectedLink) selectedLink.classList.remove('selected');
+		var selectedLinks = homeView.querySelectorAll('a[href].selected');
+		for (var i=0, l=selectedLinks.length; i<l; i++){
+			selectedLinks[i].classList.remove('selected');
+		}
 		// If there's no ID, still clear the selected link
 		if (!id) return;
 		var link = homeView.querySelector('a[href*="item/' + id + '"]');
