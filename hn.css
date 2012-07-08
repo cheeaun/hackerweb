@@ -53,6 +53,7 @@ header.fake{
 }
 .view.hidden{
 	left: -9999px;
+	pointer-events: none;
 }
 header.fake,
 .view>header{
