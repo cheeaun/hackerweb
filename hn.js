@@ -8,6 +8,10 @@
 				views[i].classList.add('hidden');
 			}
 		},
+		flipWise = {
+			clockwise: ['flip-out-to-left', 'flip-in-from-left'],
+			anticlockwise: ['flip-out-to-right', 'flip-in-from-right']
+		},
 		flip = function(opts){
 			var inEl = opts.in,
 				outEl = opts.out,
@@ -15,10 +19,6 @@
 				outClass = outEl.classList,
 				direction = opts.direction,
 				fn = opts.fn,
-				flipWise = {
-					clockwise: ['flip-out-to-left', 'flip-in-from-left'],
-					anticlockwise: ['flip-out-to-right', 'flip-in-from-right']
-				},
 				wise = flipWise[direction],
 				reset = function(){
 					inEl.removeEventListener('webkitAnimationEnd', reset, false);
@@ -38,37 +38,39 @@
 			outClass.add(wise[0]);
 			inClass.add(wise[1]);
 		},
+		slideWise = {
+			rtl: ['slide-out-to-left', 'slide-in-from-right'],
+			ltr: ['slide-out-to-right', 'slide-in-from-left']
+		},
 		slide = function(opts){
 			var inEl = opts.in,
 				outEl = opts.out,
 				inClass = inEl.classList,
 				outClass = outEl.classList,
+				inHeader = inEl.getElementsByTagName('header')[0],
+				outHeader = outEl.getElementsByTagName('header')[0],
+				inHeaderClass = inHeader.classList,
+				outHeaderClass = outHeader.classList,
 				direction = opts.direction,
 				fn = opts.fn,
-				slideWise = {
-					rtl: ['slide-out-to-left', 'slide-in-from-right'],
-					ltr: ['slide-out-to-right', 'slide-in-from-left']
-				}
 				wise = slideWise[direction],
 				reset = function(){
-					inEl.removeEventListener('webkitAnimationEnd', reset, false);
 					outClass.add('hidden');
+					inEl.removeEventListener('webkitAnimationEnd', reset, false);
 					outClass.remove('sliding');
 					inClass.remove('sliding');
 					outClass.remove(wise[0]);
 					inClass.remove(wise[1]);
-					inHeader.classList.remove('transparent');
-					outHeader.classList.remove('transparent');
+					inHeaderClass.remove('transparent');
+					outHeaderClass.remove('transparent');
 					if (fn) fn.apply();
 				};
-			var inHeader = inEl.querySelector('header'),
-				outHeader = outEl.querySelector('header');
 			inClass.remove('hidden');
 			outClass.add('sliding');
 			inClass.add('sliding');
 			inEl.addEventListener('webkitAnimationEnd', reset, false);
-			inHeader.classList.add('transparent');
-			outHeader.classList.add('transparent');
+			inHeaderClass.add('transparent');
+			outHeaderClass.add('transparent');
 			outClass.add(wise[0]);
 			inClass.add(wise[1]);
 		},
