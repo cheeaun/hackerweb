@@ -780,7 +780,8 @@
 		}
 	});
 
-	PubSub.publishSync('reloadNews');
+	PubSub.publish('reloadNews');
+
 	// Auto-reload news for some specific situations...
 	w.addEventListener('pageshow', function(){
 		setTimeout(function(){
