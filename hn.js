@@ -509,7 +509,9 @@
 			if (!isWideScreen) return;
 			clearTimeout(listTappedDelay);
 			var ul = target.parentNode.parentNode;
-			ul.classList.remove('list-tapped');
+			setTimeout(function(){
+				ul.classList.remove('list-tapped');
+			}, 100);
 		},
 		onTap: function(e, target){
 			if (target.classList.contains('more-link')){
