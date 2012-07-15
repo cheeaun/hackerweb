@@ -168,7 +168,7 @@ header.fake,
 	box-flex: 1;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
-	background-color: #e2e7ed;
+	background-color: #fff;
 	display: -webkit-box;
 	display: -moz-box;
 	display: box;
@@ -197,9 +197,6 @@ header.fake,
 	color: #4c566c;
 	text-shadow: 0 1px #fff;
 	text-align: center;
-}
-.view>.scroll.white{
-	background: #fff none;
 }
 .view>.scroll>section{
 	-webkit-box-flex: 1;
@@ -230,7 +227,7 @@ header.fake,
 	-moz-animation: loading-sprite 1s step-start infinite;
 	animation: loading-sprite 1s step-start infinite;
 }
-.view>.scroll.white section .loader{
+.view>.scroll section .loader{
 	position: static;
 	display: none;
 	margin: 50px auto 0;
@@ -244,10 +241,10 @@ header.fake,
 .view>.scroll.loading>.loader{
 	display: block;
 }
-.view>.scroll.white.loading>.loader{
+#view-comments>.scroll.loading>.loader{
 	display: none;
 }
-.view>.scroll.white.loading section .loader{
+#view-comments>.scroll.loading section .loader{
 	display: table;
 }
 @-webkit-keyframes loading-sprite {
@@ -1592,7 +1589,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		-o-background-size: 1px 100%;
 		background-size: 1px 100%;
 	}
-	.view>.scroll.white section .loader{
+	#view-comments>.scroll section .loader{
 		margin: 100px auto 0;
 	}
 	.view .post-content{

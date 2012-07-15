@@ -243,7 +243,6 @@
 			var commentsScrollClass = $commentsScroll.classList;
 			commentsScrollClass.remove('loading'); // Happens when the previous selected comments are still loading
 			commentsScrollClass.remove('striped');
-			commentsScrollClass.add('white');
 			loadPost(post, id);
 		} else {
 			// Render the post data concurrently while loading the comments
@@ -274,12 +273,10 @@
 			if (post){
 				post.loading_comments = true;
 				commentsScrollClass.remove('striped');
-				commentsScrollClass.add('white');
 				loadPost(post, id);
 			} else {
 				viewHeading.innerHTML = '';
 				viewSection.innerHTML = '';
-				commentsScrollClass.remove('white');
 				commentsScrollClass.add('striped');
 			}
 			$commentsScroll.classList.add('loading');
@@ -300,7 +297,6 @@
 					data: data
 				});
 				commentsScrollClass.remove('striped');
-				commentsScrollClass.add('white');
 				loadPost(data, id);
 			}, currentView == 'comments' ? errors.connectionError : function(){});
 		}
@@ -336,7 +332,6 @@
 				viewComments.querySelector('header h1').innerHTML = '';
 				viewComments.querySelector('header a.header-back-button').style.display = 'none';
 				var viewScrollClass = viewComments.querySelector('.scroll').classList;
-				viewScrollClass.remove('white');
 				viewScrollClass.add('striped');
 				delete viewComments.dataset.id;
 				PubSub.publish('updateCurrentStory');
