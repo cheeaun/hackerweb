@@ -308,11 +308,19 @@ header.fake,
 	padding: 0;
 	list-style: none;
 	background-color: #fff;
-	border-bottom: 1px solid #e0e0e0;
+}
+.tableview:before{
+	content: '';
+	height: 0;
+	overflow: hidden;
+	display: block;
+	border-top: 1px solid #e0e0e0;
+	margin-top: -1px;
+	-webkit-transform: translate3d(0,0,0);
 }
 .tableview li{
 	display: block;
-	border-top: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
 	padding: 10px;
 }
 .tableview-links li{
