@@ -582,6 +582,7 @@
 		var comments = amplify.store.sessionStorage('hacker-comments-' + id);
 		if (comments){
 			var tmpl1 = tmpl('comments'),
+				tmpl2 = tmpl('comments'),
 				html = tmpl1.render(comments, {comments_list: tmpl1}),
 				li = target.parentNode,
 				ul = li.parentNode,
@@ -595,7 +596,7 @@
 				links[i].target = '_blank';
 			}
 
-			var subLis = ul.children;
+			var subLis = _ul.children;
 			for (var i=0, l=subLis.length; i<l; i++){
 				var subUl = subLis[i].getElementsByTagName('ul')[0];
 				var commentsCount = subUl.querySelectorAll('.metadata').length;
