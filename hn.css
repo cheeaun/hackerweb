@@ -842,34 +842,39 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	display: block;
 	width: 100%;
 	max-width: 300px;
-	height: 26px;
-	line-height: 26px;
+	height: 27px;
+	line-height: 27px;
 	cursor: pointer;
-	border: 0;
 	padding: 0 10px;
 	font-weight: bold;
-	color: #666;
-	background-color: #e0e0e0;
+	color: #808080;
 	border-radius: 6px;
-	text-shadow: 0 1px rgba(255,255,255,.75);
+	text-shadow: 0 1px #fff;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	margin: 2px auto 4px;
-	box-shadow: inset 0 0 1px rgba(0,0,0,.2), inset 0 1px rgba(0,0,0,.1);
-	background-image: -webkit-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
-	background-image: -moz-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
-	background-image: -ms-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
-	background-image: -o-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
-	background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
-	-webkit-background-size: 10px 26px;
-	-moz-background-size: 10px 26px;
-	-ms-background-size: 10px 26px;
-	-o-background-size: 10px 26px;
-	background-size: 10px 26px;
+	background-color: #dedede;
+	border: 1px solid #d9d9d9;
+	background-image: -webkit-linear-gradient(top, #fdfdfd, #dedede);
+	background-image: -moz-linear-gradient(top, #fdfdfd, #dedede);
+	background-image: -ms-linear-gradient(top, #fdfdfd, #dedede);
+	background-image: -o-linear-gradient(top, #fdfdfd, #dedede);
+	background-image: linear-gradient(top, #fdfdfd, #dedede);
+	-webkit-background-size: 10px 100%;
+	-moz-background-size: 10px 100%;
+	-ms-background-size: 10px 100%;
+	-o-background-size: 10px 100%;
+	background-size: 10px 100%;
 	-webkit-user-select: none;
 }
 .view section.comments button.comments-toggle.tappable-active{
 	color: #444;
-	background-color: #c0c0c0;
+	background-color: #c8c8c8;
+	border-color: #c8c8c8;
+	background-image: -webkit-linear-gradient(top, #f0f0f0, #c8c8c8);
+	background-image: -moz-linear-gradient(top, #f0f0f0, #c8c8c8);
+	background-image: -ms-linear-gradient(top, #f0f0f0, #c8c8c8);
+	background-image: -o-linear-gradient(top, #f0f0f0, #c8c8c8);
+	background-image: linear-gradient(top, #f0f0f0, #c8c8c8);
 }
 .view section.comments li.more-link-container{
 	padding: 0;
@@ -1503,6 +1508,47 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	.view section.comments p.no-comments{
 		font-size: 14px;
 		margin: 100px auto;
+	}
+	.view section.comments li.more-link-container{
+		padding: 15px;
+	}
+	.view section.comments li>a.more-link{
+		max-width: 300px;
+		height: 30px;
+		line-height: 30px;
+		padding: 0 10px;
+		color: #808080;
+		border-radius: 6px;
+		text-shadow: 0 1px #fff;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		margin: 2px auto 4px;
+		background-color: #dedede;
+		border: 1px solid #d9d9d9;
+		background-image: -webkit-linear-gradient(top, #fdfdfd, #dedede);
+		background-image: -moz-linear-gradient(top, #fdfdfd, #dedede);
+		background-image: -ms-linear-gradient(top, #fdfdfd, #dedede);
+		background-image: -o-linear-gradient(top, #fdfdfd, #dedede);
+		background-image: linear-gradient(top, #fdfdfd, #dedede);
+		-webkit-background-size: 10px 100%;
+		-moz-background-size: 10px 100%;
+		-ms-background-size: 10px 100%;
+		-o-background-size: 10px 100%;
+		background-size: 10px 100%;
+		background-repeat: repeat-x;
+		-webkit-user-select: none;
+	}
+	.view section.comments li>a.more-link.tappable-active{
+		color: #444;
+		background-color: #c8c8c8;
+		border-color: #c8c8c8;
+		background-image: -webkit-linear-gradient(top, #f0f0f0, #c8c8c8);
+		background-image: -moz-linear-gradient(top, #f0f0f0, #c8c8c8);
+		background-image: -ms-linear-gradient(top, #f0f0f0, #c8c8c8);
+		background-image: -o-linear-gradient(top, #f0f0f0, #c8c8c8);
+		background-image: linear-gradient(top, #f0f0f0, #c8c8c8);
+	}
+	.view section.comments li>a.more-link.tappable-active *{
+		color: #444;
 	}
 	.view .post-content:before{
 		height: 600px;
