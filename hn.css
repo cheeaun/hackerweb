@@ -827,8 +827,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 .view section.comments pre{
 	margin: 0 0 8px;
 	overflow: auto;
-	padding: 5px 0;
+	padding: .65em 0;
 	background-color: #eee;
+	border-radius: 3px;
+	box-shadow: inset 0 1px 1px #ddd;
 }
 .view section.comments p.no-comments{
 	text-align: center;
