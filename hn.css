@@ -206,7 +206,7 @@ header.fake,
 	overflow: auto;
 }
 .view>.scroll .loader{
-	display: none;
+	-webkit-user-select: none;
 	pointer-events: none;
 	margin: 0 0 0 -50px;
 	position: absolute;
@@ -227,25 +227,13 @@ header.fake,
 	-moz-animation: loading-sprite 1s step-start infinite;
 	animation: loading-sprite 1s step-start infinite;
 }
-.view>.scroll section .loader{
+.view>.scroll .comments .loader{
+	display: table;
 	position: static;
-	display: none;
 	margin: 50px auto 0;
 }
 .view>.scroll.striped .loader{
 	color: #2f343c;
-}
-.view>.scroll.loading{
-	background-color: transparent;
-}
-.view>.scroll.loading>.loader{
-	display: block;
-}
-#view-comments>.scroll.loading>.loader{
-	display: none;
-}
-#view-comments>.scroll.loading section .loader{
-	display: table;
 }
 @-webkit-keyframes loading-sprite {
 	0% { background-position: 0 0; }
@@ -291,6 +279,57 @@ header.fake,
 	83.33% { background-position: 0 -200px; }
 	91.67% { background-position: 0 -220px; }
 	100% { background-position: 0 0; }
+}
+.view>.scroll .load-error{
+	-webkit-user-select: none;
+	position: absolute;
+	top: 45%;
+	text-align: center;
+	width: 100%;
+	font-size: 16px;
+	color: #666;
+	line-height: 20px;
+	text-shadow: 0 1px #fff;
+}
+.view>.scroll .comments .load-error{
+	position: static;
+	margin: 50px 0 0;
+}
+.view>.scroll .load-error button{
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+	padding: 0 20px;
+	font-weight: bold;
+	color: #808080;
+	border-radius: 6px;
+	text-shadow: 0 1px #fff;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	margin: 6px auto 4px;
+	background-color: #dedede;
+	border: 1px solid #d9d9d9;
+	background-image: -webkit-linear-gradient(top, #fdfdfd, #dedede);
+	background-image: -moz-linear-gradient(top, #fdfdfd, #dedede);
+	background-image: -ms-linear-gradient(top, #fdfdfd, #dedede);
+	background-image: -o-linear-gradient(top, #fdfdfd, #dedede);
+	background-image: linear-gradient(top, #fdfdfd, #dedede);
+	-webkit-background-size: 10px 100%;
+	-moz-background-size: 10px 100%;
+	-ms-background-size: 10px 100%;
+	-o-background-size: 10px 100%;
+	background-size: 10px 100%;
+	-webkit-user-select: none;
+}
+.view>.scroll .load-error button.tappable-active{
+	color: #444;
+	background-color: #c8c8c8;
+	border-color: #c8c8c8;
+	background-image: -webkit-linear-gradient(top, #f0f0f0, #c8c8c8);
+	background-image: -moz-linear-gradient(top, #f0f0f0, #c8c8c8);
+	background-image: -ms-linear-gradient(top, #f0f0f0, #c8c8c8);
+	background-image: -o-linear-gradient(top, #f0f0f0, #c8c8c8);
+	background-image: linear-gradient(top, #f0f0f0, #c8c8c8);
 }
 .view-blank-state-text{
 	color: #666;
@@ -419,8 +458,8 @@ header.fake,
 	position: relative;
 	pointer-events: none;
 }
-.view>.scroll .tableview-links li>a.more-link.loading .loader{
-	display: block;
+.view>.scroll .tableview-links li>a.more-link .loader{
+	display: none;
 	position: absolute;
 	top: 50%;
 	left: auto;
@@ -429,13 +468,9 @@ header.fake,
 	padding-left: 0;
 	width: 20px;
 	height: 20px;
-	background: transparent url(images/activity-indicator.png) no-repeat;
-	-webkit-background-size: 20px auto;
-	-moz-background-size: 20px auto;
-	background-size: 20px auto;
-	-webkit-animation: loading-sprite 1s step-start infinite;
-	-moz-animation: loading-sprite 1s step-start infinite;
-	animation: loading-sprite 1s step-start infinite;
+}
+.view>.scroll .tableview-links li>a.more-link.loading .loader{
+	display: block;
 }
 .tableview-links li>a.tappable-active,
 .tableview-links li>a.selected{
@@ -653,6 +688,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-position: bottom, top left;
 	-webkit-transform: translate3d(0,0,0);
 	-webkit-user-select: none;
+	min-height: 5em;
 }
 /* Put some fake stripes at the top of post content, so when you scroll up, you see 'em. */
 .view .post-content:before{
@@ -795,6 +831,9 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	padding: 15px;
 	border-bottom: 1px solid #ddd;
 }
+.view section.comments ul>li:last-child{
+	border-bottom: 0;
+}
 .view section.comments ul ul li{
 	padding: 0 0 0 15px;
 	border: 0;
@@ -839,9 +878,9 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 }
 .view section.comments p.no-comments{
 	text-align: center;
-	color: #aaa;
-	font-weight: bold;
 	margin: 50px 0;
+	font-size: 16px;
+	color: #666;
 }
 .view section.comments button.comments-toggle{
 	display: block;
@@ -1511,7 +1550,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		font-weight: normal;
 	}
 	.view section.comments p.no-comments{
-		font-size: 14px;
 		margin: 100px auto;
 	}
 	.view section.comments li.more-link-container{
@@ -1584,7 +1622,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	.view section.comments{
 		font-size: 14px;
 	}
-	.view > .scroll.striped{
+	#view-comments>.scroll{
 		background-color: #fcfcfc;
 		background-image: -webkit-linear-gradient(top, #fcfcfc, #dadce0);
 		background-image: -moz-linear-gradient(top, #fcfcfc, #dadce0);
@@ -1597,8 +1635,17 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		-o-background-size: 1px 100%;
 		background-size: 1px 100%;
 	}
-	#view-comments>.scroll section .loader{
+	#view-comments>.scroll .comments{
+		background-color: #fff;
+	}
+	#view-comments>.scroll .comments .loader,
+	#view-comments>.scroll .load-error{
 		margin: 100px auto 0;
+	}
+	#view-comments>.scroll .load-error{
+		font-size: 16px;
+		color: #666;
+		font-weight: normal;
 	}
 	.view .post-content{
 		background-color: #dedfe5;

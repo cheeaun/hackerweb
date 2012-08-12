@@ -1,23 +1,25 @@
 <div class="post-content">
-	<header>
-		<h1>
-			<a href="{{url}}" target="_blank">{{title}}<br>
-			{{#user}}
-				{{#domain}}<span class="link-text">{{domain}}</span>{{/domain}}
-			{{/user}}
-			</a>
-		</h1>
-		<p class="metadata">
-			{{#user}}
-				<span class="inline-block">{{points}} {{i_point}} by {{user}}</span> 
-				<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} {{i_comment}}{{/comments_count}}</span>
-			{{/user}}
-			{{^user}}
-				<span class="inline-block">{{time_ago}}</span>
-			{{/user}}
-			<a href="{{hn_url}}" target="_blank" class="external-link">{{short_hn_url}}</a>
-		</p>
-	</header>
+	{{#has_post}}
+		<header>
+			<h1>
+				<a href="{{url}}" target="_blank">{{title}}<br>
+				{{#user}}
+					{{#domain}}<span class="link-text">{{domain}}</span>{{/domain}}
+				{{/user}}
+				</a>
+			</h1>
+			<p class="metadata">
+				{{#user}}
+					<span class="inline-block">{{points}} {{i_point}} by {{user}}</span> 
+					<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} {{i_comment}}{{/comments_count}}</span>
+				{{/user}}
+				{{^user}}
+					<span class="inline-block">{{time_ago}}</span>
+				{{/user}}
+				<a href="{{hn_url}}" target="_blank" class="external-link">{{short_hn_url}}</a>
+			</p>
+		</header>
+	{{/has_post}}
 	{{#has_content}}
 		<section class="grouped-tableview">
 			{{{content}}}
@@ -35,10 +37,14 @@
 	{{/has_content}}
 </div>
 <section class="comments">
-	{{#loading_comments}}
+	{{#loading}}
 		<div class="loader">Loading&hellip;</div>
-	{{/loading_comments}}
-	{{^loading_comments}}
+	{{/loading}}
+	{{#load_error}}
+		<div class="load-error">Couldn't load comments.<br><button>Try again</button></div>
+	{{/load_error}}
+	{{^loading}}
+	{{^load_error}}
 		{{#has_comments}}
 			<ul>
 				{{>comments_list}}
@@ -47,5 +53,6 @@
 		{{^has_comments}}
 				<p class="no-comments">No comments.</p>
 		{{/has_comments}}
-	{{/loading_comments}}
+	{{/load_error}}
+	{{/loading}}
 </section>

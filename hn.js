@@ -1,7 +1,6 @@
 (function(w, d){
 	var body = d.body,
 		$ = function(id){ return d.getElementById(id) },
-		$hnlist = $('hnlist'),
 		hideAllViews = function(){
 			var views = d.querySelectorAll('.view');
 			for (var i=0, l=views.length; i<l; i++){
@@ -143,8 +142,6 @@
 				viewComments.querySelector('section').innerHTML = '<div class="view-blank-state-text">No Story Selected.</div>';
 				viewComments.querySelector('header h1').innerHTML = '';
 				viewComments.querySelector('header a.header-back-button').style.display = 'none';
-				var viewScrollClass = viewComments.querySelector('.scroll').classList;
-				viewScrollClass.add('striped');
 				delete viewComments.dataset.id;
 				PubSub.publish('updateCurrentStory');
 			}
@@ -193,14 +190,15 @@
 					view.classList.remove('hidden');
 					$('view-home').classList.remove('hidden');
 					PubSub.publish('updateCurrentStory', id);
+					view.querySelector('header a.header-back-button').style.display = '';
 				}
+
 				currentView = 'comments';
 				if (id && view.dataset.id != id){
 					view.dataset.id = id;
 
 					var viewHeading = view.querySelector('header h1'),
-						viewSection = view.querySelector('section'),
-						viewBackButton = view.querySelector('header a.header-back-button');
+						viewSection = view.querySelector('section');
 
 					var post = amplify.store.sessionStorage('hacker-item-' + id),
 						$commentsScroll = view.querySelector('.scroll'),
@@ -230,8 +228,17 @@
 						},
 						loadPost = function(_data, id){
 							var data = clone(_data),
-								tmpl1 = tmpl('post-comments'),
-								tmpl2 = tmpl('comments'),
+								tmpl1 = tmpl('post-comments');
+
+							data.has_post = !!data.title;
+							if (!data.has_post){
+								viewHeading.innerHTML = '';
+								viewSection.innerHTML = tmpl1.render(data);
+								PubSub.publish('adjustCommentsSection');
+								return;
+							}
+
+							var tmpl2 = tmpl('comments'),
 								a = d.createElement('a');
 							// If "local" link, link to Hacker News web site
 							if (/^item/i.test(data.url)){
@@ -297,11 +304,9 @@
 							}
 							delete div;
 
-							if (isWideScreen) viewBackButton.style.display = '';
-
 							// Adjust comments section height
 							setTimeout(function(){
-								// PubSub.publishSync('adjustCommentsSection');
+								PubSub.publishSync('adjustCommentsSection');
 							}, isWideScreen ? 1 : 360); // >350ms, which is the sliding animation duration
 
 							// Grab 'More' comments
@@ -317,12 +322,9 @@
 								}
 							}
 						};
-					if (isWideScreen) viewBackButton.style.display = 'none';
+
 					if (post){
 						$commentsScroll.querySelector('section').scrollTop = 0;
-						var commentsScrollClass = $commentsScroll.classList;
-						commentsScrollClass.remove('loading'); // Happens when the previous selected comments are still loading
-						commentsScrollClass.remove('striped');
 						loadPost(post, id);
 					} else {
 						// Render the post data concurrently while loading the comments
@@ -349,24 +351,27 @@
 								}
 							}
 						}
-						var commentsScrollClass = $commentsScroll.classList;
 						if (post){
-							post.loading_comments = true;
-							commentsScrollClass.remove('striped');
+							post.loading = true;
 							loadPost(post, id);
 						} else {
-							viewHeading.innerHTML = '';
-							viewSection.innerHTML = '';
-							commentsScrollClass.add('striped');
+							loadPost({loading: true}, id);
 						}
-						$commentsScroll.classList.add('loading');
+						var showError = function(){
+							if (post){
+								delete post.loading;
+								post.load_error = true;
+								loadPost(post, id);
+							} else {
+								loadPost({load_error: true}, id);
+							}
+						};
 						hnapi.item(id, function(data){
 							// Avoiding the case where the wrong post is loaded when connection is slow
 							if (view.dataset.id != id) return;
 
-							$commentsScroll.classList.remove('loading');
 							if (!data || data.error && currentView == 'comments'){
-								errors.serverError();
+								showError();
 								return;
 							}
 							amplify.store.sessionStorage('hacker-item-' + id, data, {
@@ -376,9 +381,11 @@
 								id: id,
 								data: data
 							});
-							commentsScrollClass.remove('striped');
 							loadPost(data, id);
-						}, currentView == 'comments' ? errors.connectionError : function(){});
+						}, function(e){
+							if (view.dataset.id != id) return;
+							showError();
+						});
 					}
 				}
 			}
@@ -386,7 +393,7 @@
 	};
 	
 	var prevRoute, currentRoute;
-	Router(routes).configure({
+	var router = Router(routes).configure({
 		on: function(){
 			prevRoute = currentRoute;
 			currentRoute = location.hash;
@@ -509,7 +516,7 @@
 					var targetParent = target.parentNode;
 					targetParent.parentNode.removeChild(targetParent);
 					var html = markupNews(data, 31);
-					$hnlist.insertAdjacentHTML('beforeend', html);
+					$('hnlist').insertAdjacentHTML('beforeend', html);
 				};
 				var news2 = amplify.store('hacker-news2');
 				target.classList.add('loading');
@@ -606,6 +613,10 @@
 			// TODO: Need funnier error message than this.
 			alert('Oops, the comments have expired.');
 		}
+	});
+	tappable('#view-comments .load-error button', function(){
+		delete $('view-comments').dataset.id; // Force re-dispatch of route
+		router.dispatch('on', location.hash.slice(1));
 	});
 
 	PubSub.subscribe('updateCurrentStory', function(msg, id){
@@ -713,7 +724,9 @@
 			var data = _data.slice();
 			var html = markupNews(data);
 			html += '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>';
-			$hnlist.innerHTML = html;
+			$homeScrollSection.innerHTML = '<ul class="tableview tableview-links" id="hnlist">'
+				+ html;
+				+ '</ul>';
 			PubSub.publish('updateCurrentStory');
 		},
 		loadingNews = false;
@@ -722,16 +735,15 @@
 		if (loadingNews) return;
 		if (!opts) opts = {};
 		var cached = amplify.store('hacker-news-cached');
+		var tmpl1 = tmpl('stories-load');
 		if (cached){
 			var news = amplify.store('hacker-news');
 			var delay = opts.delay;
 			if (delay){
 				loadingNews = true;
-				$hnlist.innerHTML = '';
-				$homeScroll.classList.add('loading');
+				$homeScrollSection.innerHTML = tmpl1.render({loading: true});
 				setTimeout(function(){
 					loadingNews = false;
-					$homeScroll.classList.remove('loading');
 					loadNews(news);
 				}, delay);
 			} else {
@@ -739,13 +751,14 @@
 			}
 		} else {
 			loadingNews = true;
-			$hnlist.innerHTML = '';
-			$homeScroll.classList.add('loading');
+			$homeScrollSection.innerHTML = tmpl1.render({loading: true});
+			var showError = function(){
+				$homeScrollSection.innerHTML = tmpl1.render({load_error: true});
+			};
 			hnapi.news(function(data){
 				loadingNews = false;
-				$homeScroll.classList.remove('loading');
 				if (!data || data.error){
-					errors.serverError();
+					showError();
 					return;
 				}
 				amplify.store('hacker-news', data);
@@ -763,7 +776,7 @@
 				});
 			}, function(e){
 				loadingNews = false;
-				errors.connectionError(e);
+				showError();
 			});
 		}
 	});
@@ -773,7 +786,7 @@
 	// Auto-reload news for some specific situations...
 	w.addEventListener('pageshow', function(){
 		setTimeout(function(){
-			if (currentView == 'home' && $hnlist.innerHTML && !amplify.store('hacker-news-cached')){
+			if (currentView == 'home' && $('hnlist') && !amplify.store('hacker-news-cached')){
 				PubSub.publishSync('reloadNews');
 			}
 		}, 1);
