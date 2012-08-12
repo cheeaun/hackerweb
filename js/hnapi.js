@@ -41,8 +41,8 @@
 	var hnapi = {
 		
 		url: 'http://node-hnapi.herokuapp.com/', // Heroku
-		url2: 'http://node-hnapi.jit.su/', // Nodejitsu
-		// Note: Nodejitsu is the backup for now, in case Heroku is down (once in a while)
+		url2: 'http://node-hnapi.nodester.com/', // Nodester
+		// Note: Nodester is the backup for now, in case Heroku is down (once in a while)
 
 		news: function(success, error){
 			var path = 'news';
