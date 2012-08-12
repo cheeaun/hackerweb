@@ -3,34 +3,39 @@
 	var date = function(){
 			return +new Date();
 		},
+		supportCORS = 'withCredentials' in new XMLHttpRequest(),
+		requests = {},
 		req = function(url, success, error){
-			var r = new XMLHttpRequest();
 			if (!success) success = function(){};
 			if (!error) error = function(){};
-			if ('withCredentials' in r){ // CORS
+			if (!supportCORS){
+				error(new Error('CORS not supported.'));
+				return;
+			};
+			var r = requests[url] || new XMLHttpRequest();
+			if (r._timeout) clearTimeout(r._timeout);
+			r._timeout = setTimeout(function(){
+				r.abort();
+			}, 15000); // 15 seconds timeout
+			r.onload = function(){
+				clearTimeout(this._timeout);
+				delete requests[url];
 				try {
-					r.open('GET', url + '?' + date(), true);
-					r.onload = function(){
-						try {
-							success(JSON.parse(this.responseText));
-						} catch(e){
-							error(e);
-						}
-					};
-					r.onerror = error;
-					r.send();
-				} catch (e){
+					success(JSON.parse(this.responseText));
+				} catch(e){
 					error(e);
 				}
-			} else {
-				var d = w.document,
-					s = d.createElement('script'),
-					callback = 'callback' + date();
-				w[callback] = success;
-				s.onerror = error;
-				s.src = url + '?callback=' + callback;
-				d.body.appendChild(s);
+			};
+			r.onerror = r.onabort = r.ontimeout = function(e){
+				clearTimeout(this._timeout);
+				delete requests[url];
+				error(e);
 			}
+			if (r.readyState <= 1){
+				r.open('GET', url + '?' + date(), true);
+				r.send();
+			}
+			requests[url] = r;
 		};
 	
 	var hnapi = {
