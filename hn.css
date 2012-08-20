@@ -331,6 +331,22 @@ header.fake,
 	background-image: -o-linear-gradient(top, #f0f0f0, #c8c8c8);
 	background-image: linear-gradient(top, #f0f0f0, #c8c8c8);
 }
+.view-blank-state{
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+	background-color: #fcfcfc;
+	background-image: -webkit-linear-gradient(top, #fcfcfc, #dadce0);
+	background-image: -moz-linear-gradient(top, #fcfcfc, #dadce0);
+	background-image: -ms-linear-gradient(top, #fcfcfc, #dadce0);
+	background-image: -o-linear-gradient(top, #fcfcfc, #dadce0);
+	background-image: linear-gradient(top, #fcfcfc, #dadce0);
+	-webkit-background-size: 1px 100%;
+	-moz-background-size: 1px 100%;
+	-ms-background-size: 1px 100%;
+	-o-background-size: 1px 100%;
+	background-size: 1px 100%;
+}
 .view-blank-state-text{
 	color: #666;
 	text-shadow: 0 1px #fff;
@@ -1601,18 +1617,13 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	.view section.comments{
 		font-size: 14px;
 	}
-	#view-comments>.scroll{
-		background-color: #fcfcfc;
-		background-image: -webkit-linear-gradient(top, #fcfcfc, #dadce0);
-		background-image: -moz-linear-gradient(top, #fcfcfc, #dadce0);
-		background-image: -ms-linear-gradient(top, #fcfcfc, #dadce0);
-		background-image: -o-linear-gradient(top, #fcfcfc, #dadce0);
-		background-image: linear-gradient(top, #fcfcfc, #dadce0);
-		-webkit-background-size: 1px 100%;
-		-moz-background-size: 1px 100%;
-		-ms-background-size: 1px 100%;
-		-o-background-size: 1px 100%;
-		background-size: 1px 100%;
+	#view-comments>.scroll>section{
+		display: -webkit-box;
+		display: -moz-box;
+		display: box;
+		-webkit-box-orient: vertical;
+		-moz-box-orient: vertical;
+		box-orient: vertical;
 	}
 	#view-comments>.scroll .comments{
 		background-color: #fff;
