@@ -15,14 +15,18 @@ if (location.hostname == 'cheeaun.github.com'){
 		g.src = ('https:' == d.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		s.parentNode.insertBefore(g, s);
 	}(document, 'script'));
-	window.onerror = function(msg, url, line){
-		// References: https://gist.github.com/1878283 https://github.com/h5bp/html5-boilerplate/wiki/ga-augments
-		var file = url || location.href;
-		if (line) file += ':' + line;
-		if (msg.target && msg.type) msg = msg.type;
-		if (!msg.indexOf) msg = 'Non-string, non-event error: ' + (typeof msg);
-		_gaq.push(['_trackEvent', 'Errors', msg, file, null, false]);
+	window.Muscula = {
+		settings:{
+			logId:"21f74a59-9317-4924-8c73-9ab4718cd49b", branding: 'none'
+		}
 	};
+	(function(){
+		var m = document.createElement('script'); m.type = 'text/javascript'; m.async = true;
+		m.src = (window.location.protocol == 'https:' ? 'https:' : 'http:') +
+			'//musculahq.appspot.com/Muscula.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(m, s);
+		window.Muscula.run = function(c){ eval(c); window.Muscula.run = function(){}; };
+	})();
 }
 </script>
 </head>
