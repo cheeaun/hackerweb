@@ -1,37 +1,19 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hacker News mobile web app</title>
 <link rel="shortcut icon" href="../icons/favicon.png">
 <style>
+html{
+	overflow-x: hidden;
+}
 body{
-	text-align: center;
-	font-family: helvetica, arial, sans-serif;
-	margin: 0;
-	padding: 120px 0;
-	background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA8CAIAAAAok0etAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAKElEQVR4nGN48eIFEyMjIxgzMDBgsNFpGBuXPDaammwy+Az///+HsQEDewZszxf41AAAAABJRU5ErkJggg==) repeat-x;
-	font-size: 16px;
-}
-header{
-	padding: 0 0 120px;
-}
-header h1,
-header p{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 15px;
 	margin: 0;
 	padding: 0;
-}
-header h1{
-	font-size: 50px;
-	letter-spacing: -.1ex;
-	text-shadow: 0 0 3px #ddd;
-}
-header p{
-	margin-top: 10px;
-}
-p{
-	margin: 60px 0;
-	color: #666;
-	text-shadow: 0 0 3px #ddd;
-	line-height: 1.5em;
+	-webkit-text-size-adjust: none;
+	overflow-x: hidden;
 }
 a{
 	color: #08C;
@@ -40,14 +22,286 @@ a{
 a:hover{
 	text-decoration: underline;
 }
-.share{
-	position: absolute;
-	top: 20px;
-	right: 20px;
+p{
+	color: #666;
+	line-height: 1.5em;
 }
-.follow{
+#container{
+	position: relative;
+	margin: auto;
+	max-width: 1024px;
+	-webkit-transition: opacity .3s;
+	-moz-transition: opacity .3s;
+	-ms-transition: opacity .3s;
+	-o-transition: opacity .3s;
+	transition: opacity .3s;
+	opacity: 1;
+}
+#container.disabled{
+	pointer-events: none;
+	opacity: .1;
+}
+header{
+	text-align: center;
+	padding: 20px 20px 5px;
+}
+#app-icon{
+	display: inline-block;
+	width: 108px;
+	height: 108px;
+	background: #fff url(../landing/app-icon.png) no-repeat;
+	-webkit-background-size: 108px 108px;
+	-moz-background-size: 108px 108px;
+	-ms-background-size: 108px 108px;
+	-o-background-size: 108px 108px;
+	background-size: 108px 108px;
+	margin: 10px 0;
+}
+header h1{
+	font-size: 36px;
+	margin: 0;
+	padding: 0;
+	letter-spacing: -1px;
+	line-height: 1.15em;
+}
+header p{
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	line-height: 1em;
+}
+#description-container{
+	padding: 0 20px 10px;
+}
+#available-link{
+	font-weight: bold;
+	display: block;
+	text-decoration: none;
+	color: #fff;
+	background-color: #999a9e;
+	line-height: 1.3em;
+	padding: 10px 15px;
+	border-radius: 5px;
+	text-shadow: 0 -1px #000;
+	box-shadow: 0 1px 3px #ccc, 0 -2px 1px #666 inset;
+	-webkit-transition: background-color .3s;
+	-moz-transition: background-color .3s;
+	-ms-transition: background-color .3s;
+	-o-transition: background-color .3s;
+	transition: background-color .3s;
+}
+#available-link:hover{
+	background-color: #53595e;
+}
+#available-link:active{
+	color: #ccc;
+}
+#iphone-screenshots-container{
+	text-align: center;
+	letter-spacing: 30px;
+}
+#iphone-screenshots-container div{
+	display: inline-block;
+	width: 320px;
+	height: 460px;
+	background-color: #fff;
+	background-repeat: no-repeat;;
+	-webkit-background-size: 320px 460px;
+	-moz-background-size: 320px 460px;
+	-ms-background-size: 320px 460px;
+	-o-background-size: 320px 460px;
+	background-size: 320px 460px;
+	box-shadow: 0 3px 10px #000;
+	margin: 0px 0 30px;
+	border-radius: 5px;
+}
+#iphone-1-screenshot{
+	background-image: url(../landing/iphone-1.png);
+}
+#iphone-2-screenshot{
+	background-image: url(../landing/iphone-2.png);
+}
+#ipad-screenshot-container{
+	display: none;
+}
+footer{
+	text-align: center;
+	padding: 10px 20px 20px;
+}
+#available-container{
+	pointer-events: none;
+	-webkit-transition-property: -webkit-transform, opacity;
+	-webkit-transition-duration: .3s;
+	-moz-transition-property: -moz-transform, opacity;
+	-moz-transition-duration: .3s;
+	-ms-transition-property: -ms-transform, opacity;
+	-ms-transition-duration: .3s;
+	-o-transition-property: -o-transform, opacity;
+	-o-transition-duration: .3s;
+	transition-property: transform, opacity;
+	transition-duration: .3s;
+	opacity: 0;
+	border-radius: 5px;
+	box-shadow: 0 3px 10px #000;
+	text-shadow: 0 -1px #000;
+	color: #fff;
+	background-color: #53595e;
+	z-index: 1000;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 280px;
+	max-width: 100%;
+	max-height: 100%;
+	overflow: auto;
+	padding: 25px 20px;
+	text-align: center;
+	-webkit-transform: translate(-50%, -60%);
+	-moz-transform: translate(-50%, -60%);
+	-ms-transform: translate(-50%, -60%);
+	-o-transform: translate(-50%, -60%);
+	transform: translate(-50%, -60%);
+}
+#available-container.open{
+	pointer-events: auto;
+	opacity: 1;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+#available-container a{
+	margin: 7px 0 0;
+	padding: 7px;
+	display: block;
+	color: #fff;
+	font-weight: bold;
+	background-color: #42464a;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
+}
+#available-container img{
+	margin: 7px 0 0;
+	border: 7px solid #42464a;
+	border-radius: 3px;
+}
+#available-container .or-hr{
+	display: block;
+	text-transform: uppercase;
+	margin: 1.5em 0;
+	font-weight: bold;
+	font-size: 12px;
+	color: #aaa;
+	text-shadow: none;
+}
+#available-container a#close-available{
 	position: absolute;
-	right: 20px;
+	top: 0;
+	right: 0;
+	padding: 0;
+	margin: 0;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	color: #ccc;
+	background-color: transparent;
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+	border-radius: 0;
+	box-shadow: none;
+	font-family: arial, sans-serif;
+}
+#available-container a#close-available:hover{
+	color: #fff;
+	text-decoration: none;
+}
+@media all and (min-width: 640px){
+	header{
+		text-align: left;
+	}
+	header,
+	#description-container{
+		width: 260px;
+	}
+	#available-link{
+		display: inline-block;
+	}
+	#iphone-screenshots-container{
+		position: absolute;
+		top: 25px;
+		left: 300px;
+		right: 0;
+	}
+	#iphone-screenshots-container div{
+		position: absolute;
+	}
+	#iphone-1-screenshot{
+		z-index: 3;
+		left: 5%;
+	}
+	#iphone-2-screenshot{
+		top: 20px;
+		left: 45%;
+		z-index: 2;
+	}
+	#iphone-2-screenshot:hover{
+		z-index: 4;
+	}
+	#header-description-container{
+		min-height: 550px;
+	}
+	#ipad-screenshot-container{
+		margin: 0 0 30px 20px;
+		display: block;
+	}
+	#ipad-screenshot{
+		display: block;
+		width: 1024px;
+		height: 748px;
+		background: #fff url(../landing/ipad.png) no-repeat;
+		-webkit-background-size: 1024px 748px;
+		-moz-background-size: 1024px 748px;
+		-ms-background-size: 1024px 748px;
+		-o-background-size: 1024px 748px;
+		background-size: 1024px 748px;
+		box-shadow: 0 3px 10px #000;
+		border-radius: 5px;
+	}
+}
+@media all and (min-width: 1024px){
+	header{
+		padding-top: 30px;
+	}
+	header,
+	#description-container{
+		padding-left: 30px;
+	}
+	#iphone-screenshots-container{
+		top: 35px;
+	}
+	#ipad-screenshot-container{
+		margin-left: 0;
+	}
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+	only screen and (-o-min-device-pixel-ratio: 3/2),
+	only screen and (min--moz-device-pixel-ratio: 1.5),
+	only screen and (min-device-pixel-ratio: 1.5) {
+	
+	#app-icon{
+		background-image: url(../landing/app-icon@2x.png);
+	}
+	#iphone-1-screenshot{
+		background-image: url(../landing/iphone-1@2x.png);
+	}
+	#iphone-2-screenshot{
+		background-image: url(../landing/iphone-2@2x.png);
+	}
+	#ipad-screenshot{
+		background-image: url(../landing/ipad@2x.png);
+	}
 }
 </style>
 <script>
@@ -60,22 +314,64 @@ if (location.hostname == 'cheeaun.github.com'){
 	}(document, 'script'));
 }
 </script>
-<header>
-	<h1>Hacker News mobile web app</h1>
-	<p>Looks <em>and</em> feels like a native iOS app.</p>
-</header>
-<img src="app.png" width="746" height="1460" alt="Screenshot of Hacker News mobile web app">
-<p>Try it now on your iOS5 Safari web browser.<br>
-Go to <a href="http://cheeaun.github.com/hnmobile/">cheeaun.github.com/hnmobile</a> or <a href="http://goo.gl/6Qx19">goo.gl/6Qx19</a> or scan this&hellip;</p>
-<img src="http://goo.gl/6Qx19.qr" width="150" height="150" alt="QR code for goo.gl/6Qx19">
-<p>Project is hosted on <a href="https://github.com/cheeaun/hnmobile">GitHub</a>. iPhone 4S image is from <a href="http://kaishinlab.com/vector-iphone/">KaishinLab</a>.<br>Not affiliated with <a href="http://news.ycombinator.com/">Hacker News</a> or <a href="http://ycombinator.com/">YCombinator</a>.</p>
-
-<div class="share">
-	<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-related="cheeaun" data-hashtags="hnmobile">Tweet</a>
+<div id="container">
+	<div id="header-description-container">
+		<header>
+			<div id="app-icon"></div>
+			<p>The unofficial</p>
+			<h1>Hacker News</h1>
+			<p>Mobile Web App</p>
+		</header>
+		<section id="description-container">
+			<p>A mobile-optimized web app for Hacker News, designed to look and feel like a native iOS app. Experience the best way to browse Hacker News stories and read comment threads on your iOS device.</p>
+			<p><a href="http://cheeaun.github.com/hnmobile/" target="_blank" id="available-link">Available for the iPhone<br>and the iPad</a></p>
+		</section>
+	</div>
+	<section id="iphone-screenshots-container">
+		<div id="iphone-1-screenshot"></div>
+		<div id="iphone-2-screenshot"></div>
+	</section>
+	<section id="ipad-screenshot-container">
+		<div id="ipad-screenshot"></div>
+	</section>
+	<footer>
+		<p>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-related="cheeaun" data-hashtags="hnmobile">Tweet</a>
+			<a href="https://twitter.com/cheeaun" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @cheeaun</a>
+		</p>
+		<p><a href="http://cheeaun.com/blog/2012/03/how-i-built-hacker-news-mobile-web-app">Meticulously built</a> by <a href="http://cheeaun.com/">Lim Chee Aun</a>. Open-sourced on <a href="https://github.com/cheeaun/hnmobile">GitHub</a>. Not affiliated with <a href="http://news.ycombinator.com/">Hacker News</a> or <a href="http://ycombinator.com/">YCombinator</a>.</p>
+	</footer>
 </div>
-
-<div class="follow">
-	<a href="https://twitter.com/cheeaun" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @cheeaun</a>
+<div id="available-container">
+	<a id="close-available" href="#" title="Close">&times;</a>
+	Go to this link:<br><a href="http://cheeaun.github.com/hnmobile/" target="_blank">cheeaun.github.com/hnmobile</a>
+	<span class="or-hr">or</span>
+	this shorter link:<br><a href="http://goo.gl/6Qx19" target="_blank">goo.gl/6Qx19</a>
+	<span class="or-hr">or</span>
+	scan this QR code:<br><img src="http://goo.gl/6Qx19.qr" width="150" height="150" alt="QR code for goo.gl/6Qx19">
 </div>
+<script async>
+if (!/^(iPhone|iPad|iPod)$/i.test(navigator.platform)){
+	var container = document.getElementById('container');
+	var availableContainer = document.getElementById('available-container');
+	var availableLink = document.getElementById('available-link');
+	var closeAvailable = document.getElementById('close-available');
+	availableLink.onclick = function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		container.className += ' disabled';
+		availableContainer.className += ' open';
+	};
+	availableContainer.onclick = function(e){
+		e.stopPropagation();
+	};
+	window.onclick = closeAvailable.onclick = function(e){
+		if (e.button != 0 || e.which != 1) return; // only left-clicks
+		e.preventDefault();
+		container.className = container.className.replace(/disabled/i, '');
+		availableContainer.className = availableContainer.className.replace(/open/i, '');
+	};
+}
 
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+setTimeout(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs"), 2000);
+</script>
