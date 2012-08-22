@@ -365,7 +365,7 @@ if (!/^(iPhone|iPad|iPod)$/i.test(navigator.platform)){
 	availableContainer.onclick = function(e){
 		e.stopPropagation();
 	};
-	window.onclick = closeAvailable.onclick = function(e){
+	closeAvailable.onclick = function(e){
 		if (e.button != 0 || e.which != 1) return; // only left-clicks
 		e.preventDefault();
 		container.className = container.className.replace(/disabled/i, '');
