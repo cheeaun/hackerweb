@@ -373,5 +373,11 @@ if (!/^(iPhone|iPad|iPod)$/i.test(navigator.platform)){
 	};
 }
 
+/*! A fix for the iOS orientationchange zoom bug.
+Script by @scottjehl, rebound by @wilto.
+MIT / GPLv2 License.
+*/
+(function(e){function t(){i.setAttribute("content",o),u=!0}function n(n){c=n.accelerationIncludingGravity,a=Math.abs(c.x),f=Math.abs(c.y),l=Math.abs(c.z),(!e.orientation||180===e.orientation)&&(7<a||(6<l&&8>f||8>l&&6<f)&&5<a)?u&&(i.setAttribute("content",s),u=!1):u||t()}var r=navigator.userAgent;if(/iPhone|iPad|iPod/.test(navigator.platform)&&/OS [1-5]_[0-9_]* like Mac OS X/i.test(r)&&-1<r.indexOf("AppleWebKit")&&(r=e.document,r.querySelector)){var i=r.querySelector("meta[name=viewport]"),r=i&&i.getAttribute("content"),s=r+",maximum-scale=1",o=r+",maximum-scale=10",u=!0,a,f,l,c;i&&(e.addEventListener("orientationchange",t,!1),e.addEventListener("devicemotion",n,!1))}})(this)
+
 setTimeout(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs"), 2000);
 </script>
