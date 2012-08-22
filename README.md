@@ -16,6 +16,13 @@ Here are some screenshots. Click to see them in their full **retina** glory.
 
 [![Screenshot 1](https://github.com/cheeaun/hnmobile/raw/master/screenshots/screenshot2.png)](https://github.com/cheeaun/hnmobile/raw/master/screenshots/screenshot2@2x.png)
 
+More recent screenshots can be viewed on the [landing page](http://cheeaun.github.com/hnmobile/landing/).
+
+Also, read my two-part blog post on how I built this web app:
+
+- [How I built the Hacker News mobile web app](http://cheeaun.com/blog/2012/03/how-i-built-hacker-news-mobile-web-app) ([HN thread](http://news.ycombinator.com/item?id=3662709))
+- [How I built the Hacker News mobile web app, Part 2](http://cheeaun.com/blog/2012/03/how-i-built-hacker-news-mobile-web-app_26) ([HN thread](http://news.ycombinator.com/item?id=3756771))
+
 Technical stuff
 ---------------
 
@@ -26,12 +33,13 @@ This mobile web app primarily works on iOS 5 Mobile Safari. It uses these wonder
 - [Hogan.js](https://github.com/twitter/hogan.js) - logic-less templating
 - [Amplify.Store](http://amplifyjs.com/api/store/) - client-side storage
 - [Viper](https://github.com/alpha123/Viper/) - simple animation
+- [PubSubJS](https://github.com/mroderick/PubSubJS) - publish/subscribe messaging
 - Vanilla JavaScript - everything else
 
 Also uses the [unofficial Hacker News API](http://node-hnapi.herokuapp.com/), [open-sourced](https://github.com/cheeaun/node-hnapi).
 
 More technical stuff
------------------------
+--------------------
 
 ### Running a local server
 
@@ -60,6 +68,11 @@ Contributing and Feedback
 -------------------------
 
 Feel free to fork, file some issues or [tweet your feedback](http://twitter.com/cheeaun) to me.
+
+Do check out these awesome contributions as well:
+
+- [HNmobile Bookmarklet](http://neocoder.github.com/hnmbookmarklet/) by [neocoder](https://github.com/neocoder)
+- [Hacker News Menu Tab](http://www.guidefreitas.com/2012/03/hacker-news-menu-tab.html) ([GitHub](https://github.com/guidefreitas/HNewsTab)) by Guilherme Defreitas
 
 License
 -------
