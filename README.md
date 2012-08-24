@@ -74,6 +74,11 @@ Do check out these awesome contributions as well:
 - [HNmobile Bookmarklet](http://neocoder.github.com/hnmbookmarklet/) by [neocoder](https://github.com/neocoder)
 - [Hacker News Menu Tab](http://www.guidefreitas.com/2012/03/hacker-news-menu-tab.html) ([GitHub](https://github.com/guidefreitas/HNewsTab)) by Guilherme Defreitas
 
+Other platforms?
+----------------
+
+The current focus is iOS. I have plans to make this app look native on other mobile platforms once I fork our some money and  get my hands on a number of non-iOS devices (Android, Windows Phone, etc) for development and testing. Contact me if you feel generous enough to donate some devices to me :)
+
 License
 -------
 
