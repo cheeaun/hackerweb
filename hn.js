@@ -79,16 +79,6 @@
 			if (!data) return t;
 			return t.render(data);
 		},
-		errors = {
-			connectionError: function(e){
-				alert('Could not connect to server.');
-				throw e;
-			},
-			serverError: function(e){
-				alert('Server is currently unavailable. Please try again later.');
-				throw e;
-			}
-		},
 		getScreenState = function(){
 			return /wide/i.test(w.getComputedStyle(body,':after').getPropertyValue('content')) ? 'wide' : 'narrow';
 		},
@@ -512,30 +502,18 @@
 		onTap: function(e, target){
 			if (target.classList.contains('more-link')){
 				var loadNews2 = function(_data){
-					var data = _data.slice();
+				};
+				target.classList.add('loading');
+				var news2 = amplify.store('hacker-news2');
+				setTimeout(function(){
+					target.classList.remove('loading');
 					var targetParent = target.parentNode;
 					targetParent.parentNode.removeChild(targetParent);
+					if (!news2) return;
+					var data = news2.slice();
 					var html = markupNews(data, 31);
 					$('hnlist').insertAdjacentHTML('beforeend', html);
-				};
-				var news2 = amplify.store('hacker-news2');
-				target.classList.add('loading');
-				if (news2){
-					setTimeout(function(){
-						target.classList.remove('loading');
-						loadNews2(news2); // Cheat here too
-					}, 500);
-				} else {
-					hnapi.news2(function(data){
-						target.classList.remove('loading');
-						if (!data  || data.error){
-							errors.serverError();
-							return;
-						}
-						amplify.store('hacker-news2', data);
-						loadNews2(data);
-					}, errors.connectionError);
-				}
+				}, 500);
 			} else if (/^#\//.test(target.getAttribute('href'))){ // "local" links
 				location.hash = target.hash;
 			} else if (target.href && isWideScreen){
@@ -722,11 +700,11 @@
 		},
 		loadNews = function(_data){
 			var data = _data.slice();
-			var html = markupNews(data);
-			html += '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>';
-			$homeScrollSection.innerHTML = '<ul class="tableview tableview-links" id="hnlist">'
-				+ html;
+			var html = '<ul class="tableview tableview-links" id="hnlist">'
+				+ markupNews(data)
+				+ (amplify.store('hacker-news2') ? '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>' : '')
 				+ '</ul>';
+			$homeScrollSection.innerHTML = html;
 			PubSub.publish('updateCurrentStory');
 		},
 		loadingNews = false;
@@ -762,17 +740,16 @@
 					return;
 				}
 				amplify.store('hacker-news', data);
+				amplify.store('hacker-news-cached', true, {
+					expires: 1000*60*10 // 10 minutes
+				});
+				amplify.store('hacker-news2', null);
 				loadNews(data);
 				// Preload news2 to prevent discrepancies between /news and /news2 results
 				hnapi.news2(function(data){
-					if (!data || data.error){
-						errors.serverError();
-						return;
-					}
+					if (!data || data.error) return;
 					amplify.store('hacker-news2', data);
-					amplify.store('hacker-news-cached', true, {
-						expires: 1000*60*10 // 10 minutes
-					});
+					$('hnlist').insertAdjacentHTML('beforeend', '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>');
 				});
 			}, function(e){
 				loadingNews = false;
