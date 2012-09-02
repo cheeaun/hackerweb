@@ -383,8 +383,11 @@
 	var prevRoute, currentRoute;
 	var router = Router(routes).configure({
 		on: function(){
-			prevRoute = currentRoute;
+			var _prevRoute = currentRoute;
 			currentRoute = location.hash;
+			// Sometimes the same route is triggered more than once
+			// So, make sure the previous route is different than the current route
+			if (_prevRoute != currentRoute) prevRoute = _prevRoute;
 			amplify.store('hacker-hash', currentRoute);
 		},
 		notfound: function(){
