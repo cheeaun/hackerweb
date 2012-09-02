@@ -522,17 +522,10 @@
 			}
 		}
 	});
-	tappable('.grouped-tableview-links li>a:first-child', {
-		allowClick: false,
+	tappable('#view-about .grouped-tableview-links li>a:first-child', {
+		allowClick: true,
 		activeClassDelay: 100,
-		inactiveClassDelay: 1000,
-		onTap: function(e, target){
-			if (/^#\//.test(target.getAttribute('href'))){ // "local" links
-				location.hash = target.hash;
-			} else if (target.href && isWideScreen){
-				w.open(target.href);
-			}
-		}
+		inactiveClassDelay: 1000
 	});
 	tappable('#view-home .tableview-links li>a.detail-disclosure-button', {
 		noScroll: true,
