@@ -3,7 +3,8 @@
 	var date = function(){
 			return +new Date();
 		},
-		supportCORS = 'withCredentials' in new XMLHttpRequest(),
+		supportXDomainRequest = !!w.XDomainRequest;
+		supportCORS = 'withCredentials' in new XMLHttpRequest() || supportXDomainRequest,
 		requests = {},
 		req = function(url, success, error){
 			if (!success) success = function(){};
@@ -12,7 +13,7 @@
 				error(new Error('CORS not supported.'));
 				return;
 			};
-			var r = requests[url] || new XMLHttpRequest();
+			var r = requests[url] || (w.XDomainRequest ? new XDomainRequest() : new XMLHttpRequest());
 			if (r._timeout) clearTimeout(r._timeout);
 			r._timeout = setTimeout(function(){
 				r.abort();
@@ -31,7 +32,7 @@
 				delete requests[url];
 				error(e);
 			}
-			if (r.readyState <= 1){
+			if (r.readyState <= 1 || supportXDomainRequest){ // XDomainRequest doesn't have readyState
 				r.open('GET', url + '?' + date(), true);
 				r.send();
 			}

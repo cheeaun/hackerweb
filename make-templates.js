@@ -32,7 +32,7 @@ fs.readdir('templates', function(e, files){
 		make_seqs: false // it somehow f'ed up the sequence for this piece of code
 	});
 	var finalCode = uglify.gen_code(ast);
-	fs.writeFile('templates.js', finalCode, function(){
-		console.log('templates.js created.');
+	fs.writeFile('js/templates.js', finalCode, function(){
+		console.log('js/templates.js created.');
 	});
 });

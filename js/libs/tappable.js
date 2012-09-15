@@ -69,7 +69,7 @@
     },
     matchesSelector = function(node, selector){
       var root = d.documentElement,
-        matches = root.matchesSelector || root.mozMatchesSelector || root.webkitMatchesSelector || root.msMatchesSelector;
+        matches = root.matchesSelector || root.mozMatchesSelector || root.webkitMatchesSelector || root.oMatchesSelector || root.msMatchesSelector;
       return matches.call(node, selector);
     },
     closest = function(node, selector){

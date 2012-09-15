@@ -1,0 +1,25 @@
+{
+	"shared": {
+		"input": [
+			"js/libs/ruto.js",
+			"js/libs/amplify.store.js",
+			"js/libs/hogan.js",
+			"js/libs/hnapi.js"
+		],
+		"output": "js/scripts.js"
+	},
+	"web": {
+		"input": [
+			"js/libs/ibento.js",
+			"js/libs/classList.js"
+		],
+		"output": "js/scripts-web.js"
+	},
+	"ios": {
+		"input": [
+			"js/libs/tappable.js",
+			"js/libs/viper.js"
+		],
+		"output": "js/scripts-ios.js"
+	}
+}
