@@ -23,7 +23,8 @@ http.createServer(function(req, res){
 	var filePath = '.' + req.url;
 	if (filePath == './') filePath += 'index.html';
 
-	var noappcache = argv.indexOf('-noappcache') > -1;
+	var noappcache = argv.indexOf('-noappcache') > -1; // Prevent page from being app-cached
+	var simslow = argv.indexOf('-simslow') > -1; // Simulate "slow" connection
 	path.exists(filePath, function(exists){
 		if (exists){
 			if (noappcache && /\.appcache$/.test(filePath)){
@@ -43,8 +44,15 @@ http.createServer(function(req, res){
 							res.end();
 						} else {
 							var ext = path.extname(filePath).slice(1);
-							res.writeHead(200, {'Content-Type': types[ext] || 'application/octet-stream'});
-							res.end(content, 'utf-8');
+							if (simslow){
+								res.writeHead(200, {'Content-Type': types[ext] || 'application/octet-stream'});
+								setTimeout(function(){
+									res.end(content, 'utf-8');
+								}, Math.round(Math.random()) ? 1000 : 500);
+							} else {
+								res.writeHead(200, {'Content-Type': types[ext] || 'application/octet-stream'});
+								res.end(content, 'utf-8');
+							}
 						}
 					});
 				} else {
