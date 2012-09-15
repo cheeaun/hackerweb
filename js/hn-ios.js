@@ -400,6 +400,5 @@
 	}
 
 	hn.news.options.disclosure = !isWideScreen;
-	hn.news.render();
-	ruto.init();
+	hn.init();
 })(window);

@@ -469,6 +469,11 @@
 		}
 	};
 
+	hn.init = function(){
+		hn.news.render();
+		ruto.init();
+	};
+
 	w.hn = hn;
 
 	ruto
@@ -487,8 +492,7 @@
 		.add('/about', 'about')
 		.add(/^\/item\/(\d+)$/i, 'comments', function(path, id){
 			hn.comments.render(id);
-		})
-		.init();
+		});
 
 	// "Naturally" reload when an update is available
 	if (w.applicationCache){

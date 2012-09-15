@@ -53,6 +53,5 @@
 
 	ibento('#view-comments .load-error button', 'click', hn.comments.reload);
 
-	hn.news.render();
-	ruto.init();
+	hn.init();
 })(window);
