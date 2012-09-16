@@ -382,21 +382,19 @@
 		scrollTop();
 		if (supportOrientation) w.onorientationchange = scrollTop;
 
-		w.addEventListener('load', function(){
-			var scrollCheck = setInterval(function(){
-				var top = getScrollTop();
-				if (top <= 1){
-					clearInterval(scrollCheck);
-					setTimeout(function(){
-						var loader = $('apploader');
-						loader.classList.add('hide');
-						loader.addEventListener('webkitTransitionEnd', function(){
-							loader.parentNode.removeChild(loader);
-						}, false);
-					}, 400);
-				}
-			}, 15);
-		}, false);
+		var scrollCheck = setInterval(function(){
+			var top = getScrollTop();
+			if (top <= 1){
+				clearInterval(scrollCheck);
+				setTimeout(function(){
+					var loader = $('apploader');
+					loader.classList.add('hide');
+					loader.addEventListener('webkitTransitionEnd', function(){
+						loader.parentNode.removeChild(loader);
+					}, false);
+				}, 400);
+			}
+		}, 15);
 	} else {
 		var loader = $('apploader');
 		loader.parentNode.removeChild(loader);
