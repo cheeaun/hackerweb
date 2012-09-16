@@ -18,7 +18,7 @@ var types = {
 };
 
 http.createServer(function(req, res){
-	console.log(req.url);
+	console.log(new Date().toISOString() + ' ' + req.method + ' ' + req.url);
 	
 	var filePath = '.' + req.url;
 	if (filePath == './') filePath += 'index.html';
