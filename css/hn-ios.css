@@ -22,11 +22,11 @@ body{
 	background-color: #fff;
 	pointer-events: none;
 	opacity: 1;
-	-webkit-transition: opacity .75s;
-	-moz-transition: opacity .75s;
-	-ms-transition: opacity .75s;
-	-o-transition: opacity .75s;
-	transition: opacity .75s;
+	-webkit-transition: opacity .6s;
+	-moz-transition: opacity .6s;
+	-ms-transition: opacity .6s;
+	-o-transition: opacity .6s;
+	transition: opacity .6s;
 }
 #apploader.hide{
 	opacity: 0;
