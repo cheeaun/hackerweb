@@ -71,11 +71,14 @@
 			return /wide/i.test(w.getComputedStyle(body,':after').getPropertyValue('content')) ? 'wide' : 'narrow';
 		};
 
-	// Set viewport and disable scale
-	var vmeta = d.createElement('meta');
-	vmeta.name = 'viewport';
+	// Disable user scale of the viewport
+	var vmeta = d.querySelector('meta[name=viewport]');
+	if (!vmeta){
+		vmeta = d.createElement('meta');
+		vmeta.name = 'viewport';
+		d.head.appendChild(vmeta);
+	}
 	vmeta.content = 'width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0';
-	d.head.appendChild(vmeta);
 
 	// Wide screen state
 	var isWideScreen = getScreenState() == 'wide';
