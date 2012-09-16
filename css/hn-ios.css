@@ -35,7 +35,7 @@ pre{
 	word-wrap: normal;
 }
 
-.icon-refresh{
+i.icon-refresh{
 	display: inline-block;
 	width: 14px;
 	height: 18px;
@@ -1354,6 +1354,14 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		width: auto;
 		height: 14px;
 		margin-bottom: 2px; /* temporary hack */
+	}
+	.header-button-icon button i{
+		-webkit-transform: scale(.77);
+		-moz-transform: scale(.77);
+		-ms-transform: scale(.77);
+		-o-transform: scale(.77);
+		transform: scale(.77);
+		margin-bottom: 2px;
 	}
 }
 
