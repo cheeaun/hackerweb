@@ -1321,7 +1321,8 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	to { -webkit-transform: rotateY(180deg) scale(.65); opacity: 0; }
 }
 
-@media only screen and (max-height: 320px){
+/* Landscape orientation */
+@media only screen and (orientation: landscape){
 	header.fake,
 	.view>header{
 		background-image: url(../images/ios/nav-bar-mini.png);
