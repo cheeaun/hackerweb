@@ -25,7 +25,7 @@ http.createServer(function(req, res){
 
 	var noappcache = argv.indexOf('-noappcache') > -1; // Prevent page from being app-cached
 	var simslow = argv.indexOf('-simslow') > -1; // Simulate "slow" connection
-	path.exists(filePath, function(exists){
+	fs.exists(filePath, function(exists){
 		if (exists){
 			if (noappcache && /\.appcache$/.test(filePath)){
 				res.writeHead(404);
