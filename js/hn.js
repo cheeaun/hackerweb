@@ -133,7 +133,7 @@
 			var storyEl = $('story-' + id);
 			if (!storyEl) return;
 			post.selected = !!storyEl.querySelector('a[href].selected');
-			post.i = storyEl.dataset ? story.dataset.index : storyEl.getAttribute('data-index');
+			post.i = storyEl.dataset ? storyEl.dataset.index : storyEl.getAttribute('data-index');
 			storyEl.insertAdjacentHTML('afterend', hn.news.markupStory(post));
 			storyEl.parentNode.removeChild(storyEl);
 		},
