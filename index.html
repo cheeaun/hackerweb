@@ -29,16 +29,18 @@ if (location.hostname == 'cheeaun.github.com'){
 	})();
 }
 
-var isIOS5later = (function(ua){
-	return ua && /iPhone|iPod|iPad/.test(ua) && parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) >= 5;
+var THEME = (function(ua){
+	if (ua && /iPhone|iPod|iPad/.test(ua) && parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) >= 5){
+		return 'ios';
+	}
+	return 'web';
 })(navigator.userAgent);
+
 (function(d){
 	var link = d.createElement('link');
 	link.rel = 'stylesheet';
-	var theme = 'web';
-	if (isIOS5later) theme = 'ios';
-	link.href = 'css/hn-' + theme + '.css';
-	d.head.appendChild(link);
+	link.href = 'css/hn-' + THEME + '.css';
+	d.getElementsByTagName('head')[0].appendChild(link);
 })(document);
 
 // LAB.js
