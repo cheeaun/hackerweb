@@ -23,9 +23,6 @@ body{
 	pointer-events: none;
 	opacity: 1;
 	-webkit-transition: opacity .6s;
-	-moz-transition: opacity .6s;
-	-ms-transition: opacity .6s;
-	-o-transition: opacity .6s;
 	transition: opacity .6s;
 }
 #apploader.hide{
@@ -41,9 +38,6 @@ i.icon-refresh{
 	height: 18px;
 	background: transparent url(../images/ios/refresh-icon.png) no-repeat;
 	-webkit-background-size: 14px 18px;
-	-moz-background-size: 14px 18px;
-	-ms-background-size: 14px 18px;
-	-o-background-size: 14px 18px;
 	background-size: 14px 18px;
 	vertical-align: text-bottom;
 	overflow: hidden;
@@ -61,10 +55,8 @@ header.fake{
 	width: 100%;
 	height: 100%;
 	display: -webkit-box;
-	display: -moz-box;
 	display: box;
 	-webkit-box-orient: vertical;
-	-moz-box-orient: vertical;
 	box-orient: vertical;
 }
 .view.hidden{
@@ -77,9 +69,6 @@ header.fake,
 .view>header{
 	background: #b2bbca url(../images/ios/nav-bar.png) repeat-x;
 	-webkit-background-size: 1px 44px;
-	-moz-background-size: 1px 44px;
-	-ms-background-size: 1px 44px;
-	-o-background-size: 1px 44px;
 	background-size: 1px 44px;
 	height: 44px;
 	line-height: 44px;
@@ -101,7 +90,6 @@ header.fake,
 .header-button button{
 	pointer-events: none;
 	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	min-width: 50px;
 	height: 30px;
@@ -116,15 +104,9 @@ header.fake,
 	text-decoration: none;
 	border-width: 2px 5px;
 	-webkit-border-image: url(../images/ios/button.png) 4 10 4 10;
-	-moz-border-image: url(../images/ios/button.png) 4 10 4 10 fill;
-	-ms-border-image: url(../images/ios/button.png) 4 10 4 10 fill;
-	-o-border-image: url(../images/ios/button.png) 4 10 4 10 fill;
 /*	border-image: url(../images/ios/button.png) 4 10 4 10 fill;*/
 	background: transparent url(../images/ios/button-active.png) no-repeat;
 	-webkit-background-size: 0 0;
-	-moz-background-size: 0 0;
-	-ms-background-size: 0 0;
-	-o-background-size: 0 0;
 	background-size: 0 0;
 }
 .header-button-icon button{
@@ -135,26 +117,17 @@ header.fake,
 }
 .header-button.tappable-active button{
 	-webkit-border-image: url(../images/ios/button-active.png) 4 10 4 10;
-	-moz-border-image: url(../images/ios/button-active.png) 4 10 4 10 fill;
-	-ms-border-image: url(../images/ios/button-active.png) 4 10 4 10 fill;
-	-o-border-image: url(../images/ios/button-active.png) 4 10 4 10 fill;
 /*	border-image: url(../images/ios/button-active.png) 4 10 4 10 fill;*/
 }
 .header-back-button button{
 	padding: 0 4px 0 0;
 	border-width: 2px 4px 2px 13px;
 	-webkit-border-image: url(../images/ios/back-button.png) 4 8 4 26;
-	-moz-border-image: url(../images/ios/back-button.png) 4 8 4 26 fill;
-	-ms-border-image: url(../images/ios/back-button.png) 4 8 4 26 fill;
-	-o-border-image: url(../images/ios/back-button.png) 4 8 4 26 fill;
 /*	border-image: url(../images/ios/back-button.png) 4 8 4 26 fill;*/
 	background-image: url(../images/ios/back-button-active.png);
 }
 .header-back-button.tappable-active button{
 	-webkit-border-image: url(../images/ios/back-button-active.png) 4 8 4 26;
-	-moz-border-image: url(../images/ios/back-button-active.png) 4 8 4 26 fill;
-	-ms-border-image: url(../images/ios/back-button-active.png) 4 8 4 26 fill;
-	-o-border-image: url(../images/ios/back-button-active.png) 4 8 4 26 fill;
 /*	border-image: url(../images/ios/back-button-active.png) 4 8 4 26 fill;*/
 }
 .header-button-left{
@@ -173,7 +146,6 @@ header.fake,
 	text-overflow: ellipsis;
 	overflow: hidden;
 	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
 	box-flex: 1;
 }
 .view>header h1 img{
@@ -182,16 +154,13 @@ header.fake,
 }
 .view>.scroll{
 	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
 	box-flex: 1;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	background-color: #fff;
 	display: -webkit-box;
-	display: -moz-box;
 	display: box;
 	-webkit-box-orient: vertical;
-	-moz-box-orient: vertical;
 	box-orient: vertical;
 	height: 100%;
 	position: relative;
@@ -199,14 +168,8 @@ header.fake,
 .view>.scroll.striped{
 	background-color: #cbd2d8;
 	background-image: -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -moz-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -ms-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -o-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	background-image: linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	-webkit-background-size: 7px 1px;
-	-moz-background-size: 7px 1px;
-	-ms-background-size: 7px 1px;
-	-o-background-size: 7px 1px;
 	background-size: 7px 1px;
 }
 .view>.scroll.striped p.foot-label{
@@ -218,7 +181,6 @@ header.fake,
 }
 .view>.scroll>section{
 	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
 	box-flex: 1;
 	-webkit-overflow-scrolling: touch;
 	overflow: auto;
@@ -239,10 +201,8 @@ header.fake,
 	text-shadow: 0 1px #fff;
 	background: transparent url(../images/ios/activity-indicator.png) no-repeat;
 	-webkit-background-size: 20px auto;
-	-moz-background-size: 20px auto;
 	background-size: 20px auto;
 	-webkit-animation: loading-sprite 1s step-start infinite;
-	-moz-animation: loading-sprite 1s step-start infinite;
 	animation: loading-sprite 1s step-start infinite;
 }
 .view>.scroll .comments .loader{
@@ -254,21 +214,6 @@ header.fake,
 	color: #2f343c;
 }
 @-webkit-keyframes loading-sprite {
-	0% { background-position: 0 0; }
-	8.33% { background-position: 0 -20px; }
-	16.67% { background-position: 0 -40px; }
-	25% { background-position: 0 -60px; }
-	33.33% { background-position: 0 -80px; }
-	41.67% { background-position: 0 -100px; }
-	50% { background-position: 0 -120px; }
-	58.33% { background-position: 0 -140px; }
-	66.67% { background-position: 0 -160px; }
-	75% { background-position: 0 -180px; }
-	83.33% { background-position: 0 -200px; }
-	91.67% { background-position: 0 -220px; }
-	100% { background-position: 0 0; }
-}
-@-moz-keyframes loading-sprite {
 	0% { background-position: 0 0; }
 	8.33% { background-position: 0 -20px; }
 	16.67% { background-position: 0 -40px; }
@@ -328,14 +273,8 @@ header.fake,
 	background-color: #dedede;
 	border: 1px solid #d9d9d9;
 	background-image: -webkit-linear-gradient(top, #fdfdfd, #dedede);
-	background-image: -moz-linear-gradient(top, #fdfdfd, #dedede);
-	background-image: -ms-linear-gradient(top, #fdfdfd, #dedede);
-	background-image: -o-linear-gradient(top, #fdfdfd, #dedede);
 	background-image: linear-gradient(top, #fdfdfd, #dedede);
 	-webkit-background-size: 10px 100%;
-	-moz-background-size: 10px 100%;
-	-ms-background-size: 10px 100%;
-	-o-background-size: 10px 100%;
 	background-size: 10px 100%;
 	-webkit-user-select: none;
 }
@@ -344,25 +283,15 @@ header.fake,
 	background-color: #c8c8c8;
 	border-color: #c8c8c8;
 	background-image: -webkit-linear-gradient(top, #f0f0f0, #c8c8c8);
-	background-image: -moz-linear-gradient(top, #f0f0f0, #c8c8c8);
-	background-image: -ms-linear-gradient(top, #f0f0f0, #c8c8c8);
-	background-image: -o-linear-gradient(top, #f0f0f0, #c8c8c8);
 	background-image: linear-gradient(top, #f0f0f0, #c8c8c8);
 }
 .view-blank-state{
 	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
 	box-flex: 1;
 	background-color: #fcfcfc;
 	background-image: -webkit-linear-gradient(top, #fcfcfc, #dadce0);
-	background-image: -moz-linear-gradient(top, #fcfcfc, #dadce0);
-	background-image: -ms-linear-gradient(top, #fcfcfc, #dadce0);
-	background-image: -o-linear-gradient(top, #fcfcfc, #dadce0);
 	background-image: linear-gradient(top, #fcfcfc, #dadce0);
 	-webkit-background-size: 1px 100%;
-	-moz-background-size: 1px 100%;
-	-ms-background-size: 1px 100%;
-	-o-background-size: 1px 100%;
 	background-size: 1px 100%;
 }
 .view-blank-state-text{
@@ -399,7 +328,6 @@ header.fake,
 .tableview-links li{
 	padding: 0;
 	display: -webkit-box;
-	display: -moz-box;
 	display: box;
 	width: 100%;
 }
@@ -412,26 +340,17 @@ header.fake,
 	text-decoration: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	display: -webkit-box;
-	display: -moz-box;
 	display: box;
 	width: 100%;
 	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
 	box-flex: 1;
 	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -moz-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -o-linear-gradient(top, #4286f5, #194fdb);
 	background-image: linear-gradient(top, #4286f5, #194fdb);
 	background-position: -10px 0;
 	background-repeat: no-repeat;
 	-webkit-background-size: 10px 100%;
-	-moz-background-size: 10px 100%;
-	-ms-background-size: 10px 100%;
-	-o-background-size: 10px 100%;
 	background-size: 10px 100%;
 }
 .tableview-links li>a:visited{
@@ -448,7 +367,6 @@ header.fake,
 }
 .tableview-links li>a .story{
 	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
 	box-flex: 1;
 }
 .tableview-links li>a .metadata{
@@ -463,7 +381,6 @@ header.fake,
 .tableview-links li>a.disclosure:after{
 	content: '';
 	display: -webkit-box;
-	display: -moz-box;
 	display: box;
 	pointer-events: none;
 	background: transparent url(../images/ios/disclosure-indicator.png) no-repeat left center;
@@ -526,13 +443,10 @@ header.fake,
 	width: 44px;
 	margin: 0 0 0 -44px;
 	-webkit-box-align: center;
-	-moz-box-align: center;
 	box-align: center;
 	-webkit-box-pack: center;
-	-moz-box-pack: center;
 	box-pack: center;
 	-webkit-box-flex: 0;
-	-moz-box-flex: 0;
 	box-flex: 0;
 }
 .tableview-links li>a.detail-disclosure-button.tappable-active{
@@ -544,9 +458,6 @@ header.fake,
 	height: 31px;
 	background: transparent url(../images/ios/detail-disclosure-button.png);
 	-webkit-background-size: 58px 31px;
-	-moz-background-size: 58px 31px;
-	-ms-background-size: 58px 31px;
-	-o-background-size: 58px 31px;
 	background-size: 58px 31px;
 }
 .tableview-links li>a.detail-disclosure-button.tappable-active span{
@@ -613,7 +524,6 @@ ul.grouped-tableview-links li,
 ol.grouped-tableview-links li{
 	padding: 0;
 	display: -webkit-box;
-	display: -moz-box;
 	display: box;
 	width: 100%;
 }
@@ -627,26 +537,17 @@ ol.grouped-tableview-links li>a{
 	text-decoration: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	display: -webkit-box;
-	display: -moz-box;
 	display: box;
 	width: 100%;
 	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
 	box-flex: 1;
 	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -moz-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -o-linear-gradient(top, #4286f5, #194fdb);
 	background-image: linear-gradient(top, #4286f5, #194fdb);
 	background-position: -1px 0;
 	background-repeat: no-repeat;
 	-webkit-background-size: 1px 100%;
-	-moz-background-size: 1px 100%;
-	-ms-background-size: 1px 100%;
-	-o-background-size: 1px 100%;
 	background-size: 1px 100%;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -664,17 +565,14 @@ ol.grouped-tableview li:last-child>a{
 ul.grouped-tableview-links li>a.disclosure,
 ol.grouped-tableview-links li>a.disclosure{
 	-webkit-box-align: center;
-	-moz-box-align: center;
 	box-align: center;
 }
 ul.grouped-tableview-links li>a.disclosure:after,
 ol.grouped-tableview-links li>a.disclosure:after{
 	content: '';
 	display: -webkit-box;
-	display: -moz-box;
 	display: box;
 	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
 	box-flex: 1;
 	height: 13px;
 	background: transparent url(../images/ios/disclosure-indicator-2.png) no-repeat top right;
@@ -704,14 +602,8 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	padding-bottom: 1px;
 	background-color: #cbd2d8;
 	background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), -moz-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), -ms-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), -o-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	-webkit-background-size: 1px 11px, 7px 100px;
-	-moz-background-size: 1px 11px, 7px 100px;
-	-ms-background-size: 1px 11px, 7px 100px;
-	-o-background-size: 1px 11px, 7px 100px;
 	background-size: 1px 11px, 7px 100px;
 	border-bottom: 1px solid #9297a2;
 	background-repeat: repeat-x, repeat;
@@ -728,19 +620,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	height: 300px;
 	background-color: #cbd2d8;
 	background-image: -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -moz-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -ms-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: -o-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	background-image: linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	-webkit-background-size: 7px 1px;
-	-moz-background-size: 7px 1px;
-	-ms-background-size: 7px 1px;
-	-o-background-size: 7px 1px;
 	background-size: 7px 1px;
 	-webkit-transform: translate3d(0, -300px, 0);
-	-moz-transform: translate3d(0, -300px, 0);
-	-ms-transform: translate3d(0, -300px, 0);
-	-o-transform: translate3d(0, -300px, 0);
 	transform: translate3d(0, -300px, 0);
 }
 .view .post-content header{
@@ -815,15 +698,9 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	overflow: hidden;
 	box-shadow: inset 0 0 2px #808080, 0 1px #fff;
 	background-image: -webkit-linear-gradient(top, #ddd, #fff);
-	background-image: -moz-linear-gradient(top, #ddd, #fff);
-	background-image: -ms-linear-gradient(top, #ddd, #fff);
-	background-image: -o-linear-gradient(top, #ddd, #fff);
 	background-image: linear-gradient(top, #ddd, #fff);
 	background-repeat: repeat-x;
 	-webkit-background-size: 10px 9px;
-	-moz-background-size: 10px 9px;
-	-ms-background-size: 10px 9px;
-	-o-background-size: 10px 9px;
 	background-size: 10px 9px;
 }
 .view .post-content .poll li .poll-bar span{
@@ -834,15 +711,9 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	border-bottom-left-radius: 5px;
 	box-shadow: inset 0 0 2px #0b3a88;
 	background-image: -webkit-linear-gradient(top, #2f64b7, #77adf6);
-	background-image: -moz-linear-gradient(top, #2f64b7, #77adf6);
-	background-image: -ms-linear-gradient(top, #2f64b7, #77adf6);
-	background-image: -o-linear-gradient(top, #2f64b7, #77adf6);
 	background-image: linear-gradient(top, #2f64b7, #77adf6);
 	background-repeat: repeat-x;
 	-webkit-background-size: 10px 9px;
-	-moz-background-size: 10px 9px;
-	-ms-background-size: 10px 9px;
-	-o-background-size: 10px 9px;
 	background-size: 10px 9px;
 }
 
@@ -869,9 +740,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	border: 0;
 	background: transparent url(../images/comment-arrow.png) no-repeat 0 4px;
 	-webkit-background-size: 10px 9px;
-	-moz-background-size: 10px 9px;
-	-ms-background-size: 10px 9px;
-	-o-background-size: 10px 9px;
 	background-size: 10px 9px;
 	color: #333;
 }
@@ -883,7 +751,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	padding: 0;
 	margin: 0;
 	display: -webkit-box;
-	display: -moz-box;
 	display: box;
 }
 .view section.comments p.metadata b{
@@ -893,7 +760,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	display: block;
 	text-align: right;
 	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
 	box-flex: 1;
 	font-weight: bold;
 	color: #888;
@@ -929,14 +795,8 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-color: #dedede;
 	border: 1px solid #d9d9d9;
 	background-image: -webkit-linear-gradient(top, #fdfdfd, #dedede);
-	background-image: -moz-linear-gradient(top, #fdfdfd, #dedede);
-	background-image: -ms-linear-gradient(top, #fdfdfd, #dedede);
-	background-image: -o-linear-gradient(top, #fdfdfd, #dedede);
 	background-image: linear-gradient(top, #fdfdfd, #dedede);
 	-webkit-background-size: 10px 100%;
-	-moz-background-size: 10px 100%;
-	-ms-background-size: 10px 100%;
-	-o-background-size: 10px 100%;
 	background-size: 10px 100%;
 	-webkit-user-select: none;
 }
@@ -945,9 +805,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-color: #c8c8c8;
 	border-color: #c8c8c8;
 	background-image: -webkit-linear-gradient(top, #f0f0f0, #c8c8c8);
-	background-image: -moz-linear-gradient(top, #f0f0f0, #c8c8c8);
-	background-image: -ms-linear-gradient(top, #f0f0f0, #c8c8c8);
-	background-image: -o-linear-gradient(top, #f0f0f0, #c8c8c8);
 	background-image: linear-gradient(top, #f0f0f0, #c8c8c8);
 }
 .view section.comments li.more-link-container{
@@ -958,26 +815,17 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	text-decoration: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	display: -webkit-box;
-	display: -moz-box;
 	display: box;
 	width: 100%;
 	-webkit-box-flex: 1;
-	-moz-box-flex: 1;
 	box-flex: 1;
 	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -moz-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -ms-linear-gradient(top, #4286f5, #194fdb);
-	background-image: -o-linear-gradient(top, #4286f5, #194fdb);
 	background-image: linear-gradient(top, #4286f5, #194fdb);
 	background-position: -10px 0;
 	background-repeat: no-repeat;
 	-webkit-background-size: 10px 100%;
-	-moz-background-size: 10px 100%;
-	-ms-background-size: 10px 100%;
-	-o-background-size: 10px 100%;
 	background-size: 10px 100%;
 	cursor: pointer;
 	-webkit-touch-callout: none;
@@ -1032,8 +880,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 .view>header .header-button{
 	-webkit-animation-timing-function: ease-in-out;
 	-webkit-animation-duration: 350ms;
-	-moz-animation-timing-function: ease-in-out;
-	-moz-animation-duration: 350ms;
 	animation-timing-function: ease-in-out;
 	animation-duration: 350ms;
 }
@@ -1042,7 +888,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 .slow-anim .view>header h1,
 .slow-anim .view>header .header-button{
 	-webkit-animation-duration: 3.5s;
-	-moz-animation-duration: 3.5s;
 	animation-duration: 3.5s;
 }
 
@@ -1052,97 +897,79 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 
 .slide-in-from-right>.scroll{
 	-webkit-animation-name: slideinfromright;
-	-moz-animation-name: slideinfromright;
 	animation-name: slideinfromright;
 }
 .slide-in-from-right>header h1{
 	-webkit-animation-name: slidefadeinfromright;
-	-moz-animation-name: slidefadeinfromright;
 	animation-name: slidefadeinfromright;
 }
 .slide-in-from-right>header .header-button{
 	-webkit-animation-name: fadein;
-	-moz-animation-name: fadein;
 	animation-name: fadein;
 }
 .slide-in-from-right>header .header-back-button{
 	-webkit-animation-name: backinfromcenter;
-	-moz-animation-name: backinfromcenter;
 	animation-name: backinfromcenter;
 }
 
 .slide-in-from-left>.scroll{
 	-webkit-animation-name: slideinfromleft;
-	-moz-animation-name: slideinfromleft;
 	animation-name: slideinfromleft;
 }
 .slide-in-from-left>header h1{
 	-webkit-animation-name: slidefadeinfromleft;
-	-moz-animation-name: slidefadeinfromleft;
 	animation-name: slidefadeinfromleft;
 }
 .slide-in-from-left>header .header-button{
 	-webkit-animation-name: fadein;
-	-moz-animation-name: fadein;
 	animation-name: fadein;
 }
 .slide-in-from-left>header .header-back-button{
 	-webkit-animation-name: backinfromleft;
-	-moz-animation-name: backinfromleft;
 	animation-name: backinfromleft;
 }
 
 .slide-in-from-bottom{
 	-webkit-animation-name: slideinfrombottom;
-	-moz-animation-name: slideinfrombottom;
 	animation-name: slideinfrombottom;
 }
 
 .slide-out-to-right>.scroll{
 	-webkit-animation-name: slideouttoright;
-	-moz-animation-name: slideouttoright;
 	animation-name: slideouttoright;
 }
 .slide-out-to-right>header h1{
 	-webkit-animation-name: slidefadeouttoright;
-	-moz-animation-name: slidefadeouttoright;
 	animation-name: slidefadeouttoright;
 }
 .slide-out-to-right>header .header-button{
 	-webkit-animation-name: fadeout;
-	-moz-animation-name: fadeout;
 	animation-name: fadeout;
 }
 .slide-out-to-right>header .header-back-button{
 	-webkit-animation-name: backouttocenter;
-	-moz-animation-name: backouttocenter;
 	animation-name: backouttocenter;
 }
 
 .slide-out-to-left>.scroll{
 	-webkit-animation-name: slideouttoleft;
-	-moz-animation-name: slideouttoleft;
 	animation-name: slideouttoleft;
 }
 .slide-out-to-left>header h1{
 	-webkit-animation-name: slidefadeouttoleft;
-	-moz-animation-name: slidefadeouttoleft;
 	animation-name: slidefadeouttoleft;
 }
 .slide-out-to-left>header .header-button{
 	-webkit-animation-name: fadeout;
-	-moz-animation-name: fadeout;
 	animation-name: fadeout;
 }
 .slide-out-to-left>header .header-back-button{
 	-webkit-animation-name: backouttoleft;
-	-moz-animation-name: backouttoleft;
 	animation-name: backouttoleft;
 }
 
 .slide-out-to-bottom{
 	-webkit-animation-name: slideouttobottom;
-	-moz-animation-name: slideouttobottom;
 	animation-name: slideouttobottom;
 }
 
@@ -1327,9 +1154,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	.view>header{
 		background-image: url(../images/ios/nav-bar-mini.png);
 		-webkit-background-size: 1px 32px;
-		-moz-background-size: 1px 32px;
-		-ms-background-size: 1px 32px;
-		-o-background-size: 1px 32px;
 		background-size: 1px 32px;
 		height: 32px;
 		line-height: 32px;
@@ -1358,9 +1182,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	}
 	.header-button-icon button i{
 		-webkit-transform: scale(.77);
-		-moz-transform: scale(.77);
-		-ms-transform: scale(.77);
-		-o-transform: scale(.77);
 		transform: scale(.77);
 		margin-bottom: 2px;
 	}
@@ -1377,14 +1198,8 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	}
 	body{
 		background-image: -webkit-linear-gradient(top, #000, #000);
-		background-image: -moz-linear-gradient(top, #000, #000);
-		background-image: -ms-linear-gradient(top, #000, #000);
-		background-image: -o-linear-gradient(top, #000, #000);
 		background-image: linear-gradient(top, #000, #000);
 		-webkit-background-size: 10px 10px;
-		-moz-background-size: 10px 10px;
-		-ms-background-size: 10px 10px;
-		-o-background-size: 10px 10px;
 		background-size: 10px 10px;
 		background-position: bottom;
 		background-repeat: repeat-x;
@@ -1402,9 +1217,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		background-color: rgba(8, 11, 18, .5);
 		opacity: 1;
 		-webkit-transition: opacity 350ms ease-in-out;
-		-moz-transition: opacity 350ms ease-in-out;
-		-ms-transition: opacity 350ms ease-in-out;
-		-o-transition: opacity 350ms ease-in-out;
 		transition: opacity 350ms ease-in-out;
 	}
 	#overlay.hide{
@@ -1424,24 +1236,17 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	}
 	.header-button button{
 		-webkit-border-image: url(../images/ios/silver-button.png) 4 10 4 10;
-		-moz-border-image: url(../images/ios/silver-button.png) 4 10 4 10 fill;
-		-ms-border-image: url(../images/ios/silver-button.png) 4 10 4 10 fill;
-		-o-border-image: url(../images/ios/silver-button.png) 4 10 4 10 fill;
 	/*	border-image: url(../images/ios/silver-button.png) 4 10 4 10 fill;*/
 		background-image: url(../images/ios/silver-button-active.png);
 	}
 	.header-button.tappable-active button{
 		-webkit-border-image: url(../images/ios/silver-button-active.png) 4 10 4 10;
-		-moz-border-image: url(../images/ios/silver-button-active.png) 4 10 4 10 fill;
-		-ms-border-image: url(../images/ios/silver-button-active.png) 4 10 4 10 fill;
-		-o-border-image: url(../images/ios/silver-button-active.png) 4 10 4 10 fill;
 	/*	border-image: url(../images/ios/silver-button-active.png) 4 10 4 10 fill;*/
 	}
 	#view-home{
 		width: 280px;
 		border-right: 1px solid #000;
 		-webkit-box-direction: reverse;
-		-moz-box-direction: reverse;
 		box-direction: reverse;
 		left: 0;
 	}
@@ -1456,7 +1261,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	}
 	#view-home .scroll{
 		-webkit-box-direction: normal;
-		-moz-box-direction: normal;
 		box-direction: normal;
 		background-color: #fff;
 	}
@@ -1464,10 +1268,8 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		-webkit-line-clamp: 2;
 		overflow: hidden;
 		display: -webkit-box;
-		display: -moz-box;
 		display: box;
 		-webkit-box-orient: vertical;
-		-moz-box-orient: vertical;
 		box-orient: vertical;
 	}
 	#view-about{
@@ -1482,20 +1284,11 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		z-index: 101;
 		-webkit-transform: translateY(0);
 		-webkit-transition: -webkit-transform 350ms;
-		-moz-transform: translateY(0);
-		-moz-transition: -moz-transform 350ms;
-		-ms-transform: translateY(0);
-		-ms-transition: -ms-transform 350ms;
-		-o-transform: translateY(0);
-		-o-transition: -o-transform 350ms;
 		transform: translateY(0);
 		transition: -webkit-transform 350ms;
 	}
 	#view-about.hidden{
 		-webkit-transform: translateY(175%);
-		-moz-transform: translateY(175%);
-		-ms-transform: translateY(175%);
-		-o-transform: translateY(175%);
 		transform: translateY(175%);
 	}
 	#view-about>header{
@@ -1509,9 +1302,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	#view-about > .scroll.striped{
 		background-color: #e2e5ea;
 		background-image: -webkit-linear-gradient(top, #e2e5ea, #d0d2d8);
-		background-image: -moz-linear-gradient(top, #e2e5ea, #d0d2d8);
-		background-image: -ms-linear-gradient(top, #e2e5ea, #d0d2d8);
-		background-image: -o-linear-gradient(top, #e2e5ea, #d0d2d8);
 		background-image: linear-gradient(top, #e2e5ea, #d0d2d8);
 	}
 	#view-about > .scroll > section{
@@ -1525,12 +1315,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		right: 0;
 		width: auto;
 		-webkit-box-direction: reverse;
-		-moz-box-direction: reverse;
 		box-direction: reverse;
 	}
 	#view-comments .scroll{
 		-webkit-box-direction: normal;
-		-moz-box-direction: normal;
 		box-direction: normal;
 	}
 	#view-comments>header{
@@ -1551,9 +1339,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		width: 44px;
 		background: transparent url(../images/ios/close-button.png) no-repeat center;
 		-webkit-background-size: 9px 10px;
-		-moz-background-size: 9px 10px;
-		-ms-background-size: 9px 10px;
-		-o-background-size: 9px 10px;
 		background-size: 9px 10px;
 	}
 	#view-comments>header a.header-back-button button{
@@ -1572,9 +1357,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		z-index: 1;
 		background: transparent no-repeat;
 		background-image: -webkit-radial-gradient(center contain, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 100%);
-		background-image: -moz-radial-gradient(center contain, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 100%);
-		background-image: -ms-radial-gradient(center contain, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 100%);
-		background-image: -o-radial-gradient(center contain, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 100%);
 		background-image: radial-gradient(center contain, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 100%);
 	}
 	#view-comments>header a.header-back-button.tappable-active:after{
@@ -1602,14 +1384,8 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		background-color: #dedede;
 		border: 1px solid #d9d9d9;
 		background-image: -webkit-linear-gradient(top, #fdfdfd, #dedede);
-		background-image: -moz-linear-gradient(top, #fdfdfd, #dedede);
-		background-image: -ms-linear-gradient(top, #fdfdfd, #dedede);
-		background-image: -o-linear-gradient(top, #fdfdfd, #dedede);
 		background-image: linear-gradient(top, #fdfdfd, #dedede);
 		-webkit-background-size: 10px 100%;
-		-moz-background-size: 10px 100%;
-		-ms-background-size: 10px 100%;
-		-o-background-size: 10px 100%;
 		background-size: 10px 100%;
 		background-repeat: repeat-x;
 		-webkit-user-select: none;
@@ -1619,9 +1395,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		background-color: #c8c8c8;
 		border-color: #c8c8c8;
 		background-image: -webkit-linear-gradient(top, #f0f0f0, #c8c8c8);
-		background-image: -moz-linear-gradient(top, #f0f0f0, #c8c8c8);
-		background-image: -ms-linear-gradient(top, #f0f0f0, #c8c8c8);
-		background-image: -o-linear-gradient(top, #f0f0f0, #c8c8c8);
 		background-image: linear-gradient(top, #f0f0f0, #c8c8c8);
 	}
 	.view section.comments li>a.more-link.tappable-active *{
@@ -1637,10 +1410,8 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	}
 	#view-comments>.scroll>section{
 		display: -webkit-box;
-		display: -moz-box;
 		display: box;
 		-webkit-box-orient: vertical;
-		-moz-box-orient: vertical;
 		box-orient: vertical;
 	}
 	#view-comments>.scroll .comments{
@@ -1659,35 +1430,20 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		height: 600px;
 		background-color: #e2e5ea;
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
-		background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
-		background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
-		background-image: -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
 		background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
 		-webkit-background-size: 1px 11px;
-		-moz-background-size: 1px 11px;
-		-ms-background-size: 1px 11px;
-		-o-background-size: 1px 11px;
 		background-size: 1px 11px;
 		background-position: bottom;
 		background-repeat: repeat-x;
 		-webkit-transform: translate3d(0, -600px, 0);
-		-moz-transform: translate3d(0, -600px, 0);
-		-ms-transform: translate3d(0, -600px, 0);
-		-o-transform: translate3d(0, -600px, 0);
 		transform: translate3d(0, -600px, 0);
 	}
 	.view .post-content{
 		box-shadow: inset 0 1px #fff;
 		background-color: #dedfe5;
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08)), -webkit-linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
-		background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08)), -moz-linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
-		background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08)), -ms-linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
-		background-image: -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08)), -o-linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
 		background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08)), linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
 		-webkit-background-size: 1px 11px, 1px 100%;
-		-moz-background-size: 1px 11px, 1px 100%;
-		-ms-background-size: 1px 11px, 1px 100%;
-		-o-background-size: 1px 11px, 1px 100%;
 		background-size: 1px 11px, 1px 100%;
 		background-repeat: repeat-x;
 	}
@@ -1695,9 +1451,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		width: 72px;
 		height: 72px;
 		-webkit-background-size: 72px 72px;
-		-moz-background-size: 72px 72px;
-		-ms-background-size: 72px 72px;
-		-o-background-size: 72px 72px;
 		background-size: 72px 72px;
 		border-radius: 12px;
 	}
