@@ -214,7 +214,9 @@
 		}
 	};
 
-	var $commentsView = $('view-comments');
+	var $commentsView = $('view-comments'),
+		$commentsHeading = $commentsView.querySelector('header h1'),
+		$commentsSection = $commentsView.querySelector('section');
 
 	hn.comments = {
 		currentID: null,
@@ -222,16 +224,13 @@
 			if (!id || hn.comments.currentID == id) return;
 			hn.comments.currentID = id;
 
-			var viewHeading = $commentsView.querySelector('header h1'),
-				viewSection = $commentsView.querySelector('section');
-
 			var post = amplify.store.sessionStorage('hacker-item-' + id),
 				$commentsScroll = $commentsView.querySelector('.scroll'),
 				loadComments = function(_data, id){
 					if (!_data || _data.error) return;
 					var data = clone(_data);
 					amplify.store.sessionStorage('hacker-comments-' + id, data);
-					var ul = viewSection.querySelector('.comments>ul');
+					var ul = $commentsSection.querySelector('.comments>ul');
 					if (!ul.querySelector('.more-link-container')){
 						ul.insertAdjacentHTML('beforeend', '<li class="more-link-container"><a class="more-link" data-id="' + id + '">More&hellip;</a></li>');
 					}
@@ -257,8 +256,8 @@
 
 					data.has_post = !!data.title;
 					if (!data.has_post){
-						viewHeading.innerHTML = '';
-						viewSection.innerHTML = tmpl1.render(data);
+						$commentsHeading.innerHTML = '';
+						$commentsSection.innerHTML = tmpl1.render(data);
 						hn.pub('adjustCommentsSection');
 						hn.pub('onRenderComments');
 						return;
@@ -291,7 +290,7 @@
 					}
 					data.short_hn_url = 'news.ycombinator.com/item?id=' + id;
 					data.hn_url = 'http://' + data.short_hn_url;
-					viewHeading.innerHTML = data.title;
+					$commentsHeading.innerHTML = data.title;
 
 					var html = tmpl1.render(data, {comments_list: tmpl2});
 					var div = d.createElement('div');
@@ -322,11 +321,11 @@
 						}
 					}
 
-					while (viewSection.hasChildNodes()){
-						viewSection.removeChild(viewSection.childNodes[0]);
+					while ($commentsSection.hasChildNodes()){
+						$commentsSection.removeChild($commentsSection.childNodes[0]);
 					}
 					while (div.hasChildNodes()){
-						viewSection.appendChild(div.childNodes[0]);
+						$commentsSection.appendChild(div.childNodes[0]);
 					}
 					delete div;
 
