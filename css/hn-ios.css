@@ -863,7 +863,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	clear:both;
 }
 
-#y-touch-icon{
+#y-icon{
 	background: transparent url(../icons/touch-icon.png) no-repeat;
 	background-size: 57px 57px;
 	width: 57px;
@@ -1447,7 +1447,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		background-size: 1px 11px, 1px 100%;
 		background-repeat: repeat-x;
 	}
-	#y-touch-icon{
+	#y-icon{
 		width: 72px;
 		height: 72px;
 		-webkit-background-size: 72px 72px;
