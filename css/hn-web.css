@@ -139,6 +139,7 @@ button{
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	word-wrap: normal;
 }
 .view>.scroll{
 	overflow: hidden;
