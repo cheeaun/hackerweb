@@ -124,7 +124,7 @@
 						viewComments.querySelector('header h1').innerHTML = '';
 						viewComments.querySelector('header a.header-back-button').style.display = 'none';
 						hn.comments.currentID = null;
-						hn.pub('updateCurrentStory');
+						hn.pub('selectCurrentStory');
 					}
 					hn.currentView = 'home';
 					break;
@@ -169,7 +169,7 @@
 						$('overlay').classList.add('hide');
 						view.classList.remove('hidden');
 						$('view-home').classList.remove('hidden');
-						hn.pub('updateCurrentStory', matches[1]);
+						hn.pub('selectCurrentStory', matches[1]);
 						view.querySelector('header a.header-back-button').style.display = '';
 					}
 					hn.currentView = 'comments';
@@ -178,6 +178,7 @@
 		}
 	});
 
+	// Remember scroll tops of each views
 	w.addEventListener('pagehide', function(){
 		var views = d.querySelectorAll('.view'),
 			hackerScrollTops = {};
@@ -196,6 +197,7 @@
 		}, 1);
 	}, false);
 	
+	// Instantly hide address bar when start tapping the scroll area
 	var $viewSections = d.querySelectorAll('.view>.scroll');
 	for (var i=0, l=$viewSections.length; i<l; i++){
 		$viewSections[i].addEventListener('touchstart', function(){
@@ -207,6 +209,7 @@
 		noScroll: true,
 		onTap: function(e, target){
 			var hash = target.hash;
+			// The close button in 'About' view
 			if (isWideScreen && /about/i.test(ruto.current) && hash == '#/'){
 				ruto.back('/');
 			} else {
@@ -251,6 +254,9 @@
 		}
 	});
 
+	// iPad-specific code for selected items in the list
+	// When you tap on an item and drag, selected item will be deselected
+	// When drag is done, previous selected item will be re-selected
 	var listTappedDelay;
 	tappable('#view-home .tableview-links li>a:first-child', {
 		allowClick: !isWideScreen,
@@ -311,7 +317,7 @@
 	
 	tappable('#view-comments .load-error button', hn.comments.reload);
 
-	hn.sub('updateCurrentStory', function(msg, id){
+	hn.sub('selectCurrentStory', function(msg, id){
 		if (!isWideScreen) return;
 		if (!id) id = (location.hash.match(/item\/(\d+)/) || [,''])[1];
 		var homeView = $('view-home');
@@ -330,7 +336,7 @@
 		}
 	});
 	hn.sub('onRenderNews', function(){
-		hn.pub('updateCurrentStory');
+		hn.pub('selectCurrentStory');
 	});
 
 	// Auto-reload news for some specific situations...
@@ -342,6 +348,8 @@
 		}, 1);
 	}, false);
 
+	// Adjust comments view min-height, a little higher than the scroll area
+	// so that it's scrollable. Else, the whole page will scroll instead, which is rather 'ugly'.
 	var adjustCommentsSection = function(){
 		var viewSection = d.querySelector('#view-comments section');
 		if (!viewSection) return;

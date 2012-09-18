@@ -2,15 +2,22 @@
 	var d = w.document,
 		body = d.body;
 
-	// Handy utilities
 	var $ = w.$ = function(id){
 		return d.getElementById(id)
 	};
 
 	var pubsubCache = {},
-		slice = Array.prototype.slice;
+		slice = Array.prototype.slice,
+		clone = function(obj){
+			var target = {};
+			for (var i in obj){
+				if (obj.hasOwnProperty(i)) target[i] = obj[i];
+			}
+			return target;
+		};
 
 	var hn = {
+		// PubSub
 		pub: function(topic){
 			var t = pubsubCache[topic];
 			if (!t) return;
@@ -35,18 +42,10 @@
 			if (!t) return;
 			if (!data) return t;
 			return t.render(data);
-		},
-		clone: function(obj){
-			var target = {};
-			for (var i in obj){
-				if (obj.hasOwnProperty(i)) target[i] = obj[i];
-			}
-			return target;
 		}
-	}
+	};
 
-	var tmpl = hn.tmpl,
-		clone = hn.clone;
+	var tmpl = hn.tmpl;
 
 	var $homeScroll = d.querySelector('#view-home .scroll'),
 		$homeScrollSection = $homeScroll.querySelector('section'),
@@ -91,6 +90,9 @@
 			});
 			return html;
 		},
+		// Re-markup the story item in the News list when
+		// there's an update from specific API call of the item.
+		// Make sure the title, points, comments count, etc matches.
 		updateStory: function(story){
 			if (!story || !story.id) return;
 			var id = story.id;
@@ -239,7 +241,8 @@
 						ul.insertAdjacentHTML('beforeend', '<li class="more-link-container"><a class="more-link" data-id="' + id + '">More&hellip;</a></li>');
 					}
 					if (!data.more_comments_id) return;
-					// Keep getting more and more comments...
+
+					// Preload all 'More' comments
 					var loadMoreComments = function(id){
 						var comments = amplify.store.sessionStorage('hacker-comments-' + id);
 						if (!comments){
@@ -403,6 +406,7 @@
 					amplify.store.sessionStorage('hacker-item-' + id, data, {
 						expires: 1000*60*5 // 5 minutes
 					});
+					// Sync the story to the one listed in the stories list
 					hn.news.updateStory({
 						id: id,
 						data: data
