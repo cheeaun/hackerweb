@@ -59,6 +59,7 @@
 		markupStory: function(item){
 			if (/^item/i.test(item.url)){
 				item.url = '#/item/' + item.id;
+				item.domain = null;
 			} else {
 				item.external = true;
 				var a = d.createElement('a');
@@ -68,7 +69,10 @@
 			}
 			// if (isWideScreen){
 			if (!hn.news.options.disclosure){
-				if (item.id) item.url = '#/item/' + item.id;
+				if (item.id){
+					item.url = '#/item/' + item.id;
+					item.domain = null;
+				}
 			} else {
 				if (item.type == 'link') item.detail_disclosure = true;
 				if (/^#\//.test(item.url)) item.disclosure = true;
