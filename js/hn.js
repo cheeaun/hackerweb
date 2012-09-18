@@ -45,6 +45,11 @@
 		}
 	};
 
+	// Log API failures/errors to GA
+	if (typeof _gaq != 'undefined') hn.sub('logAPIError', function(msg, type){
+		_gaq.push(['_trackEvent', 'Errors', 'API', type]);
+	});
+
 	var tmpl = hn.tmpl;
 
 	var $homeScroll = d.querySelector('#view-home .scroll'),
@@ -175,6 +180,7 @@
 				$homeScrollSection.innerHTML = tmpl1.render({loading: true});
 				var showError = function(){
 					$homeScrollSection.innerHTML = tmpl1.render({load_error: true});
+					hn.pub('logAPIError', 'news');
 				};
 				hnapi.news(function(data){
 					loadingNews = false;
@@ -394,6 +400,7 @@
 					} else {
 						loadPost({load_error: true}, id);
 					}
+					hn.pub('logAPIError', 'comments');
 				};
 				hnapi.item(id, function(data){
 					// Avoiding the case where the wrong post is loaded when connection is slow
