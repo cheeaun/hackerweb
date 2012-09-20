@@ -57,9 +57,11 @@ if (location.hostname == 'cheeaun.github.com'){
 			var script = d.createElement('script');
 			script.src = 'js/' + scripts[i++] + '.js';
 			script.onload = injectScript;
-			head.appendChild(script);
+			setTimeout(function(){
+				head.appendChild(script);
+			}, 1);
 		};
-		setTimeout(injectScript, 1);
+		injectScript();
 	}
 })(document, navigator.userAgent);
 </script>
