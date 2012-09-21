@@ -201,7 +201,8 @@
 	var $viewSections = d.querySelectorAll('.view>.scroll');
 	for (var i=0, l=$viewSections.length; i<l; i++){
 		$viewSections[i].addEventListener('touchstart', function(){
-			w.scrollTo(0, 0);
+			var top = getScrollTop();
+			if (top > 1) w.scrollTo(0, 0);
 		}, false);
 	}
 
