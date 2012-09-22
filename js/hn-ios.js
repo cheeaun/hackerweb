@@ -390,6 +390,7 @@
 	if (!isWideScreen){
 		scrollTop();
 		if (supportOrientation) w.onorientationchange = scrollTop;
+		w.addEventListener('resize', scrollTop, false);
 
 		w.addEventListener('load', function(){
 			var scrollCheck = setInterval(function(){
