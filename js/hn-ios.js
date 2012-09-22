@@ -198,11 +198,13 @@
 	}, false);
 	
 	// Instantly hide address bar when start tapping the scroll area
-	var $viewSections = d.querySelectorAll('.view>.scroll');
+	var $viewSections = d.querySelectorAll('.view>.scroll'),
+		wInnerHeight = null;
 	for (var i=0, l=$viewSections.length; i<l; i++){
 		$viewSections[i].addEventListener('touchstart', function(){
-			var top = getScrollTop();
-			if (top > 1) w.scrollTo(0, 0);
+			if (w.innerHeight != wInnerHeight){
+				w.scrollTo(0, 0);
+				wInnerHeight = w.innerHeight;
 		}, false);
 	}
 
