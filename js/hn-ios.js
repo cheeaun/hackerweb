@@ -209,6 +209,7 @@
 			if (w.innerHeight != wInnerHeight){
 				w.scrollTo(0, 0);
 				wInnerHeight = w.innerHeight;
+			}
 		}, false);
 	}
 
@@ -391,6 +392,7 @@
 				var top = getScrollTop();
 				w.scrollTo(0, top === 1 ? 0 : 1);
 				body.style.height = w.innerHeight + 'px';
+				body.offsetHeight; // Force redraw/repaint
 			}, 1);
 		};
 	if (!isWideScreen){
