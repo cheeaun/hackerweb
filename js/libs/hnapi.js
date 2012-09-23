@@ -9,34 +9,41 @@
 		req = function(url, success, error){
 			if (!success) success = function(){};
 			if (!error) error = function(){};
-			if (!supportCORS){
-				error(new Error('CORS not supported.'));
-				return;
-			};
-			var r = requests[url] || (w.XDomainRequest ? new XDomainRequest() : new XMLHttpRequest());
-			if (r._timeout) clearTimeout(r._timeout);
-			r._timeout = setTimeout(function(){
-				r.abort();
-			}, 15000); // 15 seconds timeout
-			r.onload = function(){
-				clearTimeout(this._timeout);
-				delete requests[url];
-				try {
-					success(JSON.parse(this.responseText));
-				} catch(e){
+			if (supportCORS){
+				var r = requests[url] || (w.XDomainRequest ? new XDomainRequest() : new XMLHttpRequest());
+				if (r._timeout) clearTimeout(r._timeout);
+				r._timeout = setTimeout(function(){
+					r.abort();
+				}, 15000); // 15 seconds timeout
+				r.onload = function(){
+					clearTimeout(this._timeout);
+					delete requests[url];
+					try {
+						success(JSON.parse(this.responseText));
+					} catch(e){
+						error(e);
+					}
+				};
+				r.onerror = r.onabort = r.ontimeout = function(e){
+					clearTimeout(this._timeout);
+					delete requests[url];
 					error(e);
 				}
-			};
-			r.onerror = r.onabort = r.ontimeout = function(e){
-				clearTimeout(this._timeout);
-				delete requests[url];
-				error(e);
+				if (r.readyState <= 1 || supportXDomainRequest){ // XDomainRequest doesn't have readyState
+					r.open('GET', url + '?' + date(), true);
+					r.send();
+				}
+				requests[url] = r;
+			} else {
+				// Very, very basic JSON-P fallback
+				var d = w.document,
+					s = d.createElement('script'),
+					callback = 'callback' + date();
+				w[callback] = success;
+				s.onerror = error;
+				s.src = url + '?callback=' + callback;
+				d.body.appendChild(s);
 			}
-			if (r.readyState <= 1 || supportXDomainRequest){ // XDomainRequest doesn't have readyState
-				r.open('GET', url + '?' + date(), true);
-				r.send();
-			}
-			requests[url] = r;
 		};
 	
 	var hnapi = {
