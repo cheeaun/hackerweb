@@ -80,6 +80,10 @@
 	}
 	vmeta.content = 'width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0';
 
+	// Apply iOS < 6 styles, only for iPhone/iPod
+	var ua = navigator.userAgent;
+	if (ua && /iPhone|iPod/.test(ua) && parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) < 6) body.classList.add('ios5');
+
 	// Wide screen state
 	var isWideScreen = getScreenState() == 'wide';
 	w.addEventListener('resize', function(){

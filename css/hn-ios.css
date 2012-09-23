@@ -77,8 +77,33 @@ header.fake,
 	-webkit-user-select: none;
 	-webkit-touch-callout: none;
 }
+.ios5 header.fake,
+.ios5 .view>header{
+	background-image: url(../images/ios/nav-bar-5.png);
+}
+body:not(.ios5) .view>header:after{
+	overflow: hidden;
+	content: '.';
+	position: absolute;
+	top: 44px;
+	width: 100%;
+	height: 3px;
+	z-index: 1;
+	background-image: -webkit-linear-gradient(top, rgba(0,0,0,.25), rgba(0,0,0,0));
+	background-image: linear-gradient(top, rgba(0,0,0,.25), rgba(0,0,0,0));
+	-webkit-background-size: 1px 3px;
+	background-size: 1px 3px;
+}
 .view>header.transparent{
 	background: transparent none;
+}
+body:not(.ios5) .view>header.transparent:after{
+	/*
+	When transitioning between two views, the shadows will overlap,
+	causing the shadows to darken. So, here applies the half opacity
+	to reduce the darkness.
+	*/
+	opacity: .5;
 }
 .header-button{
 	position: absolute;
@@ -109,6 +134,11 @@ header.fake,
 	-webkit-background-size: 0 0;
 	background-size: 0 0;
 }
+.ios5 .header-button button{
+	-webkit-border-image-source: url(../images/ios/button-5.png);
+	border-image-source: url(../images/ios/button-5.png);
+	background-image: url(../images/ios/button-active-5.png);
+}
 .header-button-icon button{
 	min-width: 0;
 }
@@ -119,6 +149,10 @@ header.fake,
 	-webkit-border-image: url(../images/ios/button-active.png) 4 10 4 10;
 /*	border-image: url(../images/ios/button-active.png) 4 10 4 10 fill;*/
 }
+.ios5 .header-button.tappable-active button{
+	-webkit-border-image-source: url(../images/ios/button-active-5.png);
+	border-image-source: url(../images/ios/button-active-5.png);
+}
 .header-back-button button{
 	padding: 0 4px 0 0;
 	border-width: 2px 4px 2px 13px;
@@ -126,9 +160,18 @@ header.fake,
 /*	border-image: url(../images/ios/back-button.png) 4 8 4 26 fill;*/
 	background-image: url(../images/ios/back-button-active.png);
 }
+.ios5 .header-back-button button{
+	-webkit-border-image-source: url(../images/ios/back-button-5.png);
+	border-image-source: url(../images/ios/back-button-5.png);
+	background-image: url(../images/ios/back-button-active-5.png);
+}
 .header-back-button.tappable-active button{
 	-webkit-border-image: url(../images/ios/back-button-active.png) 4 8 4 26;
 /*	border-image: url(../images/ios/back-button-active.png) 4 8 4 26 fill;*/
+}
+.ios5 .header-back-button.tappable-active button{
+	-webkit-border-image-source: url(../images/ios/back-button-active-5.png);
+	border-image-source: url(../images/ios/back-button-active-5.png);
 }
 .header-button-left{
 	left: 0;
@@ -166,6 +209,13 @@ header.fake,
 	position: relative;
 }
 .view>.scroll.striped{
+	background-color: #d7dce5;
+	background-image: -webkit-linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
+	background-image: linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
+	-webkit-background-size: 8px 1px;
+	background-size: 8px 1px;
+}
+.ios5 .view>.scroll.striped{
 	background-color: #cbd2d8;
 	background-image: -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	background-image: linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
@@ -173,7 +223,7 @@ header.fake,
 	background-size: 7px 1px;
 }
 .view>.scroll.striped p.foot-label{
-	margin: 11px 10px 0;
+	margin: 11px 10px 10px;
 	font-size: 14px;
 	color: #4c566c;
 	text-shadow: 0 1px #fff;
@@ -600,11 +650,11 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 
 .view .post-content{
 	padding-bottom: 1px;
-	background-color: #cbd2d8;
-	background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	-webkit-background-size: 1px 11px, 7px 100px;
-	background-size: 1px 11px, 7px 100px;
+	background-color: #d7dce5;
+	background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), -webkit-linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
+	background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
+	-webkit-background-size: 1px 11px, 8px 100px;
+	background-size: 1px 11px, 8px 100px;
 	border-bottom: 1px solid #9297a2;
 	background-repeat: repeat-x, repeat;
 	background-position: bottom, top left;
@@ -612,19 +662,33 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	-webkit-user-select: none;
 	min-height: 5em;
 }
+.ios5 .view .post-content{
+	background-color: #cbd2d8;
+	background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
+	-webkit-background-size: 1px 11px, 7px 100px;
+	background-size: 1px 11px, 7px 100px;
+}
 /* Put some fake stripes at the top of post content, so when you scroll up, you see 'em. */
 .view .post-content:before{
 	content: '';
 	position: absolute;
 	width: 100%;
 	height: 300px;
+	background-color: #d7dce5;
+	background-image: -webkit-linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
+	background-image: linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
+	-webkit-background-size: 8px 1px;
+	background-size: 8px 1px;
+	-webkit-transform: translate3d(0, -300px, 0);
+	transform: translate3d(0, -300px, 0);
+}
+.ios5 .view .post-content:before{
 	background-color: #cbd2d8;
 	background-image: -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	background-image: linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	-webkit-background-size: 7px 1px;
 	background-size: 7px 1px;
-	-webkit-transform: translate3d(0, -300px, 0);
-	transform: translate3d(0, -300px, 0);
 }
 .view .post-content header{
 	padding: 10px 15px;
@@ -1159,6 +1223,13 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		background-size: 1px 32px;
 		height: 32px;
 		line-height: 32px;
+	}
+	.ios5 header.fake,
+	.ios5 .view>header{
+		background-image: url(../images/ios/nav-bar-mini-5.png);
+	}
+	body:not(.ios5) .view>header:after{
+		top: 32px;
 	}
 	.view>header h1{
 		font-size: 16px;
