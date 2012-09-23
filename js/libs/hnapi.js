@@ -3,7 +3,7 @@
 	var date = function(){
 			return +new Date();
 		},
-		supportXDomainRequest = !!w.XDomainRequest;
+		supportXDomainRequest = !!w.XDomainRequest,
 		supportCORS = 'withCredentials' in new XMLHttpRequest() || supportXDomainRequest,
 		requests = {},
 		req = function(url, success, error){
