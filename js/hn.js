@@ -18,12 +18,11 @@
 
 	var hn = {
 		// PubSub
-		pub: function(topic){
+		pub: function(topic, data){
 			var t = pubsubCache[topic];
 			if (!t) return;
-			var args = slice.call(arguments, 1);
 			for (var i=0, l=t.length; i<l; i++){
-				t[i].apply(this, args);
+				t[i].call(this, data);
 			}
 		},
 		sub: function(topic, fn){
@@ -46,7 +45,7 @@
 	};
 
 	// Log API failures/errors to GA
-	if (typeof _gaq != 'undefined') hn.sub('logAPIError', function(msg, type){
+	if (typeof _gaq != 'undefined') hn.sub('logAPIError', function(type){
 		_gaq.push(['_trackEvent', 'Errors', 'API', type]);
 	});
 

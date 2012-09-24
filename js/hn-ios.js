@@ -325,7 +325,7 @@
 	
 	tappable('#view-comments .load-error button', hn.comments.reload);
 
-	hn.sub('selectCurrentStory', function(msg, id){
+	hn.sub('selectCurrentStory', function(id){
 		if (!isWideScreen) return;
 		if (!id) id = (location.hash.match(/item\/(\d+)/) || [,''])[1];
 		var homeView = $('view-home');
