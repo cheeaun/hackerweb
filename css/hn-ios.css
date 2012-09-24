@@ -81,29 +81,8 @@ header.fake,
 .ios5 .view>header{
 	background-image: url(../images/ios/nav-bar-5.png);
 }
-body:not(.ios5) .view>header:after{
-	overflow: hidden;
-	content: '.';
-	position: absolute;
-	top: 44px;
-	width: 100%;
-	height: 3px;
-	z-index: 1;
-	background-image: -webkit-linear-gradient(top, rgba(0,0,0,.25), rgba(0,0,0,0));
-	background-image: linear-gradient(top, rgba(0,0,0,.25), rgba(0,0,0,0));
-	-webkit-background-size: 1px 3px;
-	background-size: 1px 3px;
-}
 .view>header.transparent{
 	background: transparent none;
-}
-body:not(.ios5) .view>header.transparent:after{
-	/*
-	When transitioning between two views, the shadows will overlap,
-	causing the shadows to darken. So, here applies the half opacity
-	to reduce the darkness.
-	*/
-	opacity: .5;
 }
 .header-button{
 	position: absolute;
@@ -228,6 +207,20 @@ body:not(.ios5) .view>header.transparent:after{
 	color: #4c566c;
 	text-shadow: 0 1px #fff;
 	text-align: center;
+}
+body:not(.ios5) .view>.scroll:before{
+	content: '';
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 3px;
+	z-index: 1;
+	background-image: -webkit-linear-gradient(top, rgba(0,0,0,.25), rgba(0,0,0,0));
+	background-image: linear-gradient(top, rgba(0,0,0,.25), rgba(0,0,0,0));
+	-webkit-background-size: 1px 3px;
+	background-size: 1px 3px;
 }
 .view>.scroll>section{
 	-webkit-box-flex: 1;
@@ -1227,9 +1220,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	.ios5 header.fake,
 	.ios5 .view>header{
 		background-image: url(../images/ios/nav-bar-mini-5.png);
-	}
-	body:not(.ios5) .view>header:after{
-		top: 32px;
 	}
 	.view>header h1{
 		font-size: 16px;
