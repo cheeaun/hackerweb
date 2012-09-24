@@ -404,13 +404,14 @@
 		if (supportOrientation) w.onorientationchange = scrollTop;
 		w.addEventListener('resize', scrollTop, false);
 
-		w.addEventListener('load', function(){
+		var reveal = function(){
 			var scrollCheck = setInterval(function(){
 				var top = getScrollTop();
 				if (top <= 1){
 					clearInterval(scrollCheck);
 					setTimeout(function(){
 						var loader = $('apploader');
+						if (!loader) return;
 						loader.classList.add('hide');
 						loader.addEventListener('webkitTransitionEnd', function(){
 							loader.parentNode.removeChild(loader);
@@ -418,7 +419,9 @@
 					}, 400);
 				}
 			}, 15);
-		}, false);
+		};
+		w.addEventListener('load', reveal, false);
+		setTimeout(reveal, 5000); // Just in case the load event above doesn't fire.
 	} else {
 		var loader = $('apploader');
 		loader.parentNode.removeChild(loader);
