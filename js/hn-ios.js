@@ -81,8 +81,9 @@
 	vmeta.content = 'width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0';
 
 	// Apply iOS < 6 styles, only for iPhone/iPod
-	var ua = navigator.userAgent;
-	if (ua && /iPhone|iPod/.test(ua) && parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) < 6) body.classList.add('ios5');
+	var ua = navigator.userAgent,
+		isIPhoneIPod = ua && /iPhone|iPod/.test(ua);
+	if (isIPhoneIPod && parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) < 6) body.classList.add('ios5');
 
 	// Wide screen state
 	var isWideScreen = getScreenState() == 'wide';
@@ -93,6 +94,9 @@
 			location.reload();
 		}
 	});
+
+	// Inject some elements for additional iOS decorations
+	body.insertAdjacentHTML('beforeend', isIPhoneIPod ? '</div><header class="fake"></header>' : '<div id="overlay" class="hide">');
 
 	ruto.config({
 		before: function(path, name, matches){

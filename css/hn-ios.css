@@ -58,12 +58,16 @@ header.fake{
 	display: box;
 	-webkit-box-orient: vertical;
 	box-orient: vertical;
+	z-index: 2;
 }
 .view.hidden{
 	position: absolute;
 	top: -9999px;
 	left: -9999px;
 	pointer-events: none;
+}
+.header-fake{
+	z-index: 1;
 }
 header.fake,
 .view>header{
