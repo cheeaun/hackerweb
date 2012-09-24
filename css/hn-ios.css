@@ -1395,6 +1395,8 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		font-size: 14px;
 		padding-left: 44px !important;
 		padding-right: 10px !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
 	}
 	#view-comments>header a.header-back-button{
 		padding: 0;
