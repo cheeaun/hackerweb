@@ -51,6 +51,11 @@
 
 	var tmpl = hn.tmpl;
 
+	// Fix browsers freak out of amplify.store.sessionStorage not a function
+	if (!amplify.store.sessionStorage || typeof amplify.store.sessionStorage != 'function'){
+		amplify.store.sessionStorage = amplify.store.memory; // Fallback to in-memory storage
+	}
+
 	var $homeScroll = d.querySelector('#view-home .scroll'),
 		$homeScrollSection = $homeScroll.querySelector('section'),
 		loadingNews = false;
