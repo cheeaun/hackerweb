@@ -67,7 +67,6 @@
 		markupStory: function(item){
 			if (/^item/i.test(item.url)){
 				item.url = '#/item/' + item.id;
-				item.domain = null;
 			} else {
 				item.external = true;
 				var a = d.createElement('a');
@@ -75,15 +74,14 @@
 				item.domain = a.hostname.replace(/^www\./, '');
 				delete a;
 			}
-			// if (isWideScreen){
 			if (!hn.news.options.disclosure){
-				if (item.id){
-					item.url = '#/item/' + item.id;
-					item.domain = null;
-				}
+				if (item.id) item.url = '#/item/' + item.id;
 			} else {
 				if (item.type == 'link') item.detail_disclosure = true;
-				if (/^#\//.test(item.url)) item.disclosure = true;
+				if (/^#\//.test(item.url)){
+					item.disclosure = true;
+					item.domain = null;
+				}
 			}
 			item.i_point = item.points == 1 ? 'point' : 'points';
 			item.i_comment = item.comments_count == 1 ? 'comment' : 'comments';
