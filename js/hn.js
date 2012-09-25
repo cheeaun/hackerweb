@@ -431,7 +431,11 @@
 			var ul = target.nextElementSibling;
 			if (ul){
 				var ulStyle = ul.style;
+				// Fix weird bug introduced in iOS6
+				// Toggling this button somehow make the content scroll to top.
+				var top = $commentsSection.scrollTop;
 				ulStyle.display = (ulStyle.display == 'none') ? '' : 'none';
+				$commentsSection.scrollTop = top;
 			}
 		},
 		more: function(target){
