@@ -221,8 +221,8 @@ body:not(.ios5) .view>.scroll:before{
 	width: 100%;
 	height: 3px;
 	z-index: 1;
-	background-image: -webkit-linear-gradient(top, rgba(0,0,0,.25), rgba(0,0,0,0));
-	background-image: linear-gradient(top, rgba(0,0,0,.25), rgba(0,0,0,0));
+	background-image: -webkit-linear-gradient(top, rgba(0,0,0,.205), rgba(0,0,0,0));
+	background-image: linear-gradient(top, rgba(0,0,0,.205), rgba(0,0,0,0));
 	-webkit-background-size: 1px 3px;
 	background-size: 1px 3px;
 }
@@ -1309,6 +1309,13 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	.header-button.tappable-active button{
 		-webkit-border-image: url(../images/ios/silver-button-active.png) 4 10 4 10;
 	/*	border-image: url(../images/ios/silver-button-active.png) 4 10 4 10 fill;*/
+	}
+	#view-home>.scroll:before,
+	#view-comments>.scroll:before{
+		top: auto;
+		bottom: 0;
+		background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.205), rgba(0,0,0,0));
+		background-image: linear-gradient(bottom, rgba(0,0,0,.205), rgba(0,0,0,0));
 	}
 	#view-home{
 		width: 280px;
