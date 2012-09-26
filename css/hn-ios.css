@@ -706,6 +706,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	font-size: 13px;
 	color: #666d74;
 }
+.view .post-content header .metadata a.user{
+	color: #666d74;
+	text-decoration: none;
+}
 .view .post-content header .metadata a.external-link{
 	color: #666d74;
 	text-decoration: none;
@@ -817,6 +821,11 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 .view section.comments p.metadata b{
 	color: #b23914;
 }
+.view section.comments p.metadata a.user{
+	color: #b23914;
+	font-weight: bold;
+	text-decoration: none;
+}
 .view section.comments p.metadata time{
 	display: block;
 	text-align: right;
@@ -905,6 +914,20 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 .view section.comments li>a.more-link.tappable-active *{
 	color: #fff;
 }
+
+.view header.user h1{
+	text-transform: capitalize;
+}
+#view-user header h1{
+	text-transform: capitalize;
+}
+.view header.user span.karma{
+	color: #385487;
+	font-weight: bold;
+	font-size: 13px;
+	line-height: 1.5em;
+}
+
 .link-text{
 	color: #385487;
 	font-weight: bold;
@@ -1533,6 +1556,66 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	#app-desc{
 		margin-left: 82px;
 	}
+	
+	
+	
+	#view-user{
+		left: 281px;
+		right: 0;
+		width: auto;
+		-webkit-box-direction: reverse;
+		box-direction: reverse;
+	}
+	#view-user .scroll{
+		-webkit-box-direction: normal;
+		box-direction: normal;
+	}
+	#view-user>header{
+		position: relative;
+		background-image: url(../images/ios/silver-button-bar.png);
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 5px;
+	}
+	#view-user>header h1{
+		text-align: left;
+		font-size: 14px;
+		padding-left: 44px !important;
+		padding-right: 10px !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+	#view-user>header a.header-back-button{
+		padding: 0;
+		height: 44px;
+		width: 44px;
+		background: transparent url(../images/ios/close-button.png) no-repeat center;
+		-webkit-background-size: 9px 10px;
+		background-size: 9px 10px;
+	}
+	#view-user>header a.header-back-button button{
+		display: none;
+	}
+	#view-user>header a.header-back-button:after{
+		pointer-events: none;
+		opacity: 0;
+		content: '';
+		display: block;
+		width: 60px;
+		height: 60px;
+		position: absolute;
+		left: -8px;
+		top: -8px;
+		z-index: 1;
+		background: transparent no-repeat;
+		background-image: -webkit-radial-gradient(center contain, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 100%);
+		background-image: radial-gradient(center contain, rgba(255,255,255,.8) 0%, rgba(255,255,255,0) 100%);
+	}
+	#view-user>header a.header-back-button.tappable-active:after{
+		opacity: 1;
+	}
+	
+	
+	
 }
 
 @media only screen and (min-width: 1000px){
@@ -1540,6 +1623,9 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		width: 320px;
 	}
 	#view-comments{
+		left: 321px;
+	}
+	#view-user{
 		left: 321px;
 	}
 }
