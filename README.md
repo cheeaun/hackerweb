@@ -58,7 +58,7 @@ If there are changes in the `/js` folder, run this to regenerate `scripts.js` (s
 
 ### Changes to templates
 
-If there are changes in the `/templates` folder, run this to regenerate `templates.js` (skip the npm install if `uglify-js` and `hogan.js` are already installed):
+If there are changes in the `/templates` folder, run this to regenerate `templates.js` (skip the npm install if `uglify-js` is already installed ; do not use `npm install hogan.js` as the current NPM version – 2.0.0 – is not compatible):
 
 	npm install uglify-js
 	npm install git://github.com/twitter/hogan.js.git
