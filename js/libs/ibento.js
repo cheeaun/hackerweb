@@ -8,7 +8,6 @@
 
 (function(w){
 	var d = w.document,
-		body = d.body,
 		matchesSelector = function(node, selector){
 			var root = d.documentElement,
 			matches = root.matchesSelector || root.mozMatchesSelector || root.webkitMatchesSelector || root.oMatchesSelector || root.msMatchesSelector;
@@ -23,6 +22,7 @@
 		};
 
 	w.ibento = function(selector, event, fn){
+		var body = d.body;
 		body.addEventListener(event, function(e){
 			var target = closest(e.target, selector);
 			if (!target) return;
