@@ -29,11 +29,9 @@ Technical stuff
 This mobile web app primarily works on iOS 5 Mobile Safari. It uses these wonderful scripts:
 
 - [Tappable](https://github.com/cheeaun/tappable) - touch-friendly tap events
-- [Director](https://github.com/flatiron/director) - location.hash router
 - [Hogan.js](https://github.com/twitter/hogan.js) - logic-less templating
 - [Amplify.Store](http://amplifyjs.com/api/store/) - client-side storage
 - [Viper](https://github.com/alpha123/Viper/) - simple animation
-- [PubSubJS](https://github.com/mroderick/PubSubJS) - publish/subscribe messaging
 - Vanilla JavaScript - everything else
 
 Also uses the [unofficial Hacker News API](http://node-hnapi.herokuapp.com/), [open-sourced](https://github.com/cheeaun/node-hnapi).
