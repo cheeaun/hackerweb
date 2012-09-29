@@ -311,10 +311,12 @@
 					var div = d.createElement('div');
 					div.innerHTML = html;
 
-					// Make all links open in new tab/window
+					// Make all links, except for internal ones, open in new tab/window
 					var links = div.querySelectorAll('a');
 					for (var i=0, l=links.length; i<l; i++){
-						links[i].target = '_blank';
+						if (!(links[i].className === 'user')){
+							links[i].target = '_blank';
+						}
 					}
 
 					// 20K chars will be the max to trigger collapsible comments.
@@ -454,7 +456,9 @@
 
 				var links = _ul.querySelectorAll('a');
 				for (var i=0, l=links.length; i<l; i++){
-					links[i].target = '_blank';
+					if (!(links[i].className === 'user')){
+						links[i].target = '_blank';
+					}
 				}
 
 				var subLis = _ul.children;
@@ -488,6 +492,44 @@
 			ruto.reload();
 		}
 	};
+	
+	
+	var $userView = $('view-user'),
+		$userHeading = $userView.querySelector('header h1'),
+		$userBackButton = $userView.querySelector('header a'),
+		$userSection = $userView.querySelector('section');
+	
+	hn.user = {
+		currentID: null,
+		markupUser: function(user){
+			return tmpl('user', user);
+		},
+		render: function(id){
+			if (!id || hn.user.currentID == id) return;
+			hn.user.currentID = id;
+			
+			var loadUser = function(data, id){
+				var html = hn.user.markupUser(data);
+				$userSection.innerHTML = html;
+			};
+			
+			$userHeading.innerHTML = id;
+			
+			$userBackButton.href = (hn.comments.currentID) ? ('#/item/' + hn.comments.currentID) : '#/';
+			
+			hnapi.user(id, function(data){
+				// Avoiding the case where the wrong user is loaded when connection is slow
+				if (hn.user.currentID != id) return;
+				
+				loadUser(data, id);
+			}, function(e){
+				if (hn.user.currentID != id) return;
+				showError();
+			});
+			
+		}
+	};
+	
 
 	hn.init = function(){
 		hn.news.render();
@@ -512,6 +554,9 @@
 		.add('/about', 'about')
 		.add(/^\/item\/(\d+)$/i, 'comments', function(path, id){
 			hn.comments.render(id);
+		})
+		.add(/^\/user\/(\w+)$/i, 'user', function(path, id){
+			hn.user.render(id);
 		});
 
 	// "Naturally" reload when an update is available

@@ -10,7 +10,7 @@
 			</h1>
 			<p class="metadata">
 				{{#user}}
-					<span class="inline-block">{{points}} {{i_point}} by {{user}}</span> 
+					<span class="inline-block">{{points}} {{i_point}} by <a href="#/user/{{user}}" class="user">{{user}}</a></span> 
 					<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} {{i_comment}}{{/comments_count}}</span>
 				{{/user}}
 				{{^user}}

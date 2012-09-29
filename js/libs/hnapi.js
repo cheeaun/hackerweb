@@ -78,6 +78,13 @@
 			req(hnapi.url + path, success, function(){
 				req(hnapi.url2 + path, success, error);
 			});
+		},
+		
+		user: function(id, success, error){
+			var path = 'user/' + id;
+			req(hnapi.url + path, success, function(){
+				req(hnapi.url2 + path, success, error);
+			});
 		}
 		
 	};

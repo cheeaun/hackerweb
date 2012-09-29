@@ -165,6 +165,12 @@
 						if (!currentView){
 							hideAllViews();
 							view.classList.remove('hidden');
+						} else if (currentView == 'user'){
+							slide({
+								in: view,
+								out: $('view-' + currentView),
+								direction: 'ltr'
+							});
 						} else if (currentView != 'comments'){
 							slide({
 								in: view,
@@ -181,6 +187,28 @@
 						view.querySelector('header a.header-back-button').style.display = '';
 					}
 					hn.currentView = 'comments';
+					break;
+				case 'user':
+					var view = $('view-user');
+					if (!isWideScreen){
+						if (!currentView){
+							hideAllViews();
+							view.classList.remove('hidden');
+						} else if (currentView != 'user'){
+							slide({
+								in: view,
+								out: $('view-' + currentView),
+								direction: 'rtl'
+							});
+						}
+					} else {
+						hideAllViews();
+						$('overlay').classList.add('hide');
+						view.classList.remove('hidden');
+						$('view-home').classList.remove('hidden');
+						view.querySelector('header a.header-back-button').style.display = '';
+					}
+					hn.currentView = 'user';
 					break;
 			}
 		}

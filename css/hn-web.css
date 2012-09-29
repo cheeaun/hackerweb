@@ -363,6 +363,10 @@ ol.grouped-tableview-links li>a:hover{
 	font-size: 13px;
 	color: #666d74;
 }
+.view .post-content header .metadata a.user{
+	color: #666d74;
+	text-decoration: none;
+}
 .view .post-content header .metadata a.external-link{
 	color: #666d74;
 	text-decoration: none;
@@ -461,8 +465,13 @@ ol.grouped-tableview-links li>a:hover{
 	margin: 0;
 }
 .view section.comments p.metadata b{
+	color: #b23914;
+}
+.view section.comments p.metadata a.user{
 	float: left;
 	color: #b23914;
+	font-weight: bold;
+	text-decoration: none;
 }
 .view section.comments p.metadata time{
 	display: block;
@@ -517,6 +526,19 @@ ol.grouped-tableview-links li>a:hover{
 	color: #2960d9;
 	text-align: center;
 	font-weight: bold;
+}
+
+.view header.user h1{
+	text-transform: capitalize;
+}
+#view-user header h1{
+	text-transform: capitalize;
+}
+.view header.user span.karma{
+	color: #385487;
+	font-weight: bold;
+	font-size: 13px;
+	line-height: 1.5em;
 }
 
 .link-text{
