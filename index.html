@@ -43,26 +43,17 @@ if (location.hostname == 'cheeaun.github.com'){
 	head.appendChild(link);
 
 	var scripts = ['scripts', 'scripts-' + theme, 'templates', 'hn', 'hn-' + theme];
-	if ('async' in d.createElement('script')){
-		for (var i=0, l=scripts.length; i<l; i++){
-			var script = d.createElement('script');
-			script.async = false;
-			script.src = 'js/' + scripts[i] + '.js';
+	var i = 0, l = scripts.length;
+	var injectScript = function(){
+		if (i == l) return;
+		var script = d.createElement('script');
+		script.src = 'js/' + scripts[i++] + '.js';
+		script.onload = injectScript;
+		setTimeout(function(){
 			head.appendChild(script);
-		}
-	} else {
-		var i = 0, l = scripts.length;
-		var injectScript = function(){
-			if (i == l) return;
-			var script = d.createElement('script');
-			script.src = 'js/' + scripts[i++] + '.js';
-			script.onload = injectScript;
-			setTimeout(function(){
-				head.appendChild(script);
-			}, 1);
-		};
-		injectScript();
-	}
+		}, 1);
+	};
+	injectScript();
 })(document, navigator.userAgent);
 
 if (window.applicationCache){
