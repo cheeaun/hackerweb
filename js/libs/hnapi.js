@@ -52,9 +52,9 @@
 		'http://node-hnapi.nodester.com/' // Nodester
 	];
 	var requests = function(path, success, error){
-		req(hnapi.url + path, success, function(){
-			req(hnapi.url2 + path, success, function(){
-				req(hnapi.url3 + path, success, error);
+		req(urls[0] + path, success, function(){
+			req(urls[1] + path, success, function(){
+				req(urls[2] + path, success, error);
 			});
 		});
 	};
