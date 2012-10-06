@@ -513,47 +513,4 @@
 		.add(/^\/item\/(\d+)$/i, 'comments', function(path, id){
 			hn.comments.render(id);
 		});
-
-	// "Naturally" reload when an update is available
-	if (w.applicationCache){
-		var reload = false;
-		w.applicationCache.addEventListener('updateready', function(){
-			if (w.applicationCache.status == w.applicationCache.UPDATEREADY){
-				w.applicationCache.swapCache();
-				reload = true;
-			}
-		}, false);
-
-		var checkReload = function(){
-			if (reload){
-				 location.reload();
-			} else if (!amplify.store('hacker-update-delay')){
-				try { // There's nothing to update for first-time load, browser freaks out :/
-					w.applicationCache.update();
-					// Delay check update to after next 1 hour
-					amplify.store('hacker-update-delay', 1, {
-						expires: 1000*60*60 // 1 hour
-					});
-				} catch (e){}
-			}
-		};
-		w.addEventListener('pageshow', checkReload, false);
-		w.addEventListener('focus', checkReload, false);
-	}
-
-	// Use GA to track the update rate of this manifest appcache thing
-	// and see how fast users are updated to the latest cache/version
-	if (typeof _gaq != 'undefined' && w.applicationCache) w.addEventListener('load', function(){
-		setTimeout(function(){
-			var r = new XMLHttpRequest();
-			r.open('GET', 'manifest.appcache', true);
-			r.onload = function(){
-				var text = this.responseText;
-				if (!text) return;
-				var version = (text.match(/#\s\d[^\n\r]+/) || [])[0];
-				if (version) _gaq.push(['_trackEvent', 'Appcache', 'Version', version.replace(/^#\s/, '')]);
-			};
-			r.send();
-		}, 1000);
-	}, false);
 })(window);
