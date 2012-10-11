@@ -96,7 +96,7 @@
 	});
 
 	// Inject some elements for additional iOS decorations
-	body.insertAdjacentHTML('beforeend', isIPhoneIPod ? '</div><header class="fake"></header>' : '<div id="overlay" class="hide">');
+	body.insertAdjacentHTML('beforeend', isWideScreen ? '<div id="overlay" class="hide"></div>' : '<header class="fake"></header>');
 
 	ruto.config({
 		before: function(path, name, matches){
