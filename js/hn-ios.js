@@ -410,6 +410,7 @@
 				clearInterval(scrollCheck);
 				setTimeout(function(){
 					var loader = $('apploader');
+					if (!loader) return;
 					loader.classList.add('hide');
 					loader.addEventListener('webkitTransitionEnd', function(){
 						loader.parentNode.removeChild(loader);
