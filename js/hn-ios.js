@@ -417,7 +417,7 @@
 					loader.addEventListener('webkitTransitionEnd', function(){
 						loader.parentNode.removeChild(loader);
 					}, false);
-				}, 400);
+				}, 200);
 			}
 		}, 15);
 	} else {
