@@ -196,14 +196,16 @@
 		}
 		amplify.store('hacker-scrolltops', hackerScrollTops);
 	}, false);
-	w.addEventListener('pageshow', function(){
+	var restoreScrollTops = function(){
 		var hackerScrollTops = amplify.store('hacker-scrolltops');
 		setTimeout(function(){
 			for (var id in hackerScrollTops){
 				$(id).querySelector('.scroll section').scrollTop = hackerScrollTops[id];
 			}
 		}, 1);
-	}, false);
+	};
+	w.addEventListener('pageshow', restoreScrollTops, false);
+	restoreScrollTops();
 	
 	// Instantly hide address bar when start tapping the scroll area
 	var $viewSections = d.querySelectorAll('.view>.scroll'),
