@@ -24,13 +24,14 @@
 
 	// Adjust min-height on the views based on the viewport
 	// While waiting for viewport units to be more widely supported by modern browsers
+	var head = d.head || d.getElementsByTagName('head')[0];
 	var adjustViewsHeight = function(){
 		var vh = window.innerHeight;
 		var style = $('view-height');
 		if (!style){
 			style = d.createElement('style');
 			style.id = 'view-height';
-			d.head.appendChild(style);
+			head.appendChild(style);
 		}
 		style.textContent = '.view>.scroll{min-height: ' + (vh*.85) + 'px}';
 	}
