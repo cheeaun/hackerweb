@@ -219,6 +219,7 @@
 			setTimeout(function(){
 				target.classList.remove('loading');
 				var targetParent = target.parentNode;
+				if (!targetParent) return;
 				targetParent.parentNode.removeChild(targetParent);
 				if (!news2) return;
 				var data = news2.slice();
