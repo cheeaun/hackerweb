@@ -1,4 +1,6 @@
-﻿html{
+﻿@import url(http://fonts.googleapis.com/css?family=Inconsolata);
+
+html{
 	height: 100%;
 }
 body{
@@ -30,6 +32,9 @@ body{
 }
 pre{
 	word-wrap: normal;
+}
+pre, code{
+	font-family: Menlo, Monaco, Inconsolata, Consolas, "Lucida Console", monospace;
 }
 
 i.icon-refresh{
