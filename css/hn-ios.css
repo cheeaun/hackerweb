@@ -782,6 +782,15 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	-webkit-background-size: 10px 9px;
 	background-size: 10px 9px;
 }
+.view .post-content pre,
+.view section.comments pre{
+	margin: 0 0 8px;
+	overflow: auto;
+	padding: .65em 0;
+	background-color: #eee;
+	border-radius: 3px;
+	box-shadow: inset 0 1px 1px #ddd;
+}
 
 .view section.comments{
 	min-height: 100%;
@@ -829,14 +838,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	box-flex: 1;
 	font-weight: bold;
 	color: #888;
-}
-.view section.comments pre{
-	margin: 0 0 8px;
-	overflow: auto;
-	padding: .65em 0;
-	background-color: #eee;
-	border-radius: 3px;
-	box-shadow: inset 0 1px 1px #ddd;
 }
 .view section.comments p.no-comments{
 	text-align: center;

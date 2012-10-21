@@ -424,6 +424,14 @@ ol.grouped-tableview-links li>a:hover{
 	width: 0;
 	height: 9px;
 }
+.view .post-content pre,
+.view section.comments pre{
+	margin: 0 0 8px;
+	overflow: auto;
+	padding: .65em 0;
+	background-color: #F6F6EF;
+	border-radius: 2px;
+}
 
 .view section.comments{
 	font-size: 13px;
@@ -469,13 +477,6 @@ ol.grouped-tableview-links li>a:hover{
 	text-align: right;
 	font-weight: bold;
 	color: #888;
-}
-.view section.comments pre{
-	margin: 0 0 8px;
-	overflow: auto;
-	padding: .65em 0;
-	background-color: #F6F6EF;
-	border-radius: 2px;
 }
 .view section.comments p.no-comments{
 	text-align: center;
