@@ -294,13 +294,17 @@
 					data.has_content = !!data.content;
 					if (data.poll){
 						var total = 0;
+						var max = 0;
 						data.poll.forEach(function(p){
 							var points = p.points;
+							if (points > max) max = points;
 							total += points;
 							p.i_point = points == 1 ? 'point' : 'points';
 						});
 						data.poll.forEach(function(p){
-							p.width = (p.points/total*100).toFixed(1) + '%';
+							var points = p.points;
+							p.percentage = (points/total*100).toFixed(1);
+							p.width = (points/max*100).toFixed(1) + '%';
 						});
 						data.has_poll = data.has_content = true;
 					}
