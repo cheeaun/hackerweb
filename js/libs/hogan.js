@@ -71,14 +71,18 @@ var Hogan = {};
       this.partials[symbol].base = template;
 
       if (partial.subs) {
-        template = createSpecializedPartial(template, partial.subs, partial.partials);
-      }
-
+        // Make sure we consider parent template now
+        if (this.activeSub === undefined) {
+          // Store parent template text in partials.stackText to perform substitutions in child templates correctly
+          partials.stackText  = this.text;
+        }
+         template = createSpecializedPartial(template, partial.subs, partial.partials, partials.stackText || this.text);
+       }
       this.partials[symbol].instance = template;
       return template;
     },
 
-    // tries to find a partial in the curent scope and render it
+    // tries to find a partial in the current scope and render it
     rp: function(symbol, context, partials, indent) {
       var partial = this.ep(symbol, partials);
       if (!partial) {
@@ -132,16 +136,16 @@ var Hogan = {};
           cx = null;
 
       if (key === '.' && isArray(ctx[ctx.length - 2])) {
-        return ctx[ctx.length - 1];
-      }
-
-      for (var i = 1; i < names.length; i++) {
-        if (val && typeof val == 'object' && val[names[i]] != null) {
-          cx = val;
-          val = val[names[i]];
-        } else {
-          val = '';
-        }
+        val = ctx[ctx.length - 1];
+      } else {
+          for (var i = 1; i < names.length; i++) {
+            if (val && typeof val == 'object' && val[names[i]] != null) {
+              cx = val;
+              val = val[names[i]];
+            } else {
+              val = '';
+            }
+          }
       }
 
       if (returnFound && !val) {
@@ -215,14 +219,16 @@ var Hogan = {};
 
     // method replace section
     ms: function(func, ctx, partials, inverted, start, end, tags) {
-      var cx = ctx[ctx.length - 1],
+      var textSource,
+          cx = ctx[ctx.length - 1],
           result = func.call(cx);
 
       if (typeof result == 'function') {
         if (inverted) {
           return true;
         } else {
-          return this.ls(result, cx, partials, this.text.substring(start, end), tags);
+          textSource = (this.activeSub && this.subsText[this.activeSub]) ? this.subsText[this.activeSub] : this.text;
+          return this.ls(result, cx, partials, textSource.substring(start, end), tags);
         }
       }
 
@@ -241,16 +247,18 @@ var Hogan = {};
       return result;
     },
 
-    sub: function(name, context, partials) {
+    sub: function(name, context, partials, indent) {
       var f = this.subs[name];
       if (f) {
-        f(context, partials, this);
+        this.activeSub = name;
+        f(context, partials, this, indent);
+        this.activeSub = false;
       }
     }
 
   };
 
-  function createSpecializedPartial(instance, subs, partials) {
+  function createSpecializedPartial(instance, subs, partials, childText) {
     function PartialTemplate() {};
     PartialTemplate.prototype = instance;
     function Substitutions() {};
@@ -258,10 +266,12 @@ var Hogan = {};
     var key;
     var partial = new PartialTemplate();
     partial.subs = new Substitutions();
+    partial.subsText = {};  //hehe. substext.
     partial.ib();
 
     for (key in subs) {
       partial.subs[key] = subs[key];
+      partial.subsText[key] = childText;
     }
 
     for (key in partials) {
@@ -274,9 +284,9 @@ var Hogan = {};
   var rAmp = /&/g,
       rLt = /</g,
       rGt = />/g,
-      rApos =/\'/g,
+      rApos = /\'/g,
       rQuot = /\"/g,
-      hChars =/[&<>\"\']/;
+      hChars = /[&<>\"\']/;
 
   function coerceToString(val) {
     return String((val === null || val === undefined) ? '' : val);
@@ -286,10 +296,10 @@ var Hogan = {};
     str = coerceToString(str);
     return hChars.test(str) ?
       str
-        .replace(rAmp,'&amp;')
-        .replace(rLt,'&lt;')
-        .replace(rGt,'&gt;')
-        .replace(rApos,'&#39;')
+        .replace(rAmp, '&amp;')
+        .replace(rLt, '&lt;')
+        .replace(rGt, '&gt;')
+        .replace(rApos, '&#39;')
         .replace(rQuot, '&quot;') :
       str;
   }
