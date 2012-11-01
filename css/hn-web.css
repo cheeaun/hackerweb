@@ -552,6 +552,16 @@ ol.grouped-tableview-links li>a:hover{
 	margin-left: 67px;
 }
 
+@-ms-viewport{
+	width: device-width;
+	zoom: 1.0;
+}
+
+@viewport{
+	width: device-width;
+	zoom: 1.0;
+}
+
 @media only screen and (min-width: 788px){
 	body{
 		background-color: #ebebe5;
