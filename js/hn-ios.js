@@ -166,6 +166,9 @@
 							hideAllViews();
 							view.classList.remove('hidden');
 						} else if (currentView != 'comments'){
+							// Scroll to top first then slide, prevent Flash of Unscrolled View (FOUV)
+							var id = matches[1];
+							if (id && hn.comments.currentID != id) view.querySelector('section').scrollTop = 0;
 							slide({
 								in: view,
 								out: $('view-' + currentView),
