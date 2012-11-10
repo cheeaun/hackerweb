@@ -211,15 +211,21 @@
 	restoreScrollTops();
 	
 	// Instantly hide address bar when start tapping the scroll area
-	var $viewSections = d.querySelectorAll('.view>.scroll'),
-		wInnerHeight = null;
-	for (var i=0, l=$viewSections.length; i<l; i++){
-		$viewSections[i].addEventListener('touchstart', function(){
-			if (w.innerHeight != wInnerHeight){
-				w.scrollTo(0, 0);
-				wInnerHeight = w.innerHeight;
-			}
-		}, false);
+	if (isIPhoneIPod){
+		var $viewSections = d.querySelectorAll('.view>.scroll'),
+			wInnerHeight = null;
+		for (var i=0, l=$viewSections.length; i<l; i++){
+			$viewSections[i].addEventListener('touchstart', function(){
+				if (body.dataset.heightChanged){
+					scrollTop();
+					delete body.dataset.heightChanged;
+				}
+				if (w.innerHeight != wInnerHeight){
+					w.scrollTo(0, 0);
+					wInnerHeight = w.innerHeight;
+				}
+			}, false);
+		}
 	}
 
 	tappable('.view>header a.header-button[href]', {
@@ -244,12 +250,11 @@
 		onTap: function(e, target){
 			var section = target.parentNode.nextElementSibling.firstElementChild;
 			if (section.scrollTop == 0){
-				// Show address bar
-				var originalHeight = body.style.height;
-				body.style.height = '100%';
-				setTimeout(function(){
-					body.style.height = originalHeight;
-				}, 1);
+				if (isIPhoneIPod){
+					// Show address bar
+					body.style.height = '100%';
+					body.dataset.heightChanged = true;
+				}
 			} else {
 				// Scroll the section to top
 				// Reset the overflow because the momentum ignores scrollTop setting
