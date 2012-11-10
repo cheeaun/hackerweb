@@ -241,8 +241,7 @@
 			if (hn.comments.currentID == id && post) return;
 			hn.comments.currentID = id;
 
-			var $commentsScroll = $commentsView.querySelector('.scroll'),
-				loadComments = function(_data, id){
+			var loadComments = function(_data, id){
 					if (!_data || _data.error) return;
 					var data = clone(_data);
 					amplify.store.sessionStorage('hacker-comments-' + id, data);
@@ -367,7 +366,7 @@
 				};
 
 			if (post){
-				$commentsScroll.querySelector('section').scrollTop = 0;
+				$commentsSection.scrollTop = 0;
 				loadPost(post, id);
 			} else {
 				// Render the post data concurrently while loading the comments
