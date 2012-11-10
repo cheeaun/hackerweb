@@ -236,11 +236,12 @@
 	hn.comments = {
 		currentID: null,
 		render: function(id){
-			if (!id || hn.comments.currentID == id) return;
+			if (!id) return;
+			var post = amplify.store.sessionStorage('hacker-item-' + id);
+			if (hn.comments.currentID == id && post) return;
 			hn.comments.currentID = id;
 
-			var post = amplify.store.sessionStorage('hacker-item-' + id),
-				$commentsScroll = $commentsView.querySelector('.scroll'),
+			var $commentsScroll = $commentsView.querySelector('.scroll'),
 				loadComments = function(_data, id){
 					if (!_data || _data.error) return;
 					var data = clone(_data);
