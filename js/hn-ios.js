@@ -286,10 +286,13 @@
 		inactiveClassDelay: isWideScreen ? 100 : 1000,
 		onStart: function(e, target){
 			if (isWideScreen){
-				var ul = target.parentNode.parentNode;
-				listTappedDelay = setTimeout(function(){
-					ul.classList.add('list-tapped');
-				}, 100);
+				var ul = target.parentNode;
+				if (ul){
+					ul = ul.parentNode;
+					listTappedDelay = setTimeout(function(){
+						if (ul) ul.classList.add('list-tapped');
+					}, 100);
+				}
 			}
 		},
 		onMove: function(){

@@ -220,7 +220,7 @@
 				target.classList.remove('loading');
 				var targetParent = target.parentNode;
 				if (!targetParent) return;
-				targetParent.parentNode.removeChild(targetParent);
+				if (targetParent.parentNode) targetParent.parentNode.removeChild(targetParent);
 				if (!news2) return;
 				var data = news2.slice();
 				var html = hn.news.markupStories(data, 31);
