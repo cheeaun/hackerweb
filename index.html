@@ -54,6 +54,10 @@ if (location.hostname == 'cheeaun.github.com'){
 		}, 1);
 	};
 	injectScript();
+
+	if (typeof _gaq != 'undefined') setTimeout(function(){
+		_gaq.push(['_trackEvent', 'App', 'Theme', theme]);
+	}, 2000);
 })(document, navigator.userAgent);
 
 if (window.applicationCache){
