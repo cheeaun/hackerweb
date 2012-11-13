@@ -60,6 +60,8 @@
 			found = false,
 			current = ruto.current;
 
+		if (!hash) hash = options.defaultPath;
+
 		if (current && current != ruto.previous){
 			ruto.previous = current;
 		}
@@ -94,12 +96,6 @@
 	};
 	ruto.init = function(path){
 		w.addEventListener('hashchange', hashchange);
-
-		if (!location.hash.slice(1)){
-			location.hash = path || options.defaultPath;
-			return ruto;
-		}
-
 		return hashchange();
 	};
 	ruto.reload = hashchange;
