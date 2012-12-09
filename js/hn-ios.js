@@ -303,7 +303,7 @@
 			clearTimeout(listTappedDelay);
 			var ul = target.parentNode.parentNode;
 			setTimeout(function(){
-				ul.classList.remove('list-tapped');
+				if (ul) ul.classList.remove('list-tapped');
 			}, 100);
 		},
 		onTap: function(e, target){
