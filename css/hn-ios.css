@@ -939,6 +939,12 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	border-radius: 9px;
 	box-shadow: 0 2px 2px rgba(0,0,0,.5);
 }
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+	only screen and (min-device-pixel-ratio: 1.5) {
+	#y-icon{
+		background-image: url(../icons/touch-icon-114.png);
+	}
+}
 #app-desc{
 	margin-left: 67px;
 	line-height: 1.3em;
@@ -1532,9 +1538,15 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	#y-icon{
 		width: 72px;
 		height: 72px;
-		-webkit-background-size: 72px 72px;
 		background-size: 72px 72px;
+		background-image: url(../icons/touch-icon-72.png);
 		border-radius: 12px;
+	}
+	@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+	only screen and (min-device-pixel-ratio: 1.5) {
+		#y-icon{
+			background-image: url(../icons/touch-icon-144.png);
+		}
 	}
 	#app-desc{
 		margin-left: 82px;
