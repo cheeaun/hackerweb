@@ -1301,6 +1301,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	#overlay.hide{
 		opacity: 0;
 		pointer-events: none;
+		visibility: hidden;
 	}
 	header.fake{
 		display: none;
