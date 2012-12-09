@@ -216,10 +216,6 @@
 			wInnerHeight = null;
 		for (var i=0, l=$viewSections.length; i<l; i++){
 			$viewSections[i].addEventListener('touchstart', function(){
-				if (body.dataset.heightChanged){
-					scrollTop();
-					delete body.dataset.heightChanged;
-				}
 				if (w.innerHeight != wInnerHeight){
 					w.scrollTo(0, 0);
 					wInnerHeight = w.innerHeight;
@@ -252,8 +248,11 @@
 			if (section.scrollTop == 0){
 				if (isIPhoneIPod){
 					// Show address bar
+					var oriHeight = body.style.height;
 					body.style.height = '100%';
-					body.dataset.heightChanged = true;
+					setTimeout(function(){
+						body.style.height = oriHeight;
+					}, 100);
 				}
 			} else {
 				// Scroll the section to top
@@ -405,32 +404,22 @@
 			if (!supportOrientation) return;
 			body.style.height = screen.height + 'px';
 			setTimeout(function(){
-				w.scrollTo(0, 1);
-				var top = getScrollTop();
-				w.scrollTo(0, top === 1 ? 0 : 1);
+				w.scrollTo(0, 0);
 				body.style.height = w.innerHeight + 'px';
-				body.offsetHeight; // Force redraw/repaint
 			}, 1);
 		};
 	if (!isWideScreen){
 		scrollTop();
 		if (supportOrientation) w.onorientationchange = scrollTop;
-		w.addEventListener('resize', scrollTop, false);
 
-		var scrollCheck = setInterval(function(){
-			var top = getScrollTop();
-			if (top <= 1){
-				clearInterval(scrollCheck);
-				setTimeout(function(){
-					var loader = $('apploader');
-					if (!loader) return;
-					loader.classList.add('hide');
-					loader.addEventListener('webkitTransitionEnd', function(){
-						loader.parentNode.removeChild(loader);
-					}, false);
-				}, 200);
-			}
-		}, 15);
+		setTimeout(function(){
+			var loader = $('apploader');
+			if (!loader) return;
+			loader.classList.add('hide');
+			loader.addEventListener('webkitTransitionEnd', function(){
+				loader.parentNode.removeChild(loader);
+			}, false);
+		}, 200);
 	} else {
 		var loader = $('apploader');
 		loader.parentNode.removeChild(loader);
