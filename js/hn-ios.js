@@ -68,7 +68,7 @@
 			inClass.add(wise[1]);
 		},
 		getScreenState = function(){
-			return /wide/i.test(w.getComputedStyle(body,':after').getPropertyValue('content')) ? 'wide' : 'narrow';
+			return w.innerWidth >= 640 ? 'wide' : 'narrow';
 		};
 
 	// Disable user scale of the viewport
