@@ -49,7 +49,6 @@
 	var urls = {
 		primary: 'http://node-hnapi.herokuapp.com/', // Heroku
 		secondary: [
-			'http://node-hnapi.nodester.com/', // Nodester
 			'http://node-hnapi.ap01.aws.af.cm/', // AWS (Asia Pacific)
 			'http://node-hnapi-hp.hp.af.cm/', // HP Cloud
 			'http://node-hnapi-rs.rs.af.cm/', // Rackspace Cloud
