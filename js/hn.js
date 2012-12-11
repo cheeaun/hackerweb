@@ -7,7 +7,6 @@
 	};
 
 	var pubsubCache = {},
-		slice = Array.prototype.slice,
 		clone = function(obj){
 			var target = {};
 			for (var i in obj){
