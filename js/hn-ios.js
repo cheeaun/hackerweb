@@ -82,8 +82,9 @@
 
 	// Apply iOS < 6 styles, only for iPhone/iPod
 	var ua = navigator.userAgent,
-		isIPhoneIPod = ua && /iPhone|iPod/.test(ua);
-	if (isIPhoneIPod && parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) < 6) body.classList.add('ios5');
+		isIPhoneIPod = ua && /iPhone|iPod/.test(ua),
+		isIOS5 = parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) < 6;
+	if (isIPhoneIPod && isIOS5) body.classList.add('ios5');
 
 	// Wide screen state
 	var isWideScreen = getScreenState() == 'wide';
@@ -214,14 +215,22 @@
 	if (isIPhoneIPod){
 		var $viewSections = d.querySelectorAll('.view>.scroll'),
 			wInnerHeight = null;
-		for (var i=0, l=$viewSections.length; i<l; i++){
-			$viewSections[i].addEventListener('touchstart', function(){
+		Array.prototype.forEach.call($viewSections, function(view){
+			view.addEventListener('touchstart', function(){
 				if (w.innerHeight != wInnerHeight){
 					w.scrollTo(0, 0);
+					if (isIOS5){
+						var div = d.createElement('div');
+						div.style.height = '600px';
+						body.appendChild(div);
+						setTimeout(function(){
+							body.removeChild(div);
+						}, 100);
+					}
 					wInnerHeight = w.innerHeight;
 				}
 			}, false);
-		}
+		});
 	}
 
 	tappable('.view>header a.header-button[href]', {
