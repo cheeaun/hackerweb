@@ -1310,6 +1310,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	header.fake{
 		display: none;
 	}
+	.view,
+	.view.hidden{
+		position: absolute;
+	}
 	.view>header{
 		color: #656C73;
 		background-color: #d2d4db;
