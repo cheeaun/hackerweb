@@ -409,7 +409,11 @@
 			}, 1);
 		};
 	if (!isWideScreen){
-		scrollTop();
+		if (d.readyState == 'complete'){
+			scrollTop();
+		} else {
+			w.addEventListener('load', scrollTop, false);
+		}
 		if (supportOrientation) w.onorientationchange = scrollTop;
 
 		setTimeout(function(){
