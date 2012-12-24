@@ -251,6 +251,7 @@
 		onTap: hn.news.reload
 	});
 
+	var scrollingToTop = false;
 	tappable('.view>header h1', {
 		onTap: function(e, target){
 			var section = target.parentNode.nextElementSibling.firstElementChild;
@@ -266,6 +267,8 @@
 			} else {
 				// Scroll the section to top
 				// Reset the overflow because the momentum ignores scrollTop setting
+				if (scrollingToTop) return;
+				scrollingToTop = true;
 				var originalOverflow = section.style.overflow;
 				section.style.overflow = 'hidden';
 				setTimeout(function(){
@@ -275,7 +278,10 @@
 						transition: Viper.Transitions.sine,
 						property: 'scrollTop',
 						to: 0,
-						fps: 60 // pushing the limit?
+						fps: 60, // pushing the limit?
+						finish: function(){
+							scrollingToTop = false;
+						}
 					});
 					anim.start();
 					anim = null;
