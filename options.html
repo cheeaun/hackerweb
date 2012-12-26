@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>HackerWeb Options</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="icons/favicon.ico">
+<style>
+body{
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	-webkit-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	max-width: 640px;
+	margin: 0 auto;
+	padding: 10px;
+	font-size: 14px;
+}
+h1{
+	font-size: 1.2em;
+}
+#options-list{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#options-list li{
+	padding: 10px;
+	background-color: #eee;
+	margin-bottom: 2px;
+}
+#options-list li .label{
+	font-weight: bold;
+}
+footer{
+	font-size: .9em;
+}
+footer button{
+	margin: 0;
+	float: right;
+}
+</style>
+</head>
+<body>
+<header>
+	<h1>HackerWeb Options</h1>
+</header>
+<ul id="options-list">
+	<li>
+		<span class="label">UI Theme <small>(experimental)</small></span>
+		<label><input type="radio" name="hackerweb:options:theme" value="" checked> Auto (default)</label>
+		<label><input type="radio" name="hackerweb:options:theme" value="web"> Web</label>
+		<label><input type="radio" name="hackerweb:options:theme" value="ios"> iOS</label>
+	</li>
+</ul>
+<footer>
+	<button id="reset">Reset all options</button>
+	<p>Note: Reload HackerWeb after changing these options.</p>
+</footer>
+<script>
+var validOption = 'hackerweb:options';
+for (var i=0, l=localStorage.length; i<l; i++){
+	var key = localStorage.key(i);
+	var value = localStorage[key];
+	if (key.indexOf(validOption) != -1 && value){
+		var el = document.querySelector('[name="' + key + '"][value="' + value + '"]');
+		if (el && el.type == 'radio') el.checked = true;
+	}
+}
+document.addEventListener('change', function(e){
+	var el = e.target;
+	if (!el) return;
+	var name = el.name;
+	var value = el.value;
+	if (name.indexOf(validOption) != -1){
+		if (value){
+			localStorage[name] = value;
+		} else {
+			delete localStorage[name];
+		}
+	}
+}, true);
+document.getElementById('reset').addEventListener('click', function(){
+	for (var i=0, l=localStorage.length; i<l; i++){
+		var key = localStorage.key(i);
+		if (key.indexOf(validOption) != -1){
+			delete localStorage[key];
+		}
+	}
+	location.reload();
+}, false);
+</script>
+</body>
+</html>

@@ -33,10 +33,16 @@ if (location.hostname == 'cheeaun.github.com'){
 }
 
 (function(d, ua){
+	var hasLocalStorage = false;
+	try {
+		hasLocalStorage = !!localStorage.getItem;
+	} catch(e) {}
+
 	var theme = 'web';
 	if (ua && /iPhone|iPod|iPad/.test(ua) && parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) >= 5){
 		theme = 'ios';
 	}
+	if (hasLocalStorage) theme = localStorage['hackerweb:options:theme'] || theme;
 
 	var head = d.head || d.getElementsByTagName('head')[0];
 
