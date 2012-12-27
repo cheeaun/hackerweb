@@ -1,39 +1,67 @@
 (function(w){
 	
-	var date = function(){
-			return +new Date();
-		},
+	var date = function(){ return +new Date(); },
 		supportXDomainRequest = !!w.XDomainRequest,
 		supportCORS = 'withCredentials' in new XMLHttpRequest() || supportXDomainRequest,
-		requests = {},
-		req = function(url, success, error){
+		worker = false,
+		timeout = 15000, // 15 seconds timeout
+		requests = {};
+
+	try {
+		worker = new Worker('js/hnapi-worker.js');
+		worker.addEventListener('message', function(e){
+			var data = e.data,
+				url = data.url || '';
+			if (!requests[url]) return;
+			var r = requests[url];
+			if (data.success){
+				r.success(data.response);
+			} else {
+				r.error(data.error);
+			}
+			delete requests[url];
+		}, false);
+	} catch (e){}
+
+	var req = function(url, success, error){
 			if (!success) success = function(){};
 			if (!error) error = function(){};
 			if (supportCORS){
-				var r = requests[url] || (w.XDomainRequest ? new XDomainRequest() : new XMLHttpRequest());
-				if (r._timeout) clearTimeout(r._timeout);
-				r._timeout = setTimeout(function(){
-					r.abort();
-				}, 15000); // 15 seconds timeout
-				r.onload = function(){
-					clearTimeout(this._timeout);
-					delete requests[url];
-					try {
-						success(JSON.parse(this.responseText));
-					} catch(e){
+				if (worker){
+					requests[url] = {
+						success: success,
+						error: error
+					};
+					worker.postMessage({
+						url: url,
+						timeout: timeout
+					});
+				} else {
+					var r = requests[url] || (w.XDomainRequest ? new XDomainRequest() : new XMLHttpRequest());
+					if (r._timeout) clearTimeout(r._timeout);
+					r._timeout = setTimeout(function(){
+						r.abort();
+					}, timeout);
+					r.onload = function(){
+						clearTimeout(this._timeout);
+						delete requests[url];
+						try {
+							success(JSON.parse(this.responseText));
+						} catch(e){
+							error(e);
+						}
+					};
+					r.onerror = r.onabort = r.ontimeout = function(e){
+						clearTimeout(this._timeout);
+						delete requests[url];
 						error(e);
 					}
-				};
-				r.onerror = r.onabort = r.ontimeout = function(e){
-					clearTimeout(this._timeout);
-					delete requests[url];
-					error(e);
+					if (r.readyState <= 1 || supportXDomainRequest){ // XDomainRequest doesn't have readyState
+						r.open('GET', url + '?' + date(), true);
+						r.send();
+					}
+					requests[url] = r;
 				}
-				if (r.readyState <= 1 || supportXDomainRequest){ // XDomainRequest doesn't have readyState
-					r.open('GET', url + '?' + date(), true);
-					r.send();
-				}
-				requests[url] = r;
 			} else {
 				// Very, very basic JSON-P fallback
 				var d = w.document,

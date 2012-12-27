@@ -4,6 +4,7 @@ CACHE MANIFEST
 index.html
 css/hn-web.css
 css/hn-ios.css
+js/hnapi-worker.js
 js/scripts.js
 js/scripts-web.js
 js/scripts-ios.js
