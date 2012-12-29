@@ -55,9 +55,14 @@ if (location.hostname == 'cheeaun.github.com'){
 		if (i == l) return;
 		var script = d.createElement('script');
 		script.src = 'js/' + scripts[i++] + '.js';
-		script.onload = injectScript;
+		script.onload = script.onreadystatechange = function(e){
+			if (e.type === 'load' || /loaded|complete/.test(script.readyState)){
+				script.onload = script.onreadystatechange = null;
+				injectScript();
+			}
+		};
 		setTimeout(function(){
-			head.appendChild(script);
+			head.insertBefore(script, head.lastChild);
 		}, 1);
 	};
 	injectScript();
