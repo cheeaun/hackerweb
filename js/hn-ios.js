@@ -255,7 +255,7 @@
 	tappable('.view>header h1', {
 		onTap: function(e, target){
 			var section = target.parentNode.nextElementSibling.firstElementChild;
-			if (section.scrollTop == 0){
+			if (section.scrollTop == 0 || scrollingToTop){
 				if (isIPhoneIPod){
 					// Show address bar
 					var oriHeight = body.style.height;
@@ -273,19 +273,26 @@
 				section.style.overflow = 'hidden';
 				setTimeout(function(){
 					section.style.overflow = originalOverflow;
-					var anim = Viper({
-						object: section,
-						transition: Viper.Transitions.sine,
-						property: 'scrollTop',
-						to: 0,
-						fps: 60, // pushing the limit?
-						finish: function(){
+					var raf;
+					var tween = new TWEEN.Tween({scrollTop: section.scrollTop})
+						.to({scrollTop: 0}, 300)
+						.easing(TWEEN.Easing.Cubic.InOut)
+						.onUpdate(function(){
+							section.scrollTop = this.scrollTop;
+						})
+						.onComplete(function(){
+							cancelAnimationFrame(raf);
+							tween.stop(); // Removes the tween object
 							scrollingToTop = false;
-						}
-					});
-					anim.start();
-					anim = null;
-				}, 300);
+							delete tween;
+						})
+						.start();
+					var step = function(){
+						TWEEN.update();
+						requestAnimationFrame(step);
+					};
+					raf = requestAnimationFrame(step);
+				}, 200);
 			}
 		}
 	});

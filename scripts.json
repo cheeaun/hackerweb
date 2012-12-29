@@ -18,7 +18,8 @@
 	"ios": {
 		"input": [
 			"js/libs/tappable.js",
-			"js/libs/viper.js"
+			"js/libs/tween.js",
+			"js/libs/requestanimationframe.js"
 		],
 		"output": "js/scripts-ios.js"
 	}
