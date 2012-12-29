@@ -23,13 +23,23 @@ This web app works best on iOS 5+ Mobile Safari (iOS theme) and other modern bro
 - ruto.js - `location.hash` router
 - iOS
 	- [Tappable](https://github.com/cheeaun/tappable) - touch-friendly tap events
-	- [Viper](https://github.com/alpha123/Viper/) - simple animation
+	- [Tween.js](https://github.com/sole/tween.js) - simple tweening engine
 - Web
 	- ibento.js - simple event delegation
 	- [classList.js](https://github.com/eligrey/classList.js) - shim for `element.classList`
 - Vanilla JavaScript - everything else
 
 Also uses the [unofficial Hacker News API](https://github.com/cheeaun/node-hnapi/).
+
+Some of the *cutting-edge* web technologies used:
+- [localStorage & sessionStorage](http://caniuse.com/namevalue-storage)
+- [CORS](http://caniuse.com/cors)
+- [Application Cache](http://caniuse.com/offline-apps)
+- [CSS Animation](http://caniuse.com/css-animation)
+- [CSS Media Queries](http://caniuse.com/css-mediaqueries)
+- [Flexible Box Layout](http://caniuse.com/flexbox) (old spec)
+- [requestAnimationFrame](http://caniuse.com/requestanimationframe)
+- [Web Workers](http://caniuse.com/webworkers)
 
 More technical stuff
 --------------------
