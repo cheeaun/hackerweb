@@ -1,0 +1,14 @@
+{
+	"name": "HackerWeb",
+	"description": "A simply readable Hacker News web app",
+	"version": "0.1",
+	"manifest_version": 2,
+	"app": {
+		"launch": {
+			"web_url": "http://cheeaun.github.com/hackerweb/"
+		}
+	},
+	"icons": {
+		"128": "icon-128.png"
+	}
+}
