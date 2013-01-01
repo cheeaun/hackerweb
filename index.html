@@ -11,9 +11,12 @@
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/touch-icon-72.png">
 <link rel="apple-touch-icon-precomposed" href="icons/touch-icon.png">
 <script>
-var _gaq = [['_setAccount', 'UA-36575624-2'], ['_trackPageview']];
+var _gaq = [];
 
 if (location.hostname == 'cheeaun.github.com'){
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-36575624-2']);
+	_gaq.push(['_trackPageview']);
 	(function() {
 		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
