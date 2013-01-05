@@ -14,11 +14,7 @@
 				url = data.url || '';
 			if (!requests[url]) return;
 			var r = requests[url];
-			if (data.success){
-				r.success(data.response);
-			} else {
-				r.error(data.error);
-			}
+			r.success(data.response);
 			delete requests[url];
 		}, false);
 	} catch (e){}

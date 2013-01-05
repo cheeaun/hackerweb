@@ -13,26 +13,15 @@ addEventListener('message', function(e){
 		clearTimeout(this._timeout);
 		delete requests[url];
 		var responseText = this.responseText;
-		try {
-			postMessage({
-				success: true,
-				url: url,
-				response: JSON.parse(responseText)
-			});
-		} catch(e){
-			postMessage({
-				url: url,
-				error: e
-			});
-		}
+		postMessage({
+			url: url,
+			response: JSON.parse(responseText)
+		});
 	};
 	r.onerror = r.onabort = r.ontimeout = function(e){
 		clearTimeout(this._timeout);
 		delete requests[url];
-		postMessage({
-			url: url,
-			error: e
-		});
+		if (e) throw e;
 	}
 	if (r.readyState <= 1){
 		r.open('GET', url + '?' + (+new Date()), true);
