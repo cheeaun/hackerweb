@@ -6,7 +6,6 @@ body{
 	background-color: #fff;
 	position: relative;
 	word-wrap: break-word;
-	-webkit-text-size-adjust: none;
 	-ms-text-size-adjust: none;
 	overflow-y: scroll;
 }
