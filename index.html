@@ -115,6 +115,10 @@ if (window.applicationCache){
 			r.send();
 		}, 1000);
 	}, false);
+} else {
+	setTimeout(function(){
+		_gaq.push(['_trackEvent', 'Appcache', 'Version', 'n/a']);
+	}, 1000);
 }
 </script>
 </head>
