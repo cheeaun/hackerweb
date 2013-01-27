@@ -3,8 +3,6 @@
 var fs = require('fs');
 var hogan = require('hogan.js');
 var uglifyjs = require('uglify-js');
-var parser = uglifyjs.parser;
-var uglify = uglifyjs.uglify;
 
 fs.readdir('templates', function(e, files){
 	if (e) throw e;
@@ -26,12 +24,12 @@ fs.readdir('templates', function(e, files){
 		+ '})(Hogan.Template);';
 
 	// Uglify to further shrink the file size
-	var ast = parser.parse(code);
-	ast = uglify.ast_mangle(ast);
-	ast = uglify.ast_squeeze(ast, {
-		make_seqs: false // it somehow f'ed up the sequence for this piece of code
-	});
-	var finalCode = uglify.gen_code(ast);
+	var finalCode = uglifyjs.minify(code, {
+		fromString: true,
+		compress: {
+			sequences: false
+		}
+	}).code;
 	fs.writeFile('js/templates.js', finalCode, function(){
 		console.log('js/templates.js created.');
 	});

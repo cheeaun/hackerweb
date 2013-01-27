@@ -3,15 +3,6 @@
 var fs = require('fs');
 var path = require('path');
 var uglifyjs = require('uglify-js');
-var parser = uglifyjs.parser;
-var uglify = uglifyjs.uglify;
-
-var minify = function(code){
-	var ast = parser.parse(code);
-	ast = uglify.ast_mangle(ast);
-	ast = uglify.ast_squeeze(ast);
-	return uglify.gen_code(ast);
-}
 
 fs.readFile('scripts.json', function(e, data){
 	if (e) throw e;
@@ -22,13 +13,13 @@ fs.readFile('scripts.json', function(e, data){
 			output = d.output;
 		var codes = '';
 		if (typeof input == 'string'){
-			var code = fs.readFileSync(input, 'ascii');
-			codes = minify(code);
+			var code = uglifyjs.minify(input).code;
 		} else {
 			d.input.forEach(function(file){
-				var code = fs.readFileSync(file, 'ascii');
+				var code = uglifyjs.minify(file).code;
+				if (!/;$/.test(code)) code += ';';
 				codes += '// ' + path.basename(file) + '\n'
-					+ minify(code) + ';\n';
+					+ code + '\n';
 			});
 		}
 		fs.writeFileSync(output, codes.replace(/\n$/, ''));
