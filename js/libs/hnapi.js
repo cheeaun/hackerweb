@@ -14,7 +14,11 @@
 				url = data.url || '';
 			if (!requests[url]) return;
 			var r = requests[url];
-			r.success(data.response);
+			if (data.error){
+				r.error(data.error);
+			} else {
+				r.success(data.response);
+			}
 			delete requests[url];
 		}, false);
 	} catch (e){}
@@ -33,7 +37,7 @@
 						timeout: timeout
 					});
 				} else {
-					var r = requests[url] || (w.XDomainRequest ? new XDomainRequest() : new XMLHttpRequest());
+					var r = requests[url] || (supportXDomainRequest ? new XDomainRequest() : new XMLHttpRequest());
 					if (r._timeout) clearTimeout(r._timeout);
 					r._timeout = setTimeout(function(){
 						r.abort();
