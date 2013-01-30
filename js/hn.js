@@ -328,7 +328,6 @@
 						}
 					}
 
-
 					// 20K chars will be the max to trigger collapsible comments.
 					// I can use number of comments as the condition but some comments
 					// might have too many chars and make the page longer.
