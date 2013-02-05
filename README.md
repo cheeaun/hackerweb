@@ -76,6 +76,7 @@ Feel free to fork, file some issues or [tweet your feedback](http://twitter.com/
 
 Do check out these awesome contributions as well:
 
+- [Bookmarklet to switch between HackerNews and HackerWeb](https://gist.github.com/duncansmart/4672084) by [duncansmart](https://github.com/duncansmart)
 - [HNmobile Bookmarklet](http://neocoder.github.com/hnmbookmarklet/) by [neocoder](https://github.com/neocoder)
 - [Hacker News Menu Tab](http://www.guidefreitas.com/2012/03/hacker-news-menu-tab.html) ([GitHub](https://github.com/guidefreitas/HNewsTab)) by Guilherme Defreitas
 
