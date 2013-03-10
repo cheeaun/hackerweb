@@ -661,7 +661,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-repeat: repeat-x, repeat;
 	background-position: bottom, top left;
 	-webkit-transform: translate3d(0,0,0);
-	-webkit-user-select: none;
 	min-height: 5em;
 }
 .ios5 .view .post-content{
@@ -695,6 +694,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 .view .post-content header{
 	padding: 10px 15px;
 	text-shadow: 0 1px rgba(255,255,255,.85);
+	-webkit-user-select: none;
 }
 .view .post-content header h1,
 .view .post-content header p{
