@@ -477,6 +477,13 @@ ol.grouped-tableview-links li>a:hover{
 	font-weight: bold;
 	color: #888;
 }
+.view section.comments p.metadata time a{
+	color: #888;
+	text-decoration: none;
+}
+.view section.comments p.metadata time a:hover{
+	text-decoration: underline;
+}
 .view section.comments p.no-comments{
 	text-align: center;
 	margin: 50px 0;

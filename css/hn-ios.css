@@ -839,6 +839,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	font-weight: bold;
 	color: #888;
 }
+.view section.comments p.metadata time a{
+	color: #888;
+	text-decoration: none;
+}
 .view section.comments p.no-comments{
 	text-align: center;
 	margin: 50px 0;

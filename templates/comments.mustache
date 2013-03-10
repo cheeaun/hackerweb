@@ -1,6 +1,6 @@
 {{#comments}}
 	<li>
-		<p class="metadata"><b>{{user}}</b> <time>{{time_ago}}</time></p>
+		<p class="metadata"><b>{{user}}</b> <time><a href="#" data-id="{{id}}" class="comment-permalink">{{time_ago}}</a></time></p>
 		<p>{{{content}}}
 		<ul>
 			{{>comments_list}}
