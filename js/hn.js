@@ -316,16 +316,9 @@
 					div.innerHTML = html;
 
 					// Make all links open in new tab/window
-					// If the link is HN internal, redirect to the webapp page
-					var itemid_regex = /http[s]?:\/\/news.ycombinator.com\/item\?id=([0-9]+)/;
 					var links = div.querySelectorAll('a');
 					for (var i=0, l=links.length; i<l; i++){
-						var m=links[i].href.match(itemid_regex);
-						if (m && m[1]){
-							links[i].href = '#/item/' + m[1];
-						} else {
-							links[i].target = '_blank';
-						}
+						links[i].target = '_blank';
 					}
 
 					// 20K chars will be the max to trigger collapsible comments.
