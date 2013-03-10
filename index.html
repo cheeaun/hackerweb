@@ -11,9 +11,11 @@
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/touch-icon-114.png">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/touch-icon-72.png">
 <link rel="apple-touch-icon-precomposed" href="icons/touch-icon.png">
+<script src="//d3nslu0hdya83q.cloudfront.net/dist/1.0/raven.min.js"></script>
 <script>
-var _gaq = [];
+Raven.config('https://ba1fa9e133f64714b762e2d8d46a0c63@app.getsentry.com/6152').install();
 
+var _gaq = [];
 if (location.hostname == 'cheeaun.github.com' || location.hostname == 'app.hackerwebapp.com'){
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-36575624-2']);
@@ -24,18 +26,18 @@ if (location.hostname == 'cheeaun.github.com' || location.hostname == 'app.hacke
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
 
-	window.Muscula = {
-		settings:{
-			logId:"21f74a59-9317-4924-8c73-9ab4718cd49b", branding: 'none'
-		}
-	};
-	(function(){
-		var m = document.createElement('script'); m.type = 'text/javascript'; m.async = true;
-		m.src = (window.location.protocol == 'https:' ? 'https:' : 'http:') +
-			'//musculahq.appspot.com/Muscula.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(m, s);
-		window.Muscula.run = function(c){ eval(c); window.Muscula.run = function(){}; };
-	})();
+	// window.Muscula = {
+	// 	settings:{
+	// 		logId:"21f74a59-9317-4924-8c73-9ab4718cd49b", branding: 'none'
+	// 	}
+	// };
+	// (function(){
+	// 	var m = document.createElement('script'); m.type = 'text/javascript'; m.async = true;
+	// 	m.src = (window.location.protocol == 'https:' ? 'https:' : 'http:') +
+	// 		'//musculahq.appspot.com/Muscula.js';
+	// 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(m, s);
+	// 	window.Muscula.run = function(c){ eval(c); window.Muscula.run = function(){}; };
+	// })();
 }
 
 (function(d, ua){
