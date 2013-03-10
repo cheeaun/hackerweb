@@ -80,8 +80,7 @@
 			'http://node-hnapi.ap01.aws.af.cm/', // AWS (Asia Pacific)
 			'http://node-hnapi-hp.hp.af.cm/', // HP Cloud
 			'http://node-hnapi-rs.rs.af.cm/', // Rackspace Cloud
-			'http://node-hnapi.azurewebsites.net/', // Windows Azure
-			'https://nodehnapi-5330.onmodulus.net/' // Modulus.io
+			'http://node-hnapi.azurewebsites.net/' // Windows Azure
 		]
 	};
 
