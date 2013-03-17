@@ -51,7 +51,7 @@ if (location.hostname == 'cheeaun.github.com' || location.hostname == 'app.hacke
 		var script = d.createElement('script');
 		script.src = 'js/' + scripts[i++] + '.js';
 		script.onload = script.onreadystatechange = function(e){
-			if (e.type === 'load' || /loaded|complete/.test(script.readyState)){
+			if (!script.readyState || /loaded|complete/.test(script.readyState)){
 				script.onload = script.onreadystatechange = null;
 				injectScript();
 			}
