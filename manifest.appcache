@@ -1,14 +1,12 @@
 CACHE MANIFEST
-# 2013-03-10:v2.1
+# 2013-03-17:v2.1
 
 index.html
 css/hn-web.css
 css/hn-ios.css
 js/hnapi-worker.js
-js/scripts.js
 js/scripts-web.js
 js/scripts-ios.js
-js/templates.js
 js/hn.js
 js/hn-web.js
 js/hn-ios.js
