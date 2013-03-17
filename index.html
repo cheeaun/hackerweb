@@ -44,7 +44,7 @@ if (location.hostname == 'cheeaun.github.com' || location.hostname == 'app.hacke
 	// Use document.write to prevent FOUC
 	d.write('<link rel="stylesheet" href="css/hn-' + theme + '.css">');
 
-	var scripts = ['scripts', 'scripts-' + theme, 'templates', 'hn', 'hn-' + theme];
+	var scripts = ['scripts-' + theme, 'hn', 'hn-' + theme];
 	var i = 0, l = scripts.length;
 	var injectScript = function(){
 		if (i == l) return;
