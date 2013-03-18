@@ -42,25 +42,11 @@ if (location.hostname == 'cheeaun.github.com' || location.hostname == 'app.hacke
 	var head = d.head || d.getElementsByTagName('head')[0];
 
 	// Use document.write to prevent FOUC
-	d.write('<link rel="stylesheet" href="css/hn-' + theme + '.css">');
+	d.write('<link rel="stylesheet" href="assets/css/hw-' + theme + '.css">');
 
-	var scripts = ['scripts-' + theme, 'hn', 'hn-' + theme];
-	var i = 0, l = scripts.length;
-	var injectScript = function(){
-		if (i == l) return;
-		var script = d.createElement('script');
-		script.src = 'js/' + scripts[i++] + '.js';
-		script.onload = script.onreadystatechange = function(e){
-			if (!script.readyState || /loaded|complete/.test(script.readyState)){
-				script.onload = script.onreadystatechange = null;
-				injectScript();
-			}
-		};
-		setTimeout(function(){
-			head.insertBefore(script, head.lastChild);
-		}, 1);
-	};
-	injectScript();
+	var script = d.createElement('script');
+	script.src = 'js/hw-' + theme + '.min.js';
+	head.insertBefore(script, head.lastChild);
 
 	if (typeof _gaq != 'undefined') setTimeout(function(){
 		_gaq.push(['_trackEvent', 'App', 'Theme', theme]);

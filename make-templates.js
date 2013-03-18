@@ -3,7 +3,7 @@
 var fs = require('fs');
 var hogan = require('hogan.js');
 
-fs.readdir('templates', function(e, files){
+fs.readdir('assets/templates', function(e, files){
 	if (e) throw e;
 
 	var code = '(function(t){\n'
@@ -11,7 +11,7 @@ fs.readdir('templates', function(e, files){
 
 	files.forEach(function(file){
 		if (/\.mustache$/i.test(file)){
-			var mustache = fs.readFileSync('templates/' + file, 'ascii');
+			var mustache = fs.readFileSync('assets/templates/' + file, 'ascii');
 			var key = file.match(/^([^.]+)\./i)[1];
 			// Clean up some spaces
 			mustache = mustache.replace(/[\r\n\t]+/g, '');
@@ -22,7 +22,7 @@ fs.readdir('templates', function(e, files){
 	code += '\t}\n'
 		+ '})(Hogan.Template);';
 
-	fs.writeFile('js/templates.js', code, function(){
-		console.log('js/templates.js created.');
+	fs.writeFile('assets/js/templates.js', code, function(){
+		console.log('assets/js/templates.js created.');
 	});
 });

@@ -5,50 +5,52 @@ module.exports = function(grunt) {
 		uglify: {
 			web: {
 				options: {
-					sourceMap: 'js/scripts-web.js.map',
+					sourceMap: 'js/hw-web.min.js.map',
 					sourceMappingURL: function(path){
 						return path.replace(/^js\//i, '') + '.map';
-					},
-					sourceMapRoot: '../'
+					}
 				},
 				files: {
-					'js/scripts-web.js': [
-						'js/libs/ruto.js',
-						'js/libs/amplify.store.js',
-						'js/libs/hogan.js',
-						'js/libs/hnapi.js',
-						'js/libs/ibento.js',
-						'js/libs/classList.js',
-						'js/templates.js'
+					'js/hw-web.min.js': [
+						'assets/js/libs/ruto.js',
+						'assets/js/libs/amplify.store.js',
+						'assets/js/libs/hogan.js',
+						'assets/js/libs/hnapi.js',
+						'assets/js/libs/ibento.js',
+						'assets/js/libs/classList.js',
+						'assets/js/templates.js',
+						'assets/js/hw.js',
+						'assets/js/hw-web.js'
 					]
 				}
 			},
 			ios: {
 				options: {
-					sourceMap: 'js/scripts-ios.js.map',
+					sourceMap: 'js/hw-ios.min.js.map',
 					sourceMappingURL: function(path){
 						return path.replace(/^js\//i, '') + '.map';
-					},
-					sourceMapRoot: '../'
+					}
 				},
 				files: {
-					'js/scripts-ios.js': [
-						'js/libs/ruto.js',
-						'js/libs/amplify.store.js',
-						'js/libs/hogan.js',
-						'js/libs/hnapi.js',
-						'js/libs/tappable.js',
-						'js/libs/tween.js',
-						'js/libs/requestanimationframe.js',
-						'js/templates.js'
+					'js/hw-ios.min.js': [
+						'assets/js/libs/ruto.js',
+						'assets/js/libs/amplify.store.js',
+						'assets/js/libs/hogan.js',
+						'assets/js/libs/hnapi.js',
+						'assets/js/libs/tappable.js',
+						'assets/js/libs/tween.js',
+						'assets/js/libs/requestanimationframe.js',
+						'assets/js/templates.js',
+						'assets/js/hw.js',
+						'assets/js/hw-web.js'
 					]
 				}
 			}
 		},
 		jshint: {
 			all: [
-				'js/*.js',
-				'js/libs/*.js'
+				'assets/js/libs/*.js',
+				'assets/js/*.js'
 			]
 		}
 	});
