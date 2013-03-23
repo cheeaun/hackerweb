@@ -39,21 +39,21 @@
 	w.addEventListener('orientationchange', adjustViewsHeight, false);
 	adjustViewsHeight();
 
-	ibento('#view-home-refresh', 'click', hn.news.reload);
+	ibento('#view-home-refresh', 'click', hw.news.reload);
 
 	ibento('#view-home .more-link', 'click', function(e, target){
-		hn.news.more(target);
+		hw.news.more(target);
 	});
 
 	ibento('button.comments-toggle', 'click', function(e, target){
-		hn.comments.toggle(target);
+		hw.comments.toggle(target);
 	});
 
 	ibento('section.comments li>a.more-link', 'click', function(e, target){
-		hn.comments.more(target);
+		hw.comments.more(target);
 	});
 
-	ibento('#view-comments .load-error button', 'click', hn.comments.reload);
+	ibento('#view-comments .load-error button', 'click', hw.comments.reload);
 
-	hn.init();
+	hw.init();
 })(window);

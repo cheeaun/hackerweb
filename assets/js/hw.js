@@ -15,7 +15,7 @@
 			return target;
 		};
 
-	var hn = {
+	var hw = {
 		// PubSub
 		pub: function(topic, data){
 			var t = pubsubCache[topic];
@@ -44,11 +44,11 @@
 	};
 
 	// Log API failures/errors to GA
-	if (typeof _gaq != 'undefined') hn.sub('logAPIError', function(type){
+	if (typeof _gaq != 'undefined') hw.sub('logAPIError', function(type){
 		_gaq.push(['_trackEvent', 'Errors', 'API', type]);
 	});
 
-	var tmpl = hn.tmpl;
+	var tmpl = hw.tmpl;
 
 	// Fix browsers freak out of amplify.store.sessionStorage not a function
 	if (!amplify.store.sessionStorage || typeof amplify.store.sessionStorage != 'function'){
@@ -59,7 +59,7 @@
 		$homeScrollSection = $homeScroll.querySelector('section'),
 		loadingNews = false;
 
-	hn.news = {
+	hw.news = {
 		options: {
 			disclosure: true
 		},
@@ -73,7 +73,7 @@
 				item.domain = a.hostname.replace(/^www\./, '');
 				delete a;
 			}
-			if (!hn.news.options.disclosure){
+			if (!hw.news.options.disclosure){
 				if (item.id) item.url = '#/item/' + item.id;
 			} else {
 				if (item.type == 'link') item.detail_disclosure = true;
@@ -89,7 +89,7 @@
 		markupStories: function(data, i){
 			var html = '';
 			if (!i) i = 1;
-			var markupStory = hn.news.markupStory;
+			var markupStory = hw.news.markupStory;
 			data.forEach(function(item){
 				item.i = i++;
 				html += markupStory(item);
@@ -146,7 +146,7 @@
 			if (!storyEl) return;
 			post.selected = !!storyEl.querySelector('a[href].selected');
 			post.i = storyEl.dataset ? storyEl.dataset.index : storyEl.getAttribute('data-index');
-			storyEl.insertAdjacentHTML('afterend', hn.news.markupStory(post));
+			storyEl.insertAdjacentHTML('afterend', hw.news.markupStory(post));
 			storyEl.parentNode.removeChild(storyEl);
 		},
 		render: function(opts){
@@ -156,12 +156,12 @@
 			var tmpl1 = tmpl('stories-load');
 			var loadNews = function(_data){
 				var data = _data.slice();
-				var html = '<ul class="tableview tableview-links" id="hnlist">'
-					+ hn.news.markupStories(data)
+				var html = '<ul class="tableview tableview-links" id="hwlist">'
+					+ hw.news.markupStories(data)
 					+ (amplify.store('hacker-news2') ? '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>' : '')
 					+ '</ul>';
 				$homeScrollSection.innerHTML = html;
-				hn.pub('onRenderNews');
+				hw.pub('onRenderNews');
 			};
 			if (cached){
 				var news = amplify.store('hacker-news');
@@ -181,7 +181,7 @@
 				$homeScrollSection.innerHTML = tmpl1.render({loading: true});
 				var showError = function(){
 					$homeScrollSection.innerHTML = tmpl1.render({load_error: true});
-					hn.pub('logAPIError', 'news');
+					hw.pub('logAPIError', 'news');
 				};
 				hnapi.news(function(data){
 					loadingNews = false;
@@ -199,7 +199,7 @@
 					hnapi.news2(function(data){
 						if (!data || data.error) return;
 						amplify.store('hacker-news2', data);
-						$('hnlist').insertAdjacentHTML('beforeend', '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>');
+						$('hwlist').insertAdjacentHTML('beforeend', '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>');
 					});
 				}, function(e){
 					loadingNews = false;
@@ -208,7 +208,7 @@
 			}
 		},
 		reload: function(){
-			hn.news.render({
+			hw.news.render({
 				delay: 300 // Cheat a little to make user think that it's doing something
 			});
 		},
@@ -222,8 +222,8 @@
 				if (targetParent.parentNode) targetParent.parentNode.removeChild(targetParent);
 				if (!news2) return;
 				var data = news2.slice();
-				var html = hn.news.markupStories(data, 31);
-				$('hnlist').insertAdjacentHTML('beforeend', html);
+				var html = hw.news.markupStories(data, 31);
+				$('hwlist').insertAdjacentHTML('beforeend', html);
 			}, 400);
 		}
 	};
@@ -232,13 +232,13 @@
 		$commentsHeading = $commentsView.querySelector('header h1'),
 		$commentsSection = $commentsView.querySelector('section');
 
-	hn.comments = {
+	hw.comments = {
 		currentID: null,
 		render: function(id){
 			if (!id) return;
 			var post = amplify.store.sessionStorage('hacker-item-' + id);
-			if (hn.comments.currentID == id && post) return;
-			hn.comments.currentID = id;
+			if (hw.comments.currentID == id && post) return;
+			hw.comments.currentID = id;
 
 			var loadComments = function(_data, id){
 					if (!_data || _data.error) return;
@@ -273,8 +273,8 @@
 					if (!data.has_post){
 						$commentsHeading.innerHTML = '';
 						$commentsSection.innerHTML = tmpl1.render(data);
-						hn.pub('adjustCommentsSection');
-						hn.pub('onRenderComments');
+						hw.pub('adjustCommentsSection');
+						hw.pub('onRenderComments');
 						return;
 					}
 
@@ -367,7 +367,7 @@
 						}
 					}
 
-					hn.pub('onRenderComments');
+					hw.pub('onRenderComments');
 				};
 
 			if (post){
@@ -412,13 +412,13 @@
 					} else {
 						loadPost({load_error: true}, id);
 					}
-					hn.pub('logAPIError', 'comments');
+					hw.pub('logAPIError', 'comments');
 				};
 				hnapi.item(id, function(data){
 					// Avoiding the case where the wrong post is loaded when connection is slow
-					if (hn.comments.currentID != id) return;
+					if (hw.comments.currentID != id) return;
 
-					if (!data || data.error && hn.currentView == 'comments'){
+					if (!data || data.error && hw.currentView == 'comments'){
 						showError();
 						return;
 					}
@@ -426,13 +426,13 @@
 						expires: 1000*60*5 // 5 minutes
 					});
 					// Sync the story to the one listed in the stories list
-					hn.news.updateStory({
+					hw.news.updateStory({
 						id: id,
 						data: data
 					});
 					loadPost(data, id);
 				}, function(e){
-					if (hn.comments.currentID != id) return;
+					if (hw.comments.currentID != id) return;
 					showError();
 				});
 			}
@@ -494,25 +494,25 @@
 			}
 		},
 		reload: function(){
-			hn.comments.currentID = null;
+			hw.comments.currentID = null;
 			ruto.reload();
 		}
 	};
 
-	hn.init = function(){
-		hn.news.render();
+	hw.init = function(){
+		hw.news.render();
 		ruto.init();
 	};
 
-	w.hn = hn;
+	w.hw = hw;
 
 	ruto
 		.config({
 			before: function(path, name){
-				hn.hideAllViews();
+				hw.hideAllViews();
 				var view = $('view-' + name);
 				view.classList.remove('hidden');
-				hn.currentView = name;
+				hw.currentView = name;
 			},
 			notfound: function(){
 				ruto.go('/');
@@ -521,6 +521,6 @@
 		.add('/', 'home')
 		.add('/about', 'about')
 		.add(/^\/item\/(\d+)$/i, 'comments', function(path, id){
-			hn.comments.render(id);
+			hw.comments.render(id);
 		});
 })(window);

@@ -101,8 +101,8 @@
 
 	ruto.config({
 		before: function(path, name, matches){
-			var currentView = hn.currentView;
-			var hideAllViews = hn.hideAllViews;
+			var currentView = hw.currentView;
+			var hideAllViews = hw.hideAllViews;
 			switch (name){
 				case 'home':
 					var view = $('view-home');
@@ -132,10 +132,10 @@
 						viewComments.querySelector('section').innerHTML = '<div class="view-blank-state"><div class="view-blank-state-text">No Story Selected.</div></div>';
 						viewComments.querySelector('header h1').innerHTML = '';
 						viewComments.querySelector('header a.header-back-button').style.display = 'none';
-						hn.comments.currentID = null;
-						hn.pub('selectCurrentStory');
+						hw.comments.currentID = null;
+						hw.pub('selectCurrentStory');
 					}
-					hn.currentView = 'home';
+					hw.currentView = 'home';
 					break;
 				case 'about':
 					var view = $('view-about');
@@ -158,7 +158,7 @@
 							$('overlay').classList.remove('hide');
 						}, 1);
 					}
-					hn.currentView = 'about';
+					hw.currentView = 'about';
 					break;
 				case 'comments':
 					var view = $('view-comments');
@@ -169,7 +169,7 @@
 						} else if (currentView != 'comments'){
 							// Scroll to top first then slide, prevent Flash of Unscrolled View (FOUV)
 							var id = matches[1];
-							if (id && hn.comments.currentID != id) view.querySelector('section').scrollTop = 0;
+							if (id && hw.comments.currentID != id) view.querySelector('section').scrollTop = 0;
 							slide({
 								in: view,
 								out: $('view-' + currentView),
@@ -181,10 +181,10 @@
 						$('overlay').classList.add('hide');
 						view.classList.remove('hidden');
 						$('view-home').classList.remove('hidden');
-						hn.pub('selectCurrentStory', matches[1]);
+						hw.pub('selectCurrentStory', matches[1]);
 						view.querySelector('header a.header-back-button').style.display = '';
 					}
-					hn.currentView = 'comments';
+					hw.currentView = 'comments';
 					break;
 			}
 		}
@@ -248,7 +248,7 @@
 
 	tappable('#view-home-refresh', {
 		noScroll: true,
-		onTap: hn.news.reload
+		onTap: hw.news.reload
 	});
 
 	var scrollingToTop = false;
@@ -330,7 +330,7 @@
 		},
 		onTap: function(e, target){
 			if (target.classList.contains('more-link')){
-				hn.news.more(target);
+				hw.news.more(target);
 			} else if (/^#\//.test(target.getAttribute('href'))){ // "local" links
 				location.hash = target.hash;
 			} else if (target.href && isWideScreen){
@@ -354,16 +354,16 @@
 	});
 
 	tappable('button.comments-toggle', function(e, target){
-		hn.comments.toggle(target);
+		hw.comments.toggle(target);
 	});
 
 	tappable('section.comments li>a.more-link', function(e, target){
-		hn.comments.more(target);
+		hw.comments.more(target);
 	});
 	
-	tappable('#view-comments .load-error button', hn.comments.reload);
+	tappable('#view-comments .load-error button', hw.comments.reload);
 
-	hn.sub('selectCurrentStory', function(id){
+	hw.sub('selectCurrentStory', function(id){
 		if (!isWideScreen) return;
 		if (!id) id = (location.hash.match(/item\/(\d+)/) || [,''])[1];
 		var homeView = $('view-home');
@@ -381,15 +381,15 @@
 			}, 1);
 		}
 	});
-	hn.sub('onRenderNews', function(){
-		hn.pub('selectCurrentStory');
+	hw.sub('onRenderNews', function(){
+		hw.pub('selectCurrentStory');
 	});
 
 	// Auto-reload news for some specific situations...
 	w.addEventListener('pageshow', function(){
 		setTimeout(function(){
-			if (hn.currentView == 'home' && $('hnlist') && !amplify.store('hacker-news-cached')){
-				hn.news.reload();
+			if (hw.currentView == 'home' && $('hwlist') && !amplify.store('hacker-news-cached')){
+				hw.news.reload();
 			}
 		}, 1);
 	}, false);
@@ -411,7 +411,7 @@
 		}
 		style.textContent = '.view section.comments{min-height: ' + minHeight + 'px;}';
 	};
-	hn.sub('onRenderComments', function(){
+	hw.sub('onRenderComments', function(){
 		setTimeout(adjustCommentsSection, isWideScreen ? 1 : 360); // >350ms, which is the sliding animation duration
 	});
 	w.addEventListener('resize', adjustCommentsSection, false);
@@ -451,6 +451,6 @@
 		loader.parentNode.removeChild(loader);
 	}
 
-	hn.news.options.disclosure = !isWideScreen;
-	hn.init();
+	hw.news.options.disclosure = !isWideScreen;
+	hw.init();
 })(window);
