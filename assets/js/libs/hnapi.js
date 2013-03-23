@@ -74,26 +74,23 @@
 			}
 		};
 
-	var urls = {
-		primary: 'http://node-hnapi.herokuapp.com/', // Heroku
-		secondary: [
-			'http://node-hnapi.ap01.aws.af.cm/', // AWS (Asia Pacific)
-			'http://node-hnapi-hp.hp.af.cm/', // HP Cloud
-			'http://node-hnapi-rs.rs.af.cm/', // Rackspace Cloud
-			'http://node-hnapi.azurewebsites.net/' // Windows Azure
-		]
-	};
+	var urls = [
+		'http://node-hnapi-hp.hp.af.cm/', // HP Cloud
+		'http://node-hnapi-rs.rs.af.cm/', // Rackspace Cloud
+		'http://node-hnapi.azurewebsites.net/', // Windows Azure
+		'http://node-hnapi-asia.azurewebsites.net/' // Windows Azure (2)
+	];
+	urls.sort(function() {return 0.5 - Math.random()}); // Shuffle the API URLs
 
-	var length = urls.secondary.length;
+	var length = urls.length;
 	var reqAgain = function(i, path, success, error){
 		var errorFunc = (i < length-1) ? function(){
 			reqAgain(i+1, path, success, error);
 		} : error;
-		req(urls.secondary[i] + path, success, errorFunc);
+		req(urls[i] + path, success, errorFunc);
 	};
 	var reqs = function(path, success, error){
-		req(urls.primary + path, success, function(){
-			urls.secondary.sort(function() {return 0.5 - Math.random()}); // Shuffle the API URLs
+		req(urls[0] + path, success, function(){
 			reqAgain(0, path, success, error);
 		});
 	};
