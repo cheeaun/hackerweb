@@ -3,7 +3,7 @@
 		body = d.body;
 
 	var $ = w.$ = function(id){
-		return d.getElementById(id)
+		return d.getElementById(id);
 	};
 
 	var pubsubCache = {},

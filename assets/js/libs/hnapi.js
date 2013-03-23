@@ -55,7 +55,7 @@
 						clearTimeout(this._timeout);
 						delete requests[url];
 						error(e);
-					}
+					};
 					if (r.readyState <= 1 || supportXDomainRequest){ // XDomainRequest doesn't have readyState
 						r.open('GET', url + '?' + date(), true);
 						r.send();
@@ -91,7 +91,7 @@
 		} : error;
 		req(urls.secondary[i] + path, success, errorFunc);
 	};
-	var requests = function(path, success, error){
+	var reqs = function(path, success, error){
 		req(urls.primary + path, success, function(){
 			urls.secondary.sort(function() {return 0.5 - Math.random()}); // Shuffle the API URLs
 			reqAgain(0, path, success, error);
@@ -103,19 +103,19 @@
 		urls: urls,
 
 		news: function(success, error){
-			requests('news', success, error);
+			reqs('news', success, error);
 		},
 		
 		news2: function(success, error){
-			requests('news2', success, error);
+			reqs('news2', success, error);
 		},
 		
 		item: function(id, success, error){
-			requests('item/' + id, success, error);
+			reqs('item/' + id, success, error);
 		},
 
 		comments: function(id, success, error){
-			requests('comments/' + id, success, error);
+			reqs('comments/' + id, success, error);
 		}
 		
 	};

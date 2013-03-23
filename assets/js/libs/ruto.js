@@ -90,7 +90,7 @@
 			}
 		}
 
-		if (!found) options.notfound.call(ruto, path);
+		if (!found) options.notfound.call(ruto);
 
 		return ruto;
 	};

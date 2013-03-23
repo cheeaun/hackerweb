@@ -26,7 +26,7 @@
 		body.addEventListener(event, function(e){
 			var target = closest(e.target, selector);
 			if (!target) return;
-    		fn.call(body, e, target);
+			fn.call(body, e, target);
 		});
 	};
 
