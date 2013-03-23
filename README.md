@@ -13,6 +13,8 @@ Read my two-part blog post on how I built this web app:
 - [How I built the Hacker News mobile web app](http://cheeaun.com/blog/2012/03/how-i-built-hacker-news-mobile-web-app) ([HN thread](http://news.ycombinator.com/item?id=3662709))
 - [How I built the Hacker News mobile web app, Part 2](http://cheeaun.com/blog/2012/03/how-i-built-hacker-news-mobile-web-app_26) ([HN thread](http://news.ycombinator.com/item?id=3756771))
 
+Also read my introductory post, [Introducing HackerWeb](http://cheeaun.com/blog/2012/12/introducing-hackerweb).
+
 Technical stuff
 ---------------
 
@@ -32,6 +34,7 @@ This web app works best on iOS 5+ Mobile Safari (iOS theme) and other modern bro
 Also uses the [unofficial Hacker News API](https://github.com/cheeaun/node-hnapi/).
 
 Some of the *cutting-edge* web technologies used:
+
 - [localStorage & sessionStorage](http://caniuse.com/namevalue-storage)
 - [CORS](http://caniuse.com/cors)
 - [Application Cache](http://caniuse.com/offline-apps)
@@ -41,33 +44,36 @@ Some of the *cutting-edge* web technologies used:
 - [requestAnimationFrame](http://caniuse.com/requestanimationframe)
 - [Web Workers](http://caniuse.com/webworkers)
 
-More technical stuff
+Development stuff
 --------------------
+
+### Prerequisites
+
+	git clone git://github.com/cheeaun/hackerweb.git
+	cd hackerweb/
+	npm install
+
+Some tasks will need [Grunt](http://gruntjs.com/getting-started), so install it.
+
+	npm install -g grunt-cli
 
 ### Running a local server
 
-	git clone git@github.com:cheeaun/hackerweb.git
-	cd hackerweb
 	node server.js -noappcache
 
 The `-noappcache` argument is to prevent browsers from caching everything in the Application Cache.
 
-### Changes to scripts
-
-If there are changes in the `/js` folder, run this to regenerate the static JavaScript files (skip the npm install if `uglify-js` is already installed):
-
-	npm install uglify-js
-	node make-scripts.js
-
-The static JS files are defined by `scripts.json` which specifies which files are combined and minified into smaller individual files.
-
 ### Changes to templates
 
-If there are changes in the `/templates` folder, run this to regenerate `js/templates.js` (skip the npm install if `uglify-js` is already installed; do not use `npm install hogan.js` as the current NPM version – 2.0.0 – is not compatible):
+If there are changes in the `/templates` folder, run this to regenerate `assets/js/templates.js`:
 
-	npm install uglify-js
-	npm install git://github.com/twitter/hogan.js.git
 	node make-templates.js
+
+### Changes to scripts
+
+If there are changes in the `assets/js` folder, run this to regenerate the static JavaScript files:
+
+	grunt uglify
 
 Contributing and Feedback
 -------------------------
