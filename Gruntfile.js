@@ -44,7 +44,7 @@ module.exports = function(grunt) {
 						'assets/js/libs/requestanimationframe.js',
 						'assets/js/templates.js',
 						'assets/js/hw.js',
-						'assets/js/hw-web.js'
+						'assets/js/hw-ios.js'
 					]
 				}
 			}
