@@ -4,7 +4,7 @@
 		supportXDomainRequest = !!w.XDomainRequest,
 		supportCORS = 'withCredentials' in new XMLHttpRequest() || supportXDomainRequest,
 		worker = false,
-		timeout = 15000, // 15 seconds timeout
+		timeout = 20000, // 20 seconds timeout
 		requests = {};
 
 	try {

@@ -3,7 +3,7 @@ var requests = {};
 addEventListener('message', function(e){
 	var data = e.data,
 		url = data.url,
-		timeout = data.timeout || 30000;
+		timeout = data.timeout || 20000;
 	var r = requests[url] || new XMLHttpRequest();
 	if (r._timeout) clearTimeout(r._timeout);
 	r._timeout = setTimeout(function(){
