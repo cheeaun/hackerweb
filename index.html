@@ -13,10 +13,10 @@
 <link rel="apple-touch-icon-precomposed" href="icons/touch-icon.png">
 <script src="//d3nslu0hdya83q.cloudfront.net/dist/1.0/raven.min.js"></script>
 <script>
-Raven.config('https://ba1fa9e133f64714b762e2d8d46a0c63@app.getsentry.com/6152').install();
-
 var _gaq = [];
 if (location.hostname == 'cheeaun.github.com' || location.hostname == 'app.hackerwebapp.com'){
+	Raven.config('https://ba1fa9e133f64714b762e2d8d46a0c63@app.getsentry.com/6152').install();
+
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-36575624-2']);
 	_gaq.push(['_trackPageview']);
