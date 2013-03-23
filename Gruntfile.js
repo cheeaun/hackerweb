@@ -8,7 +8,8 @@ module.exports = function(grunt) {
 					sourceMap: 'js/hw-web.min.js.map',
 					sourceMappingURL: function(path){
 						return path.replace(/^js\//i, '') + '.map';
-					}
+					},
+					sourceMapRoot: '../'
 				},
 				files: {
 					'js/hw-web.min.js': [
@@ -29,7 +30,8 @@ module.exports = function(grunt) {
 					sourceMap: 'js/hw-ios.min.js.map',
 					sourceMappingURL: function(path){
 						return path.replace(/^js\//i, '') + '.map';
-					}
+					},
+					sourceMapRoot: '../'
 				},
 				files: {
 					'js/hw-ios.min.js': [
