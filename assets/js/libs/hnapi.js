@@ -75,10 +75,10 @@
 		};
 
 	var urls = [
-		'http://node-hnapi-hp.hp.af.cm/', // HP Cloud
-		'http://node-hnapi-rs.rs.af.cm/', // Rackspace Cloud
-		'http://node-hnapi.azurewebsites.net/', // Windows Azure
-		'http://node-hnapi-asia.azurewebsites.net/' // Windows Azure (2)
+		'http://node-hnapi.azurewebsites.net/', // Windows Azure (North EU)
+		'http://node-hnapi-asia.azurewebsites.net/', // Windows Azure (East Asia)
+		'http://node-hnapi-eus.azurewebsites.net/', // Windows Azure (East US)
+		'http://node-hnapi-weu.azurewebsites.net/' // Windows Azure (West EU)
 	];
 	urls.sort(function() {return 0.5 - Math.random()}); // Shuffle the API URLs
 
