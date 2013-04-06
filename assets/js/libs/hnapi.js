@@ -75,6 +75,7 @@
 		};
 
 	var urls = [
+		'http://node-hnapi.herokuapp.com/', // Heroku
 		'http://node-hnapi.azurewebsites.net/', // Windows Azure (North EU)
 		'http://node-hnapi-asia.azurewebsites.net/', // Windows Azure (East Asia)
 		'http://node-hnapi-eus.azurewebsites.net/', // Windows Azure (East US)
