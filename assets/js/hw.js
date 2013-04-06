@@ -40,6 +40,12 @@
 			if (!t) return;
 			if (!data) return t;
 			return t.render(data);
+		},
+		setTitle: function(str){
+			var title = 'HackerWeb';
+			str = str.replace(/^\s+|\s+$/g, ''); // trim
+			if (str && str.toLowerCase() != title.toLowerCase()) title = str + ' – ' + title;
+			document.title = title;
 		}
 	};
 
@@ -271,6 +277,7 @@
 
 					data.has_post = !!data.title;
 					if (!data.has_post){
+						hw.setTitle();
 						$commentsHeading.innerHTML = '';
 						$commentsSection.innerHTML = tmpl1.render(data);
 						hw.pub('adjustCommentsSection');
@@ -309,6 +316,7 @@
 					}
 					data.short_hn_url = 'news.ycombinator.com/item?id=' + id;
 					data.hn_url = 'http://' + data.short_hn_url;
+					hw.setTitle(data.title);
 					$commentsHeading.innerHTML = data.title;
 
 					var html = tmpl1.render(data, {comments_list: tmpl2});
@@ -513,6 +521,7 @@
 				var view = $('view-' + name);
 				view.classList.remove('hidden');
 				hw.currentView = name;
+				hw.setTitle(view.querySelector('header h1').textContent);
 			},
 			notfound: function(){
 				ruto.go('/');

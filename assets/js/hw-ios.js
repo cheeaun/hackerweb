@@ -103,9 +103,11 @@
 		before: function(path, name, matches){
 			var currentView = hw.currentView;
 			var hideAllViews = hw.hideAllViews;
+			var view = $('view-' + name);
+			hw.setTitle(view.querySelector('header h1').textContent);
+			
 			switch (name){
 				case 'home':
-					var view = $('view-home');
 					if (!isWideScreen){
 						if (!currentView){
 							hideAllViews();
@@ -138,7 +140,6 @@
 					hw.currentView = 'home';
 					break;
 				case 'about':
-					var view = $('view-about');
 					if (!isWideScreen){
 						if (!currentView){
 							hideAllViews();
@@ -161,7 +162,6 @@
 					hw.currentView = 'about';
 					break;
 				case 'comments':
-					var view = $('view-comments');
 					if (!isWideScreen){
 						if (!currentView){
 							hideAllViews();
