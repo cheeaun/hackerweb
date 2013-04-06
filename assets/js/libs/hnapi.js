@@ -81,7 +81,15 @@
 		'http://node-hnapi-eus.azurewebsites.net/', // Windows Azure (East US)
 		'http://node-hnapi-weu.azurewebsites.net/' // Windows Azure (West EU)
 	];
-	urls.sort(function() {return 0.5 - Math.random()}); // Shuffle the API URLs
+	var shuffle = function(array){ // Fisher-Yates
+		for (var i = array.length - 1; i > 0; i--){
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+	};
+	shuffle(urls);
 
 	var length = urls.length;
 	var reqAgain = function(i, path, success, error){
