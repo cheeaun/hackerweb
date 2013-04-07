@@ -147,7 +147,7 @@ classListProto.toggle = function (token, forse) {
 		this[method](token);
 	}
 
-	return result;
+	return !result;
 };
 classListProto.toString = function () {
 	return this.join(" ");
