@@ -6,7 +6,7 @@
 			anticlockwise: ['flip-out-to-right', 'flip-in-from-right']
 		},
 		flip = function(opts){
-			var inEl = opts.in,
+			var inEl = opts['in'],
 				outEl = opts.out,
 				inClass = inEl.classList,
 				outClass = outEl.classList,
@@ -36,7 +36,7 @@
 			ltr: ['slide-out-to-right', 'slide-in-from-left']
 		},
 		slide = function(opts){
-			var inEl = opts.in,
+			var inEl = opts['in'],
 				outEl = opts.out,
 				inClass = inEl.classList,
 				outClass = outEl.classList,
@@ -114,13 +114,13 @@
 							view.classList.remove('hidden');
 						} else if (currentView == 'about'){
 							flip({
-								in: view,
+								'in': view,
 								out: $('view-' + currentView),
 								direction: 'anticlockwise'
 							});
 						} else if (currentView != 'home'){
 							slide({
-								in: view,
+								'in': view,
 								out: $('view-' + currentView),
 								direction: 'ltr'
 							});
@@ -146,7 +146,7 @@
 							view.classList.remove('hidden');
 						} else if (currentView != 'about'){
 							flip({
-								in: view,
+								'in': view,
 								out: $('view-home'),
 								direction: 'clockwise'
 							});
@@ -171,7 +171,7 @@
 							var id = matches[1];
 							if (id && hw.comments.currentID != id) view.querySelector('section').scrollTop = 0;
 							slide({
-								in: view,
+								'in': view,
 								out: $('view-' + currentView),
 								direction: 'rtl'
 							});

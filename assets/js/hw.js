@@ -1,6 +1,5 @@
 (function(w){
-	var d = w.document,
-		body = d.body;
+	var d = w.document;
 
 	var $ = w.$ = function(id){
 		return d.getElementById(id);
