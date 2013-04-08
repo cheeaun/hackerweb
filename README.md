@@ -47,33 +47,38 @@ Some of the *cutting-edge* web technologies used:
 Development stuff
 --------------------
 
-### Prerequisites
+- Prerequisites
 
-	git clone git://github.com/cheeaun/hackerweb.git
-	cd hackerweb/
-	npm install
+		git clone git://github.com/cheeaun/hackerweb.git
+		cd hackerweb/
+		npm install
 
-Some tasks will need [Grunt](http://gruntjs.com/getting-started), so install it.
+- [Grunt](http://gruntjs.com/) tasks
 
-	npm install -g grunt-cli
+	- Compile templates in `templates/*` to generate `assets/js/templates.js`
 
-### Running a local server
+			grunt templates
 
-	node server.js -noappcache
+	- Concat and minify JavaScript files in `assets/js/*` to generate `js/*`
 
-The `-noappcache` argument is to prevent browsers from caching everything in the Application Cache.
+			grunt uglify
 
-### Changes to templates
+	- Watch the templates and scripts, run `templates` and `uglify` tasks when they're changed
 
-If there are changes in the `/templates` folder, run this to regenerate `assets/js/templates.js`:
+			grunt watch
 
-	node make-templates.js
+	- Run a local dev server.
 
-### Changes to scripts
+			grunt connect
 
-If there are changes in the `assets/js` folder, run this to regenerate the static JavaScript files:
+		Arguments:
 
-	grunt uglify
+		- `--appcache` - enable Application Cache
+		- `--port=XX` - specify a custom port number
+
+	- Run both `watch` and `connect` tasks at the same time
+
+			grunt server
 
 Contributing and Feedback
 -------------------------

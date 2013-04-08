@@ -54,10 +54,68 @@ module.exports = function(grunt) {
 				'assets/js/libs/*.js',
 				'assets/js/*.js'
 			]
+		},
+		templates: {
+			all: {
+				files: {
+					'assets/js/templates.js': [
+						'assets/templates/*.mustache'
+					]
+				}
+			}
+		},
+		watch: {
+			scripts: {
+				files: [
+					'assets/js/libs/*.js',
+					'assets/js/*.js'
+				],
+				tasks: ['uglify']
+			},
+			templates: {
+				files: 'assets/templates/*.mustache',
+				tasks: ['templates']
+			}
+		},
+		connect: {
+			server: {
+				options: {
+					port: 80,
+					keepalive: true,
+					hostname: null,
+					middleware: function(connect, options){
+						var appcache = grunt.option('appcache');
+						return [
+							function(req, res, next){
+								if (req.url == '/manifest.appcache' && !appcache){
+									res.writeHead(404);
+									res.end();
+								} else {
+									next();
+								}
+							},
+							connect.static(options.base),
+							connect.directory(options.base)
+						];
+					}
+				}
+			}
+		},
+		concurrent: {
+			server: ['watch', 'connect']
 		}
 	});
 
+	grunt.loadTasks('tasks');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-concurrent');
+
+	// Configurable port number
+	var port = grunt.option('port');
+	if (port) grunt.config('connect.server.options.port', port);
+	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.registerTask('server', 'concurrent:server');
 
 };
