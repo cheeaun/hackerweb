@@ -12,7 +12,10 @@ module.exports = function(grunt) {
 					sourceMappingURL: function(path){
 						return path.replace(/^js\//i, '') + '.map';
 					},
-					sourceMapRoot: '../'
+					sourceMapRoot: '../',
+					beautify: {
+						max_line_len: 500
+					}
 				},
 				files: {
 					'js/hw-web.min.js': [
@@ -34,7 +37,10 @@ module.exports = function(grunt) {
 					sourceMappingURL: function(path){
 						return path.replace(/^js\//i, '') + '.map';
 					},
-					sourceMapRoot: '../'
+					sourceMapRoot: '../',
+					beautify: {
+						max_line_len: 500
+					}
 				},
 				files: {
 					'js/hw-ios.min.js': [
