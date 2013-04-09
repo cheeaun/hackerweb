@@ -10,14 +10,14 @@ module.exports = function(grunt){
 		this.files.forEach(function(f){
 			var code = '(function(t){\n'
 				+ '\tTEMPLATES = {\n';
-			f.src.forEach(function(filepath){
-				var mustache = grunt.file.read(filepath);
-				var key = path.basename(filepath, path.extname(filepath));
-				// Clean up some spaces
-				mustache = mustache.replace(/[\r\n\t]+/g, '');
-				code += "\t\t'" + key + "': new t(" + hogan.compile(mustache, {asString: true}) + "),\n";
-			});
-			code += '\t}\n'
+			code += f.src.map(function(filepath){
+					var mustache = grunt.file.read(filepath);
+					var key = path.basename(filepath, path.extname(filepath));
+					// Clean up some spaces
+					mustache = mustache.replace(/[\r\n\t]+/g, '');
+					return "\t\t'" + key + "': new t(" + hogan.compile(mustache, {asString: true}) + ')';
+				}).join(',\n');
+			code += '\n\t}\n'
 				+ '})(Hogan.Template);';
 
 			grunt.file.write(f.dest, code);
