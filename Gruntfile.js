@@ -3,6 +3,9 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		uglify: {
+			options: {
+				report: 'min'
+			},
 			web: {
 				options: {
 					sourceMap: 'js/hw-web.min.js.map',
