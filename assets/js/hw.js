@@ -42,8 +42,12 @@
 		},
 		setTitle: function(str){
 			var title = 'HackerWeb';
-			str = str.replace(/^\s+|\s+$/g, ''); // trim
-			if (str && str.toLowerCase() != title.toLowerCase()) title = str + ' – ' + title;
+			if (str){
+				str = str.replace(/^\s+|\s+$/g, ''); // trim
+				if (str.toLowerCase() != title.toLowerCase()){
+					title = str + ' – ' + title;
+				}
+			}
 			document.title = title;
 		}
 	};
