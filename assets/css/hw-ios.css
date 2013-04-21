@@ -42,7 +42,6 @@ i.icon-refresh{
 	width: 14px;
 	height: 18px;
 	background: transparent url(../images/ios/refresh-icon.png) no-repeat;
-	-webkit-background-size: 14px 18px;
 	background-size: 14px 18px;
 	vertical-align: text-bottom;
 	overflow: hidden;
@@ -77,7 +76,6 @@ header.fake{
 header.fake,
 .view>header{
 	background: #b2bbca url(../images/ios/nav-bar.png) repeat-x;
-	-webkit-background-size: 1px 44px;
 	background-size: 1px 44px;
 	height: 44px;
 	line-height: 44px;
@@ -102,7 +100,6 @@ header.fake,
 }
 .header-button button{
 	pointer-events: none;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	min-width: 50px;
 	height: 30px;
@@ -195,14 +192,12 @@ header.fake,
 	background-color: #d7dce5;
 	background-image: -webkit-linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
 	background-image: linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
-	-webkit-background-size: 8px 1px;
 	background-size: 8px 1px;
 }
 .ios5 .view>.scroll.striped{
 	background-color: #cbd2d8;
 	background-image: -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	background-image: linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	-webkit-background-size: 7px 1px;
 	background-size: 7px 1px;
 }
 .view>.scroll.striped p.foot-label{
@@ -223,7 +218,6 @@ body:not(.ios5) .view>.scroll:before{
 	z-index: 1;
 	background-image: -webkit-linear-gradient(top, rgba(0,0,0,.205), rgba(0,0,0,0));
 	background-image: linear-gradient(top, rgba(0,0,0,.205), rgba(0,0,0,0));
-	-webkit-background-size: 1px 3px;
 	background-size: 1px 3px;
 }
 .view>.scroll>section{
@@ -247,7 +241,6 @@ body:not(.ios5) .view>.scroll:before{
 	color: #666;
 	text-shadow: 0 1px #fff;
 	background: transparent url(../images/ios/activity-indicator.png) no-repeat;
-	-webkit-background-size: 20px auto;
 	background-size: 20px auto;
 	-webkit-animation: loading-sprite 1s step-start infinite;
 	animation: loading-sprite 1s step-start infinite;
@@ -321,7 +314,6 @@ body:not(.ios5) .view>.scroll:before{
 	border: 1px solid #d9d9d9;
 	background-image: -webkit-linear-gradient(top, #fdfdfd, #dedede);
 	background-image: linear-gradient(top, #fdfdfd, #dedede);
-	-webkit-background-size: 10px 100%;
 	background-size: 10px 100%;
 	-webkit-user-select: none;
 }
@@ -338,7 +330,6 @@ body:not(.ios5) .view>.scroll:before{
 	background-color: #fcfcfc;
 	background-image: -webkit-linear-gradient(top, #fcfcfc, #dadce0);
 	background-image: linear-gradient(top, #fcfcfc, #dadce0);
-	-webkit-background-size: 1px 100%;
 	background-size: 1px 100%;
 }
 .view-blank-state-text{
@@ -391,13 +382,11 @@ body:not(.ios5) .view>.scroll:before{
 	width: 100%;
 	-webkit-box-flex: 1;
 	box-flex: 1;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
 	background-image: linear-gradient(top, #4286f5, #194fdb);
 	background-position: -10px 0;
 	background-repeat: no-repeat;
-	-webkit-background-size: 10px 100%;
 	background-size: 10px 100%;
 }
 .tableview-links li>a:visited{
@@ -587,13 +576,11 @@ ol.grouped-tableview-links li>a{
 	width: 100%;
 	-webkit-box-flex: 1;
 	box-flex: 1;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
 	background-image: linear-gradient(top, #4286f5, #194fdb);
 	background-position: -1px 0;
 	background-repeat: no-repeat;
-	-webkit-background-size: 1px 100%;
 	background-size: 1px 100%;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -649,7 +636,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-color: #d7dce5;
 	background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), -webkit-linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
 	background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
-	-webkit-background-size: 1px 11px, 8px 100px;
 	background-size: 1px 11px, 8px 100px;
 	border-bottom: 1px solid #9297a2;
 	background-repeat: repeat-x, repeat;
@@ -661,7 +647,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-color: #cbd2d8;
 	background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12)), linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	-webkit-background-size: 1px 11px, 7px 100px;
 	background-size: 1px 11px, 7px 100px;
 }
 /* Put some fake stripes at the top of post content, so when you scroll up, you see 'em. */
@@ -673,7 +658,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-color: #d7dce5;
 	background-image: -webkit-linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
 	background-image: linear-gradient(left, #d3d8e2, #d3d8e2 12.49%, #d7dce5 12.5%, #d7dce5 81.24%, #d3d8e2 81.25%, #d3d8e2);
-	-webkit-background-size: 8px 1px;
 	background-size: 8px 1px;
 	-webkit-transform: translate3d(0, -300px, 0);
 	transform: translate3d(0, -300px, 0);
@@ -682,7 +666,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-color: #cbd2d8;
 	background-image: -webkit-linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
 	background-image: linear-gradient(left, #c5ccd4, #c5ccd4 71.4%, #cbd2d8 71.5%, #cbd2d8);
-	-webkit-background-size: 7px 1px;
 	background-size: 7px 1px;
 }
 .view .post-content header{
@@ -760,7 +743,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-image: -webkit-linear-gradient(top, #ddd, #fff);
 	background-image: linear-gradient(top, #ddd, #fff);
 	background-repeat: repeat-x;
-	-webkit-background-size: 10px 9px;
 	background-size: 10px 9px;
 }
 .view .post-content .poll li .poll-bar span{
@@ -773,7 +755,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	background-image: -webkit-linear-gradient(top, #2f64b7, #77adf6);
 	background-image: linear-gradient(top, #2f64b7, #77adf6);
 	background-repeat: repeat-x;
-	-webkit-background-size: 10px 9px;
 	background-size: 10px 9px;
 }
 .view .post-content pre,
@@ -808,7 +789,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	padding: 0 0 0 15px;
 	border: 0;
 	background: transparent url(../images/comment-arrow.png) no-repeat 0 4px;
-	-webkit-background-size: 10px 9px;
 	background-size: 10px 9px;
 	color: #333;
 }
@@ -861,7 +841,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	border: 1px solid #d9d9d9;
 	background-image: -webkit-linear-gradient(top, #fdfdfd, #dedede);
 	background-image: linear-gradient(top, #fdfdfd, #dedede);
-	-webkit-background-size: 10px 100%;
 	background-size: 10px 100%;
 	-webkit-user-select: none;
 }
@@ -884,13 +863,11 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	width: 100%;
 	-webkit-box-flex: 1;
 	box-flex: 1;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	background-image: -webkit-linear-gradient(top, #4286f5, #194fdb);
 	background-image: linear-gradient(top, #4286f5, #194fdb);
 	background-position: -10px 0;
 	background-repeat: no-repeat;
-	-webkit-background-size: 10px 100%;
 	background-size: 10px 100%;
 	cursor: pointer;
 	-webkit-touch-callout: none;
@@ -1170,6 +1147,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 
 .viewport-flip {
 	-webkit-perspective: 1000;
+	perspective: 1000;
 	background-color: #000;
 }
 .viewport-flip header.fake{
@@ -1181,25 +1159,33 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	-webkit-animation-timing-function: ease-in-out;
 	-webkit-animation-duration: .7s;
 	-webkit-backface-visibility: hidden;
+	animation-timing-function: ease-in-out;
+	animation-duration: .7s;
+	backface-visibility: hidden;
 	border: 1px solid #000;
 	margin: -1px;
 	pointer-events: none;
 }
 .slow-anim .flip{
 	-webkit-animation-duration: 7s;
+	animation-duration: 7s;
 }
 
 .flip-out-to-left {
 	-webkit-animation-name: flipouttoleft;
+	animation-name: flipouttoleft;
 }
 .flip-out-to-right {
 	-webkit-animation-name: flipouttoright;
+	animation-name: flipouttoright;
 }
 .flip-in-from-left {
 	-webkit-animation-name: flipinfromleft;
+	animation-name: flipinfromleft;
 }
 .flip-in-from-right {
 	-webkit-animation-name: flipinfromright;
+	animation-name: flipinfromright;
 }
 
 @-webkit-keyframes flipinfromright {
@@ -1230,7 +1216,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	header.fake,
 	.view>header{
 		background-image: url(../images/ios/nav-bar-mini.png);
-		-webkit-background-size: 1px 32px;
 		background-size: 1px 32px;
 		height: 32px;
 		line-height: 32px;
@@ -1280,7 +1265,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	body{
 		background-image: -webkit-linear-gradient(top, #000, #000);
 		background-image: linear-gradient(top, #000, #000);
-		-webkit-background-size: 10px 10px;
 		background-size: 10px 10px;
 		background-position: bottom;
 		background-repeat: repeat-x;
@@ -1432,7 +1416,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		height: 44px;
 		width: 44px;
 		background: transparent url(../images/ios/close-button.png) no-repeat center;
-		-webkit-background-size: 9px 10px;
 		background-size: 9px 10px;
 	}
 	#view-comments>header a.header-back-button button{
@@ -1479,7 +1462,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		border: 1px solid #d9d9d9;
 		background-image: -webkit-linear-gradient(top, #fdfdfd, #dedede);
 		background-image: linear-gradient(top, #fdfdfd, #dedede);
-		-webkit-background-size: 10px 100%;
 		background-size: 10px 100%;
 		background-repeat: repeat-x;
 		-webkit-user-select: none;
@@ -1525,7 +1507,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		background-color: #e2e5ea;
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
 		background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.12));
-		-webkit-background-size: 1px 11px;
 		background-size: 1px 11px;
 		background-position: bottom;
 		background-repeat: repeat-x;
@@ -1537,7 +1518,6 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 		background-color: #dedfe5;
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08)), -webkit-linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
 		background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.08)), linear-gradient(top, #f3f3f5, rgba(255,255,255,0));
-		-webkit-background-size: 1px 11px, 1px 100%;
 		background-size: 1px 11px, 1px 100%;
 		background-repeat: repeat-x;
 	}

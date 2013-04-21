@@ -38,10 +38,6 @@ button{
 	width: 14px;
 	height: 17px;
 	background: transparent url(../images/web/refresh-icon.png) no-repeat;
-	-webkit-background-size: 14px 17px;
-	-moz-background-size: 14px 17px;
-	-ms-background-size: 14px 17px;
-	-o-background-size: 14px 17px;
 	background-size: 14px 17px;
 	vertical-align: text-bottom;
 	overflow: hidden;
@@ -123,10 +119,6 @@ button{
 	background-image: url(../images/web/home-icon.png);
 	background-repeat: no-repeat;
 	background-position: center;
-	-webkit-background-size: 16px 15px;
-	-moz-background-size: 16px 15px;
-	-ms-background-size: 16px 15px;
-	-o-background-size: 16px 15px;
 	background-size: 16px 15px;
 }
 
@@ -254,10 +246,6 @@ button{
 	width: 14px;
 	height: 14px;
 	background: transparent url(../images/web/comments-icon.png) no-repeat;
-	-webkit-background-size: 14px 14px;
-	-moz-background-size: 14px 14px;
-	-ms-background-size: 14px 14px;
-	-o-background-size: 14px 14px;
 	background-size: 14px 14px;
 	margin: 15px 0;
 }
@@ -452,10 +440,6 @@ ol.grouped-tableview-links li>a:hover{
 	padding: 0 0 0 15px;
 	border: 0;
 	background: transparent url(../images/comment-arrow.png) no-repeat 0 4px;
-	-webkit-background-size: 10px 9px;
-	-moz-background-size: 10px 9px;
-	-ms-background-size: 10px 9px;
-	-o-background-size: 10px 9px;
 	background-size: 10px 9px;
 	color: #333;
 }
