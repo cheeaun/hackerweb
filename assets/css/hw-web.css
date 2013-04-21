@@ -30,7 +30,11 @@ button{
 	text-align: center;
 	padding: 1em;
 	margin: 0;
-	font-weight: bold;
+}
+#outdated-browser p{
+	margin: 0;
+	padding: 0;
+	line-height: 1.5em;
 }
 
 .icon-refresh{
