@@ -86,6 +86,11 @@ module.exports = function(grunt) {
 				tasks: ['templates']
 			}
 		},
+		embedImage: {
+			all: [
+				'assets/css/*.css'
+			]
+		},
 		connect: {
 			server: {
 				options: {

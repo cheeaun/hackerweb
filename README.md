@@ -67,6 +67,18 @@ Development stuff
 
 			grunt watch
 
+	- Embed images into CSS files
+
+			grunt embedImages
+
+		This will parse CSS files in `assets/css/*` and change this (any lines with `url()`):
+
+			background-image: url(PATH); /* embedImages:url(PATH) */
+
+		... into this:
+
+			background-image: url(data:DATAURI); /* embedImages:url(PATH) */
+
 	- Run a local dev server.
 
 			grunt connect
