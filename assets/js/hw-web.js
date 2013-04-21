@@ -1,4 +1,6 @@
 (function(w){
+	if (!w.addEventListener) return; // If the browser doesn't even support this, just give up.
+
 	var d = w.document,
 		body = d.body,
 		scrollTops = {},
