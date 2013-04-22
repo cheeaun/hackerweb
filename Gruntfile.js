@@ -116,7 +116,10 @@ module.exports = function(grunt) {
 			}
 		},
 		concurrent: {
-			server: ['watch', 'connect']
+			server: {
+				tasks: ['watch', 'connect'],
+				logConcurrentOutput: true
+			}
 		},
 		bumpAppCache: {
 			files: ['manifest.appcache'],
