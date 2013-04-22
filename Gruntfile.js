@@ -128,7 +128,11 @@ module.exports = function(grunt) {
 				format: function(match, version){
 					version = version.replace(/\d+\-\d+\-\d+/i, function(date){
 						var d = new Date();
-						var dateStr = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+						var month = d.getMonth() + 1;
+						if (month < 10) month = '0' + month;
+						var date = d.getDate();
+						if (date < 10) date = '0' + date;
+						var dateStr = d.getFullYear() + '-' + month + '-' + date;
 						return dateStr;
 					});
 					return '# ' + version;
