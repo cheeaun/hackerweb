@@ -9,6 +9,7 @@
     "grunt-contrib-connect": "~0.3.0",
     "grunt-contrib-watch": "~0.3.1",
     "grunt-concurrent": "~0.1.1",
-    "mime": "~1.2.9"
+    "mime": "~1.2.9",
+    "grunt-shell": "~0.2.2"
   }
 }

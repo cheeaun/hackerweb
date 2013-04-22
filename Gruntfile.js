@@ -117,6 +117,30 @@ module.exports = function(grunt) {
 		},
 		concurrent: {
 			server: ['watch', 'connect']
+		},
+		bumpAppCache: {
+			files: ['manifest.appcache'],
+			options: {
+				rVersion: /#\s(\d+\-.*)/i,
+				format: function(match, version){
+					version = version.replace(/\d+\-\d+\-\d+/i, function(date){
+						var d = new Date();
+						var dateStr = d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+						return dateStr;
+					});
+					return '# ' + version;
+				}
+			}
+		},
+		shell: {
+			deploy: {
+				command: [
+					'git checkout gh-pages',
+					'git merge master',
+					'git push origin gh-pages',
+					'git checkout master'
+				].join(' && ')
+			}
 		}
 	});
 
@@ -125,11 +149,16 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-concurrent');
+	grunt.loadNpmTasks('grunt-shell');
 
 	// Configurable port number
 	var port = grunt.option('port');
 	if (port) grunt.config('connect.server.options.port', port);
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.registerTask('server', 'concurrent:server');
+
+	// Shorter aliases
+	grunt.registerTask('bump', 'bumpAppCache');
+	grunt.registerTask('deploy', 'shell:deploy');
 
 };
