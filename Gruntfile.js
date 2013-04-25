@@ -141,6 +141,9 @@ module.exports = function(grunt) {
 		},
 		shell: {
 			deploy: {
+				options: {
+					stdout: true
+				},
 				command: [
 					'git checkout gh-pages',
 					'git merge master',
