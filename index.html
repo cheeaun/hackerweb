@@ -11,6 +11,14 @@
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/touch-icon-114.png">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/touch-icon-72.png">
 <link rel="apple-touch-icon-precomposed" href="icons/touch-icon.png">
+<script>
+// WP8 Viewport fix: http://trentwalton.com/2013/01/16/windows-phone-8-viewport-fix/
+if (navigator.userAgent.match(/IEMobile\/10\.0/)){
+	var msViewportStyle = document.createElement('style');
+	msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'));
+	document.getElementsByTagName('head')[0].appendChild(msViewportStyle);
+}
+</script>
 <script src="//d3nslu0hdya83q.cloudfront.net/dist/1.0/raven.min.js"></script>
 <script>
 var _gaq = [];
