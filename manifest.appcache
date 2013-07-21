@@ -7,7 +7,6 @@ assets/css/hw-ios.css
 js/hnapi-worker.js
 js/hw-web.min.js
 js/hw-ios.min.js
-js/fxos.js
 assets/images/comment-arrow.png
 assets/images/external-arrow.png
 assets/images/web/home-icon.png
@@ -29,11 +28,6 @@ assets/images/ios/back-button-5.png
 assets/images/ios/detail-disclosure-button.png
 assets/images/ios/close-button.png
 assets/images/ios/disclosure-indicator.png
-icons/favicon.ico
-icons/favicon.png
-icons/favicon-30.png
-icons/favicon-60.png
-icons/favicon-128.png
 icons/favicon-144.png
 icons/icon-128.png
 icons/touch-icon.png
