@@ -2,9 +2,11 @@
 	"name": "HackerWeb",
 	"description": "A simply readable Hacker News web app",
 	"version": "0.1",
-	"launch_path": "/index.html",
+	"launch_path": "/hackerweb/index.html",
 	"icons": {
-		"128": "/icons/icon-128.png"
+		"30": "/hackerweb/icons/favicon-30.png",
+		"60": "/hackerweb/icons/favicon-60.png",
+		"128": "/hackerweb/icons/favicon-128.png"
 	},
 	"developer": {
 		"name": "Lim Chee Aun",
