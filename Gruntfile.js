@@ -77,7 +77,8 @@ module.exports = function(grunt) {
 			scripts: {
 				files: [
 					'assets/js/libs/*.js',
-					'assets/js/*.js'
+					'assets/js/*.js',
+					'Gruntfile.js'
 				],
 				tasks: ['uglify']
 			},
