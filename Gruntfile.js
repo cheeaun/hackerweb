@@ -14,7 +14,8 @@ module.exports = function(grunt) {
 					},
 					sourceMapRoot: '../',
 					beautify: {
-						max_line_len: 500
+						max_line_len: 500,
+						ie_proof: false
 					}
 				},
 				files: {
@@ -39,7 +40,8 @@ module.exports = function(grunt) {
 					},
 					sourceMapRoot: '../',
 					beautify: {
-						max_line_len: 500
+						max_line_len: 500,
+						ie_proof: false
 					}
 				},
 				files: {
