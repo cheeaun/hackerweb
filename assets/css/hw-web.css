@@ -62,6 +62,12 @@ button{
 	line-height: 44px;
 	height: 44px;
 	color: #fff;
+	position: absolute; /* if position:fixed is not supported */
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	z-index: 3;
 }
 .header-button{
 	position: absolute;
@@ -139,6 +145,7 @@ button{
 .view>.scroll{
 	overflow: hidden;
 	min-height: 85vh;
+	margin-top: 44px;
 }
 .view>.scroll.striped{
 	background-color: #F6F6EF;
@@ -571,5 +578,9 @@ ol.grouped-tableview-links li>a:hover{
 	.view>header{
 		border-top-left-radius: 2px;
 		border-top-right-radius: 2px;
+		position: static;
+	}
+	.view>.scroll{
+		margin-top: 0;
 	}
 }
