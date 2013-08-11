@@ -90,6 +90,7 @@ button{
 	text-decoration: none;
 	border: 0;
 	background-color: rgba(0,0,0,.1);
+	background-image: none; /* Override FxOS's gradient bg */
 	cursor: pointer;
 	border-radius: 2px;
 }
