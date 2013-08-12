@@ -62,7 +62,7 @@
 		request.onsuccess = function(){
 			if (request.result){
 				// Bind all external links to window.open which invokes a system-provided "browser" window
-				ibento('a:not([href^="#"])', 'click', function(e, target){
+				ibento('a[href]:not([href^="#"])', 'click', function(e, target){
 					e.preventDefault();
 					window.open(target.href, 'browser');
 				});
