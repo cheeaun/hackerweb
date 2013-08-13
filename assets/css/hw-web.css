@@ -14,15 +14,14 @@ a:link{
 }
 button{
 	font-family: inherit;
+	outline: 0;
+	background-image: none; /* Override FxOS's gradient bg */
 }
 pre{
 	word-wrap: normal;
 }
 pre, code{
 	font-family: Menlo, Monaco, Inconsolata, Consolas, "Lucida Console", monospace;
-}
-button{
-	outline: 0;
 }
 
 #outdated-browser{
@@ -90,7 +89,6 @@ button{
 	text-decoration: none;
 	border: 0;
 	background-color: rgba(0,0,0,.1);
-	background-image: none; /* Override FxOS's gradient bg */
 	cursor: pointer;
 	border-radius: 2px;
 }
