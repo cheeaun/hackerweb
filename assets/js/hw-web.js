@@ -35,7 +35,8 @@
 			style.id = 'view-height';
 			head.appendChild(style);
 		}
-		style.textContent = '.view>.scroll{min-height: ' + (vh*.85) + 'px}';
+		if (window.innerWidth >= 788) vh *= .85;
+		style.textContent = '.view>.scroll{min-height: ' + vh + 'px}';
 	};
 	w.addEventListener('resize', adjustViewsHeight, false);
 	w.addEventListener('orientationchange', adjustViewsHeight, false);
