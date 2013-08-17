@@ -11,6 +11,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/touch-icon-114.png">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/touch-icon-72.png">
 <link rel="apple-touch-icon-precomposed" href="icons/touch-icon.png">
+<style>body{ visibility: hidden; }</style>
 <script>
 // WP8 Viewport fix: http://trentwalton.com/2013/01/16/windows-phone-8-viewport-fix/
 if (navigator.userAgent.match(/IEMobile\/10\.0/)){
@@ -52,8 +53,10 @@ if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.gi
 
 	var head = d.head || d.getElementsByTagName('head')[0];
 
-	// Use document.write to prevent FOUC
-	d.write('<link rel="stylesheet" href="assets/css/hw-' + theme + '.css">');
+	var link = d.createElement('link');
+	link.rel = 'stylesheet';
+	link.href = 'assets/css/hw-' + theme + '.css';
+	head.insertBefore(link, head.lastChild);
 
 	var script = d.createElement('script');
 	script.src = 'js/hw-' + theme + '.min.js';

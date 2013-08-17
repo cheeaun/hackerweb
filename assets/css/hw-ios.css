@@ -14,6 +14,7 @@ body{
 	position: relative;
 	word-wrap: break-word;
 	-webkit-text-size-adjust: none;
+	visibility: visible;
 }
 #apploader{
 	position: fixed;
