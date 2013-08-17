@@ -38,7 +38,10 @@ if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.gi
 (function(d, ua){
 	var hasLocalStorage = false;
 	try {
-		hasLocalStorage = !!localStorage.getItem;
+		var testKey = '__hackerweb__test';
+		localStorage.setItem(testKey, testKey);
+		localStorage.removeItem(testKey);
+		hasLocalStorage = true;
 	} catch(e) {}
 
 	var theme = 'web';
