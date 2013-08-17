@@ -71,5 +71,5 @@
 		}
 	}
 
-	hw.init();
+	window.onload = hw.init;
 })(window);
