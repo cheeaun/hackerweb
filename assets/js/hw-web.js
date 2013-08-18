@@ -28,14 +28,14 @@
 	// While waiting for viewport units to be more widely supported by modern browsers
 	var head = d.head || d.getElementsByTagName('head')[0];
 	var adjustViewsHeight = function(){
-		var vh = window.innerHeight;
+		var vh = w.innerHeight;
 		var style = $('view-height');
 		if (!style){
 			style = d.createElement('style');
 			style.id = 'view-height';
 			head.appendChild(style);
 		}
-		if (window.innerWidth >= 788) vh *= .85;
+		if (w.innerWidth >= 788) vh *= .85;
 		style.textContent = '.view>.scroll{min-height: ' + vh + 'px}';
 	};
 	w.addEventListener('resize', adjustViewsHeight, false);
