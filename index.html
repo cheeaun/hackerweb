@@ -36,37 +36,6 @@ if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.gi
 	})();
 }
 
-(function(d, ua){
-	var hasLocalStorage = false;
-	try {
-		var testKey = '__hackerweb__test';
-		localStorage.setItem(testKey, testKey);
-		localStorage.removeItem(testKey);
-		hasLocalStorage = true;
-	} catch(e) {}
-
-	var theme = 'web';
-	if (ua && /iPhone|iPod|iPad/.test(ua) && parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) >= 5){
-		theme = 'ios';
-	}
-	if (hasLocalStorage) theme = localStorage['hackerweb:options:theme'] || theme;
-
-	var head = d.head || d.getElementsByTagName('head')[0];
-
-	var link = d.createElement('link');
-	link.rel = 'stylesheet';
-	link.href = 'assets/css/hw-' + theme + '.css';
-	head.insertBefore(link, head.lastChild);
-
-	var script = d.createElement('script');
-	script.src = 'js/hw-' + theme + '.min.js';
-	head.insertBefore(script, head.lastChild);
-
-	if (typeof _gaq != 'undefined') setTimeout(function(){
-		_gaq.push(['_trackEvent', 'App', 'Theme', theme]);
-	}, 2000);
-})(document, navigator.userAgent);
-
 if (window.applicationCache){
 	// "Naturally" reload when an update is available
 	var reload = false;
@@ -164,5 +133,37 @@ if (window.applicationCache){
 		</section>
 	</div>
 </div>
+<script>
+(function(d, ua){
+	var hasLocalStorage = false;
+	try {
+		var testKey = '__hackerweb__test';
+		localStorage.setItem(testKey, testKey);
+		localStorage.removeItem(testKey);
+		hasLocalStorage = true;
+	} catch(e) {}
+
+	var theme = 'web';
+	if (ua && /iPhone|iPod|iPad/.test(ua) && parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) >= 5){
+		theme = 'ios';
+	}
+	if (hasLocalStorage) theme = localStorage['hackerweb:options:theme'] || theme;
+
+	var head = d.head || d.getElementsByTagName('head')[0];
+
+	var link = d.createElement('link');
+	link.rel = 'stylesheet';
+	link.href = 'assets/css/hw-' + theme + '.css';
+	head.insertBefore(link, head.lastChild);
+
+	var script = d.createElement('script');
+	script.src = 'js/hw-' + theme + '.min.js';
+	head.insertBefore(script, head.lastChild);
+
+	if (typeof _gaq != 'undefined') setTimeout(function(){
+		_gaq.push(['_trackEvent', 'App', 'Theme', theme]);
+	}, 2000);
+})(document, navigator.userAgent);
+</script>
 </body>
 </html>
