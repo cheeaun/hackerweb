@@ -5,7 +5,7 @@
 	"manifest_version": 2,
 	"app": {
 		"launch": {
-			"web_url": "http://cheeaun.github.com/hackerweb/"
+			"web_url": "http://cheeaun.github.io/hackerweb/"
 		}
 	},
 	"icons": {
