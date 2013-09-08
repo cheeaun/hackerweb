@@ -64,6 +64,20 @@
 		amplify.store.sessionStorage = amplify.store.memory; // Fallback to in-memory storage
 	}
 
+	var linkElement = d.createElement('a');
+	var domainsCache = {};
+	var domainify = function(url){
+		var domained = domainsCache[url];
+		if (domained) return domained;
+		linkElement.href = url;
+		var domain = linkElement.hostname.replace(/^www\./, '');
+		var pathname = linkElement.pathname.replace(/^\//, '').split('/')[0];
+		var pathnameLen = pathname.length;
+		var firstPath = domain.length <= 25 && pathnameLen > 3 && pathnameLen <= 15 && /^[^0-9][^.]+$/.test(pathname) ? ('/' + pathname) : '';
+		domained = domain + firstPath;
+		return domained;
+	};
+
 	var $homeScroll = d.querySelector('#view-home .scroll'),
 		$homeScrollSection = $homeScroll.querySelector('section'),
 		loadingNews = false;
@@ -77,10 +91,7 @@
 				item.url = '#/item/' + item.id;
 			} else {
 				item.external = true;
-				var a = d.createElement('a');
-				a.href = item.url;
-				item.domain = a.hostname.replace(/^www\./, '');
-				delete a;
+				item.domain = domainify(item.url);
 			}
 			if (!hw.news.options.disclosure){
 				if (item.id) item.url = '#/item/' + item.id;
@@ -288,14 +299,12 @@
 						return;
 					}
 
-					var tmpl2 = tmpl('comments'),
-						a = d.createElement('a');
+					var tmpl2 = tmpl('comments');
 					// If "local" link, link to Hacker News web site
 					if (/^item/i.test(data.url)){
 						data.url = 'http://news.ycombinator.com/' + data.url;
 					} else {
-						a.href = data.url;
-						data.domain = a.hostname.replace(/^www\./, '');
+						data.domain = domainify(data.url);
 					}
 					data.has_comments = data.comments && !!data.comments.length;
 					data.i_point = data.points == 1 ? 'point' : 'points';
