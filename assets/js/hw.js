@@ -338,6 +338,19 @@
 						link.target = '_blank';
 					}
 
+					// Highlight the OP
+					var opUser = data.user;
+					if (opUser){
+						var users = div.querySelectorAll('.user');
+						for (var i=0, l=users.length; i<l; i++){
+							var user = users[i];
+							if (user.textContent.trim() == opUser){
+								user.classList.add('op');
+								user.title = 'Original Poster';
+							}
+						}
+					}
+
 					// 20K chars will be the max to trigger collapsible comments.
 					// I can use number of comments as the condition but some comments
 					// might have too many chars and make the page longer.

@@ -462,9 +462,20 @@ ol.grouped-tableview-links li>a:hover{
 	padding: 0;
 	margin: 0;
 }
-.view section.comments p.metadata b{
+.view section.comments p.metadata .user{
 	float: left;
 	color: #b23914;
+}
+.view section.comments p.metadata .user.op:after{
+	content: 'OP';
+	display: inline-block;
+	font-size: 70%;
+	color: #fff;
+	background-color: #c16143;
+	padding: 3px 4px;
+	line-height: 1;
+	margin-left: 5px;
+	border-radius: 2px;
 }
 .view section.comments p.metadata time{
 	display: block;
