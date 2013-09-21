@@ -15,7 +15,7 @@ module.exports = function(grunt) {
 					sourceMapRoot: '../',
 					beautify: {
 						max_line_len: 500,
-						ie_proof: false
+						screw_ie8: true
 					}
 				},
 				files: {
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
 					sourceMapRoot: '../',
 					beautify: {
 						max_line_len: 500,
-						ie_proof: false
+						screw_ie8: true
 					}
 				},
 				files: {
@@ -100,8 +100,10 @@ module.exports = function(grunt) {
 					port: 80,
 					keepalive: true,
 					hostname: null,
+					debug: true,
 					middleware: function(connect, options){
 						var appcache = grunt.option('appcache');
+						grunt.log.writeln('Application Cache: ' + (appcache ? 'ON' : 'OFF'));
 						return [
 							function(req, res, next){
 								if (req.url == '/manifest.appcache' && !appcache){
@@ -121,7 +123,9 @@ module.exports = function(grunt) {
 		concurrent: {
 			server: {
 				tasks: ['watch', 'connect'],
-				logConcurrentOutput: true
+				options: {
+					logConcurrentOutput: true
+				}
 			}
 		},
 		bumpAppCache: {
