@@ -9,7 +9,10 @@
 			return w.pageYOffset || d.compatMode === 'CSS1Compat' && d.documentElement.scrollTop || 0;
 		},
 		saveScrollTop = function(){
-			scrollTops[location.hash.slice(1)] = getScrollTop();
+			var hash = location.hash.slice(1);
+			var top = scrollTops[hash] = getScrollTop();
+			var key = 'hacker-scrolltop-' + hash;
+			amplify.store.sessionStorage(key, top);
 		};
 	w.addEventListener('scroll', function(){
 		// debouncing scrolls
@@ -19,8 +22,11 @@
 	ruto.config({
 		on: function(){
 			var hash = location.hash.slice(1);
-			w.scrollTo(0, scrollTops[hash] || 0);
-			scrollTops[hash] = getScrollTop();
+			var key = 'hacker-scrolltop-' + hash;
+			var top = amplify.store.sessionStorage(key);
+			w.scrollTo(0, scrollTops[hash] || top || 0);
+			top = scrollTops[hash] = getScrollTop();
+			amplify.store.sessionStorage(key, top);
 		}
 	});
 
