@@ -14,12 +14,14 @@
 				url = data.url || '';
 			if (!requests[url]) return;
 			var r = requests[url];
-			if (data.error){
-				r.error(data.error);
-			} else {
-				r.success(data.response);
-			}
+			var error = r.error;
+			var success = r.success;
 			delete requests[url];
+			if (data.error){
+				error(data.error);
+			} else {
+				success(data.response);
+			}
 		}, false);
 	} catch (e){}
 
