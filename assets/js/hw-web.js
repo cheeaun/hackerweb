@@ -6,7 +6,7 @@
 		scrollTops = {},
 		scrollTimeout,
 		getScrollTop = function(){
-			return w.pageYOffset || d.compatMode === 'CSS1Compat' && d.documentElement.scrollTop || body.scrollTop || 0;
+			return w.pageYOffset || d.compatMode === 'CSS1Compat' && d.documentElement.scrollTop || 0;
 		},
 		saveScrollTop = function(){
 			scrollTops[location.hash.slice(1)] = getScrollTop();
