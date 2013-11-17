@@ -20,11 +20,17 @@ if (navigator.userAgent.match(/IEMobile\/10\.0/)){
 	document.getElementsByTagName('head')[0].appendChild(msViewportStyle);
 }
 </script>
-<script src="//d3nslu0hdya83q.cloudfront.net/dist/1.0/raven.min.js"></script>
 <script>
 var _gaq = [];
+var RavenConfig = { dsn: 'https://ba1fa9e133f64714b762e2d8d46a0c63@app.getsentry.com/6152' };
+
 if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.github.com' || location.hostname == 'app.hackerwebapp.com'){
-	Raven.config('https://ba1fa9e133f64714b762e2d8d46a0c63@app.getsentry.com/6152').install();
+
+	var ra = document.createElement('script');
+	ra.type = 'text/javascript'; ra.async = true;
+	ra.src = '//cdn.ravenjs.com/1.1.0/native/raven.min.js';
+	var s0 = document.getElementsByTagName('script')[0];
+	s0.parentNode.insertBefore(ra, s0);
 
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-36575624-2']);
