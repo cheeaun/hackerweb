@@ -58,6 +58,33 @@ module.exports = function(grunt) {
 						'assets/js/hw-ios.js'
 					]
 				}
+			},
+			ios2: {
+				options: {
+					sourceMap: 'js/hw-ios-2.min.js.map',
+					sourceMappingURL: function(path){
+						return path.replace(/^js\//i, '') + '.map';
+					},
+					sourceMapRoot: '../',
+					beautify: {
+						max_line_len: 500,
+						screw_ie8: true
+					}
+				},
+				files: {
+					'js/hw-ios-2.min.js': [
+						'assets/js/libs/ruto.js',
+						'assets/js/libs/amplify.store.js',
+						'assets/js/libs/hogan.js',
+						'assets/js/libs/hnapi.js',
+						'assets/js/libs/tappable.js',
+						'assets/js/libs/tween.js',
+						'assets/js/libs/requestanimationframe.js',
+						'assets/js/templates.js',
+						'assets/js/hw.js',
+						'assets/js/hw-ios-2.js'
+					]
+				}
 			}
 		},
 		jshint: {

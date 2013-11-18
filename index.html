@@ -108,7 +108,7 @@ if (window.applicationCache){
 <div class="view hidden" id="view-comments">
 	<header>
 		<a href="#/" class="header-button header-button-left header-back-button"><button>News</button></a>
-		<h1 style="margin: 0 65px;"></h1>
+		<h1 style="margin: 0 75px;"></h1>
 	</header>
 	<div class="scroll">
 		<section>
@@ -150,8 +150,13 @@ if (window.applicationCache){
 	} catch(e) {}
 
 	var theme = 'web';
-	if (ua && /iPhone|iPod|iPad/.test(ua) && parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10) >= 5){
-		theme = 'ios';
+	if (ua && /iPhone|iPod|iPad/.test(ua)){
+		var version = parseInt((ua.match(/ OS (\d+)_/i) || [,0])[1], 10);
+		if (version >= 7){
+			theme = 'ios-2';
+		} else if (version >= 5){
+			theme = 'ios';
+		}
 	}
 	if (hasLocalStorage) theme = localStorage['hackerweb:options:theme'] || theme;
 

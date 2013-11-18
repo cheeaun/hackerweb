@@ -10,7 +10,7 @@
 			</h1>
 			<p class="metadata">
 				{{#user}}
-					<span class="inline-block">{{points}} {{i_point}} by {{user}}</span> 
+					<span class="inline-block">{{points}} {{i_point}} by {{user}}</span>
 					<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} {{i_comment}}{{/comments_count}}</span>
 				{{/user}}
 				{{^user}}
@@ -38,7 +38,7 @@
 </div>
 <section class="comments">
 	{{#loading}}
-		<div class="loader">Loading&hellip;</div>
+		<div class="loader"><i class="icon-loading"></i> Loading&hellip;</div>
 	{{/loading}}
 	{{#load_error}}
 		<div class="load-error">Couldn't load comments.<br><button>Try again</button></div>

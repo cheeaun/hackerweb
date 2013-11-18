@@ -105,7 +105,7 @@
 			var hideAllViews = hw.hideAllViews;
 			var view = $('view-' + name);
 			hw.setTitle(view.querySelector('header h1').textContent);
-			
+
 			switch (name){
 				case 'home':
 					if (!isWideScreen){
@@ -210,7 +210,7 @@
 	};
 	w.addEventListener('pageshow', restoreScrollTops, false);
 	restoreScrollTops();
-	
+
 	// Instantly hide address bar when start tapping the scroll area
 	if (isIPhoneIPod){
 		var $viewSections = d.querySelectorAll('.view>.scroll'),
@@ -360,7 +360,7 @@
 	tappable('section.comments li>a.more-link', function(e, target){
 		hw.comments.more(target);
 	});
-	
+
 	tappable('#view-comments .load-error button', hw.comments.reload);
 
 	hw.sub('selectCurrentStory', function(id){
@@ -416,7 +416,7 @@
 	});
 	w.addEventListener('resize', adjustCommentsSection, false);
 	w.addEventListener('orientationchange', adjustCommentsSection, false);
-	
+
 	// Some useful tips from http://24ways.org/2011/raising-the-bar-on-mobile
 	var supportOrientation = typeof w.orientation != 'undefined',
 		getScrollTop = function(){

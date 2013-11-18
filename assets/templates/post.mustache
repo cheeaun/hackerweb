@@ -1,12 +1,12 @@
 <li id="story-{{id}}" data-index="{{i}}" class="post-{{type}}">
 	<a href="{{url}}" class="{{#detail_disclosure}}detail-disclosure{{/detail_disclosure}}{{#disclosure}}disclosure{{/disclosure}} {{#selected}}selected{{/selected}}">
-		<div class="number">{{i}}.</div>
+		<div class="number">{{i}}</div>
 		<div class="story">
 			<b>{{title}}</b>
 			{{#user}}
 				<span class="metadata">
 					{{#domain}}<span class="link-text">{{domain}}</span><br>{{/domain}}
-					<span class="inline-block">{{points}} {{i_point}} by {{user}}</span> 
+					<span class="inline-block">{{points}} {{i_point}} by {{user}}</span>
 					<span class="inline-block">{{time_ago}}{{#comments_count}} &middot; {{comments_count}} {{i_comment}}{{/comments_count}}</span>
 				</span>
 			{{/user}}
