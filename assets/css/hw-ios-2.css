@@ -119,13 +119,18 @@ i.icon-loading{
 	max-height: 45px;
 	line-height: 45px;
 	background-color: #f8f8f8;
-	background-image: -webkit-linear-gradient(bottom, #c6c6c6, #c6c6c6 50%, transparent 50%);
-	background-image: linear-gradient(bottom, #c6c6c6, #c6c6c6 50%, transparent 50%);
+	background-image: -webkit-linear-gradient(bottom, #b2b2b2, #b2b2b2 50%, transparent 50%);
+	background-image: linear-gradient(bottom, #b2b2b2, #b2b2b2 50%, transparent 50%);
 	background-position: bottom;
 	background-repeat: repeat-x;
 	background-size: 1px 2px;
 	-webkit-user-select: none;
 	-webkit-touch-callout: none;
+}
+.view.shaded>header{
+	background-color: #f6f6f7;
+	background-image: -webkit-linear-gradient(bottom, #a7a7aa, #a7a7aa 50%, transparent 50%);
+	background-image: linear-gradient(bottom, #a7a7aa, #a7a7aa 50%, transparent 50%);
 }
 
 .view>header .header-button{
@@ -197,11 +202,11 @@ i.icon-loading{
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 }
-.view>.scroll.striped{
+.view.shaded>.scroll{
 	background-color: #efeff4;
 }
 .view>.scroll .loader{
-	padding: 50px 0;
+	padding: 100px 0 50px;
 	-webkit-user-select: none;
 	pointer-events: none;
 	text-align: center;
@@ -209,10 +214,6 @@ i.icon-loading{
 	font-size: 17px;
 	font-weight: normal;
 	font: -apple-system-body;
-}
-
-#view-comments>.scroll{
-	background-color: #efeff4;
 }
 
 .tableview{
@@ -224,8 +225,8 @@ i.icon-loading{
 }
 .tableview li{
 	display: block;
-	background-image: -webkit-linear-gradient(bottom, #bfbfbf, #bfbfbf 50%, transparent 50%);
-	background-image: linear-gradient(bottom, #bfbfbf, #bfbfbf 50%, transparent 50%);
+	background-image: -webkit-linear-gradient(bottom, #c8c7cc, #c8c7cc 50%, transparent 50%);
+	background-image: linear-gradient(bottom, #c8c7cc, #c8c7cc 50%, transparent 50%);
 	background-position: 15px bottom;
 	background-repeat: no-repeat;
 	background-size: 100% 2px;
@@ -253,7 +254,7 @@ i.icon-loading{
 	text-align: center;
 	min-width: 2.5ex;
 	padding-right: 10px;
-	color: #999;
+	color: #8e8e93;
 }
 .tableview-links li>a .story{
 	-webkit-flex-grow: 1;
@@ -331,12 +332,21 @@ i.icon-loading{
 	padding: 20px 20px 20px calc(25px + 2.5ex);
 	-webkit-flex-grow: 1;
 	flex-grow: 1;
+	display: -webkit-flex;
+	display: flex;
 }
 .tableview-links li>a.more-link:before{
 	content: none !important;
 }
 .tableview-links li>a.more-link .loader{
 	display: none;
+	padding: 0;
+	text-align: right;
+	-webkit-flex-grow: 1;
+	flex-grow: 1;
+}
+.tableview-links li>a.more-link.loading .loader{
+	display: block;
 }
 
 .grouped-tableview{
@@ -521,8 +531,8 @@ ol.grouped-tableview-links li>a.tappable-active{
 	font-size: 13px;
 	font: -apple-system-footnote;
 	line-height: 1.4em;
-	background-image: -webkit-linear-gradient(top, #b4b4b4, #b4b4b4 50%, transparent 50%), -webkit-linear-gradient(bottom, #b4b4b4, #b4b4b4 50%, transparent 50%);
-	background-image: linear-gradient(top, #b4b4b4, #b4b4b4 50%, transparent 50%), linear-gradient(bottom, #b4b4b4, #b4b4b4 50%, transparent 50%);
+	background-image: -webkit-linear-gradient(top, #c8c7cc, #c8c7cc 50%, transparent 50%), -webkit-linear-gradient(bottom, #c8c7cc, #c8c7cc 50%, transparent 50%);
+	background-image: linear-gradient(top, #c8c7cc, #c8c7cc 50%, transparent 50%), linear-gradient(bottom, #c8c7cc, #c8c7cc 50%, transparent 50%);
 	background-position: top, bottom;
 	background-repeat: repeat-x;
 	background-size: 1px 2px;
@@ -579,9 +589,6 @@ ol.grouped-tableview-links li>a.tappable-active{
 .view section.comments p.metadata time a{
 	color: #8e8e93;
 }
-.view section.comments p.metadata time a:hover{
-	text-decoration: underline;
-}
 .view .post-content header .metadata a.external-link{
 	color: #8e8e93;
 	text-decoration: none;
@@ -622,6 +629,9 @@ ol.grouped-tableview-links li>a.tappable-active{
 	color: #8e8e93;
 	font-size: 17px;
 	font: -apple-system-body;
+}
+.view section.comments .loader{
+	padding-top: 50px;
 }
 
 .foot-label{

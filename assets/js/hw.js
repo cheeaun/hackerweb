@@ -178,7 +178,7 @@
 				var data = _data.slice();
 				var html = '<ul class="tableview tableview-links" id="hwlist">'
 					+ hw.news.markupStories(data)
-					+ (amplify.store('hacker-news2') ? '<li><a class="more-link">More&hellip;<span class="loader"></span></a></li>' : '')
+					+ (amplify.store('hacker-news2') ? '<li><a class="more-link">More&hellip;<span class="loader"><i class="icon-loading"></i></span></a></li>' : '')
 					+ '</ul>';
 				$homeScrollSection.innerHTML = html;
 				hw.pub('onRenderNews');
