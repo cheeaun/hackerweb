@@ -11,18 +11,21 @@
 
 /*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js*/
 
-if (typeof document !== "undefined" && !("classList" in document.createElement("a"))) {
+if ("document" in self && !(
+		"classList" in document.createElement("_") &&
+		"classList" in document.createElementNS("http://www.w3.org/2000/svg", "svg")
+	)) {
 
 (function (view) {
 
 "use strict";
 
-if (!('HTMLElement' in view) && !('Element' in view)) return;
+if (!('Element' in view)) return;
 
 var
 	  classListProp = "classList"
 	, protoProp = "prototype"
-	, elemCtrProto = (view.HTMLElement || view.Element)[protoProp]
+	, elemCtrProto = view.Element[protoProp]
 	, objCtr = Object
 	, strTrim = String[protoProp].trim || function () {
 		return this.replace(/^\s+|\s+$/g, "");
@@ -62,7 +65,7 @@ var
 	}
 	, ClassList = function (elem) {
 		var
-			  trimmedClasses = strTrim.call(elem.className)
+			  trimmedClasses = strTrim.call(elem.getAttribute("class"))
 			, classes = trimmedClasses ? trimmedClasses.split(/\s+/) : []
 			, i = 0
 			, len = classes.length
@@ -71,7 +74,7 @@ var
 			this.push(classes[i]);
 		}
 		this._updateClassName = function () {
-			elem.className = this.toString();
+			elem.setAttribute("class", this.toString());
 		};
 	}
 	, classListProto = ClassList[protoProp] = []
