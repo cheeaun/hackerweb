@@ -219,6 +219,42 @@
 		onTap: hw.news.reload
 	});
 
+	var scrollingToTop = false;
+	tappable('.view>header h1', {
+		onTap: function(e, target){
+			var section = target.parentNode.nextElementSibling.firstElementChild;
+			if (section.scrollTop == 0 || scrollingToTop) return;
+			// Scroll the section to top
+			// Reset the overflow because the momentum ignores scrollTop setting
+			if (scrollingToTop) return;
+			scrollingToTop = true;
+			var originalOverflow = section.style.overflow;
+			section.style.overflow = 'hidden';
+			setTimeout(function(){
+				section.style.overflow = originalOverflow;
+				var raf;
+				var tween = new TWEEN.Tween({scrollTop: section.scrollTop})
+					.to({scrollTop: 0}, 300)
+					.easing(TWEEN.Easing.Cubic.InOut)
+					.onUpdate(function(){
+						section.scrollTop = this.scrollTop;
+					})
+					.onComplete(function(){
+						cancelAnimationFrame(raf);
+						tween.stop(); // Removes the tween object
+						scrollingToTop = false;
+						delete tween;
+					})
+					.start();
+				var step = function(){
+					TWEEN.update();
+					requestAnimationFrame(step);
+				};
+				raf = requestAnimationFrame(step);
+			}, 200);
+		}
+	});
+
 	// iPad-specific code for selected items in the list
 	// When you tap on an item and drag, selected item will be deselected
 	// When drag is done, previous selected item will be re-selected
