@@ -90,6 +90,17 @@
 	// Inject some elements for additional iOS decorations
 	if (isWideScreen) body.insertAdjacentHTML('beforeend', '<div id="overlay" class="hide"></div>');
 
+	// Detect if swiping from screen edges to navigate back/forward
+	var swipeNav = false;
+	document.addEventListener('touchstart', function(e){
+		var touch = e.targetTouches[0];
+		var x = touch.clientX;
+		if (x < 10 || x > window.innerWidth-10) swipeNav = true;
+	});
+	document.addEventListener('touchend', function(e){
+		swipeNav = false;
+	});
+
 	ruto.config({
 		before: function(path, name, matches){
 			var previousView = hw.previousView = hw.currentView;
@@ -101,13 +112,13 @@
 			switch (currentView){
 				case 'home':
 					if (!isWideScreen){
-						if (previousView == 'comments'){
+						if (previousView == 'comments' && !swipeNav){
 							slide({
 								'in': view,
 								out: $('view-' + previousView),
 								direction: 'ltr'
 							});
-						} else if (previousView == 'about'){
+						} else if (previousView == 'about' && !swipeNav){
 							pop({
 								'in': view,
 								out: $('view-' + previousView),
@@ -132,7 +143,7 @@
 					break;
 				case 'about':
 					if (!isWideScreen){
-						if (previousView == 'home'){
+						if (previousView == 'home' && !swipeNav){
 							pop({
 								'in': view,
 								out: $('view-' + previousView),
@@ -155,7 +166,7 @@
 					break;
 				case 'comments':
 					if (!isWideScreen){
-						if (previousView == 'home'){
+						if (previousView == 'home' && !swipeNav){
 							var id = matches[1];
 							if (id && hw.comments.currentID != id) view.querySelector('section').scrollTop = 0;
 							slide({
