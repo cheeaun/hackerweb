@@ -261,147 +261,147 @@
 			hw.comments.currentID = id;
 
 			var loadComments = function(_data, id){
-					if (!_data || _data.error) return;
-					var data = clone(_data);
-					amplify.store.sessionStorage('hacker-comments-' + id, data);
-					var ul = $commentsSection.querySelector('.comments>ul');
-					if (!ul.querySelector('.more-link-container')){
-						ul.insertAdjacentHTML('beforeend', '<li class="more-link-container"><a class="more-link" data-id="' + id + '">More&hellip;</a></li>');
-					}
-					if (!data.more_comments_id) return;
+				if (!_data || _data.error) return;
+				var data = clone(_data);
+				amplify.store.sessionStorage('hacker-comments-' + id, data);
+				var ul = $commentsSection.querySelector('.comments>ul');
+				if (!ul.querySelector('.more-link-container')){
+					ul.insertAdjacentHTML('beforeend', '<li class="more-link-container"><a class="more-link" data-id="' + id + '">More&hellip;</a></li>');
+				}
+				if (!data.more_comments_id) return;
 
-					// Preload all 'More' comments
-					var loadMoreComments = function(id){
-						var comments = amplify.store.sessionStorage('hacker-comments-' + id);
-						if (!comments){
-							hnapi.comments(id, function(data){
-								if (!data || data.error) return;
-								amplify.store.sessionStorage('hacker-comments-' + id, data);
-								if (data.more_comments_id) loadMoreComments(data.more_comments_id);
-							});
-						} else {
-							if (comments.more_comments_id) loadMoreComments(comments.more_comments_id);
-						}
-					};
-					loadMoreComments(data.more_comments_id);
-				},
-				loadPost = function(_data, id){
-					var data = clone(_data),
-						tmpl1 = tmpl('post-comments');
-
-					data.has_post = !!data.title;
-					if (!data.has_post){
-						hw.setTitle();
-						$commentsHeading.innerHTML = '';
-						$commentsSection.innerHTML = tmpl1.render(data);
-						hw.pub('adjustCommentsSection');
-						hw.pub('onRenderComments');
-						return;
-					}
-
-					var tmpl2 = tmpl('comments');
-					// If "local" link, link to Hacker News web site
-					if (/^item/i.test(data.url)){
-						data.url = 'http://news.ycombinator.com/' + data.url;
+				// Preload all 'More' comments
+				var loadMoreComments = function(id){
+					var comments = amplify.store.sessionStorage('hacker-comments-' + id);
+					if (!comments){
+						hnapi.comments(id, function(data){
+							if (!data || data.error) return;
+							amplify.store.sessionStorage('hacker-comments-' + id, data);
+							if (data.more_comments_id) loadMoreComments(data.more_comments_id);
+						});
 					} else {
-						data.domain = domainify(data.url);
+						if (comments.more_comments_id) loadMoreComments(comments.more_comments_id);
 					}
-					data.has_comments = data.comments && !!data.comments.length;
-					data.i_point = data.points == 1 ? 'point' : 'points';
-					data.i_comment = data.comments_count == 1 ? 'comment' : 'comments';
-					data.has_content = !!data.content;
-					if (data.poll){
-						var total = 0;
-						var max = 0;
-						data.poll.forEach(function(p){
-							var points = p.points;
-							if (points > max) max = points;
-							total += points;
-							p.i_point = points == 1 ? 'point' : 'points';
-						});
-						data.poll.forEach(function(p){
-							var points = p.points;
-							p.percentage = (points/total*100).toFixed(1);
-							p.width = (points/max*100).toFixed(1) + '%';
-						});
-						data.has_poll = data.has_content = true;
-					}
-					data.short_hn_url = 'news.ycombinator.com/item?id=' + id;
-					data.hn_url = 'http://' + data.short_hn_url;
-					hw.setTitle(data.title);
-					$commentsHeading.innerHTML = data.title;
-
-					var html = tmpl1.render(data, {comments_list: tmpl2});
-					var div = d.createElement('div');
-					div.innerHTML = html;
-
-					// Make all links open in new tab/window
-					// If it's a comment permalink, link to HN
-					var links = div.querySelectorAll('a');
-					for (var i=0, l=links.length; i<l; i++){
-						var link = links[i];
-						if (link.classList.contains('comment-permalink')){
-							var id = link.dataset ? link.dataset.id : link.getAttribute('data-id');
-							link.href = 'http://news.ycombinator.com/item?id=' + id;
-						}
-						link.target = '_blank';
-					}
-
-					// Highlight the OP
-					var opUser = data.user;
-					if (opUser){
-						var users = div.querySelectorAll('.user');
-						for (var i=0, l=users.length; i<l; i++){
-							var user = users[i];
-							if (user.textContent.trim() == opUser){
-								user.classList.add('op');
-								user.title = 'Original Poster';
-							}
-						}
-					}
-
-					// 20K chars will be the max to trigger collapsible comments.
-					// I can use number of comments as the condition but some comments
-					// might have too many chars and make the page longer.
-					if (html.length > 20000){
-						var subUls = div.querySelectorAll('.comments>ul>li>ul');
-						var tmpl3 = tmpl('comments-toggle');
-						for (var j=0, l=subUls.length; j<l; j++){
-							var subUl = subUls[j],
-								commentsCount = subUl.querySelectorAll('.metadata').length;
-							subUl.style.display = 'none';
-							if (commentsCount){
-								subUl.insertAdjacentHTML('beforebegin', tmpl3.render({
-									comments_count: commentsCount,
-									i_reply: commentsCount == 1 ? 'reply' : 'replies'
-								}));
-							}
-						}
-					}
-
-					while ($commentsSection.hasChildNodes()){
-						$commentsSection.removeChild($commentsSection.childNodes[0]);
-					}
-					while (div.hasChildNodes()){
-						$commentsSection.appendChild(div.childNodes[0]);
-					}
-					delete div;
-
-					// Grab 'More' comments
-					if (data.more_comments_id){
-						var id = data.more_comments_id;
-						var comments = amplify.store.sessionStorage('hacker-comments-' + id);
-						if (comments){
-							loadComments(comments, id);
-						} else {
-							hnapi.comments(id, function(data){
-								loadComments(data, id);
-							});
-						}
-					}
-
-					hw.pub('onRenderComments');
 				};
+				loadMoreComments(data.more_comments_id);
+			};
+			var loadPost = function(_data, id){
+				var data = clone(_data),
+					tmpl1 = tmpl('post-comments');
+
+				data.has_post = !!data.title;
+				if (!data.has_post){
+					hw.setTitle();
+					$commentsHeading.innerHTML = '';
+					$commentsSection.innerHTML = tmpl1.render(data);
+					hw.pub('adjustCommentsSection');
+					hw.pub('onRenderComments');
+					return;
+				}
+
+				var tmpl2 = tmpl('comments');
+				// If "local" link, link to Hacker News web site
+				if (/^item/i.test(data.url)){
+					data.url = 'http://news.ycombinator.com/' + data.url;
+				} else {
+					data.domain = domainify(data.url);
+				}
+				data.has_comments = data.comments && !!data.comments.length;
+				data.i_point = data.points == 1 ? 'point' : 'points';
+				data.i_comment = data.comments_count == 1 ? 'comment' : 'comments';
+				data.has_content = !!data.content;
+				if (data.poll){
+					var total = 0;
+					var max = 0;
+					data.poll.forEach(function(p){
+						var points = p.points;
+						if (points > max) max = points;
+						total += points;
+						p.i_point = points == 1 ? 'point' : 'points';
+					});
+					data.poll.forEach(function(p){
+						var points = p.points;
+						p.percentage = (points/total*100).toFixed(1);
+						p.width = (points/max*100).toFixed(1) + '%';
+					});
+					data.has_poll = data.has_content = true;
+				}
+				data.short_hn_url = 'news.ycombinator.com/item?id=' + id;
+				data.hn_url = 'http://' + data.short_hn_url;
+				hw.setTitle(data.title);
+				$commentsHeading.innerHTML = data.title;
+
+				var html = tmpl1.render(data, {comments_list: tmpl2});
+				var div = d.createElement('div');
+				div.innerHTML = html;
+
+				// Make all links open in new tab/window
+				// If it's a comment permalink, link to HN
+				var links = div.querySelectorAll('a');
+				for (var i=0, l=links.length; i<l; i++){
+					var link = links[i];
+					if (link.classList.contains('comment-permalink')){
+						var id = link.dataset ? link.dataset.id : link.getAttribute('data-id');
+						link.href = 'http://news.ycombinator.com/item?id=' + id;
+					}
+					link.target = '_blank';
+				}
+
+				// Highlight the OP
+				var opUser = data.user;
+				if (opUser){
+					var users = div.querySelectorAll('.user');
+					for (var i=0, l=users.length; i<l; i++){
+						var user = users[i];
+						if (user.textContent.trim() == opUser){
+							user.classList.add('op');
+							user.title = 'Original Poster';
+						}
+					}
+				}
+
+				// 20K chars will be the max to trigger collapsible comments.
+				// I can use number of comments as the condition but some comments
+				// might have too many chars and make the page longer.
+				if (html.length > 20000){
+					var subUls = div.querySelectorAll('.comments>ul>li>ul');
+					var tmpl3 = tmpl('comments-toggle');
+					for (var j=0, l=subUls.length; j<l; j++){
+						var subUl = subUls[j],
+							commentsCount = subUl.querySelectorAll('.metadata').length;
+						subUl.style.display = 'none';
+						if (commentsCount){
+							subUl.insertAdjacentHTML('beforebegin', tmpl3.render({
+								comments_count: commentsCount,
+								i_reply: commentsCount == 1 ? 'reply' : 'replies'
+							}));
+						}
+					}
+				}
+
+				while ($commentsSection.hasChildNodes()){
+					$commentsSection.removeChild($commentsSection.childNodes[0]);
+				}
+				while (div.hasChildNodes()){
+					$commentsSection.appendChild(div.childNodes[0]);
+				}
+				delete div;
+
+				// Grab 'More' comments
+				if (data.more_comments_id){
+					var id = data.more_comments_id;
+					var comments = amplify.store.sessionStorage('hacker-comments-' + id);
+					if (comments){
+						loadComments(comments, id);
+					} else {
+						hnapi.comments(id, function(data){
+							loadComments(data, id);
+						});
+					}
+				}
+
+				hw.pub('onRenderComments');
+			};
 
 			if (post){
 				$commentsSection.scrollTop = 0;
