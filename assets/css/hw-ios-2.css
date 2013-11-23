@@ -205,10 +205,10 @@ i.icon-loading{
 .view.shaded>.scroll{
 	background-color: #efeff4;
 }
-.view>.scroll .loader{
+.view>.scroll .loader,
+.view>.scroll .load-error{
 	padding: 100px 0 50px;
 	-webkit-user-select: none;
-	pointer-events: none;
 	text-align: center;
 	color: #8e8e93;
 	font-size: 17px;
@@ -622,6 +622,19 @@ ol.grouped-tableview-links li>a.tappable-active{
 	color: #fff;
 	background-color: #848484;
 }
+.view section.comments li.more-link-container{
+	padding: 0;
+}
+.view section.comments li>a.more-link{
+	display: block;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	padding: 20px;
+	color: #000;
+}
+.view section.comments li>a.more-link.tappable-active{
+	background-color: #d9d9d9;
+}
 .view section.comments p.no-comments{
 	text-align: center;
 	padding: 50px 0;
@@ -630,8 +643,25 @@ ol.grouped-tableview-links li>a.tappable-active{
 	font-size: 17px;
 	font: -apple-system-body;
 }
-.view section.comments .loader{
+.view section.comments .loader,
+.view section.comments .load-error{
 	padding-top: 50px;
+}
+
+.view section.comments .load-error button{
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	font-size: inherit;
+	color: #007aff;
+	background-color: transparent;
+	outline: 0;
+}
+.view section.comments .load-error button.tappable-active{
+	opacity: .205;
 }
 
 .foot-label{
