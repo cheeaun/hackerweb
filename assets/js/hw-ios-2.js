@@ -318,6 +318,7 @@
 		noScroll: true,
 		noScrollDelay: 100,
 		onTap: function(e, target){
+			if (hw.currentView == 'comments') return;
 			location.hash = target.hash;
 		}
 	});
