@@ -246,7 +246,7 @@ i.icon-loading{
 	box-sizing: border-box;
 }
 .tableview-links li>a:visited{
-	color: #666;
+	color: #8e8e93;
 }
 .tableview-links li>a .number{
 	text-align: center;
@@ -260,7 +260,6 @@ i.icon-loading{
 }
 .tableview-links li>a .story>b{
 	font-weight: normal;
-	color: #000;
 }
 .tableview-links li>a .metadata{
 	margin-top: 1px;
