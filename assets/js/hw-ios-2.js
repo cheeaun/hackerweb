@@ -95,7 +95,7 @@
 	document.addEventListener('touchstart', function(e){
 		var touch = e.targetTouches[0];
 		var x = touch.clientX;
-		if (x < 10 || x > window.innerWidth-10) swipeNav = true;
+		if (x < 20 || x > window.innerWidth-20) swipeNav = true;
 	});
 	document.addEventListener('touchend', function(e){
 		swipeNav = false;
