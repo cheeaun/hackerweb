@@ -544,10 +544,14 @@ ol.grouped-tableview-links li>a.tappable-active{
 }
 .view section.comments ul li{
 	padding: 15px;
-	border-bottom: 1px solid #ddd;
+	background-image: -webkit-linear-gradient(top, #c8c7cc, #c8c7cc 50%, transparent 50%);
+	background-image: linear-gradient(top, #c8c7cc, #c8c7cc 50%, transparent 50%);
+	background-position: top;
+	background-repeat: repeat-x;
+	background-size: 1px 2px;
 }
-.view section.comments ul>li:last-child{
-	border-bottom: 0;
+.view section.comments>ul>li:first-child{
+	background-image: none;
 }
 .view section.comments ul ul li{
 	padding: 0 0 0 14px;
