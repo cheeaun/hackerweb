@@ -10,6 +10,7 @@ body{
 	padding: 0;
 	background-color: #fff;
 	word-wrap: break-word;
+	overflow-wrap: break-word;
 	-webkit-text-size-adjust: none;
 	visibility: visible;
 	overflow: hidden;
@@ -23,6 +24,7 @@ a{
 
 pre{
 	word-wrap: normal;
+	overflow-wrap: normal;
 	line-height: 1.2em;
 }
 pre, code{
