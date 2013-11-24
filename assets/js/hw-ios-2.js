@@ -203,11 +203,10 @@
 	}, false);
 	var restoreScrollTops = function(){
 		var hackerScrollTops = amplify.store('hacker-scrolltops');
-		setTimeout(function(){
-			for (var id in hackerScrollTops){
-				$(id).querySelector('.scroll section').scrollTop = hackerScrollTops[id];
-			}
-		}, 1);
+		for (var id in hackerScrollTops){
+			var section = $(id).querySelector('.scroll section');
+			section.scrollTop = hackerScrollTops[id];
+		}
 	};
 	w.addEventListener('pageshow', restoreScrollTops, false);
 	restoreScrollTops();
@@ -385,14 +384,14 @@
 		// }
 		// if (supportOrientation) w.onorientationchange = scrollTop;
 
-		// setTimeout(function(){
-		// 	var loader = $('apploader');
-		// 	if (!loader) return;
-		// 	loader.classList.add('hide');
-		// 	loader.addEventListener('webkitTransitionEnd', function(){
-		// 		loader.parentNode.removeChild(loader);
-		// 	}, false);
-		// }, 200);
+		setTimeout(function(){
+			var loader = $('apploader');
+			if (!loader) return;
+			loader.classList.add('hide');
+			prefixedAddEvent(loader, 'TransitionEnd', function(){
+				loader.parentNode.removeChild(loader);
+			});
+		}, 200);
 	} else {
 		var loader = $('apploader');
 		loader.parentNode.removeChild(loader);
