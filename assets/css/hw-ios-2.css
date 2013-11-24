@@ -102,11 +102,7 @@ i.icon-loading{
 	bottom: 0;
 	overflow: hidden;
 	z-index: 2;
-/*	display: -webkit-flex;
-	display: flex;
-	-webkit-flex-direction: column;
-	flex-direction: column;
-*/}
+}
 .view.hidden{
 	-webkit-transform: translate3d(-100%, -100%, 0);
 	transform: translate3d(-100%, -100%, 0);
@@ -933,28 +929,19 @@ ol.grouped-tableview-links li>a.tappable-active{
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
-	.view>header{
+	.view>header,
+	.tableview-links li:not(:first-child)>a:first-child:before,
+	.grouped-tableview,
+	ul.grouped-tableview-links:before,
+	ol.grouped-tableview-links:before,
+	.view section.comments,
+	.view section.comments ul li{
 		background-size: 1px 1px;
 	}
-	.tableview li{
-		background-size: 100% 1px;
-	}
-	.tableview-links li:not(:first-child)>a:first-child:before{
-		background-size: 1px 1px;
-	}
-	.grouped-tableview{
-		background-size: 1px 1px;
-	}
+	.tableview li,
 	ul.grouped-tableview li,
 	ol.grouped-tableview li{
 		background-size: 100% 1px;
-	}
-	ul.grouped-tableview-links:before,
-	ol.grouped-tableview-links:before{
-		background-size: 1px 1px;
-	}
-	.view section.comments{
-		background-size: 1px 1px;
 	}
 	.view section.comments button.comments-toggle{
 		border: 0;
