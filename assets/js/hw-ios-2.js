@@ -377,13 +377,6 @@
 			}, 1);
 		};
 	if (!isWideScreen){
-		// if (d.readyState == 'complete'){
-		// 	scrollTop();
-		// } else {
-		// 	w.addEventListener('load', scrollTop, false);
-		// }
-		// if (supportOrientation) w.onorientationchange = scrollTop;
-
 		setTimeout(function(){
 			var loader = $('apploader');
 			if (!loader) return;
