@@ -128,23 +128,25 @@ i.icon-loading{
 }
 
 .view>header{
-	height: 45px;
-	min-height: 45px;
-	max-height: 45px;
-	line-height: 45px;
+	height: 44px;
+	min-height: 44px;
+	max-height: 44px;
+	line-height: 44px;
 	background-color: #f8f8f8;
-	background-image: -webkit-linear-gradient(bottom, #b2b2b2, #b2b2b2 50%, transparent 50%);
-	background-image: linear-gradient(bottom, #b2b2b2, #b2b2b2 50%, transparent 50%);
-	background-position: bottom;
-	background-repeat: repeat-x;
-	background-size: 1px 2px;
 	-webkit-user-select: none;
 	-webkit-touch-callout: none;
 }
+.view:after{
+	content: '';
+	position: absolute;
+	top: 44px;
+	width: 100%;
+	height: 1px;
+	background-color: rgba(0,0,0,.3);
+	z-index: 3;
+}
 .view.shaded>header{
 	background-color: #f6f6f7;
-	background-image: -webkit-linear-gradient(bottom, #a7a7aa, #a7a7aa 50%, transparent 50%);
-	background-image: linear-gradient(bottom, #a7a7aa, #a7a7aa 50%, transparent 50%);
 }
 
 .view>header .header-button{
@@ -207,7 +209,7 @@ i.icon-loading{
 }
 
 .view>.scroll{
-	height: calc(100% - 45px);
+	height: calc(100% - 44px);
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 }
@@ -735,7 +737,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	background-position: right;
 	background-repeat: repeat-y;
 	position: absolute;
-	top: 45px;
+	top: 44px;
 	left: 0;
 	width: 100%;
 	height: 100%;
@@ -745,6 +747,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 
 .view,
 .view:before,
+.view:after,
 .view>.scroll,
 .view>header,
 .view>header h1,
@@ -784,6 +787,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	-webkit-animation-name: slideinfromright;
 	animation-name: slideinfromright;
 }
+.slide-in-from-right:after,
 .slide-in-from-right>header{
 	-webkit-animation-name: fadein;
 	animation-name: fadein;
@@ -818,6 +822,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	-webkit-animation-name: slideouttoright;
 	animation-name: slideouttoright;
 }
+.slide-out-to-right:after,
 .slide-out-to-right>header{
 	-webkit-animation-name: fadeout;
 	animation-name: fadeout;
@@ -950,7 +955,13 @@ ol.grouped-tableview-links li>a.tappable-active{
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
-	.view>header,
+	.view:after{
+		width: 200%;
+		-webkit-transform: scale(.5);
+		transform: scale(.5);
+		-webkit-transform-origin: 0 0;
+		transform-origin: 0 0;
+	}
 	.tableview-links li:not(:first-child)>a:first-child:before,
 	.grouped-tableview,
 	ul.grouped-tableview-links:before,
@@ -982,5 +993,6 @@ ol.grouped-tableview-links li>a.tappable-active{
 		-webkit-transform: scale(.5);
 		transform: scale(.5);
 		-webkit-transform-origin: 0 0;
+		transform-origin: 0 0;
 	}
 }
