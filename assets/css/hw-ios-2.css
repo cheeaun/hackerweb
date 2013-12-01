@@ -305,7 +305,8 @@ i.icon-loading{
 	transform: translateY(-11px);
 	opacity: 0;
 }
-.tableview-links li>a.tappable-active{
+.tableview-links li>a.tappable-active,
+.tableview-links li>a.selected{
 	background-color: #d9d9d9;
 }
 .tableview-links li:not(:first-child)>a.tappable-active:first-child:before{
@@ -994,5 +995,121 @@ ol.grouped-tableview-links li>a.tappable-active{
 		transform: scale(.5);
 		-webkit-transform-origin: 0 0;
 		transform-origin: 0 0;
+	}
+}
+
+@media only screen and (min-width: 640px){
+	.tableview-links li>a.selected:visited{
+		color: #000;
+	}
+	#view-home>header,
+	#view-comments>header{
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	#view-home:after,
+	#view-comments:after{
+		top: auto;
+		bottom: 44px;
+	}
+	#view-home{
+		width: 301px;
+	}
+	#view-home>header{
+		border-right: 1px solid #bbbbbe;
+	}
+	#view-home>header h1{
+		display: none;
+	}
+	#view-home>.scroll{
+		border-right: 1px solid #8e8e93;
+	}
+	#view-comments{
+		left: 301px;
+	}
+	#view-comments .header-back-button{
+		padding: 0 15px;
+		width: 13px;
+		background: transparent url(../images/ios7/close-button.png) center no-repeat;
+		background-size: 13px 13px;
+		height: 44px;
+	}
+	#view-comments .header-back-button button{
+		display: none;
+	}
+	#view-comments>header h1{
+		text-align: left;
+		margin-left: 44px !important;
+		margin-right: 10px !important;
+		font-weight: normal;
+	}
+
+	.view-blank-state{
+		display: -webkit-flex;
+		display: flex;
+		height: 100%;
+	}
+	.view-blank-state-text{
+		margin: auto;
+		-webkit-user-select: none;
+		text-align: center;
+		color: #8e8e93;
+		font-size: 17px;
+		font-weight: normal;
+		font: -apple-system-body;
+	}
+
+	#overlay{
+		position: absolute;
+		top: 0;
+		z-index: 100;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 2, 8, .5);
+		opacity: 1;
+		-webkit-transition: opacity 350ms ease-in-out;
+		transition: opacity 350ms ease-in-out;
+	}
+	#overlay.hide{
+		opacity: 0;
+		pointer-events: none;
+		visibility: hidden;
+	}
+	#view-about{
+		width: 540px;
+		height: 400px;
+		left: 50%;
+		margin-left: -270px;
+		top: 50%;
+		margin-top: -200px;
+		z-index: 101;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+		-webkit-transition: -webkit-transform 350ms;
+		transition: -webkit-transform 350ms;
+		box-sizing: border-box;
+	}
+	#view-about.hidden{
+		-webkit-transform: translateY(175%);
+		transform: translateY(175%);
+	}
+	#view-about>.scroll>section{
+		padding: 0 28px;
+	}
+	#view-about .grouped-tableview,
+	#view-about .grouped-tableview li:last-child{
+		background-image: none;
+	}
+	#view-about .grouped-tableview{
+		border-radius: 5px;
+		overflow: hidden;
+	}
+	#view-about .grouped-tableview:before{
+		content: none;
+	}
+	#view-about .foot-label{
+		padding-bottom: 34px;
 	}
 }
