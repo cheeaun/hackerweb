@@ -390,6 +390,11 @@
 		loader.parentNode.removeChild(loader);
 	}
 
+	// Make about dialog animated after 400ms, for widescreen
+	if (isWideScreen) setTimeout(function(){
+		$('view-about').classList.add('animated');
+	}, 400);
+
 	hw.news.options.disclosure = !isWideScreen;
 	hw.init();
 })(window);

@@ -1087,9 +1087,11 @@ ol.grouped-tableview-links li>a.tappable-active{
 		z-index: 101;
 		-webkit-transform: translateY(0);
 		transform: translateY(0);
+		box-sizing: border-box;
+	}
+	#view-about.animated{
 		-webkit-transition: -webkit-transform 350ms;
 		transition: -webkit-transform 350ms;
-		box-sizing: border-box;
 	}
 	#view-about.hidden{
 		-webkit-transform: translateY(175%);
