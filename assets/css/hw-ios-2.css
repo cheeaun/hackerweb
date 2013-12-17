@@ -1000,6 +1000,10 @@ ol.grouped-tableview-links li>a.tappable-active{
 }
 
 @media only screen and (min-width: 640px){
+	.view:after{
+		-webkit-transform-origin: bottom left;
+		transform-origin: bottom left;
+	}
 	.tableview-links li>a.selected:visited{
 		color: #000;
 	}
