@@ -2,6 +2,7 @@
 
 html{
 	height: 100%;
+	overflow: hidden;
 }
 body{
 	font-family: -apple-system-font, 'Helvetica Neue', Helvetica, Arial, sans-serif;
