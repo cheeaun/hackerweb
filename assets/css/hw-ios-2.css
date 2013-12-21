@@ -1119,4 +1119,15 @@ ol.grouped-tableview-links li>a.tappable-active{
 	#view-about .foot-label{
 		padding-bottom: 34px;
 	}
+
+	#y-icon{
+		background: transparent url(../../icons/touch-icon-152.png) no-repeat;
+		background-size: 76px 76px;
+		width: 76px;
+		height: 76px;
+		border-radius: 18px;
+	}
+	#app-desc{
+		margin-left: 86px;
+	}
 }
