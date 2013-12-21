@@ -363,19 +363,6 @@
 		}, 1);
 	}, false);
 
-	// Some useful tips from http://24ways.org/2011/raising-the-bar-on-mobile
-	var supportOrientation = typeof w.orientation != 'undefined',
-		getScrollTop = function(){
-			return w.pageYOffset || d.compatMode === 'CSS1Compat' && d.documentElement.scrollTop || body.scrollTop || 0;
-		},
-		scrollTop = function(){
-			if (!supportOrientation) return;
-			body.style.height = screen.height + 'px';
-			setTimeout(function(){
-				w.scrollTo(0, 0);
-				body.style.height = w.innerHeight + 'px';
-			}, 1);
-		};
 	if (!isWideScreen){
 		setTimeout(function(){
 			var loader = $('apploader');
