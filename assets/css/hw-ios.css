@@ -402,6 +402,9 @@ body:not(.ios5) .view>.scroll:before{
 	padding-right: 5px;
 	color: #666d74;
 }
+.tableview-links li>a .number:after{
+	content: '.';
+}
 .tableview-links li>a .story{
 	-webkit-box-flex: 1;
 	box-flex: 1;
