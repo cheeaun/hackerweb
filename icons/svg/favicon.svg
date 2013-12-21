@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+<g>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#FF6600" d="M508,488c0,11-9,20-20,20H24c-11,0-20-9-20-20V24C4,13,13,4,24,4
+		h464c11,0,20,9,20,20V488z"/>
+	<path fill="none" stroke="#993D00" stroke-width="3" stroke-miterlimit="10" d="M508,488c0,11-9,20-20,20H24c-11,0-20-9-20-20V24
+		C4,13,13,4,24,4h464c11,0,20,9,20,20V488z"/>
+</g>
+<g>
+	<path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M137,113.9c19.8,0,39.7,0,59.5,0c0,39.7,0,79.3,0,119
+		c39.7,0,79.3,0,119,0c0-39.7,0-79.3,0-119c19.8,0,39.7,0,59.5,0c0,98,0,196,0,294c-19.8,0-39.7,0-59.5,0c0-40.8,0-81.7,0-122.5
+		c-39.7,0-79.3,0-119,0c0,40.8,0,81.7,0,122.5c-19.8,0-39.7,0-59.5,0C137,309.9,137,211.9,137,113.9z"/>
+	<line fill="none" stroke="#993D00" stroke-width="4" stroke-miterlimit="10" x1="196.5" y1="232.9" x2="315.5" y2="232.9"/>
+	<line fill="none" stroke="#993D00" stroke-width="4" stroke-miterlimit="10" x1="137" y1="113.9" x2="196.5" y2="113.9"/>
+	<line fill="none" stroke="#993D00" stroke-width="4" stroke-miterlimit="10" x1="315.5" y1="113.9" x2="375" y2="113.9"/>
+</g>
+</svg>
