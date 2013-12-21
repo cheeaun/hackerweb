@@ -709,12 +709,12 @@ ol.grouped-tableview-links li>a.tappable-active{
 }
 
 #y-icon{
-	background: transparent url(../../icons/favicon-144.png) no-repeat;
+	background: transparent url(../../icons/touch-icon-120.png) no-repeat;
 	background-size: 60px 60px;
 	width: 60px;
 	height: 60px;
 	float: left;
-	border-radius: 17.544%;
+	border-radius: 14px;
 }
 
 #app-desc{
