@@ -5,6 +5,7 @@ html{
 	overflow: hidden;
 }
 body{
+	height: calc(100% + 64px);
 	font-family: -apple-system-font, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 17px;
 	margin: 0;
