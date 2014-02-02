@@ -53,8 +53,8 @@
 	};
 
 	// Log API failures/errors to GA
-	if (typeof _gaq != 'undefined') hw.sub('logAPIError', function(type){
-		_gaq.push(['_trackEvent', 'Errors', 'API', type]);
+	if (typeof ga != 'undefined') hw.sub('logAPIError', function(type){
+		ga('send', 'event', 'Errors', 'API', type);
 	});
 
 	var tmpl = hw.tmpl;

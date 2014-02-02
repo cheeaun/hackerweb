@@ -24,7 +24,6 @@ if (navigator.userAgent.match(/IEMobile\/10\.0/)){
 }
 </script>
 <script>
-var _gaq = [];
 var RavenConfig = { dsn: 'https://ba1fa9e133f64714b762e2d8d46a0c63@app.getsentry.com/6152' };
 
 if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.github.com' || location.hostname == 'app.hackerwebapp.com'){
@@ -35,14 +34,13 @@ if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.gi
 	var s0 = document.getElementsByTagName('script')[0];
 	s0.parentNode.insertBefore(ra, s0);
 
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-36575624-2']);
-	_gaq.push(['_trackPageview']);
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-36575624-2', 'auto');
+	ga('send', 'pageview');
 }
 
 if (window.applicationCache){
@@ -69,7 +67,7 @@ if (window.applicationCache){
 
 	// Use GA to track the update rate of this manifest appcache thing
 	// and see how fast users are updated to the latest cache/version
-	if (typeof _gaq != 'undefined') window.addEventListener('load', function(){
+	if (typeof ga != 'undefined') window.addEventListener('load', function(){
 		setTimeout(function(){
 			var r = new XMLHttpRequest();
 			r.open('GET', 'manifest.appcache', true);
@@ -77,14 +75,14 @@ if (window.applicationCache){
 				var text = this.responseText;
 				if (!text) return;
 				var version = (text.match(/#\s\d[^\n\r]+/) || [])[0];
-				if (version) _gaq.push(['_trackEvent', 'Appcache', 'Version', version.replace(/^#\s/, '')]);
+				if (version) ga('send', 'event', 'Appcache', 'Version', version.replace(/^#\s/, ''));
 			};
 			r.send();
 		}, 1000);
 	}, false);
 } else {
 	setTimeout(function(){
-		_gaq.push(['_trackEvent', 'Appcache', 'Version', 'n/a']);
+		ga('send', 'event', 'Appcache', 'Version', 'n/a');
 	}, 1000);
 }
 </script>
@@ -174,8 +172,8 @@ if (window.applicationCache){
 	script.src = 'js/hw-' + theme + '.min.js';
 	head.insertBefore(script, head.lastChild);
 
-	if (typeof _gaq != 'undefined') setTimeout(function(){
-		_gaq.push(['_trackEvent', 'App', 'Theme', theme]);
+	if (typeof ga != 'undefined') setTimeout(function(){
+		ga('send', 'event', 'App', 'Theme', theme);
 	}, 2000);
 })(document, navigator.userAgent);
 </script>
