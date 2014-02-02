@@ -1,0 +1,37 @@
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="112.5" height="112.5" viewBox="0 0 90 90">
+<style>
+  .s0{ stop-color:#191919; stop-opacity:1; }
+  .s1{ stop-color:#000000; stop-opacity:1; }
+  .s2{ fill:#fff; }
+</style>
+<defs>
+  <linearGradient x1="0" y1="0" x2="0" y2="-71.689003" id="LinearGradient" gradientUnits="userSpaceOnUse" gradientTransform="translate(45,90)">
+    <stop offset="0" style="stop-color:#ffa600;stop-opacity:1"/>
+    <stop offset="1" style="stop-color:#ff6600;stop-opacity:1"/>
+  </linearGradient>
+  <linearGradient x1="0" y1="0" x2="0" y2="28.507999" id="LinearGradient_1" gradientUnits="userSpaceOnUse" gradientTransform="translate(45,50.251)">
+    <stop offset="0" style="stop-color:#262626;stop-opacity:1"/>
+    <stop offset="0.1" style="stop-color:#252525;stop-opacity:1"/>
+    <stop offset="0.2" style="stop-color:#232323;stop-opacity:1"/>
+    <stop offset="0.3" style="stop-color:#212121;stop-opacity:1"/>
+    <stop offset="0.4" style="stop-color:#1f1f1f;stop-opacity:1"/>
+    <stop offset="0.5" style="stop-color:#1c1c1c;stop-opacity:1"/>
+    <stop offset="0.6" class="s0"/>
+    <stop offset="0.7" style="stop-color:#151515;stop-opacity:1"/>
+    <stop offset="0.8" style="stop-color:#101010;stop-opacity:1"/>
+    <stop offset="0.9" style="stop-color:#090909;stop-opacity:1"/>
+    <stop offset="1" class="s1"/>
+  </linearGradient>
+  <linearGradient x1="0" y1="0" x2="45" y2="0" id="LinearGradient_2" gradientUnits="userSpaceOnUse" gradientTransform="translate(45,32.111)">
+    <stop offset="0" class="s0"/>
+    <stop offset="1" class="s1"/>
+  </linearGradient>
+  <mask id="TranspMask"><rect width="108.00001" height="108.00001" x="-9" y="-9" fill="url(#LinearGradient_1)"/></mask>
+  <mask id="TranspMask_1"><rect width="108.00001" height="108.00001" x="-9" y="-9" fill="url(#LinearGradient_2)"/></mask>
+  <linearGradient x1="0" y1="0" x2="0" y2="-71.689003" id="linearGradient3306" xlink:href="#LinearGradient" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1,0,0,-1,45,0)"/>
+</defs>
+<path d="M0 0 0 90 90 90 90 0 0 0z" fill="url(#linearGradient3306)"/>
+<path d="M0 90 90 90 90 70.503 45 45 0 70.503 0 90z" transform="matrix(1,0,0,-1,0,90)" mask="url(#TranspMask)" class="s2"/>
+<path d="M90 70.503 45 45.003 45 0 90 0 90 70.503z" transform="matrix(1,0,0,-1,0,90)" mask="url(#TranspMask_1)" class="s2"/>
+<path d="m55.499 49.502-20.999 0 0 21.749-11.25 0 0-52.501 11.25 0-0.001 20.999 21 0 0-20.999 11.25 0 0 52.501-11.25 0 0-21.749z" class="s2"/>
+</svg>

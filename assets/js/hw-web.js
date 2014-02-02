@@ -41,7 +41,7 @@
 			style.id = 'view-height';
 			head.appendChild(style);
 		}
-		if (w.innerWidth >= 788) vh *= .85;
+		if (w.innerWidth >= 788) vh *= .9;
 		style.textContent = '.view>.scroll{min-height: ' + vh + 'px}';
 	};
 	w.addEventListener('resize', adjustViewsHeight, false);

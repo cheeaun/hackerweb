@@ -1,5 +1,7 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic);
+
 body{
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 16px;
 	margin: 0;
 	padding: 0;
@@ -11,7 +13,7 @@ body{
 	visibility: visible;
 }
 a:link{
-	color: #2960d9;
+	color: #007aff;
 }
 button{
 	font-family: inherit;
@@ -42,8 +44,8 @@ pre, code{
 	width: 14px;
 	height: 17px;
 	background: transparent url(../images/web/refresh-icon.png) no-repeat;
-	background-size: 14px 17px;
-	vertical-align: text-bottom;
+	background-image: url(../images/web/refresh-icon.svg), none;
+	vertical-align: middle;
 	overflow: hidden;
 	text-indent: -999px;
 }
@@ -58,10 +60,11 @@ pre, code{
 	display: none;
 }
 .view>header{
-	background-color: #f60;
+	border-bottom: 1px solid #ddd;
+	background-color: rgba(255,255,255,.95);
 	line-height: 44px;
 	height: 44px;
-	color: #fff;
+	color: #f60;
 	position: absolute; /* if position:fixed is not supported */
 	position: fixed;
 	left: 0;
@@ -81,25 +84,22 @@ pre, code{
 	min-width: 50px;
 	height: 30px;
 	line-height: 25px;
-	font-weight: bold;
-	font-size: 13px;
+	font-weight: normal;
+	font-size: 15px;
 	text-align: center;
-	color: #fff;
+	color: #f60;
 	padding: 0 4px;
 	margin: 0;
 	text-decoration: none;
 	border: 0;
-	background-color: rgba(0,0,0,.1);
+	background-color: transparent;
 	cursor: pointer;
-	border-radius: 2px;
 }
-.header-button:hover button,
-.header-button button:hover{
-	background-color: rgba(0,0,0,.15);
+.header-button:hover{
+	background-color: #F6F6EF;
 }
-.header-button:active button,
-.header-button button:active{
-	background-color: rgba(0,0,0,.25);
+.header-button:active button{
+	opacity: .5;
 }
 .header-button button::-moz-focus-inner{
 	padding: 0;
@@ -127,15 +127,17 @@ pre, code{
 	text-indent: -999px;
 	min-width: 32px;
 	background-image: url(../images/web/home-icon.png);
+	background-image: url(../images/web/home-icon.svg), none;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: 16px 15px;
 }
 
 .view>header h1{
+	cursor: default;
 	padding: 0;
 	text-align: center;
-	font-size: 20px;
+	font-size: 18px;
+	font-weight: normal;
 	margin: 0;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -144,13 +146,13 @@ pre, code{
 }
 .view>.scroll{
 	overflow: hidden;
-	min-height: 85vh;
+	min-height: 9vh;
 	margin-top: 44px;
 }
-.view>.scroll.striped{
+.view.shaded>.scroll{
 	background-color: #F6F6EF;
 }
-.view>.scroll.striped p.foot-label{
+.view.shaded>.scroll p.foot-label{
 	margin: 15px 10px;
 	font-size: 13px;
 	line-height: 1.4em;
@@ -163,7 +165,7 @@ pre, code{
 	color: #666;
 	color: #666;
 	text-align: center;
-	margin: 50px 0;
+	padding: 50px 0;
 }
 .view>.scroll .load-error button{
 	border: 0;
@@ -203,7 +205,7 @@ pre, code{
 	position: relative;
 }
 .tableview-links li>a{
-	font-size: 15px;
+	font-size: 14px;
 	line-height: 1.3em;
 	color: #000;
 	display: block;
@@ -231,9 +233,12 @@ pre, code{
 	margin-left: 4ex;
 	padding-left: 5px;
 }
+.tableview-links li>a .story b{
+	font-weight: 600;
+}
 .tableview-links li>a .metadata{
 	display: block;
-	font-size: 13px;
+	font-size: 12px;
 	color: #666d74;
 	line-height: 1.2em;
 }
@@ -252,25 +257,23 @@ pre, code{
 	vertical-align: middle;
 }
 .tableview-links li>a.detail-disclosure-button span{
-	opacity: .5;
 	display: inline-block;
-	width: 14px;
-	height: 14px;
+	width: 17px;
+	height: 17px;
 	background: transparent url(../images/web/comments-icon.png) no-repeat;
-	background-size: 14px 14px;
+	background-image: url(../images/web/comments-icon.svg), none;
 	margin: 15px 0;
 }
-.tableview-links li>a.detail-disclosure-button:hover span{
-	opacity: 1;
+.tableview-links li>a.detail-disclosure-button:active span{
+	opacity: .5;
 }
 .tableview-links li>a.more-link{
+	color: #007aff;
 	cursor: pointer;
 	line-height: 3em;
 	padding: 10px;
 	display: block;
-	color: #2960d9;
 	text-align: center;
-	font-weight: bold;
 }
 
 .grouped-tableview{
@@ -325,7 +328,6 @@ ul.grouped-tableview-links li>a,
 ol.grouped-tableview-links li>a{
 	color: #000;
 	font-size: 16px;
-	font-weight: bold;
 	display: block;
 	padding: 10px;
 	text-decoration: none;
@@ -338,8 +340,6 @@ ol.grouped-tableview-links li>a:hover{
 }
 
 .view .post-content{
-	background-color: #f6f6ef;
-	border-bottom: 1px solid #E0E0E0;
 	min-height: 4em;
 	overflow: hidden;
 }
@@ -370,10 +370,10 @@ ol.grouped-tableview-links li>a:hover{
 	text-overflow: ellipsis;
 	padding-left: 16px;
 	background: transparent url(../images/external-arrow.png) no-repeat 0 50%;
-	background-size: 12px 10px;
+	background-image: url(../images/web/external-arrow.svg), none;
 }
 .view .post-content header .metadata a.external-link:hover{
-	color: #2960d9;
+	color: #007aff;
 }
 .view .post-content header h1{
 	font-size: 17px;
@@ -410,17 +410,17 @@ ol.grouped-tableview-links li>a:hover{
 	vertical-align: bottom;
 }
 .view .post-content .poll li .poll-bar{
-	background-color: #eee;
+	background-color: #fafafa;
 	width: 100%;
-	height: 9px;
+	height: 3px;
 	overflow: hidden;
 	border-radius: 2px;
 }
 .view .post-content .poll li .poll-bar span{
-	background-color: #77adf6;
+	background-color: #007aff;
 	display: block;
 	width: 0;
-	height: 9px;
+	height: 3px;
 }
 .view .post-content pre,
 .view section.comments pre{
@@ -433,12 +433,16 @@ ol.grouped-tableview-links li>a:hover{
 
 .view section.comments{
 	font-size: 13px;
+	background-color: #fff;
+	border-top: 1px solid #E0E0E0;
+	border-bottom: 1px solid #E0E0E0;
+	margin-bottom: 20px;
 }
 .view section.comments ul{
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	line-height: 1.4em;
+	line-height: 1.6em;
 }
 .view section.comments ul li{
 	padding: 15px;
@@ -451,6 +455,7 @@ ol.grouped-tableview-links li>a:hover{
 	padding: 0 0 0 15px;
 	border: 0;
 	background: transparent url(../images/comment-arrow.png) no-repeat 0 4px;
+	background-image: url(../images/web/comment-arrow.svg), none;
 	background-size: 10px 9px;
 	color: #333;
 }
@@ -464,14 +469,14 @@ ol.grouped-tableview-links li>a:hover{
 }
 .view section.comments p.metadata .user{
 	float: left;
-	color: #b23914;
+	color: #bf223f;
 }
 .view section.comments p.metadata .user.op:after{
 	content: 'OP';
 	display: inline-block;
 	font-size: 70%;
 	color: #fff;
-	background-color: #c16143;
+	background-color: #bf223f;
 	padding: 3px 4px;
 	line-height: 1;
 	margin-left: 5px;
@@ -526,14 +531,13 @@ ol.grouped-tableview-links li>a:hover{
 	line-height: 3em;
 	padding: 10px;
 	display: block;
-	color: #2960d9;
+	color: #007aff;
 	text-align: center;
-	font-weight: bold;
 }
 
 .link-text{
-	color: #385487;
-	font-weight: bold;
+	color: #003d80;
+	font-weight: normal;
 }
 .inline-block{
 	display: inline-block;
@@ -551,16 +555,19 @@ ol.grouped-tableview-links li>a:hover{
 }
 
 #y-icon{
-	background: transparent url(../../icons/touch-icon-144.png) no-repeat;
+	background: transparent url(../../icons/touch-icon-114.png) no-repeat;
+	background-image: url(../../icons/icon.svg), none;
 	background-size: 57px 57px;
 	width: 57px;
 	height: 57px;
 	float: left;
-	border-radius: 2px;
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	border-radius: 4px;
 }
 #app-desc{
 	margin-left: 67px;
+}
+#app-desc strong{
+	font-size: 18px;
 }
 
 @-ms-viewport{
@@ -575,15 +582,12 @@ ol.grouped-tableview-links li>a:hover{
 
 @media only screen and (min-width: 788px){
 	body{
-		background-color: #ebebe5;
+		background-color: #fafafa;
 	}
 	.view{
 		background-color: #fff;
-		max-width: 768px;
-		box-shadow: 0 2px 3px #aaa;
-		border-radius: 2px;
-		margin-top: 10px;
-		margin-bottom: 10px;
+		max-width: 700px;
+		box-shadow: 0 0 1px #aaa;
 	}
 	.view>header{
 		border-top-left-radius: 2px;
