@@ -85,7 +85,7 @@ if (window.applicationCache){
 	}, false);
 } else {
 	setTimeout(function(){
-		ga('send', 'event', 'Appcache', 'Version', 'n/a');
+		if (typeof ga != 'undefined') ga('send', 'event', 'Appcache', 'Version', 'n/a');
 	}, 1000);
 }
 </script>

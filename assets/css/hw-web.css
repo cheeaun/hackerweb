@@ -42,9 +42,10 @@ pre, code{
 .icon-refresh{
 	display: inline-block;
 	width: 14px;
-	height: 17px;
+	height: 18px;
 	background: transparent url(../images/web/refresh-icon.png) no-repeat;
 	background-image: url(../images/web/refresh-icon.svg), none;
+	background-size: 14px 18px;
 	vertical-align: middle;
 	overflow: hidden;
 	text-indent: -999px;
@@ -64,7 +65,7 @@ pre, code{
 	background-color: rgba(255,255,255,.95);
 	line-height: 44px;
 	height: 44px;
-	color: #f60;
+	color: #333;
 	position: absolute; /* if position:fixed is not supported */
 	position: fixed;
 	left: 0;
@@ -128,6 +129,7 @@ pre, code{
 	min-width: 32px;
 	background-image: url(../images/web/home-icon.png);
 	background-image: url(../images/web/home-icon.svg), none;
+	background-size: 19.5px 17px;
 	background-repeat: no-repeat;
 	background-position: center;
 }
@@ -242,6 +244,9 @@ pre, code{
 	color: #666d74;
 	line-height: 1.2em;
 }
+.tableview-links li>a:hover .link-text{
+	text-decoration: underline;
+}
 .tableview-links li>a.detail-disclosure{
 	padding-right: 44px;
 }
@@ -262,6 +267,7 @@ pre, code{
 	height: 17px;
 	background: transparent url(../images/web/comments-icon.png) no-repeat;
 	background-image: url(../images/web/comments-icon.svg), none;
+	background-size: 17px 17px;
 	margin: 15px 0;
 }
 .tableview-links li>a.detail-disclosure-button:active span{
@@ -328,7 +334,9 @@ ul.grouped-tableview-links li>a,
 ol.grouped-tableview-links li>a{
 	color: #000;
 	font-size: 16px;
-	display: block;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 100%;
 	padding: 10px;
 	text-decoration: none;
 	white-space: nowrap;
@@ -371,6 +379,7 @@ ol.grouped-tableview-links li>a:hover{
 	padding-left: 16px;
 	background: transparent url(../images/external-arrow.png) no-repeat 0 50%;
 	background-image: url(../images/web/external-arrow.svg), none;
+	background-size: 12px 10px;
 }
 .view .post-content header .metadata a.external-link:hover{
 	color: #007aff;
@@ -442,7 +451,7 @@ ol.grouped-tableview-links li>a:hover{
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	line-height: 1.6em;
+	line-height: 1.5em;
 }
 .view section.comments ul li{
 	padding: 15px;
