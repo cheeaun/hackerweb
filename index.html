@@ -41,6 +41,9 @@ if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.gi
 
 	ga('create', 'UA-36575624-2', 'auto');
 	ga('send', 'pageview');
+
+	// Track device pixel ratios
+	if (window.devicePixelRatio) ga('set', 'dimension1', window.devicePixelRatio);
 }
 
 if (window.applicationCache){
