@@ -1,7 +1,7 @@
 {
 	"name": "HackerWeb",
 	"description": "A simply readable Hacker News web app",
-	"version": "0.1",
+	"version": "0.2",
 	"launch_path": "/",
 	"icons": {
 		"30": "/icons/fxos-icon-30.png",
