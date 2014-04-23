@@ -47,6 +47,10 @@ Some of the *cutting-edge* web technologies used:
 Development stuff
 --------------------
 
+Use [Nitrous.IO](https://www.nitrous.io/?utm_source=github.com&utm_campaign=Hackerweb&utm_medium=hackonnitrous) to create your own *Hackerweb* in seconds:
+
+[![Hack cheeaun/hackerweb on Nitrous.IO](https://d3o0mnbgv6k92a.cloudfront.net/assets/hack-l-v1-3cc067e71372f6045e1949af9d96095b.png)](https://www.nitrous.io/hack_button?source=embed&runtime=nodejs&repo=cheeaun%2Fhackerweb&file_to_open=README.nitrous.md)
+
 - Prerequisites
 
 		git clone git://github.com/cheeaun/hackerweb.git

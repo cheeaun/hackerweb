@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export HACKERWEB_PORT=3000
+grunt server
