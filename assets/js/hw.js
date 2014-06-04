@@ -302,7 +302,7 @@
 				var tmpl2 = tmpl('comments');
 				// If "local" link, link to Hacker News web site
 				if (/^item/i.test(data.url)){
-					data.url = 'http://news.ycombinator.com/' + data.url;
+					data.url = '//news.ycombinator.com/' + data.url;
 				} else {
 					data.domain = domainify(data.url);
 				}
@@ -327,7 +327,7 @@
 					data.has_poll = data.has_content = true;
 				}
 				data.short_hn_url = 'news.ycombinator.com/item?id=' + id;
-				data.hn_url = 'http://' + data.short_hn_url;
+				data.hn_url = '//' + data.short_hn_url;
 				hw.setTitle(data.title);
 				$commentsHeading.innerHTML = data.title;
 
@@ -342,7 +342,7 @@
 					var link = links[i];
 					if (link.classList.contains('comment-permalink')){
 						var id = link.dataset ? link.dataset.id : link.getAttribute('data-id');
-						link.href = 'http://news.ycombinator.com/item?id=' + id;
+						link.href = '//news.ycombinator.com/item?id=' + id;
 					}
 					link.target = '_blank';
 				}
