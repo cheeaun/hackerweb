@@ -417,7 +417,7 @@
 	w.addEventListener('resize', adjustCommentsSection, false);
 	w.addEventListener('orientationchange', adjustCommentsSection, false);
 
-	// Some useful tips from //24ways.org/2011/raising-the-bar-on-mobile
+	// Some useful tips from http://24ways.org/2011/raising-the-bar-on-mobile
 	var supportOrientation = typeof w.orientation != 'undefined',
 		getScrollTop = function(){
 			return w.pageYOffset || d.compatMode === 'CSS1Compat' && d.documentElement.scrollTop || body.scrollTop || 0;
