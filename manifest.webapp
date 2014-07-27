@@ -4,9 +4,12 @@
 	"version": "0.2",
 	"launch_path": "/",
 	"icons": {
-		"30": "/icons/fxos-icon-30.png",
+		"32": "/icons/fxos-icon-32.png",
 		"60": "/icons/fxos-icon-60.png",
-		"128": "/icons/fxos-icon-128.png"
+		"90": "/icons/fxos-icon-90.png",
+		"120": "/icons/fxos-icon-120.png",
+		"128": "/icons/fxos-icon-128.png",
+		"256": "/icons/fxos-icon-256.png"
 	},
 	"developer": {
 		"name": "Lim Chee Aun",
