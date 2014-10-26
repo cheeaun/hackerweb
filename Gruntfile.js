@@ -123,24 +123,24 @@ module.exports = function(grunt) {
 				options: {
 					port: process.env.HACKERWEB_PORT || 80,
 					keepalive: true,
-					hostname: null,
+					hostname: '*',
 					debug: true,
-					middleware: function(connect, options){
-						var appcache = grunt.option('appcache');
-						grunt.log.writeln('Application Cache: ' + (appcache ? 'ON' : 'OFF'));
-						return [
-							function(req, res, next){
-								if (req.url == '/manifest.appcache' && !appcache){
-									res.writeHead(404);
-									res.end();
-								} else {
-									next();
-								}
-							},
-							connect.static(options.base),
-							connect.directory(options.base)
-						];
-					}
+					// middleware: function(connect, options){
+					// 	var appcache = grunt.option('appcache');
+					// 	grunt.log.writeln('Application Cache: ' + (appcache ? 'ON' : 'OFF'));
+					// 	return [
+					// 		function(req, res, next){
+					// 			if (req.url == '/manifest.appcache' && !appcache){
+					// 				res.writeHead(404);
+					// 				res.end();
+					// 			} else {
+					// 				next();
+					// 			}
+					// 		},
+					// 		connect.static(options.base),
+					// 		connect.directory(options.base)
+					// 	];
+					// }
 				}
 			}
 		},
