@@ -3,10 +3,11 @@
 html{
 	height: 100%;
 	overflow: hidden;
+	font-size: 62.5%;
 }
 body{
 	font-family: -apple-system-font, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 17px;
+	font-size: 1.7rem;
 	margin: 0;
 	padding: 0;
 	background-color: #fff;
@@ -200,7 +201,7 @@ i.icon-loading{
 }
 
 .view>header h1{
-	font-size: 17px;
+	font-size: 1.7rem;
 	text-align: center;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -228,7 +229,7 @@ i.icon-loading{
 	-webkit-user-select: none;
 	text-align: center;
 	color: #8e8e93;
-	font-size: 17px;
+	font-size: 1.7rem;
 	font-weight: normal;
 	font: -apple-system-body;
 }
@@ -255,7 +256,7 @@ i.icon-loading{
 .tableview-links li>a{
 	display: -webkit-flex;
 	display: flex;
-	font-size: 17px;
+	font-size: 1.7rem;
 	font: -apple-system-body;
 	line-height: 1.2em;
 	color: #000;
@@ -282,7 +283,7 @@ i.icon-loading{
 }
 .tableview-links li>a .metadata{
 	margin-top: 1px;
-	font-size: 13px;
+	font-size: 1.3rem;
 	font: -apple-system-footnote;
 	line-height: 1.2em;
 	display: block;
@@ -384,7 +385,7 @@ i.icon-loading{
 }
 
 section.grouped-tableview{
-	font-size: 13px;
+	font-size: 1.3rem;
 	font: -apple-system-footnote;
 	line-height: 1.4em;
 }
@@ -462,7 +463,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 }
 .view .post-content header{
 	padding: 15px;
-	font-size: 17px;
+	font-size: 1.7rem;
 	font: -apple-system-body;
 	line-height: 1.2em;
 }
@@ -472,7 +473,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	padding: 0;
 }
 .view .post-content header h1{
-	font-size: 17px;
+	font-size: 1.7rem;
 	font-weight: normal;
 	font: -apple-system-body;
 	line-height: 1.2em;
@@ -483,13 +484,13 @@ ol.grouped-tableview-links li>a.tappable-active{
 	text-decoration: none;
 }
 .view .post-content header h1 .link-text{
-	font-size: 13px;
+	font-size: 1.3rem;
 	font: -apple-system-footnote;
 	line-height: 1.2em;
 	color: #003d80;
 }
 .view .post-content header .metadata{
-	font-size: 13px;
+	font-size: 1.3rem;
 	font: -apple-system-footnote;
 	line-height: 1.4em;
 	color: #8e8e93;
@@ -545,7 +546,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 
 .view section.comments{
 	background-color: #fff;
-	font-size: 13px;
+	font-size: 1.6rem;
 	font: -apple-system-footnote;
 	line-height: 1.4em;
 	background-image: -webkit-linear-gradient(top, #c8c7cc, #c8c7cc 50%, transparent 50%), -webkit-linear-gradient(bottom, #c8c7cc, #c8c7cc 50%, transparent 50%);
@@ -589,6 +590,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	margin: 0;
 }
 .view section.comments p.metadata .user{
+	font-size: 1.3rem;
 	float: left;
 	color: #bf223f;
 }
@@ -608,6 +610,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	text-align: right;
 }
 .view section.comments p.metadata time a{
+	font-size: 1.3rem;
 	color: #8e8e93;
 }
 .view .post-content header .metadata a.external-link{
@@ -630,7 +633,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	max-width: 320px;
 	cursor: pointer;
 	padding: 5px 10px;
-	font-size: inherit;
+	font-size: 1.3rem;
 	border-radius: 3px;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	margin: 2px auto 4px;
@@ -661,7 +664,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	padding: 50px 0;
 	margin: 0;
 	color: #8e8e93;
-	font-size: 17px;
+	font-size: 1.7rem;
 	font: -apple-system-body;
 }
 .view section.comments .loader,
@@ -689,7 +692,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	margin: 0;
 	padding: 10px 15px;
 	color: #6d6d72;
-	font-size: 15px;
+	font-size: 1.5rem;
 	font: -apple-system-subheadline;
 	font-weight: normal;
 	line-height: 1.2em;
@@ -719,13 +722,13 @@ ol.grouped-tableview-links li>a.tappable-active{
 
 #app-desc{
 	margin: 0 0 0 70px;
-	font-size: 15px;
+	font-size: 1.5rem;
 	font: -apple-system-subheadline;
 	font-weight: normal;
 	line-height: 1.2em;
 }
 #app-desc strong{
-	font-size: 17px;
+	font-size: 1.7rem;
 	font: -apple-system-body;
 	line-height: 1.3;
 }
@@ -1061,7 +1064,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 		-webkit-user-select: none;
 		text-align: center;
 		color: #8e8e93;
-		font-size: 17px;
+		font-size: 1.7rem;
 		font-weight: normal;
 		font: -apple-system-body;
 	}
