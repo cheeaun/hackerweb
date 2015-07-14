@@ -806,6 +806,9 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 	display: -webkit-box;
 	display: box;
 }
+.view section.comments p.metadata.deleted{
+	margin-bottom: 8px;
+}
 .view section.comments p.metadata .user{
 	color: #b23914;
 }

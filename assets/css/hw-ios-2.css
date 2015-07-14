@@ -592,6 +592,12 @@ ol.grouped-tableview-links li>a.tappable-active{
 	float: left;
 	color: #bf223f;
 }
+.view section.comments p.metadata.deleted{
+	margin-bottom: 8px;
+}
+.view section.comments p.metadata.deleted span{
+	float: left;
+}
 .view section.comments p.metadata .user.op:after{
 	content: 'OP';
 	display: inline-block;

@@ -1,7 +1,13 @@
 {{#comments}}
 	<li>
-		<p class="metadata"><b class="user">{{user}}</b> <time><a href="#" data-id="{{id}}" class="comment-permalink">{{time_ago}}</a></time></p>
-		<p>{{{content}}}
+		<p class="metadata {{#deleted}}deleted{{/deleted}}">
+			{{#deleted}}<span>[deleted]</span>{{/deleted}}
+			{{^deleted}}<b class="user">{{user}}</b>{{/deleted}}
+			<time><a href="#" data-id="{{id}}" class="comment-permalink">{{time_ago}}</a></time>
+		</p>
+		{{^deleted}}
+			<p>{{{content}}}
+		{{/deleted}}
 		<ul>
 			{{>comments_list}}
 		</ul>
