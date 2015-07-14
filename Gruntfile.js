@@ -78,6 +78,17 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		cssmin: {
+			target: {
+				files: [{
+					expand: true,
+					cwd: 'assets/css',
+					src: ['*.css', '!*.min.css'],
+					dest: 'assets/css',
+					ext: '.min.css'
+				}]
+			}
+		},
 		jshint: {
 			all: [
 				'assets/js/libs/*.js',
@@ -101,6 +112,13 @@ module.exports = function(grunt) {
 					'Gruntfile.js'
 				],
 				tasks: ['uglify']
+			},
+			css: {
+				files: [
+					'assets/css/*.css',
+					'!assets/css/*.min.css'
+				],
+				tasks: ['cssmin']
 			},
 			templates: {
 				files: 'assets/templates/*.mustache',
@@ -169,6 +187,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-shell');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 
 	// Configurable port number
 	var port = grunt.option('port');
