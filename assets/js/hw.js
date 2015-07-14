@@ -98,6 +98,7 @@
 			} else {
 				if (item.type == 'link') item.detail_disclosure = true;
 				if (/^#\//.test(item.url)){
+					item.detail_disclosure = false;
 					item.disclosure = true;
 					item.domain = null;
 				}
