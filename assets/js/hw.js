@@ -260,31 +260,6 @@
 			if (hw.comments.currentID == id && post) return;
 			hw.comments.currentID = id;
 
-			var loadComments = function(_data, id){
-				if (!_data || _data.error) return;
-				var data = clone(_data);
-				amplify.store.sessionStorage('hacker-comments-' + id, data);
-				var ul = $commentsSection.querySelector('.comments>ul');
-				if (!ul.querySelector('.more-link-container')){
-					ul.insertAdjacentHTML('beforeend', '<li class="more-link-container"><a class="more-link" data-id="' + id + '">More&hellip;</a></li>');
-				}
-				if (!data.more_comments_id) return;
-
-				// Preload all 'More' comments
-				var loadMoreComments = function(id){
-					var comments = amplify.store.sessionStorage('hacker-comments-' + id);
-					if (!comments){
-						hnapi.comments(id, function(data){
-							if (!data || data.error) return;
-							amplify.store.sessionStorage('hacker-comments-' + id, data);
-							if (data.more_comments_id) loadMoreComments(data.more_comments_id);
-						});
-					} else {
-						if (comments.more_comments_id) loadMoreComments(comments.more_comments_id);
-					}
-				};
-				loadMoreComments(data.more_comments_id);
-			};
 			var loadPost = function(_data, id){
 				var data = clone(_data),
 					tmpl1 = tmpl('post-comments');
@@ -387,19 +362,6 @@
 				}
 				delete div;
 
-				// Grab 'More' comments
-				if (data.more_comments_id){
-					var id = data.more_comments_id;
-					var comments = amplify.store.sessionStorage('hacker-comments-' + id);
-					if (comments){
-						loadComments(comments, id);
-					} else {
-						hnapi.comments(id, function(data){
-							loadComments(data, id);
-						});
-					}
-				}
-
 				hw.pub('onRenderComments');
 			};
 
@@ -479,51 +441,6 @@
 				var top = $commentsSection.scrollTop;
 				ulStyle.display = (ulStyle.display == 'none') ? '' : 'none';
 				$commentsSection.scrollTop = top;
-			}
-		},
-		more: function(target){
-			var id = target.dataset ? target.dataset.id : target.getAttribute('data-id');
-			var comments = amplify.store.sessionStorage('hacker-comments-' + id);
-			if (comments){
-				var tmpl1 = tmpl('comments'),
-					tmpl2 = tmpl('comments'),
-					html = tmpl1.render(comments, {comments_list: tmpl1}),
-					li = target.parentNode,
-					ul = li.parentNode,
-					more_comments_id = comments.more_comments_id,
-					_ul = d.createElement('ul');
-
-				_ul.innerHTML = html;
-
-				var links = _ul.querySelectorAll('a');
-				for (var i=0, l=links.length; i<l; i++){
-					links[i].target = '_blank';
-				}
-
-				var subLis = _ul.children;
-				for (var i=0, l=subLis.length; i<l; i++){
-					var subUl = subLis[i].getElementsByTagName('ul')[0];
-					var commentsCount = subUl.querySelectorAll('.metadata').length;
-					subUl.style.display = 'none';
-					if (commentsCount){
-						subUl.insertAdjacentHTML('beforebegin', tmpl2.render({
-							comments_count: commentsCount,
-							i_reply: commentsCount == 1 ? 'reply' : 'replies'
-						}));
-					}
-				}
-
-				if (more_comments_id && amplify.store.sessionStorage('hacker-comments-' + more_comments_id)){
-					_ul.insertAdjacentHTML('beforeend', '<li class="more-link-container"><a class="more-link" data-id="' + more_comments_id + '">More&hellip;</a></li>');
-				}
-				ul.removeChild(li);
-				while (_ul.hasChildNodes()){
-					ul.appendChild(_ul.childNodes[0]);
-				}
-				delete _ul;
-			} else {
-				// TODO: Need funnier error message than this.
-				alert('Oops, the comments have expired.');
 			}
 		},
 		reload: function(){

@@ -58,10 +58,6 @@
 		hw.comments.toggle(target);
 	});
 
-	ibento('section.comments li>a.more-link', 'click', function(e, target){
-		hw.comments.more(target);
-	});
-
 	ibento('#view-comments .load-error button', 'click', hw.comments.reload);
 
 	if (/Mobile;.*Firefox/.test(navigator.userAgent) && navigator.mozApps){ // Firefox Mobile
