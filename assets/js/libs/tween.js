@@ -1,27 +1,34 @@
 /**
- * @author sole / http://soledadpenades.com
- * @author mrdoob / http://mrdoob.com
- * @author Robert Eisele / http://www.xarg.org
- * @author Philippe / http://philippe.elsass.me
- * @author Robert Penner / http://www.robertpenner.com/easing_terms_of_use.html
- * @author Paul Lewis / http://www.aerotwist.com/
- * @author lechecacharro
- * @author Josh Faul / http://jocafa.com/
- * @author egraether / http://egraether.com/
- * @author endel / http://endel.me
- * @author Ben Delarre / http://delarre.net
+ * Tween.js - Licensed under the MIT license
+ * https://github.com/sole/tween.js
+ * ----------------------------------------------
+ *
+ * See https://github.com/sole/tween.js/graphs/contributors for the full list of contributors.
+ * Thank you all, you're awesome!
  */
 
-// Date.now shim for (ahem) Internet Explo(d|r)er
-if ( Date.now === undefined ) {
+// performance.now polyfill
+( function ( root ) {
 
-	Date.now = function () {
+	if ( 'performance' in root === false ) {
+		root.performance = {};
+	}
 
-		return new Date().valueOf();
+	// IE 8
+	Date.now = ( Date.now || function () {
+		return new Date().getTime();
+	} );
 
-	};
+	if ( 'now' in root.performance === false ) {
+		var offset = root.performance.timing && root.performance.timing.navigationStart ? performance.timing.navigationStart
+		                                                                                : Date.now();
 
-}
+		root.performance.now = function () {
+			return Date.now() - offset;
+		};
+	}
+
+} )( this );
 
 var TWEEN = TWEEN || ( function () {
 
@@ -29,7 +36,7 @@ var TWEEN = TWEEN || ( function () {
 
 	return {
 
-		REVISION: '12',
+		REVISION: '14',
 
 		getAll: function () {
 
@@ -67,7 +74,7 @@ var TWEEN = TWEEN || ( function () {
 
 			var i = 0;
 
-			time = time !== undefined ? time : ( typeof window !== 'undefined' && window.performance !== undefined && window.performance.now !== undefined ? window.performance.now() : Date.now() );
+			time = time !== undefined ? time : window.performance.now();
 
 			while ( i < _tweens.length ) {
 
@@ -110,6 +117,7 @@ TWEEN.Tween = function ( object ) {
 	var _onStartCallbackFired = false;
 	var _onUpdateCallback = null;
 	var _onCompleteCallback = null;
+	var _onStopCallback = null;
 
 	// Set all starting values present on the target object
 	for ( var field in object ) {
@@ -140,7 +148,7 @@ TWEEN.Tween = function ( object ) {
 
 		_onStartCallbackFired = false;
 
-		_startTime = time !== undefined ? time : ( typeof window !== 'undefined' && window.performance !== undefined && window.performance.now !== undefined ? window.performance.now() : Date.now() );
+		_startTime = time !== undefined ? time : window.performance.now();
 		_startTime += _delayTime;
 
 		for ( var property in _valuesEnd ) {
@@ -181,6 +189,13 @@ TWEEN.Tween = function ( object ) {
 
 		TWEEN.remove( this );
 		_isPlaying = false;
+
+		if ( _onStopCallback !== null ) {
+
+			_onStopCallback.call( _object );
+
+		}
+
 		this.stopChainedTweens();
 		return this;
 
@@ -260,6 +275,13 @@ TWEEN.Tween = function ( object ) {
 
 	};
 
+	this.onStop = function ( callback ) {
+
+		_onStopCallback = callback;
+		return this;
+
+	};
+
 	this.update = function ( time ) {
 
 		var property;
@@ -298,13 +320,13 @@ TWEEN.Tween = function ( object ) {
 
 			} else {
 
-                // Parses relative end values with start as base (e.g.: +10, -3)
+				// Parses relative end values with start as base (e.g.: +10, -3)
 				if ( typeof(end) === "string" ) {
 					end = start + parseFloat(end, 10);
 				}
 
 				// protect against non numeric properties.
-                if ( typeof(end) === "number" ) {
+				if ( typeof(end) === "number" ) {
 					_object[ property ] = start + ( end - start ) * value;
 				}
 
@@ -337,10 +359,14 @@ TWEEN.Tween = function ( object ) {
 						var tmp = _valuesStartRepeat[ property ];
 						_valuesStartRepeat[ property ] = _valuesEnd[ property ];
 						_valuesEnd[ property ] = tmp;
-						_reversed = !_reversed;
 					}
+
 					_valuesStart[ property ] = _valuesStartRepeat[ property ];
 
+				}
+
+				if (_yoyo) {
+					_reversed = !_reversed;
 				}
 
 				_startTime = time + _delayTime;
@@ -739,3 +765,27 @@ TWEEN.Interpolation = {
 	}
 
 };
+
+// UMD (Universal Module Definition)
+( function ( root ) {
+
+	if ( typeof define === 'function' && define.amd ) {
+
+		// AMD
+		define( [], function () {
+			return TWEEN;
+		} );
+
+	} else if ( typeof exports === 'object' ) {
+
+		// Node.js
+		module.exports = TWEEN;
+
+	} else {
+
+		// Global variable
+		root.TWEEN = TWEEN;
+
+	}
+
+} )( this );

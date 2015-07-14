@@ -10,10 +10,8 @@ module.exports = function(grunt) {
 						return path.replace(/^js\//i, '') + '.map';
 					},
 					sourceMapRoot: '../',
-					beautify: {
-						max_line_len: 500,
-						screw_ie8: true
-					}
+					maxLineLen: 500,
+					screwIE8: true
 				},
 				files: {
 					'js/hw-web.min.js': [
@@ -36,10 +34,8 @@ module.exports = function(grunt) {
 						return path.replace(/^js\//i, '') + '.map';
 					},
 					sourceMapRoot: '../',
-					beautify: {
-						max_line_len: 500,
-						screw_ie8: true
-					}
+					maxLineLen: 500,
+					screwIE8: true
 				},
 				files: {
 					'js/hw-ios.min.js': [
@@ -63,10 +59,8 @@ module.exports = function(grunt) {
 						return path.replace(/^js\//i, '') + '.map';
 					},
 					sourceMapRoot: '../',
-					beautify: {
-						max_line_len: 500,
-						screw_ie8: true
-					}
+					maxLineLen: 500,
+					screwIE8: true
 				},
 				files: {
 					'js/hw-ios-2.min.js': [
