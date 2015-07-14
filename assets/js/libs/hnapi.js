@@ -79,11 +79,11 @@
 	var urls = [
 		'//node-hnapi-eu.herokuapp.com/', // Heroku (EU)
 		'//node-hnapi.azurewebsites.net/', // Windows Azure (North EU)
-		'//node-hnapi-asia.azurewebsites.net/', // Windows Azure (East Asia)
-		'//node-hnapi-eus.azurewebsites.net/', // Windows Azure (East US)
-		'//node-hnapi-weu.azurewebsites.net/', // Windows Azure (West EU)
-		'//node-hnapi-wus.azurewebsites.net/', // Windows Azure (West US)
-		'//node-hnapi-ncus.azurewebsites.net/' // Windows Azure (North Central US)
+		'//node-hnapi-eus.azurewebsites.net/' // Windows Azure (East US)
+		// '//node-hnapi-asia.azurewebsites.net/', // Windows Azure (East Asia)
+		// '//node-hnapi-weu.azurewebsites.net/', // Windows Azure (West EU)
+		// '//node-hnapi-wus.azurewebsites.net/', // Windows Azure (West US)
+		// '//node-hnapi-ncus.azurewebsites.net/' // Windows Azure (North Central US)
 	];
 	var shuffle = function(array){ // Fisher-Yates
 		for (var i = array.length - 1; i > 0; i--){
