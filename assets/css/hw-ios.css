@@ -685,6 +685,10 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 }
 .view .post-content header h1 a .link-text{
 	font-size: 13px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block; 
 }
 .view .post-content header .metadata{
 	font-size: 13px;
