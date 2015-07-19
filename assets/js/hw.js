@@ -75,6 +75,7 @@
 		var pathnameLen = pathname.length;
 		var firstPath = domain.length <= 25 && pathnameLen > 3 && pathnameLen <= 15 && /^[^0-9][^.]+$/.test(pathname) ? ('/' + pathname) : '';
 		domained = domain + firstPath;
+		domainsCache[url] = domained;
 		return domained;
 	};
 
