@@ -47,10 +47,6 @@ Some of the *cutting-edge* web technologies used:
 Development stuff
 --------------------
 
-Use [Nitrous.IO](https://www.nitrous.io/?utm_source=github.com&utm_campaign=Hackerweb&utm_medium=hackonnitrous) to create your own *Hackerweb* in seconds:
-
-[![Hack cheeaun/hackerweb on Nitrous.IO](https://d3o0mnbgv6k92a.cloudfront.net/assets/hack-l-v1-3cc067e71372f6045e1949af9d96095b.png)](https://www.nitrous.io/hack_button?source=embed&runtime=nodejs&repo=cheeaun%2Fhackerweb&file_to_open=README.nitrous.md)
-
 - Prerequisites
 
 		git clone git://github.com/cheeaun/hackerweb.git
@@ -107,17 +103,12 @@ Do check out these awesome contributions as well:
 - [HNmobile Bookmarklet](http://neocoder.github.com/hnmbookmarklet/) by [neocoder](https://github.com/neocoder)
 - [Hacker News Menu Tab](http://www.guidefreitas.com/2012/03/hacker-news-menu-tab.html) ([GitHub](https://github.com/guidefreitas/HNewsTab)) by Guilherme Defreitas
 
-Other platforms?
-----------------
-
-I have plans to make this app look native on other mobile platforms once I fork our some money and get my hands on other mobile devices (Android, Windows Phone, etc) for development and testing. Contact me if you feel generous enough to donate some devices to me :)
-
 License
 -------
 
-Licensed under the [MIT License](http://cheeaun.mit-license.org/).
+[MIT](http://cheeaun.mit-license.org/).
 
 Other similar apps
 ------------------
 
-This is the not the first third-party app for Hacker News. Others have tried doing the same thing, despite some slight differences. I've compiled [a list of apps here](https://github.com/cheeaun/hackerweb/wiki/Hacker-News-apps).
+This is the not the first third-party app for Hacker News. Others have tried doing the same thing, despite some slight differences. I've compiled [a list of apps here](https://github.com/cheeaun/awesome-hacker-news).
