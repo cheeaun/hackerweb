@@ -331,6 +331,8 @@ i.icon-loading{
 	background-color: transparent;
 }
 .tableview-links li>a.disclosure{
+	-webkit-flex-grow: 1;
+	flex-grow: 1;
 	padding-right: 15px;
 }
 .tableview-links li>a.disclosure:after{
