@@ -1003,7 +1003,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	}
 }
 
-@media only screen and (min-width: 640px){
+@media only screen and (min-width: 737px){
 	.view:after{
 		-webkit-transform-origin: bottom left;
 		transform-origin: bottom left;

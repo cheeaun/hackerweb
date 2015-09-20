@@ -65,7 +65,7 @@
 	};
 
 	var getScreenState = function(){
-		return w.innerWidth >= 640 ? 'wide' : 'narrow';
+		return ((body.offsetWidth || w.innerWidth) > 736) ? 'wide' : 'narrow';
 	};
 
 	// Disable user scale of the viewport
