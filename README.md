@@ -69,7 +69,7 @@ Development stuff
 
 	- Embed images into CSS files
 
-			grunt embedImages
+			grunt embedImage
 
 		This will parse CSS files in `assets/css/*` and change this (any lines with `url()`):
 
