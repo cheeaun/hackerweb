@@ -1,5 +1,5 @@
 body{
-	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
 	font-size: 16px;
 	margin: 0;
 	padding: 0;
@@ -23,6 +23,7 @@ pre{
 }
 pre, code{
 	font-family: Menlo, Monaco, Inconsolata, Consolas, "Lucida Console", monospace;
+	font-size: 12px;
 }
 
 #outdated-browser{
@@ -70,6 +71,8 @@ pre, code{
 	top: 0;
 	right: 0;
 	z-index: 3;
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
 }
 .header-button{
 	position: absolute;
@@ -136,7 +139,7 @@ pre, code{
 	cursor: default;
 	padding: 0;
 	text-align: center;
-	font-size: 18px;
+	font-size: 1em;
 	font-weight: normal;
 	margin: 0;
 	white-space: nowrap;
@@ -161,20 +164,18 @@ pre, code{
 }
 .view>.scroll .loader,
 .view>.scroll .load-error{
-	font-size: 16px;
-	color: #666;
+	font-size: 14px;
 	color: #666;
 	text-align: center;
 	padding: 50px 0;
 }
 .view>.scroll .load-error button{
 	border: 0;
-	font-size: 14px;
 	height: 30px;
 	line-height: 30px;
 	cursor: pointer;
 	padding: 0 20px;
-	font-weight: bold;
+	font-weight: 500;
 	color: #666;
 	margin: 6px auto 4px;
 	background-color: #f0f0ea;
@@ -205,8 +206,7 @@ pre, code{
 	position: relative;
 }
 .tableview-links li>a{
-	font-size: 14px;
-	line-height: 1.3em;
+	line-height: 1.2em;
 	color: #000;
 	display: block;
 	padding: 10px 5px;
@@ -222,6 +222,7 @@ pre, code{
 	pointer-events: none;
 }
 .tableview-links li>a .number{
+	font-weight: lighter;
 	text-align: right;
 	width: 3.5ex;
 	color: #666d74;
@@ -234,13 +235,12 @@ pre, code{
 	padding-left: 5px;
 }
 .tableview-links li>a .story b{
-	font-weight: 600;
+	font-weight: normal;
 }
 .tableview-links li>a .metadata{
 	display: block;
-	font-size: 12px;
+	font-size: 14px;
 	color: #666d74;
-	line-height: 1.2em;
 }
 .tableview-links li>a:hover .link-text{
 	text-decoration: underline;
@@ -279,13 +279,15 @@ pre, code{
 	display: block;
 	text-align: center;
 }
+.tableview-links li>a.more-link:active{
+	opacity: .5;
+}
 
 .grouped-tableview{
 	margin: 10px 9px 11px;
 	padding: 10px;
 	border: 1px solid #E0E0E0;
 	background-color: #fff;
-	font-size: 13px;
 	border-radius: 2px;
 	overflow: hidden;
 }
@@ -331,7 +333,6 @@ ol.grouped-tableview-links li{
 ul.grouped-tableview-links li>a,
 ol.grouped-tableview-links li>a{
 	color: #000;
-	font-size: 16px;
 	display: inline-block;
 	box-sizing: border-box;
 	width: 100%;
@@ -351,20 +352,28 @@ ol.grouped-tableview-links li>a:hover{
 }
 .view .post-content header{
 	padding: 10px 15px;
+	line-height: 1.2em;
 }
 .view .post-content header h1,
 .view .post-content header p{
+	font-size: 1em;
 	margin: 0;
 	padding: 0;
 }
-.view .post-content header h1 a{
+.view .post-content header a{
 	display: block;
+	text-decoration: none;
 }
-.view .post-content header h1 a .link-text{
-	font-size: 13px;
+.view .post-content header h1{
+	color: #000;
+	font-weight: normal;
+	font-size: 1em;
+}
+.view .post-content header .link-text{
+	font-size: 14px;
 }
 .view .post-content header .metadata{
-	font-size: 13px;
+	font-size: 14px;
 	color: #666d74;
 }
 .view .post-content header .metadata a.external-link{
@@ -381,14 +390,6 @@ ol.grouped-tableview-links li>a:hover{
 }
 .view .post-content header .metadata a.external-link:hover{
 	color: #007aff;
-}
-.view .post-content header h1{
-	font-size: 17px;
-	line-height: 1.2em;
-}
-.view .post-content header h1 a{
-	color: #000;
-	text-decoration: none;
 }
 .view .post-content header + .grouped-tableview{
 	margin-top: 0;
@@ -439,7 +440,7 @@ ol.grouped-tableview-links li>a:hover{
 }
 
 .view section.comments{
-	font-size: 13px;
+	font-size: 14px;
 	background-color: #fff;
 	border-top: 1px solid #E0E0E0;
 	border-bottom: 1px solid #E0E0E0;
@@ -475,6 +476,7 @@ ol.grouped-tableview-links li>a:hover{
 	margin: 0;
 }
 .view section.comments p.metadata .user{
+	font-weight: normal;
 	float: left;
 	color: #bf223f;
 }
@@ -510,7 +512,6 @@ ol.grouped-tableview-links li>a:hover{
 .view section.comments p.no-comments{
 	text-align: center;
 	margin: 50px 0;
-	font-size: 16px;
 	color: #666;
 }
 .view section.comments button.comments-toggle{
@@ -519,8 +520,7 @@ ol.grouped-tableview-links li>a:hover{
 	line-height: 22px;
 	cursor: pointer;
 	padding: 0 13px;
-	font-weight: bold;
-	font-size: 12px;
+	font-size: 1em;
 	color: #666;
 	margin: 2px 0 6px;
 	background-color: #f0f0ea;
@@ -536,16 +536,6 @@ ol.grouped-tableview-links li>a:hover{
 }
 .view section.comments li.more-link-container{
 	padding: 0;
-}
-.view section.comments li>a.more-link{
-	font-size: 15px;
-	text-decoration: none;
-	cursor: pointer;
-	line-height: 3em;
-	padding: 10px;
-	display: block;
-	color: #007aff;
-	text-align: center;
 }
 
 .link-text{
@@ -578,9 +568,13 @@ ol.grouped-tableview-links li>a:hover{
 }
 #app-desc{
 	margin-left: 67px;
+	font-size: 14px;
+	color: #666d74;
 }
 #app-desc strong{
-	font-size: 18px;
+	color: #000;
+	font-size: 1rem;
+	font-weight: normal;
 }
 
 @-ms-viewport{
@@ -603,8 +597,6 @@ ol.grouped-tableview-links li>a:hover{
 		box-shadow: 0 0 1px #aaa;
 	}
 	.view>header{
-		border-top-left-radius: 2px;
-		border-top-right-radius: 2px;
 		position: static;
 	}
 	.view>.scroll{
