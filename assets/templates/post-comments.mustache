@@ -1,13 +1,12 @@
 <div class="post-content">
 	{{#has_post}}
 		<header>
-			<h1>
-				<a href="{{url}}" target="_blank">{{title}}<br>
+			<a href="{{url}}" target="_blank">
+				<h1>{{title}}</h1>
 				{{#user}}
 					{{#domain}}<span class="link-text">{{domain}}</span>{{/domain}}
 				{{/user}}
-				</a>
-			</h1>
+			</a>
 			<p class="metadata">
 				{{#user}}
 					<span class="inline-block">{{points}} {{i_point}} by {{user}}</span>
