@@ -321,13 +321,15 @@ i.icon-loading{
 	padding: 0;
 	margin-left: -44px;
 	min-width: 44px;
-	background: transparent url(../images/ios7/comment-button.png) no-repeat center;
+	background: transparent url(../images/ios7/comment-button.png) no-repeat center 15px;
 	background-size: 20px 19px;
 	-webkit-transition: opacity .3s;
 	transition: opacity .3s;
 }
 .tableview-links li>a.detail-disclosure-button.tappable-active{
 	opacity: .205;
+	-webkit-transition-duration: 0;
+	transition-duration: 0;
 	background-color: transparent;
 }
 .tableview-links li>a.disclosure{
@@ -477,12 +479,12 @@ ol.grouped-tableview-links li>a.tappable-active{
 	font: -apple-system-body;
 	line-height: 1.2em;
 }
-.view .post-content header h1 a{
+.view .post-content header a{
 	color: #000;
 	display: block;
 	text-decoration: none;
 }
-.view .post-content header h1 .link-text{
+.view .post-content header a .link-text{
 	font-size: 13px;
 	font: -apple-system-footnote;
 	line-height: 1.2em;
