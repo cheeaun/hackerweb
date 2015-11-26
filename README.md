@@ -85,7 +85,6 @@ Development stuff
 
 		Arguments:
 
-		- `--appcache` - enable Application Cache
 		- `--port=XX` - specify a custom port number
 
 	- Run both `watch` and `connect` tasks at the same time
