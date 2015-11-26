@@ -8,7 +8,6 @@ self.addEventListener('activate', function(event){
 
 var cacheName = 'hackerweb-v1';
 var successResponses = /^0|([123]\d\d)|(40[14567])|410$/;
-var networkTimeoutSeconds = 10;
 
 function fetchAndCache(request){
 	console.log('fetchAndCache', request.url);
