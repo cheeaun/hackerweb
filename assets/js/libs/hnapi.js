@@ -59,7 +59,7 @@
 					error(e);
 				};
 				if (r.readyState <= 1 || supportXDomainRequest){ // XDomainRequest doesn't have readyState
-					r.open('GET', url + '?' + date(), true);
+					r.open('GET', url, true);
 					r.send();
 				}
 				requests[url] = r;
@@ -77,9 +77,9 @@
 	};
 
 	var urls = [
-		'//node-hnapi-eu.herokuapp.com/', // Heroku (EU)
-		'//node-hnapi.azurewebsites.net/', // Windows Azure (North EU)
-		'//node-hnapi-eus.azurewebsites.net/' // Windows Azure (East US)
+		'https://node-hnapi-eu.herokuapp.com/', // Heroku (EU)
+		'https://node-hnapi.azurewebsites.net/', // Windows Azure (North EU)
+		'https://node-hnapi-eus.azurewebsites.net/' // Windows Azure (East US)
 		// '//node-hnapi-asia.azurewebsites.net/', // Windows Azure (East Asia)
 		// '//node-hnapi-weu.azurewebsites.net/', // Windows Azure (West EU)
 		// '//node-hnapi-wus.azurewebsites.net/', // Windows Azure (West US)

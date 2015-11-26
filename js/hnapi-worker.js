@@ -37,7 +37,7 @@ addEventListener('message', function(e){
 		});
 	}
 	if (r.readyState <= 1){
-		r.open('GET', url + '?' + (+new Date()), true);
+		r.open('GET', url, true);
 		r.send();
 	}
 	requests[url] = r;
