@@ -548,7 +548,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 .view section.comments{
 	background-color: #fff;
 	font-size: 13px;
-	font: -apple-system-footnote;
+	font: -apple-system-body;
 	line-height: 1.4em;
 	background-image: -webkit-linear-gradient(top, #c8c7cc, #c8c7cc 50%, transparent 50%), -webkit-linear-gradient(bottom, #c8c7cc, #c8c7cc 50%, transparent 50%);
 	background-image: linear-gradient(top, #c8c7cc, #c8c7cc 50%, transparent 50%), linear-gradient(bottom, #c8c7cc, #c8c7cc 50%, transparent 50%);
@@ -589,6 +589,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 .view section.comments p.metadata{
 	padding: 0;
 	margin: 0;
+	font: -apple-system-footnote;
 }
 .view section.comments p.metadata .user{
 	float: left;
