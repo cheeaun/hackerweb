@@ -151,8 +151,8 @@ if ('serviceWorker' in navigator){
 	}).catch(function(err){
 		console.log('ServiceWorker registration failed: ', err);
 	});
-	ga('send', 'event', 'App', 'ServiceWorker', 'serviceWorker' in navigator);
 }
+ga('send', 'event', 'App', 'ServiceWorker', 'serviceWorker' in navigator);
 </script>
 </body>
 </html>
