@@ -7,9 +7,9 @@
 		</p>
 		{{^deleted}}
 			<p>{{{content}}}
+			<ul>
+				{{>comments_list}}
+			</ul>
 		{{/deleted}}
-		<ul>
-			{{>comments_list}}
-		</ul>
 	</li>
 {{/comments}}
