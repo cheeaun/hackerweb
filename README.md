@@ -33,68 +33,43 @@ This web app works best on iOS 5+ Mobile Safari (iOS theme) and other modern bro
 
 Also uses the [unofficial Hacker News API](https://github.com/cheeaun/node-hnapi/).
 
-Some of the *cutting-edge* web technologies used:
-
-- [localStorage & sessionStorage](http://caniuse.com/namevalue-storage)
-- [CORS](http://caniuse.com/cors)
-- [Application Cache](http://caniuse.com/offline-apps)
-- [CSS Animation](http://caniuse.com/css-animation)
-- [CSS Media Queries](http://caniuse.com/css-mediaqueries)
-- [Flexible Box Layout](http://caniuse.com/flexbox) (old spec)
-- [requestAnimationFrame](http://caniuse.com/requestanimationframe)
-- [Web Workers](http://caniuse.com/webworkers)
-
 Development stuff
 --------------------
 
-- Prerequisites
+### Prerequisites
 
-		git clone git://github.com/cheeaun/hackerweb.git
-		cd hackerweb/
-		npm install
+```
+git clone git://github.com/cheeaun/hackerweb.git
+cd hackerweb/
+npm install
+```
 
-- [Grunt](http://gruntjs.com/) tasks
+### [Grunt](http://gruntjs.com/) tasks
 
-	- Compile templates in `templates/*` to generate `assets/js/templates.js`
+- `grunt templates` - Compile templates in `templates/*` to generate `assets/js/templates.js`
+- `grunt uglify` - Concat and minify JavaScript files in `assets/js/*` to generate `js/*`
+- `grunt watch` - Watch the templates and scripts, run `templates` and `uglify` tasks when they're changed
+- `grunt embedImage` - Embed images into CSS files. This will parse CSS files in `assets/css/*` and change this (any lines with `url()`):
 
-			grunt templates
+	```
+	background-image: url(PATH); /* embedImages:url(PATH) */
+	```
 
-	- Concat and minify JavaScript files in `assets/js/*` to generate `js/*`
+	... into this:
 
-			grunt uglify
+	```
+	background-image: url(data:DATAURI); /* embedImages:url(PATH) */
+	```
 
-	- Watch the templates and scripts, run `templates` and `uglify` tasks when they're changed
+- `grunt connect` - Run a local dev server. Arguments:
+	- `--port=XX` - specify a custom port number
 
-			grunt watch
-
-	- Embed images into CSS files
-
-			grunt embedImage
-
-		This will parse CSS files in `assets/css/*` and change this (any lines with `url()`):
-
-			background-image: url(PATH); /* embedImages:url(PATH) */
-
-		... into this:
-
-			background-image: url(data:DATAURI); /* embedImages:url(PATH) */
-
-	- Run a local dev server.
-
-			grunt connect
-
-		Arguments:
-
-		- `--port=XX` - specify a custom port number
-
-	- Run both `watch` and `connect` tasks at the same time
-
-			grunt server
+- `grunt server` - Run both `watch` and `connect` tasks at the same time
 
 Contributing and Feedback
 -------------------------
 
-Feel free to fork, file some issues or [tweet your feedback](http://twitter.com/cheeaun) to me.
+Feel free to fork, file some issues or [tweet your feedback](https://twitter.com/cheeaun) to me.
 
 Do check out these awesome contributions as well:
 
