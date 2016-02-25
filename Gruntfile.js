@@ -147,19 +147,6 @@ module.exports = function(grunt) {
 					logConcurrentOutput: true
 				}
 			}
-		},
-		shell: {
-			deploy: {
-				options: {
-					stdout: true
-				},
-				command: [
-					'git checkout gh-pages',
-					'git merge master',
-					'git push origin gh-pages',
-					'git checkout master'
-				].join(' && ')
-			}
 		}
 	});
 
@@ -176,8 +163,4 @@ module.exports = function(grunt) {
 	if (port) grunt.config('connect.server.options.port', port);
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.registerTask('server', 'concurrent:server');
-
-	// Shorter aliases
-	grunt.registerTask('deploy', 'shell:deploy');
-
 };

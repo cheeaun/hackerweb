@@ -9,8 +9,10 @@
     "grunt-contrib-jshint": "~0.12.0",
     "grunt-contrib-uglify": "~0.11.1",
     "grunt-contrib-watch": "~0.6.1",
-    "grunt-shell": "~1.1.2",
     "hogan.js": "git://github.com/twitter/hogan.js.git",
     "mime": "~1.3.4"
+  },
+  "scripts": {
+    "deploy": "git checkout gh-pages && git merge master && git push origin gh-pages && git checkout master"
   }
 }
