@@ -20,7 +20,6 @@ module.exports = function(grunt) {
 						'assets/js/libs/hogan.js',
 						'assets/js/libs/hnapi.js',
 						'assets/js/libs/ibento.js',
-						'assets/js/libs/classList.js',
 						'assets/js/templates.js',
 						'assets/js/hw.js',
 						'assets/js/hw-web.js'
