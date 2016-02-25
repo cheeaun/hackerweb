@@ -89,12 +89,6 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
-		jshint: {
-			all: [
-				'assets/js/libs/*.js',
-				'assets/js/*.js'
-			]
-		},
 		templates: {
 			all: {
 				files: {
@@ -152,7 +146,6 @@ module.exports = function(grunt) {
 
 	grunt.loadTasks('tasks');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
