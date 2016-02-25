@@ -317,10 +317,6 @@
 				var links = div.querySelectorAll('a');
 				for (var i=0, l=links.length; i<l; i++){
 					var link = links[i];
-					if (link.classList.contains('comment-permalink')){
-						var id = link.dataset ? link.dataset.id : link.getAttribute('data-id');
-						link.href = '//news.ycombinator.com/item?id=' + id;
-					}
 					link.target = '_blank';
 				}
 
