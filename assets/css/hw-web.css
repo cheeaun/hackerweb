@@ -42,8 +42,7 @@ pre, code{
 	display: inline-block;
 	width: 14px;
 	height: 18px;
-	background: transparent url(../images/web/refresh-icon.png) no-repeat;
-	background-image: url(../images/web/refresh-icon.svg), none;
+	background: transparent url(../images/web/refresh-icon.svg) no-repeat;
 	background-size: 14px 18px;
 	vertical-align: middle;
 	overflow: hidden;
@@ -128,8 +127,7 @@ pre, code{
 	overflow: hidden;
 	text-indent: -999px;
 	min-width: 32px;
-	background-image: url(../images/web/home-icon.png);
-	background-image: url(../images/web/home-icon.svg), none;
+	background-image: url(../images/web/home-icon.svg);
 	background-size: 19.5px 17px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -263,8 +261,7 @@ pre, code{
 	display: inline-block;
 	width: 17px;
 	height: 17px;
-	background: transparent url(../images/web/comments-icon.png) no-repeat;
-	background-image: url(../images/web/comments-icon.svg), none;
+	background: transparent url(../images/web/comments-icon.svg) no-repeat;
 	background-size: 17px 17px;
 	margin: 15px 0;
 }
@@ -384,8 +381,7 @@ ol.grouped-tableview-links li>a:hover{
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	padding-left: 16px;
-	background: transparent url(../images/external-arrow.png) no-repeat 0 50%;
-	background-image: url(../images/web/external-arrow.svg), none;
+	background: transparent url(../images/web/external-arrow.svg) no-repeat 0 50%;
 	background-size: 12px 10px;
 }
 .view .post-content header .metadata a.external-link:hover{
@@ -462,8 +458,7 @@ ol.grouped-tableview-links li>a:hover{
 .view section.comments ul ul li{
 	padding: 0 0 0 15px;
 	border: 0;
-	background: transparent url(../images/comment-arrow.png) no-repeat 0 4px;
-	background-image: url(../images/web/comment-arrow.svg), none;
+	background: transparent url(../images/web/comment-arrow.svg) no-repeat 0 4px;
 	background-size: 10px 9px;
 	color: #333;
 }
