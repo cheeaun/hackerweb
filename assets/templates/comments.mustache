@@ -2,8 +2,8 @@
 	<li>
 		<p class="metadata {{#deleted}}deleted{{/deleted}}">
 			{{#deleted}}<span>[deleted]</span>{{/deleted}}
-			{{^deleted}}<b class="user">{{user}}</b>{{/deleted}}
-			<time><a href="#" data-id="{{id}}" class="comment-permalink">{{time_ago}}</a></time>
+			{{^deleted}}<a href="https://news.ycombinator.com/user?id={{user}}" target="_blank"><b class="user">{{user}}</b></a>{{/deleted}}
+			<time><a href="https://news.ycombinator.com/item?id={{id}}" target="_blank">{{time_ago}}</a></time>
 		</p>
 		{{^deleted}}
 			<p>{{{content}}}
