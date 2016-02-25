@@ -721,11 +721,12 @@ ol.grouped-tableview-links li>a.tappable-active{
 }
 
 #y-icon{
-	background: transparent url(../../icons/touch-icon-120.png) no-repeat;
+	background: transparent url(../../icons/icon.svg) no-repeat;
 	background-size: 60px 60px;
 	width: 60px;
 	height: 60px;
 	float: left;
+	border: 1px solid #eee;
 	border-radius: 14px;
 }
 

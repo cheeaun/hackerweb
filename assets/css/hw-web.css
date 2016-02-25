@@ -553,12 +553,12 @@ ol.grouped-tableview-links li>a:hover{
 }
 
 #y-icon{
-	background: transparent url(../../icons/touch-icon-114.png) no-repeat;
-	background-image: url(../../icons/icon.svg), none;
+	background: transparent url(../../icons/icon.svg) no-repeat;
 	background-size: 57px 57px;
 	width: 57px;
 	height: 57px;
 	float: left;
+	border: 1px solid #eee;
 	border-radius: 4px;
 }
 #app-desc{
