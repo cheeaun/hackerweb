@@ -235,6 +235,7 @@
 			});
 		},
 		more: function(target){
+			if (target.classList.contains('loading')) return;
 			target.classList.add('loading');
 			var news2 = amplify.store('hacker-news2');
 			setTimeout(function(){
