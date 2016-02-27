@@ -144,6 +144,8 @@ if ('serviceWorker' in navigator){
 	});
 }
 if (typeof ga != 'undefined') ga('send', 'event', 'App', 'ServiceWorker', 'serviceWorker' in navigator);
+
+if (/preview/i.test(location.search)) document.querySelector('.scroll').style.height = 'auto';
 </script>
 </body>
 </html>
