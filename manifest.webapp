@@ -1,12 +1,12 @@
 {
 	"name": "HackerWeb",
-	"description": "A simply readable Hacker News web app",
-	"version": "0.2",
+	"description": "A simply readable Hacker News app",
+	"version": "0.3",
 	"launch_path": "/",
 	"icons": {
-		"30": "/icons/fxos-icon-30.png",
-		"60": "/icons/fxos-icon-60.png",
-		"128": "/icons/fxos-icon-128.png"
+		"30": "/icons/icon-30.png",
+		"60": "/icons/icon-60.png",
+		"128": "/icons/icon-128.png"
 	},
 	"developer": {
 		"name": "Lim Chee Aun",
