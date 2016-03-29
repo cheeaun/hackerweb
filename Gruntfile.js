@@ -114,7 +114,6 @@ module.exports = function(grunt) {
 		connect: {
 			server: {
 				options: {
-					port: process.env.HACKERWEB_PORT || 80,
 					keepalive: true,
 					hostname: '*',
 					debug: true
