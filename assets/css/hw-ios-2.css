@@ -1112,8 +1112,8 @@ ol.grouped-tableview-links li>a.tappable-active{
 		transition: -webkit-transform 350ms;
 	}
 	#view-about.hidden{
-		-webkit-transform: translateY(175%);
-		transform: translateY(175%);
+		-webkit-transform: translateY(220%);
+		transform: translateY(220%);
 	}
 	#view-about>.scroll>section{
 		padding: 0 28px;
@@ -1133,13 +1133,6 @@ ol.grouped-tableview-links li>a.tappable-active{
 		padding-bottom: 34px;
 	}
 
-	#y-icon{
-		background: transparent url(../../icons/touch-icon-152.png) no-repeat;
-		background-size: 76px 76px;
-		width: 76px;
-		height: 76px;
-		border-radius: 18px;
-	}
 	#app-desc{
 		margin-left: 86px;
 	}
