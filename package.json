@@ -12,6 +12,7 @@
     "mime": "~1.3.4"
   },
   "scripts": {
+    "start": "grunt server",
     "deploy": "git checkout gh-pages && git merge master && git push origin gh-pages && git checkout master"
   }
 }
