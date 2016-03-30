@@ -337,6 +337,7 @@ ol.grouped-tableview-links li>a{
 	text-decoration: none;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	line-height: 1.2em;
 }
 ul.grouped-tableview-links li>a:hover,
 ol.grouped-tableview-links li>a:hover{
