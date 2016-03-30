@@ -453,6 +453,7 @@ ol.grouped-tableview-links li>a{
 	background: transparent url(../images/ios7/disclosure-indicator.png) no-repeat;
 	background-position: right 15px top 50%;
 	background-size: 8px 12.5px;
+	line-height: 1.2em;
 }
 ul.grouped-tableview-links li>a.tappable-active,
 ol.grouped-tableview-links li>a.tappable-active{
