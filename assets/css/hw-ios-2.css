@@ -261,6 +261,7 @@ i.icon-loading{
 	text-decoration: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	box-sizing: border-box;
+	width: 100%;
 }
 .tableview-links li>a:visited{
 	color: #8e8e93;
@@ -274,6 +275,7 @@ i.icon-loading{
 .tableview-links li>a .story{
 	-webkit-flex-grow: 1;
 	flex-grow: 1;
+	min-width: 0;
 }
 .tableview-links li>a .story>b{
 	font-weight: normal;
@@ -320,7 +322,7 @@ i.icon-loading{
 	-webkit-touch-callout: none;
 	padding: 0;
 	margin-left: -44px;
-	min-width: 44px;
+	width: 44px;
 	background: transparent url(../images/ios7/comment-button.png) no-repeat center 15px;
 	background-size: 20px 19px;
 	-webkit-transition: opacity .3s;
