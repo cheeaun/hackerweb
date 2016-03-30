@@ -94,6 +94,7 @@
 		}
 	};
 	shuffle(urls);
+	urls.unshift('https://api.hackerwebapp.com/'); // The ultimate API
 
 	var length = urls.length;
 	var reqAgain = function(i, path, success, error){
