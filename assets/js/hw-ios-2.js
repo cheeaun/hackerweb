@@ -163,6 +163,8 @@
 							$('overlay').classList.remove('hide');
 						}, 1);
 					}
+					// Track if anyone click 'About'
+					if (typeof ga != 'undefined') ga('send', 'pageview', path);
 					break;
 				case 'comments':
 					if (!isWideScreen){
