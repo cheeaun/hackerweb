@@ -524,6 +524,7 @@ ol.grouped-tableview-links li>a.tappable-active{
 	width: 100%;
 }
 .view .post-content .poll li .poll-details b{
+	font-weight: normal;
 	display: table-cell;
 	color: #333;
 }
