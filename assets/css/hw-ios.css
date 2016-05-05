@@ -908,6 +908,7 @@ ol.grouped-tableview-links li>a.disclosure.tappable-active:after{
 }
 .inline-block{
 	display: inline-block;
+	margin-right: 4px;
 }
 
 /* For modern browsers */

@@ -55,6 +55,7 @@ pre, code{
 
 .inline-block{
 	display: inline-block;
+	margin-right: 4px;
 }
 
 i.icon-refresh{

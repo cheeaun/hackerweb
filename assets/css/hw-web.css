@@ -541,6 +541,7 @@ ol.grouped-tableview-links li>a:hover{
 }
 .inline-block{
 	display: inline-block;
+	margin-right: 4px;
 }
 
 /* For modern browsers */
