@@ -1141,3 +1141,122 @@ ol.grouped-tableview-links li>a.tappable-active{
 		margin-left: 86px;
 	}
 }
+
+@media (prefers-color-scheme: dark){
+	body{
+		color: #fff;
+		background-color: #1c1c1e;
+	}
+	#apploader{
+		background-color: #1c1c1e;
+	}
+	a,
+	.link-text{
+		color: #1684ff;
+	}
+	.view>header,
+	.view.shaded>header{
+		background-color: #2c2c2e;
+	}
+	.view>header .header-button{
+		filter: brightness(1.1);
+		/* color: #1684ff; */
+	}
+	.view:after{
+		background-color: rgba(255,255,255,.15);
+	}
+	.view.shaded>.scroll,
+	.tableview{
+		background-color: #1c1c1e;
+	}
+	.tableview li{
+		background-image: -webkit-linear-gradient(bottom, #3a3a3c, #3a3a3c 50%, transparent 50%);
+		background-image: linear-gradient(bottom, #3a3a3c, #3a3a3c 50%, transparent 50%);
+	}
+	.tableview-links li>a{
+		color: #fff;
+	}
+	.tableview-links li>a .metadata .link-text,
+	.view .post-content header a .link-text{
+		color: #2988cf;
+	}
+	.tableview-links li:not(:first-child)>a:first-child:before{
+		background-image: -webkit-linear-gradient(bottom, #48484a, #48484a 50%, transparent 50%);
+		background-image: linear-gradient(bottom, #48484a, #48484a 50%, transparent 50%);
+	}
+	.tableview-links li>a.tappable-active,
+	.tableview-links li>a.selected{
+		background-color: #48484a;
+	}
+	.grouped-tableview{
+		background-color: #2c2c2e;
+		background-image: -webkit-linear-gradient(top, #3a3a3c, #3a3a3c 50%, transparent 50%), -webkit-linear-gradient(bottom, #3a3a3c, #3a3a3c 50%, transparent 50%);
+		background-image: linear-gradient(top, #3a3a3c, #3a3a3c 50%, transparent 50%), linear-gradient(bottom, #3a3a3c, #3a3a3c 50%, transparent 50%);
+	}
+	ul.grouped-tableview li,
+	ol.grouped-tableview li,
+	ul.grouped-tableview-links:before,
+	ol.grouped-tableview-links:before{
+		background-image: -webkit-linear-gradient(bottom, #3a3a3c, #3a3a3c 50%, transparent 50%);
+		background-image: linear-gradient(bottom, #3a3a3c, #3a3a3c 50%, transparent 50%);
+	}
+	ul.grouped-tableview-links li,
+	ol.grouped-tableview-links li{
+		background-color: #2c2c2e;
+	}
+	ul.grouped-tableview-links li>a,
+	ol.grouped-tableview-links li>a{
+		color: #fff;
+	}
+	ul.grouped-tableview-links li>a.tappable-active,
+	ol.grouped-tableview-links li>a.tappable-active{
+		background-color: #48484a;
+	}
+	.view .post-content header a{
+		color: #fff;
+	}
+	.view .post-content pre,
+	.view section.comments pre{
+		background-color: #48484a;
+	}
+	.view section.comments{
+		background-color: #2c2c2e;
+		background-image: -webkit-linear-gradient(top, #48484a, #48484a 50%, transparent 50%), -webkit-linear-gradient(bottom, #48484a, #48484a 50%, transparent 50%);
+		background-image: linear-gradient(top, #48484a, #48484a 50%, transparent 50%), linear-gradient(bottom, #48484a, #48484a 50%, transparent 50%);
+	}
+	.view section.comments ul li{
+		background-image: -webkit-linear-gradient(top, #48484a, #48484a 50%, transparent 50%);
+		background-image: linear-gradient(top, #48484a, #48484a 50%, transparent 50%);
+	}
+	.view section.comments ul ul li{
+		color: #f2f2f7;
+	}
+	.view section.comments p.metadata .user{
+		color: #e84f66;
+	}
+	.view section.comments p.metadata .user.op:after{
+		background-color: #e84f66;
+	}
+	.view section.comments .load-error button{
+		filter: brightness(1.1);
+		/* color: #1684ff; */
+	}
+	@media only screen and (min-width: 737px){
+		.tableview-links li>a.selected:visited{
+			color: #fff;
+		}
+		#view-home>header,
+		#view-home>.scroll{
+			border-right-color: #48484a;
+		}
+	}
+	.icon-refresh,
+	#view-comments .header-button-left button,
+	#view-about .header-button-left button,
+	.tableview-links li>a.detail-disclosure-button{
+		filter: brightness(1.1);
+	}
+	.loader{
+		filter: invert(1);
+	}
+}
