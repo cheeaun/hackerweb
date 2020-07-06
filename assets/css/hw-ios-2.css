@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
 html{
 	height: 100%;
 	overflow: hidden;
@@ -13,22 +15,6 @@ body{
 	-webkit-text-size-adjust: none;
 	visibility: visible;
 	overflow: hidden;
-}
-
-#apploader{
-	position: fixed;
-	top: 0;
-	z-index: 100;
-	width: 100%;
-	height: 100%;
-	background-color: #fff;
-	pointer-events: none;
-	opacity: 1;
-	-webkit-transition: opacity .3s;
-	transition: opacity .3s;
-}
-#apploader.hide{
-	opacity: 0;
 }
 
 a{
