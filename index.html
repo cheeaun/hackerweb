@@ -13,18 +13,6 @@
 <link rel="manifest" href="manifest.json">
 <style>body{ visibility: hidden; }</style>
 <script>
-// WP8 Viewport fix: http://trentwalton.com/2013/01/16/windows-phone-8-viewport-fix/
-if (navigator.userAgent.match(/IEMobile\/10\.0/)){
-	var msViewportStyle = document.createElement('style');
-	msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'));
-	document.getElementsByTagName('head')[0].appendChild(msViewportStyle);
-}
-</script>
-<script>
-if (window.location.host.indexOf('github.io') > -1 && window.location.protocol != 'https:'){
-	window.location.protocol = 'https'; // Force SSL
-}
-
 var RavenConfig = { dsn: 'https://ba1fa9e133f64714b762e2d8d46a0c63@app.getsentry.com/6152' };
 
 if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.github.com' || location.hostname == 'app.hackerwebapp.com' && !/preview/i.test(location.search)){
