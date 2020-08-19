@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-title" content="HackerWeb">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="color-scheme" id="meta-color-scheme" content="dark light">
 <link rel="shortcut icon" href="icons/favicon.ico">
 <link rel="shortcut icon" sizes="196x196" href="icons/icon-196.png">
 <link rel="apple-touch-icon-precomposed" href="icons/icon-180.png">
@@ -70,9 +71,13 @@ if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.gi
 	</header>
 	<div class="scroll striped">
 		<section>
-			<div class="grouped-tableview cf">
-				<span id="y-icon"></span>
-				<p id="app-desc"><strong>HackerWeb</strong><br>A simply readable Hacker News app.</p>
+			<div class="grouped-tableview cf" id="hw-appearance-container" hidden>
+				<div class="inline-block">Appearance</div>
+				<div class="inline-block" id="hw-appearance">
+					<label><input name="hw-appearance" type="radio" value="light"> Light</label>
+					<label><input name="hw-appearance" type="radio" value="dark"> Dark</label>
+					<label hidden><input name="hw-appearance" type="radio" value="auto"> Auto</label>
+				</div>
 			</div>
 			<ul class="grouped-tableview grouped-tableview-links">
 				<li><a href="https://www.buymeacoffee.com/cheeaun" target="_blank">☕️ Buy me a cup of coffee</a></li>
