@@ -463,7 +463,7 @@
 				$('hw-appearance-container').hidden = false;
 				var $hwAppearance = $('hw-appearance');
 				var $metaColorScheme = $('meta-color-scheme');
-				var prefersColorSchemeSupported = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+				var prefersColorSchemeSupported = window.matchMedia && window.matchMedia('(prefers-color-scheme)').media !== 'not all';
 				var appearanceStorageKey = 'hw-appearance';
 				var appearance = localStorage.getItem(appearanceStorageKey) || 'auto';
 
