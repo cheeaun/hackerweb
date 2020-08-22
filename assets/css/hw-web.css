@@ -70,8 +70,6 @@ pre, code{
 	top: 0;
 	right: 0;
 	z-index: 3;
-	-webkit-backdrop-filter: blur(10px);
-	backdrop-filter: blur(10px);
 }
 .header-button{
 	position: absolute;
@@ -637,7 +635,9 @@ ol.grouped-tableview-links li>a:hover{
 	}
 
 	/* Post */
-	.view>header,
+	.view>header{
+		background-color: #1e1e1e;
+	}
 	.view section.comments,
 	.header-button:hover{
 		background-color: rgba(255,255,255,.05);
