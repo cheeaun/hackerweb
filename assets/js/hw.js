@@ -452,10 +452,14 @@
 		hw.news.render();
 		ruto.init();
 
-		var link = Array.from(document.styleSheets).find(function(s){
-			return /hw.*\.css/i.test(s.href);
-		});
 		function renderColorScheme() {
+			var link = Array.from(document.styleSheets).find(function(s){
+				return /hw.*\.css/i.test(s.href);
+			});
+			if (!link) {
+				setTimeout(renderColorScheme, 1000);
+				return;
+			}
 			var cssRule = Array.from(link.cssRules).find(function(r){
 				return r.media && /color-scheme:\s*dark/i.test(r.media.mediaText);
 			});
@@ -500,11 +504,7 @@
 				}
 			}
 		}
-		if (link) {
-			renderColorScheme();
-		} else {
-			setTimeout(renderColorScheme, 1000);
-		}
+		renderColorScheme();
 	};
 
 	w.hw = hw;
