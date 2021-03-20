@@ -5,6 +5,10 @@
 		return d.getElementById(id);
 	};
 
+	var toArray = function(nodeList){
+		return Array.prototype.slice.call(nodeList)
+	} 
+
 	var pubsubCache = {},
 		clone = function(obj){
 			var target = {};
@@ -49,6 +53,38 @@
 				}
 			}
 			document.title = title;
+		},
+		setOpenGraph: function(data){
+
+			var retrieveMetaTag = function(attribute, value){
+				var meta = toArray(document.getElementsByTagName('meta')).filter(
+					function(m){
+						return m.getAttribute(attribute) === value;
+					})[0];
+				if (meta === undefined) {
+					meta = document.createElement('meta');
+					meta.setAttribute(attribute, value);
+					document.getElementsByTagName('head')[0].appendChild(meta);
+				}
+				return meta;
+			}
+
+			var description = retrieveMetaTag('name', 'description');
+			var descriptionContent = (data === undefined ? 
+				'HackerWeb - a simply readable Hacker News app' : 
+				'Find out what Hacker News thinks of this with HackerWeb.');
+			description.setAttribute('content', descriptionContent);
+			
+			var ogData = [
+				['og:title', data !== undefined ? data.title : 'HackerWeb'],
+				['og:description', descriptionContent],
+				['og:image', data !== undefined ? 'My image lives here' : 'The standard image'],
+			]
+			ogData.forEach(function(ogd) {
+				var meta = retrieveMetaTag('property', ogd[0]);				
+				meta.setAttribute('content',  ogd[1]);
+			})
+
 		}
 	};
 
@@ -270,6 +306,7 @@
 				data.has_post = !!data.title;
 				if (!data.has_post){
 					hw.setTitle();
+					hw.setOpenGraph();
 					$commentsHeading.innerHTML = '';
 					$commentsSection.innerHTML = tmpl1.render(data);
 					hw.pub('adjustCommentsSection');
@@ -307,6 +344,7 @@
 				data.short_hn_url = 'news.ycombinator.com/item?id=' + id;
 				data.hn_url = '//' + data.short_hn_url;
 				hw.setTitle(data.title);
+				hw.setOpenGraph(data);
 				$commentsHeading.innerHTML = data.title;
 
 				var html = tmpl1.render(data, {comments_list: tmpl2});
