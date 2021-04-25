@@ -270,7 +270,7 @@
 				data.has_post = !!data.title;
 				if (!data.has_post){
 					hw.setTitle();
-					$commentsHeading.innerHTML = '';
+					$commentsHeading.innerText = '';
 					$commentsSection.innerHTML = tmpl1.render(data);
 					hw.pub('adjustCommentsSection');
 					hw.pub('onRenderComments');
@@ -307,7 +307,7 @@
 				data.short_hn_url = 'news.ycombinator.com/item?id=' + id;
 				data.hn_url = '//' + data.short_hn_url;
 				hw.setTitle(data.title);
-				$commentsHeading.innerHTML = data.title;
+				$commentsHeading.innerText = data.title;
 
 				var html = tmpl1.render(data, {comments_list: tmpl2});
 				var div = d.createElement('div');
