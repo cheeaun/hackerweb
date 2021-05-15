@@ -9,7 +9,7 @@
     "grunt-contrib-uglify": "~5.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "hogan.js": "git://github.com/twitter/hogan.js.git",
-    "mime": "~2.4.6"
+    "mime": "~2.5.0"
   },
   "scripts": {
     "start": "grunt server",
