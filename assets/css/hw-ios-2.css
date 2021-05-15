@@ -34,9 +34,6 @@ pre, code{
 
 .link-text{
 	color: #007aff;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 .inline-block{
@@ -276,6 +273,10 @@ i.icon-loading{
 }
 .tableview-links li>a .metadata .link-text{
 	color: #003d80;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
 }
 .tableview-links li:not(:first-child)>a:first-child:before{
 	pointer-events: none;
@@ -478,6 +479,10 @@ ol.grouped-tableview-links li>a.tappable-active{
 	font: -apple-system-footnote;
 	line-height: 1.2em;
 	color: #003d80;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
 }
 .view .post-content header .metadata{
 	font-size: 13px;
