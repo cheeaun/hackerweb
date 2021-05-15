@@ -13,36 +13,8 @@
 <link rel="apple-touch-icon-precomposed" href="icons/icon-180.png">
 <link rel="manifest" href="manifest.json">
 <style>body{ visibility: hidden; }</style>
-<script>
-var RavenConfig = { dsn: 'https://ba1fa9e133f64714b762e2d8d46a0c63@app.getsentry.com/6152' };
-
-if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.github.com' || location.hostname == 'app.hackerwebapp.com' && !/preview/i.test(location.search)){
-	var ra = document.createElement('script');
-	ra.type = 'text/javascript'; ra.async = true;
-	ra.src = '//cdn.ravenjs.com/1.1.0/native/raven.min.js';
-	var s0 = document.getElementsByTagName('script')[0];
-	s0.parentNode.insertBefore(ra, s0);
-
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	ga('create', 'UA-36575624-2', 'auto');
-	ga('send', 'pageview');
-
-	// Track device pixel ratios
-	if (window.devicePixelRatio) ga('set', 'dimension1', window.devicePixelRatio);
-}
-</script>
 </head>
 <body>
-<!--[if lt IE 10]>
-	<div id="outdated-browser">
-		<p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-		<p><small>Else, just go to <a href="https://news.ycombinator.com/">Hacker News</a> web site instead.</small></p>
-	</div>
-<![endif]-->
 <div class="view hidden" id="view-home">
 	<header>
 		<a href="#/about" class="header-button header-button-left"><button>About</button></a>
@@ -124,10 +96,6 @@ if (location.hostname == 'cheeaun.github.io' || location.hostname == 'cheeaun.gi
 	var script = d.createElement('script');
 	script.src = 'js/hw-' + theme + '.min.js';
 	head.insertBefore(script, head.lastChild);
-
-	if (typeof ga != 'undefined') setTimeout(function(){
-		ga('send', 'event', 'App', 'Theme', theme);
-	}, 2000);
 })(document, navigator.userAgent);
 
 if ('serviceWorker' in navigator){
@@ -137,7 +105,6 @@ if ('serviceWorker' in navigator){
 		console.log('ServiceWorker registration failed: ', err);
 	});
 }
-if (typeof ga != 'undefined') ga('send', 'event', 'App', 'ServiceWorker', 'serviceWorker' in navigator);
 
 if (/preview/i.test(location.search)) document.querySelector('.scroll').style.height = 'auto';
 </script>

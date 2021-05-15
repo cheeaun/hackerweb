@@ -52,11 +52,6 @@
 		}
 	};
 
-	// Log API failures/errors to GA
-	if (typeof ga != 'undefined') hw.sub('logAPIError', function(type){
-		ga('send', 'event', 'Errors', 'API', type);
-	});
-
 	var tmpl = hw.tmpl;
 
 	// Fix browsers freak out of amplify.store.sessionStorage not a function
